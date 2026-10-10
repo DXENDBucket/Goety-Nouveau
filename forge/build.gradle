@@ -1,0 +1,50 @@
+plugins {
+    id 'java-library'
+    id 'net.minecraftforge.gradle' version '6.0.36'
+}
+
+group = 'dev.goetynouveau'
+version = file('../VERSION').text.trim()
+base { archivesName = 'goety-nouveau' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(17); withSourcesJar() }
+repositories { flatDir { dirs 'libs' }; mavenCentral { content { excludeGroup 'local' } } }
+sourceSets.main { java.srcDir '../common/src/main/java'; resources.srcDir '../common/src/main/resources' }
+
+evaluationDependsOn(':ars-conflux')
+def confluxMain = project(':ars-conflux').sourceSets.main
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    copyIdeResources = true
+    runs {
+        configureEach {
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+        }
+        client {
+            workingDirectory project.file('run/client')
+            mods { ars_conflux { source confluxMain }; goety_nouveau { source sourceSets.main } }
+        }
+        server {
+            workingDirectory project.file('run/server'); args '--nogui'
+            mods { ars_conflux { source confluxMain }; goety_nouveau { source sourceSets.main } }
+        }
+    }
+}
+dependencies {
+    implementation project(':ars-conflux')
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.0'
+    for (name in ['ars-nouveau', 'geckolib', 'curios', 'patchouli', 'goety']) {
+        implementation fg.deobf("local:${name}:forge1201")
+    }
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/mods.toml') { expand(version: project.version) }
+}
+tasks.named('jar') {
+    from('../LICENSE', '../THIRD_PARTY_NOTICES.md')
+    archiveFileName = "goety-nouveau-${project.version}-mc1.20.1-forge.jar"
+    finalizedBy 'reobfJar'
+}
+tasks.named('sourcesJar') { from('../LICENSE', '../THIRD_PARTY_NOTICES.md') }

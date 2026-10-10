@@ -1,0 +1,40 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.146'
+}
+
+group = 'dev.goetynouveau'
+version = file('VERSION').text.trim()
+base { archivesName = 'goety-nouveau' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(21); withSourcesJar() }
+repositories { mavenCentral() }
+sourceSets.main { java.srcDir 'common/src/main/java'; resources.srcDir 'common/src/main/resources' }
+
+evaluationDependsOn(':ars-conflux')
+def confluxMain = project(':ars-conflux').sourceSets.main
+neoForge {
+    version = '21.1.250'
+    runs {
+        client { client() }
+        server { server(); programArgument '--nogui' }
+    }
+    mods {
+        ars_conflux { sourceSet confluxMain }
+        goety_nouveau { sourceSet sourceSets.main }
+    }
+}
+dependencies {
+    implementation project(':ars-conflux')
+    compileOnly fileTree(dir: 'libs', include: '*.jar')
+    runtimeOnly fileTree(dir: 'libs', include: '*.jar')
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand(version: project.version) }
+}
+tasks.named('jar') {
+    from('LICENSE', 'THIRD_PARTY_NOTICES.md')
+    archiveFileName = "goety-nouveau-${project.version}-mc1.21.1-neoforge.jar"
+}
+tasks.named('sourcesJar') { from('LICENSE', 'THIRD_PARTY_NOTICES.md') }

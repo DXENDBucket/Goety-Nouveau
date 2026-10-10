@@ -1,0 +1,62 @@
+[
+  {
+    "path": "forge/libs/ars-nouveau-forge1201.jar",
+    "version": "4.12.7",
+    "url": "https://cdn.modrinth.com/data/TKB6INcv/versions/Hw2aD01e/ars_nouveau-1.20.1-4.12.7-all.jar",
+    "sha512": "f3e3abf260fb3ef4c5b6b7324c055802135f82f4c550986f4e93b1a186c9b495cd8b6396ed89ab088b95e6176c0b9e290ccc69a528c521cd1bff19935ac36836"
+  },
+  {
+    "path": "forge/libs/curios-forge1201.jar",
+    "version": "5.14.1+1.20.1",
+    "url": "https://cdn.modrinth.com/data/vvuO3ImH/versions/IPQlZkz1/curios-forge-5.14.1%2B1.20.1.jar",
+    "sha512": "1373f95fd111c977db2f6adcef8e4eb486a2d926a3e17374692dee4ac3d65857de6446c16922b531aa5ace2c23c666a7fcc28c720b2917c1e04808d15648ba87"
+  },
+  {
+    "path": "forge/libs/geckolib-forge1201.jar",
+    "version": "4.8.4",
+    "url": "https://cdn.modrinth.com/data/8BmcQJ2H/versions/aC5KMoNg/geckolib-forge-1.20.1-4.8.4.jar",
+    "sha512": "443a321a293e3cb92fbbc3c97a38b179a45d1db703cd7bdb123270a9e04e7b7d67d5b06cd8e77a6d4d9139e033e901b9660cccf53ad5f9beaae6d06eae68febf"
+  },
+  {
+    "path": "forge/libs/patchouli-forge1201.jar",
+    "version": "1.20.1-85-forge",
+    "url": "https://cdn.modrinth.com/data/nU0bVIaL/versions/94dtOLgZ/Patchouli-1.20.1-85-FORGE.jar",
+    "sha512": "15aedda4efcc553d5e3c83aa867b62554bc2fab298b43f55ed324e10507a3605f0ec2c59c01476e6d80b2a49275ef080142e43a6e663f9463b62f520960fc203"
+  },
+  {
+    "path": "libs/ars.jar",
+    "version": "5.13.1",
+    "url": "https://cdn.modrinth.com/data/TKB6INcv/versions/qEFs5RRw/ars_nouveau-1.21.1-5.13.1.jar",
+    "sha512": "5c7f36345faf4a16a183f3d7839c0c22a0d21638410598b23049867c87acc2e673974e2eb1d0bee1b616aca14c9642f7c97e2c28a17259cddc84b731ca95684f"
+  },
+  {
+    "path": "libs/curios.jar",
+    "version": "9.5.1+1.21.1",
+    "url": "https://cdn.modrinth.com/data/vvuO3ImH/versions/yohfFbgD/curios-neoforge-9.5.1%2B1.21.1.jar",
+    "sha512": "5981a267686b744e7e3c227f78cbcd5267c14ac6979a28e814695f4589273998563147207fef4a5cdb7cdbdc39797cd95d9e4abadb55869f18e02a38d0654ae5"
+  },
+  {
+    "path": "libs/geckolib.jar",
+    "version": "4.9.2",
+    "url": "https://cdn.modrinth.com/data/8BmcQJ2H/versions/tPkJmim6/geckolib-neoforge-1.21.1-4.9.2.jar",
+    "sha512": "c91012b16cc40c8f48f69b78cb8e2e5c006486ae2431fbd289dfc01be7a4217294becea22d83a155d6b32b3969450df871352a3695e1452168b84f41355f7b9e"
+  },
+  {
+    "path": "libs/goety.jar",
+    "version": "3.2.0",
+    "url": "https://cdn.modrinth.com/data/4ZVIxU8x/versions/8jB68vz3/goety-3.2.0.jar",
+    "sha512": "bc2277f9dd22114d1aa8900a1ad145bd5cff4b935977a50d5bd8e6a38dc2ea9b2572f5ce535a1ee7e48240389c181743ecde4186d6dbd555ae12b34da8f0ce7f"
+  },
+  {
+    "path": "forge/libs/goety-forge1201.jar",
+    "version": "2.5.58.4",
+    "url": "https://cdn.modrinth.com/data/4ZVIxU8x/versions/9X8ch5p4/goety-2.5.58.4.jar",
+    "sha512": "9dce9769b9d8c7b32e2d299994f3890b772e50c7cd617925d3593e0bb6fda6e43b0ada3a4e6e5d867ab871003ab91257488e80be21734c7ed857554731cb2370"
+  },
+  {
+    "path": "libs/patchouli.jar",
+    "version": "1.21.1-93-neoforge",
+    "url": "https://cdn.modrinth.com/data/nU0bVIaL/versions/BIogJv2D/Patchouli-1.21.1-93-NEOFORGE.jar",
+    "sha512": "0b5c172db9a6eeecb5ca44b359a83548c3a60be7ff313959acdfc1e5b8039736c18e57e947d435b52d06da31159d2d02ea36e5742668dbc826308a4c99e4039f"
+  }
+]

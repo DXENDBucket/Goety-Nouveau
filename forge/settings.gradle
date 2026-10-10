@@ -1,0 +1,9 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://maven.minecraftforge.net' }
+    }
+}
+rootProject.name = 'goety-nouveau-forge'
+include ':ars-conflux'
+project(':ars-conflux').projectDir = file(providers.gradleProperty('confluxCheckout').getOrElse('../../Ars-Conflux/forge'))
