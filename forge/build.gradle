@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'net.minecraftforge.gradle' version '6.0.36'
+    id 'org.spongepowered.mixin' version '0.7.38'
 }
 
 group = 'dev.goetynouveau'
@@ -9,6 +10,16 @@ base { archivesName = 'goety-nouveau' }
 java { toolchain.languageVersion = JavaLanguageVersion.of(17); withSourcesJar() }
 repositories { flatDir { dirs 'libs' }; mavenCentral { content { excludeGroup 'local' } } }
 sourceSets.main { java.srcDir '../common/src/main/java'; resources.srcDir '../common/src/main/resources' }
+sourceSets { gameTest {
+    java.srcDir '../common/src/gameTest/java'
+    compileClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.main.output
+} }
+configurations {
+    gameTestImplementation.extendsFrom implementation
+    gameTestCompileOnly.extendsFrom compileOnly
+    gameTestRuntimeOnly.extendsFrom runtimeOnly
+}
 
 evaluationDependsOn(':ars-conflux')
 def confluxMain = project(':ars-conflux').sourceSets.main
@@ -28,15 +39,23 @@ minecraft {
             workingDirectory project.file('run/server'); args '--nogui'
             mods { ars_conflux { source confluxMain }; goety_nouveau { source sourceSets.main } }
         }
+        gameTestServer {
+            workingDirectory project.file('run/gametest')
+            property 'forge.enabledGameTestNamespaces', 'goety_nouveau'
+            jvmArgs '-Xmx2G'
+            mods { ars_conflux { source confluxMain }; goety_nouveau { source sourceSets.main; source sourceSets.gameTest } }
+        }
     }
 }
 dependencies {
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation project(':ars-conflux')
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.0'
     for (name in ['ars-nouveau', 'geckolib', 'curios', 'patchouli', 'goety']) {
         implementation fg.deobf("local:${name}:forge1201")
     }
 }
+mixin { add sourceSets.main, 'goety_nouveau.refmap.json'; config 'goety_nouveau.mixins.json' }
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 processResources {
     inputs.property 'version', project.version
@@ -46,5 +65,6 @@ tasks.named('jar') {
     from('../LICENSE', '../THIRD_PARTY_NOTICES.md')
     archiveFileName = "goety-nouveau-${project.version}-mc1.20.1-forge.jar"
     finalizedBy 'reobfJar'
+    manifest { attributes 'MixinConfigs': 'goety_nouveau.mixins.json' }
 }
 tasks.named('sourcesJar') { from('../LICENSE', '../THIRD_PARTY_NOTICES.md') }

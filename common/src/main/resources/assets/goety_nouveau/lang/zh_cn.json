@@ -1,0 +1,6 @@
+{
+  "itemGroup.goety_nouveau": "Goety 与新生魔艺",
+  "goety_nouveau.glyph_name.glyph_soul_bolt": "灵魂箭",
+  "goety_nouveau.glyph_desc.glyph_soul_bolt": "将 Ars 弹射物替换为 Goety 的灵魂箭，原生箭矢命中后继续执行剩余效果。每个强化增加一点威力，抑制则减少一点。每次发射消耗灵魂能量，重复触发的载体则在每次命中时消耗。",
+  "goety_nouveau.cast.unavailable": "未能施放灵魂箭，请检查灵魂能量容器与施法条件。"
+}

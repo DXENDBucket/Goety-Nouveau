@@ -1,0 +1,6 @@
+{
+  "itemGroup.goety_nouveau": "Goety & Nouveau",
+  "goety_nouveau.glyph_name.glyph_soul_bolt": "Soul Bolt",
+  "goety_nouveau.glyph_desc.glyph_soul_bolt": "Replaces an Ars projectile with Goety's Soul Bolt. Native impacts are followed by the remaining spell effects. Amplify adds one potency; Dampen removes one. Consumes soul energy per launch, or per impact for repeating carriers.",
+  "goety_nouveau.cast.unavailable": "Soul Bolt could not be cast. Check your soul-energy container and spell conditions."
+}

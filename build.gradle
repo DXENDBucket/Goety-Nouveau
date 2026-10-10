@@ -9,24 +9,45 @@ base { archivesName = 'goety-nouveau' }
 java { toolchain.languageVersion = JavaLanguageVersion.of(21); withSourcesJar() }
 repositories { mavenCentral() }
 sourceSets.main { java.srcDir 'common/src/main/java'; resources.srcDir 'common/src/main/resources' }
+sourceSets { gameTest {
+    java.srcDir 'common/src/gameTest/java'
+    compileClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.main.output
+} }
+configurations {
+    gameTestImplementation.extendsFrom implementation
+    gameTestCompileOnly.extendsFrom compileOnly
+    gameTestRuntimeOnly.extendsFrom runtimeOnly
+}
 
 evaluationDependsOn(':ars-conflux')
 def confluxMain = project(':ars-conflux').sourceSets.main
+def coexistWithIron = providers.gradleProperty('withIron').getOrElse('false').toBoolean()
 neoForge {
     version = '21.1.250'
+    addModdingDependenciesTo sourceSets.gameTest
     runs {
         client { client() }
         server { server(); programArgument '--nogui' }
+        gameTestServer {
+            type = 'gameTestServer'
+            gameDirectory = file('run/gametest')
+            systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('gameTestNamespaces')
+                    .getOrElse(coexistWithIron ? 'goety_nouveau_coexistence' : 'goety_nouveau')
+            jvmArgument '-Xmx2G'
+        }
     }
     mods {
         ars_conflux { sourceSet confluxMain }
-        goety_nouveau { sourceSet sourceSets.main }
+        goety_nouveau { sourceSet sourceSets.main; sourceSet sourceSets.gameTest }
     }
 }
 dependencies {
     implementation project(':ars-conflux')
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     runtimeOnly fileTree(dir: 'libs', include: '*.jar')
+    // Development-only optional coexistence run; never a production dependency or bundled JAR.
+    if (coexistWithIron) runtimeOnly fileTree(dir: 'libs/coexistence', include: '*.jar')
 }
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 processResources {

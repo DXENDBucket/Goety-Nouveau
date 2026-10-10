@@ -4,7 +4,7 @@
 
 ```text
 MinecraftDev/
-  Ars-Conflux/              # compatible Core checkout, currently 0.1.3
+  Ars-Conflux/              # compatible Core checkout, at least 0.1.5
   Goety-Nouveau/
     VERSION                 # single version for both targets
     common/src/main/        # shared integration source and resources
@@ -20,7 +20,7 @@ The root wrapper uses Gradle 9.2.1; the Forge wrapper uses Gradle 8.8. Do not re
 
 ## Prepare dependencies
 
-Prepare an Ars Conflux 0.1.3 source checkout beside this project, then run:
+Prepare an Ars Conflux 0.1.5 source checkout beside this project, then run:
 
 ```powershell
 python tools/fetch_dependencies.py
@@ -65,7 +65,27 @@ Forge's `:jar` also runs `reobfJar`. Neither addon artifact embeds Goety, Ars No
 
 Both targets expose `:runClient` and `:runServer`; server launches use `--nogui`. These runs include the local addon and Core source sets. Goety's own content remains present, so use disposable test worlds.
 
-Use a dedicated Ars integration instance. Its local path can be recorded in the ignored `test-environment.local.json`; personal instance paths are not part of the public source. The foundation build is not automatically installed into a game instance. Compilation alone does not verify mod loading, rendering or playable spell behavior.
+Use a dedicated Ars integration instance. Its local path can be recorded in the ignored `test-environment.local.json`; personal instance paths are not part of the public source. Build tasks do not automatically install into a game instance. Compilation alone does not verify mod loading, rendering or playable spell behavior.
+
+## Focused runtime validation
+
+Each platform exposes `:runGameTestServer`, containing the same shared Soul Bolt scenarios with platform-specific test discovery and fake-player setup. These run with Ars, Goety and Core, without Iron:
+
+```powershell
+./gradlew.bat :runGameTestServer --no-daemon --max-workers=2
+cd forge
+./gradlew.bat :runGameTestServer --no-daemon --max-workers=2
+```
+
+Coverage: actual native hit damage and Ars continuation; no duplicated carriers; real player/totem storage, reduced scatter, creative bypass; Ars mana alternative and failed-action billing; repeated carrier payments and cleanup; native soul-loss event pricing. Headless tests do not inspect client rendering or animations.
+
+For the separate NeoForge coexistence test, place matching Iron & Nouveau, Iron's Spells 'n Spellbooks, irons_lib, Player Animator and Caelus JARs in the ignored `libs/coexistence/` directory. Run from the project root:
+
+```powershell
+./gradlew.bat :runGameTestServer -PwithIron=true --no-daemon --max-workers=2
+```
+
+This selects the `goety_nouveau_coexistence` namespace and checks real Goety and Iron glyph registration, learning, native projectile dispatch and rejection of two replacement glyphs on a single projectile. The verified versions are Iron & Nouveau 0.17.4, Iron's Spells 'n Spellbooks 3.16.3, irons_lib 2.2.0, Player Animator 2.0.4 and Caelus 7.0.1. These are optional development runtime dependencies, never bundled or required by this addon.
 
 ## Version control
 

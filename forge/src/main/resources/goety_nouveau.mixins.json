@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.goetynouveau.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "goety_nouveau.refmap.json",
+  "mixins": ["ProjectileHitAccess", "ManagedEntityMixin", "GoetyMovementMixin", "GoetyBoltStateMixin"],
+  "injectors": {"defaultRequire": 1}
+}
