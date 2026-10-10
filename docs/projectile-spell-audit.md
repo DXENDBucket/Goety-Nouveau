@@ -59,3 +59,8 @@ Goety 原生 `Spell.isShifting` 除潜行外还要求手持 `IWand`。Ars 已是
 冰刺使用原生法杖匹配：主手 Ars 法术书、副手 `goety:frost_staff` 会生成原生 IceSpear，保留 1.5 倍速度及穿透。`irons_spellbooks:ice_staff` 是另一模组的物品，不满足此原生判定。两版完整施法的服务端检查均验证了类型、速度和连续两目标实际伤害，未复现正确 Goety 法杖下仍为冰刺的情况；客户端最终画面仍需人工确认。
 
 岩浆炸弹（`magma_bomb_focus`）与熔岩炸弹（`lavaball_focus`）不同。原生 MagmaBomb 爆炸直接生成 2 只限时岩浆怪，匹配法杖时为 3 只，不检查普通召唤法术的数量上限。联动调用原生爆炸，保留该行为和原生存活时限。
+
+
+## 后续接入状态
+
+dev.15 已接入地拳，dev.16 已接入爆发/生物地雷/魔牙，dev.17 已接入冰雹和季风（均为效果魔符，不是替换弹射物）。原生区域实体的暖机、后续伤害、粒子与寿命仍保留；详见 location-effect-audit.md、hazard-effect-audit.md、weather-effect-audit.md。箭雨和持续弹幕仍未接入，不以单批箭代替原生连续施放。

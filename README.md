@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.16`). Seventeen projectile replacements, twenty-four target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.17`). Seventeen projectile replacements, twenty-seven target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -20,7 +20,7 @@ The glyphs are available in the creative tab; survival acquisition and ritual re
 
 ## Target and location effects
 
-These twenty-four glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+These twenty-seven glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
@@ -47,6 +47,9 @@ These twenty-four glyphs are **effects**, placed after an Ars cast method. They 
 | Eruption | Native volcano at the selected point, retaining emergence, upward Pyroclast salvos, native explosions, burning and descent. Geomancy staffs create three for one charge. One duration unit is six seconds. | Amplify / Dampen, AOE, Extend Time / Duration Down, Burning |
 | Bio Mine | Four native mines around the selected point, retaining arming, enemy detection, explosion and Acid Pool aftermath. Abyss staffs create eight. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Teeth | A native hovering tooth above the selected point, placed below a ceiling when present. Retains falling collision, particles and four follow-up Vicious Pikes. Ominous staff creates sixteen; sneaking changes to thirteen in rings. | Amplify / Dampen |
+| Thunderbolt | Native thick lightning beam to the selected enemy/location, with shock damage, Spasms chance, lightning rod redirection and Storm-staff chaining/weather bonuses. Nameless staff retains its green beam. | Amplify / Dampen |
+| Hail | Native hail cloud above the selected point, with warmup, snowfall, freezing damage, ally/overhead-obstruction rules and expiry. Frost staffs retain native target following. | Amplify / Dampen, AOE, Extend Time / Duration Down |
+| Monsoon | Native stationary storm cloud above the selected point, retaining rain, water-sensitive damage, random lightning, rod redirection, Spasms and chaining. Storm staffs enlarge it; Nameless staff retains green lightning. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Ignite | Uses Goety's entity ignition and original fire-charge block interactions at the Ars hit. Lights supported campfires/candles and places fire without another view ray trace. | Burning |
 
 **Magic Bolt** is the second projectile replacement: **Projectile → Magic Bolt → Ignite**. It shares only the native `SpellHurtingProjectile` flight adapter with Soul Bolt. Its own native curse and lingering `MagicGround` run on impact before the remaining Ars effects, including block impacts. Amplify/Dampen modify potency; Extend Time/Duration Down modify its extra curse/ground duration. Native flight, initial model turn, trails and impact entities are preserved. Magic Bolt keeps its native five-second expiry; it does not inherit Soul Bolt's staff variants or velocity enchantment.
@@ -69,6 +72,8 @@ Fangs' geometry is adapted explicitly: its first central fang occupies the Ars-s
 A staff's native three-shot salvo is one native batch and pays one focus charge. Ordinary salvos retain separate native flight and hits. For special Ars carriers, the salvo follows one shared Ars trajectory; its native payloads resolve at that trajectory's hit, each continuing the remaining Ars effects. Repeated carriers pay once per triggered batch, including Burning, and stop on insufficient resources. This is an explicit trajectory adaptation rather than three independent native orbit paths.
 
 Examples: **Projectile → Ice Chunk**, **Touch → Entangling → Extend Time**, **Self → Frost Nova**, **Self → Soul Heal**. These are not projectile replacements: the Ars carrier reaches its hit first, then the effect runs. Native damage ownership stays with the original caster, independently of the selected target.
+
+Hail and Monsoon start with a five-second active lifetime, following their native one-second warmup. Each Ars time modifier adds/removes one base active lifetime; native duration enchantments multiply it by their original level-plus-one. Clouds are placed below a low ceiling when room permits, never embedded in it. Hail follows its selected target only with a matching Frost staff; Monsoon remains stationary. Native cloud attacks are part of the paid entity lifetime, not extra charges each tick.
 
 Amplify/Dampen add/subtract Goety potency; Extend Time/Duration Down add/subtract its duration parameter; AOE adds to its radius. Supported native focus potency, duration and radius enchantments and staff/robe bonuses are preserved. Each effect quotes its own focus cost, charges only on a successful trigger, and can trigger again until the selected resource runs out. Their glyph cost is zero; the rest of the Ars spell follows Core's configured billing behavior.
 
@@ -95,7 +100,7 @@ These twelve glyphs are replacement augments, grouped with the other Goety proje
 
 An ordinary native staff salvo pays once. A repeat carrier pays once for each successful triggered batch, then continues the remaining Ars effects for each native payload. Failed or unaffordable triggers do not apply impacts. Native aftermath entities keep Goety's own lifetime and are not independently rebilled each tick.
 
-Cyclone, Grapple and rain/cloud/barrage spells still need their own lifecycle or effect adapters. See the [projectile audit](docs/projectile-spell-audit.md) for the remaining scope and native exceptions.
+Hail and Monsoon now have native cloud effect adapters. Cyclone, Grapple and the other rain/cloud/barrage spells still need their own lifecycle or effect adapters. See the [projectile audit](docs/projectile-spell-audit.md) for the remaining scope and native exceptions.
 
 ## Integration
 

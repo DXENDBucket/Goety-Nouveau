@@ -94,5 +94,11 @@
   "goety_nouveau.glyph_name.glyph_bio_mine": "Bio Mine",
   "goety_nouveau.glyph_desc.glyph_bio_mine": "Places native mines around the selected point. They arm before exploding and leave acid pools; Abyss staffs double the batch.",
   "goety_nouveau.glyph_name.glyph_teeth": "Teeth",
-  "goety_nouveau.glyph_desc.glyph_teeth": "Summons a hovering tooth above the selected point. It falls and raises native spikes; Ominous staffs add salvos or sneaking rings."
+  "goety_nouveau.glyph_desc.glyph_teeth": "Summons a hovering tooth above the selected point. It falls and raises native spikes; Ominous staffs add salvos or sneaking rings.",
+  "goety_nouveau.glyph_name.glyph_thunderbolt": "Thunderbolt",
+  "goety_nouveau.glyph_desc.glyph_thunderbolt": "Strike the selected enemy or point with a native lightning beam. Storm staffs retain chain lightning and bypass nearby lightning rods.",
+  "goety_nouveau.glyph_name.glyph_hail": "Hail",
+  "goety_nouveau.glyph_desc.glyph_hail": "Creates a native hail cloud above the selected point. It freezes enemies below; Frost staffs let the cloud follow its target.",
+  "goety_nouveau.glyph_name.glyph_monsoon": "Monsoon",
+  "goety_nouveau.glyph_desc.glyph_monsoon": "Creates a native storm cloud above the selected point, retaining rain and lightning. Storm staffs increase its area and allow chain lightning."
 }

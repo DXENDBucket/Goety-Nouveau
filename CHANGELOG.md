@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.17
+
+- Add Thunderbolt, Hail and Monsoon effect glyphs on both loaders (48 glyphs: 17 projectile replacements, 27 effects, 4 native parameter augments).
+- Thunderbolt retains its dedicated native thick-beam packet, shock damage, lightning-rod redirection, Spasms, weather bonuses, Storm-staff chains and Nameless-staff color. Targeting uses the Ars hit; rejected damage is uncharged.
+- Hail/Monsoon use full native cloud entities: warmup, rain/snow, attacks, ally and overhead-obstruction rules, lifetime, Frost-staff tracking and native Monsoon lightning remain intact.
+- Cloud time augments scale the native active tick lifetime; gear duration keeps its native multiplicative rule. Low-ceiling placement uses actual cloud dimensions and refuses obstructed or unloaded space.
+- Native cloud upkeep does not consume additional glyph fees after a successful paid spawn. Creative remains free; effects retain their Ars category and provider grouping.
+
 ## 0.1.0-dev.16
 
 - Add Eruption, Bio Mine and Teeth effect glyphs on both loaders, using the actual native entities and their complete Pyroclast/Acid Pool/Vicious Pike aftermath.
