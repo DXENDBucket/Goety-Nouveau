@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.5`). Soul Bolt and five target/location effects are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.6`). Two projectile replacements and ten target/location effects are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -18,7 +18,7 @@ The glyphs are available in the creative tab; survival acquisition and ritual re
 
 ## Target and location effects
 
-These five glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+These ten glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
@@ -27,6 +27,13 @@ These five glyphs are **effects**, placed after an Ars cast method. They use the
 | Entangling | Native vines bind the selected enemy or form a trap at the selected location. AOE selects nearby enemies; Wild staffs retain their larger group selection and target limit, and Wild robes retain vine damage. | AOE, Extend Time / Duration Down |
 | Haunted Skull | Native skulls summon near the selected entity/location and keep their owner, AI, explosions and limited lifetime. Necromancy staffs retain batch bonuses; sneak-casting recalls existing skulls. One successful batch pays one focus charge. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Soul Heal | Heals yourself or the selected native ally/owned creature. AOE also heals nearby native allies, using the original caster's alliance rules. Full-health groups and invalid targets are uncharged. | Amplify / Dampen, AOE |
+| Iron Hide | Protects yourself or the selected ally using native Iron Hide, including its hidden effect particles. One duration unit is one minute. | Amplify / Dampen, Extend Time / Duration Down |
+| Chill Hide | Native Chill Hide protects yourself or the selected ally; a Frost staff also protects nearby allies. One duration unit is 45 seconds. | Amplify / Dampen, Extend Time / Duration Down |
+| Weakening | A native weakening wave at the selected entity/location, with both Weakness and Sapped, native particles/sounds and original-caster ally filtering. | Amplify / Dampen, AOE, Extend Time / Duration Down |
+| Lightning | Native lightning at the selected entity/block, including native damage, visuals and interactions. Nearby rods redirect it unless using the native Storm staff. | Amplify / Dampen |
+| Updraft | Native delayed damage and upward launch at the selected entity or above the selected block. Wind staff retains its area bonus. | Amplify / Dampen, AOE |
+
+**Magic Bolt** is the second projectile replacement: **Projectile → Magic Bolt → Ignite**. It shares only the native `SpellHurtingProjectile` flight adapter with Soul Bolt. Its own native curse and lingering `MagicGround` run on impact before the remaining Ars effects, including block impacts. Amplify/Dampen modify potency; Extend Time/Duration Down modify its extra curse/ground duration. Native flight, initial model turn, trails and impact entities are preserved. Magic Bolt keeps its native five-second expiry; it does not inherit Soul Bolt's staff variants or velocity enchantment.
 
 Examples: **Projectile → Ice Chunk**, **Touch → Entangling → Extend Time**, **Self → Frost Nova**, **Self → Soul Heal**. These are not projectile replacements: the Ars carrier reaches its hit first, then the effect runs. Native damage ownership stays with the original caster, independently of the selected target.
 
@@ -58,7 +65,7 @@ Each Goety trigger uses its own native payment account without replacing the sou
 
 These are the pinned build dependencies. Transitive mod dependencies are included in the download manifest, but upstream mod JARs are not committed or bundled in this addon.
 
-See [building instructions](docs/building.md), the [integration plan and API audit](docs/integration-plan.md), and [third-party notices](THIRD_PARTY_NOTICES.md).
+See [building instructions](docs/building.md), the [integration plan and API audit](docs/integration-plan.md), the [per-spell behavior audit](docs/simple-spell-audit.md), and [third-party notices](THIRD_PARTY_NOTICES.md). The shared [adapter checklist](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/spell-adapter-checklist.md) covers full native behavior, logical sides and both loaders.
 
 ## License
 

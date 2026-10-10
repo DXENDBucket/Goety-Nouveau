@@ -22,6 +22,19 @@ import java.util.List;
 /** Exercises foreign glyphs through public Ars/Core APIs, without linking any Iron classes. */
 @GameTestHolder("goety_nouveau_coexistence") @PrefixGameTestTemplate(false)
 public final class CoexistenceGameTests {
+    private static net.minecraft.server.level.ServerPlayer player(GameTestHelper h) {
+        var player = net.neoforged.neoforge.common.util.FakePlayerFactory.get(h.getLevel(),
+                new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "ConfluxNewSpells"));
+        var mana = com.hollingsworth.arsnouveau.setup.registry.CapabilityRegistry.getMana(player);
+        mana.setMaxMana(10000); mana.setMana(10000);
+        return player;
+    }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeBuffsAndWeakening(GameTestHelper h) { SimpleSpellCases.nativeBuffsAndWeakening(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeLightningAndUpdraft(GameTestHelper h) { SimpleSpellCases.nativeLightningAndUpdraft(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeMagicBoltFlightAndFullImpacts(GameTestHelper h) { SimpleSpellCases.nativeMagicBoltFlightAndFullImpacts(h, player(h)); }
     @GameTest(template="empty", timeoutTicks=40)
     public static void providerGlyphGroupsKeepCategories(GameTestHelper h) {
         PresentationCases.check(h, com.hollingsworth.arsnouveau.setup.registry.CreativeTabRegistry.COMPARE_SPELL_TYPE_NAME);

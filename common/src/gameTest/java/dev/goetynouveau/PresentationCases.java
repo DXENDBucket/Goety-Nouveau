@@ -21,7 +21,7 @@ public final class PresentationCases {
             if (iron != null) values.add(iron);
         }
         for (var part : GlyphCatalog.ALL)
-            h.assertTrue(part == GlyphCatalog.SOUL_BOLT || part instanceof AbstractEffect,
+            h.assertTrue(part instanceof dev.goetynouveau.glyph.GoetyBoltGlyph || part instanceof AbstractEffect,
                     "Effect glyphs retain their actual category, independently of sorting");
         values.sort(registryOrder);
         verify(h, values);

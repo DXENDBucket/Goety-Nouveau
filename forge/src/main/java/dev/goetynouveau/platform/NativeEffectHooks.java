@@ -11,4 +11,8 @@ public final class NativeEffectHooks {
     public static int duration(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.DURATION.get(), caster); }
     public static int radius(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.RADIUS.get(), caster); }
     public static MobEffectInstance freezing(int ticks, int amplifier) { return new MobEffectInstance(GoetyEffects.FREEZING.get(), ticks, amplifier); }
+    public static MobEffectInstance ironHide(int ticks, int amplifier) { return new MobEffectInstance(GoetyEffects.IRON_HIDE.get(), ticks, amplifier, false, false, true); }
+    public static MobEffectInstance chillHide(int ticks, int amplifier) { return new MobEffectInstance(GoetyEffects.CHILL_HIDE.get(), ticks, amplifier); }
+    public static MobEffectInstance sapped(int ticks, int amplifier) { return new MobEffectInstance(GoetyEffects.SAPPED.get(), ticks, amplifier); }
+    public static MobEffectInstance cursed(int ticks) { return new MobEffectInstance(GoetyEffects.CURSED.get(), ticks); }
 }

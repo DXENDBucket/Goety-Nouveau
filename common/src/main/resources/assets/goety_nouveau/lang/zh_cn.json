@@ -12,5 +12,17 @@
   "goety_nouveau.glyph_desc.glyph_soul_heal": "治疗选中的友军或自身，保留 Goety 的灵魂治疗表现。强化增加威力，扩散还会治疗周围友军。目标无效或全部满血时不消耗原生资源。",
   "goety_nouveau.glyph_name.glyph_haunted_skull": "幽灵头骨",
   "goety_nouveau.glyph_desc.glyph_haunted_skull": "在选中的实体或位置附近召唤幽灵头骨，沿用 Goety 的追击、爆炸、归属和寿命。强化提升召唤增益，扩散增大爆炸范围，延长时效增加寿命。潜行施法召回已有头骨；没有可召回的头骨时不消耗资源。",
+  "goety_nouveau.glyph_name.glyph_magic_bolt": "魔法箭",
+  "goety_nouveau.glyph_desc.glyph_magic_bolt": "将 Ars 弹射物替换为 Goety 原生魔法箭，保留诅咒，以及击中实体或方块后的魔法区域。原生命中后继续执行剩余效果。强化增加威力，延长时效增加诅咒与区域的持续时间。",
+  "goety_nouveau.glyph_name.glyph_iron_hide": "铁皮",
+  "goety_nouveau.glyph_desc.glyph_iron_hide": "为自身或选中的友军附加 Goety 原生铁皮效果。强化增加威力，延长时效增加一个原生时长单位（一分钟）。目标无效时不消耗资源。",
+  "goety_nouveau.glyph_name.glyph_chill_hide": "寒冰护体",
+  "goety_nouveau.glyph_desc.glyph_chill_hide": "为自身或选中的友军附加 Goety 原生寒冰护体，寒霜法杖还会保护周围友军。强化增加威力，延长时效增加一个原生时长单位（45 秒）。",
+  "goety_nouveau.glyph_name.glyph_weakening": "虚弱",
+  "goety_nouveau.glyph_desc.glyph_weakening": "以选中的实体或位置为中心释放 Goety 虚弱波，同时附加虚弱与侵蚀。按原施法者的阵营排除友军。强化、扩散和延长时效分别增加威力、范围与时间。",
+  "goety_nouveau.glyph_name.glyph_lightning": "闪电",
+  "goety_nouveau.glyph_desc.glyph_lightning": "向选中的实体或方块降下 Goety 原生闪电。附近的避雷针会引走闪电，风暴法杖可避免偏转。强化增加伤害，保留原生雷电表现与交互。",
+  "goety_nouveau.glyph_name.glyph_updraft": "上升气流",
+  "goety_nouveau.glyph_desc.glyph_updraft": "在选中的实体或方块上方生成 Goety 原生气流冲击，保留伤害、抬升和粒子效果。风之法杖保留范围加成，强化增加伤害，扩散扩大范围。",
   "goety_nouveau.cast.unavailable": "未能施放 Goety 法术，请检查灵魂能量容器与施法条件。"
 }

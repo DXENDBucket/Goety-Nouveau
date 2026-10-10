@@ -57,6 +57,10 @@ public final class GoetyEffectCasting {
             case HAUNTED_SKULL -> GoetySummonCasting.hauntedSkull(world, frame,
                     (com.Polarice3.Goety.common.magic.spells.necromancy.HauntedSkullSpell)spell,
                     potency, duration, radius);
+            case IRON_HIDE, CHILL_HIDE -> GoetySimpleEffects.hide(focus, world, frame, spell, potency, duration);
+            case WEAKENING -> GoetySimpleEffects.weakening(world, frame, spell, potency, duration, (int)radius);
+            case LIGHTNING -> GoetySimpleEffects.lightning(world, frame, spell, potency);
+            case UPDRAFT -> GoetySimpleEffects.updraft(world, frame, spell, potency, radius);
         };
     }
     private static LivingEntity target(CastContext frame) {

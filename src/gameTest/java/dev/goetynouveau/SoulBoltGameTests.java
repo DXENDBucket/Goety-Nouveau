@@ -17,6 +17,12 @@ public final class SoulBoltGameTests {
         return player;
     }
     @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeBuffsAndWeakening(GameTestHelper h) { SimpleSpellCases.nativeBuffsAndWeakening(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeLightningAndUpdraft(GameTestHelper h) { SimpleSpellCases.nativeLightningAndUpdraft(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeMagicBoltFlightAndFullImpacts(GameTestHelper h) { SimpleSpellCases.nativeMagicBoltFlightAndFullImpacts(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
     public static void providerGlyphGroupsKeepCategories(GameTestHelper h) {
         PresentationCases.check(h, com.hollingsworth.arsnouveau.setup.registry.CreativeTabRegistry.COMPARE_SPELL_TYPE_NAME);
     }

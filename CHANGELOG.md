@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.6
+
+- Add native Magic Bolt as a projectile replacement, retaining launch/flight/turn, curse, lingering magic ground on entity/block impact and Ars continuation. Share the native bolt adapter without applying Soul Bolt staff variants or velocity enchantments to Magic Bolt.
+- Add Iron Hide, Chill Hide, Weakening, Lightning and Updraft effect glyphs, with actual Ars targets, native effect/entity behavior, visuals, equipment bonuses and per-focus trigger billing.
+- Preserve Frost staff group protection, both Weakening debuffs, lightning-rod attraction and Storm staff bypass, and Wind staff area bonuses. Keep native duration units explicit.
+- Add glyph icons by referencing native focus models, Chinese/English descriptions, a per-spell behavior audit and a shared Conflux checklist covering client/server boundaries and both loaders.
+- Add targeted native-world checks for full Magic Bolt flight/entity/block impacts, protection/ally filtering/billing, and actual lightning/updraft damage and lift.
+
 ## 0.1.0-dev.5
 
 - Group Goety glyphs after ordinary Ars/addon glyphs within their original categories, using the new shared Conflux presentation registry. Preserve separate Iron groups and native Iron school ordering.

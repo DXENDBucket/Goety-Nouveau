@@ -3,7 +3,7 @@ package dev.goetynouveau.mixin;
 import com.Polarice3.Goety.common.entities.projectiles.WaterHurtingProjectile;
 import com.Polarice3.Goety.common.entities.projectiles.SpellHurtingProjectile;
 import dev.goetynouveau.casting.ManagedBolt;
-import dev.goetynouveau.casting.SoulBoltCasting;
+import dev.goetynouveau.casting.GoetyBoltCasting;
 import dev.goetynouveau.platform.NativeBoltHooks;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.phys.HitResult;
@@ -40,7 +40,7 @@ public abstract class GoetyMovementMixin {
         var hit = ProjectileUtil.getHitResultOnMoveVector(bolt,
                 entity -> ((ProjectileHitAccess)bolt).goetyNouveau$canHit(entity));
         if (hit.getType() != HitResult.Type.MISS && !NativeBoltHooks.impactCancelled(bolt, hit))
-            SoulBoltCasting.nativeImpact((SpellHurtingProjectile)bolt, hit);
+            GoetyBoltCasting.nativeImpact((SpellHurtingProjectile)bolt, hit);
         ci.cancel();
     }
     // Run the original integrator in native velocity units, then scale its displacement and

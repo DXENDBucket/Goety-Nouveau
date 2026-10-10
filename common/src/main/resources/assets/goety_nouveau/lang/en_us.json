@@ -12,5 +12,17 @@
   "goety_nouveau.glyph_desc.glyph_soul_heal": "Heals the selected ally or yourself with Goety's soul healing. Amplify increases potency; AOE also heals nearby allies. An invalid target or a fully healed group consumes no native resource.",
   "goety_nouveau.glyph_name.glyph_haunted_skull": "Haunted Skull",
   "goety_nouveau.glyph_desc.glyph_haunted_skull": "Summons native haunted skulls near the selected entity or location, retaining Goety pursuit, explosions, ownership and lifetime. Amplify boosts the summon, AOE increases explosion radius and Extend Time increases lifetime. Sneak-casting recalls existing skulls; no eligible skull means no charge.",
+  "goety_nouveau.glyph_name.glyph_magic_bolt": "Magic Bolt",
+  "goety_nouveau.glyph_desc.glyph_magic_bolt": "Replaces an Ars projectile with Goety's native Magic Bolt, including its curse and lingering magic ground on entity or block impact. Remaining Ars effects resolve after the native impact. Amplify increases potency; Extend Time increases curse and ground duration.",
+  "goety_nouveau.glyph_name.glyph_iron_hide": "Iron Hide",
+  "goety_nouveau.glyph_desc.glyph_iron_hide": "Grants native Iron Hide to yourself or the selected ally. Amplify increases potency; Extend Time adds one native duration unit (one minute). Invalid targets consume no resource.",
+  "goety_nouveau.glyph_name.glyph_chill_hide": "Chill Hide",
+  "goety_nouveau.glyph_desc.glyph_chill_hide": "Grants Goety's native Chill Hide to yourself or the selected ally. Frost staffs also protect nearby allies. Amplify increases potency; Extend Time adds one native duration unit (45 seconds).",
+  "goety_nouveau.glyph_name.glyph_weakening": "Weakening",
+  "goety_nouveau.glyph_desc.glyph_weakening": "Creates Goety's weakening wave around the selected entity or location. Enemies receive both Weakness and Sapped; allies are excluded using the original caster's allegiance. Amplify, AOE and Extend Time increase potency, radius and duration.",
+  "goety_nouveau.glyph_name.glyph_lightning": "Lightning",
+  "goety_nouveau.glyph_desc.glyph_lightning": "Calls Goety's native lightning onto the selected entity or block. Nearby lightning rods redirect it unless a Storm staff is used. Amplify increases damage. Native lightning visuals and interactions are retained.",
+  "goety_nouveau.glyph_name.glyph_updraft": "Updraft",
+  "goety_nouveau.glyph_desc.glyph_updraft": "Creates Goety's native updraft blast at the selected entity or above the selected block, including damage, lift and particles. Wind staffs retain their area bonus. Amplify increases damage; AOE increases its area.",
   "goety_nouveau.cast.unavailable": "The Goety spell could not be cast. Check your soul-energy container and spell conditions."
 }

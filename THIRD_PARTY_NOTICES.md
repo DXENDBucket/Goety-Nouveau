@@ -1,6 +1,6 @@
 # Third-party notices
 
-Goety & Nouveau uses the public APIs of Ars Nouveau, Ars Conflux and Goety. Upstream mod JARs and assets are not redistributed inside this addon. The location/target adapters in `GoetyEffectCasting` and `GoetySummonCasting` adapt parts of Polarice3's original MIT-licensed Frost Nova, Soul Heal and Haunted Skull implementations; their full license is retained below.
+Goety & Nouveau uses the public APIs of Ars Nouveau, Ars Conflux and Goety. Upstream mod JARs and assets are not redistributed inside this addon. The adapters in `GoetyEffectCasting`, `GoetySimpleEffects`, `GoetySummonCasting` and `GoetyBoltCasting` adapt parts of Polarice3's original MIT-licensed spell implementations, including Frost Nova, Soul Heal, Haunted Skull, Iron Hide, Chill Hide, Weakening, Lightning, Updraft and Magic Bolt; their full license is retained below.
 
 - Goety 1.20 source: https://github.com/Polarice3/Goety-2 — MIT, Polarice3 and contributors.
 - Goety 1.21.1 source: https://github.com/Vivideru/Goety-3 — original `com/Polarice3` code/assets retain MIT; Vivideru-authored additions have separate reserved-rights terms. This addon references the dependency and does not redistribute those additions.

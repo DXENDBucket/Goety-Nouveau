@@ -17,6 +17,10 @@ import dev.arsconflux.api.projectile.*;
 import dev.arsconflux.api.resource.ResourceCharge;
 import dev.goetynouveau.mixin.ProjectileHitAccess;
 import dev.goetynouveau.platform.NativeBoltHooks;
+import dev.goetynouveau.platform.NativeEffectHooks;
+import dev.goetynouveau.api.BoltFocus;
+import com.hollingsworth.arsnouveau.common.spell.augment.AugmentExtendTime;
+import com.hollingsworth.arsnouveau.common.spell.augment.AugmentDurationDown;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -26,16 +30,16 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.sounds.SoundEvents;
 
-public final class SoulBoltCasting {
-    private SoulBoltCasting() {}
-    public static boolean replace(EntityProjectileSpell carrier, CarrierProfile profile) {
+public final class GoetyBoltCasting {
+    private GoetyBoltCasting() {}
+    public static boolean replace(BoltFocus focus, EntityProjectileSpell carrier, CarrierProfile profile) {
         if (!(carrier.level() instanceof ServerLevel world)) return false;
         var resolver = ArsSpellAccess.resolver(carrier);
         var context = CastContext.of(resolver.spellContext, null, null);
         var inheritedAccount = context.account();
         var caster = context.caster();
         if (caster == null) return true;
-        var spell = GoetyResources.spell();
+        var spell = focus.spell();
         var augments = resolver.spell.getAugments(0, caster);
         int potency = spell.defaultStats().getPotency();
         potency += augments.stream().filter(a -> a == AugmentAmplify.INSTANCE).count();
@@ -43,21 +47,30 @@ public final class SoulBoltCasting {
         if (WandUtil.enchantedFocus(caster)) potency += WandUtil.getPotencyLevel(caster);
         var direction = TriggerGeometry.direction(carrier);
         var origin = profile.arsDriven() ? carrier.position()
+                // Ars already starts at eyeY - 0.1; both native bolts start at eyeY - 0.2.
                 : carrier.position().add(direction.x / 2, -0.1, direction.z / 2);
-        var projectile = create(world, caster, origin, direction);
+        var projectile = create(focus, world, caster, origin, direction);
         projectile.setExtraDamage(Math.max(0, potency));
-        float velocity = spell.defaultStats().getVelocity();
-        if (WandUtil.enchantedFocus(caster)) velocity += NativeBoltHooks.velocityLevel(caster);
-        projectile.setBoltSpeed((int)velocity);
+        if (projectile instanceof MagicBolt magic) {
+            int duration = spell.defaultStats().getDuration();
+            duration += augments.stream().filter(a -> a == AugmentExtendTime.INSTANCE).count();
+            duration -= augments.stream().filter(a -> a == AugmentDurationDown.INSTANCE).count();
+            if (WandUtil.enchantedFocus(caster)) duration += NativeEffectHooks.duration(caster);
+            magic.setExtraDuration(Math.max(0, duration));
+        } else {
+            float velocity = spell.defaultStats().getVelocity();
+            if (WandUtil.enchantedFocus(caster)) velocity += NativeBoltHooks.velocityLevel(caster);
+            projectile.setBoltSpeed((int)velocity);
+        }
         projectile.setOwner(context.damageOwner());
-        var charge = GoetyResources.quote(resolver.spellContext);
+        var charge = GoetyResources.quote(resolver.spellContext, spell);
         context = context.withAccount(charge.account()).withIncomingDirection(carrier.getDeltaMovement());
         CastContexts.bind(resolver.spellContext, context);
         var continuation = resolver.clone();
         // Read Ars' acceleration statistic, not the jittered launch-vector length. Native speed
         // must be exactly unchanged with no speed modifiers, even when Ars adds shot inaccuracy.
         float speedMultiplier = Math.max(0.1F, 0.75F + resolver.getCastStats().getAccMultiplier() / 2) / 0.75F;
-        var driver = new BoltExecution(projectile, carrier, profile.arsDriven(), speedMultiplier);
+        var driver = new BoltExecution(focus, projectile, carrier, profile.arsDriven(), speedMultiplier);
         var session = new ExecutionSession<>(world, context, charge, Math.max(1, Math.min(200, carrier.getExpirationTime() + 1)), driver,
                 hit -> {
                     var child = continuation.clone();
@@ -65,7 +78,8 @@ public final class SoulBoltCasting {
                     // provider owns the next effect in the Ars recipe.
                     CastContexts.bind(child.spellContext, CastContexts.current().withAccount(inheritedAccount));
                     child.onResolveEffect(world, hit);
-                }, () -> dev.goetynouveau.GlyphCatalog.SOUL_BOLT.isEnabled() && spell.conditionsMet(world, caster), ExecutionScope.DIRECT)
+                }, () -> (focus == BoltFocus.SOUL_BOLT ? dev.goetynouveau.GlyphCatalog.SOUL_BOLT
+                        : dev.goetynouveau.GlyphCatalog.MAGIC_BOLT).isEnabled() && spell.conditionsMet(world, caster), ExecutionScope.DIRECT)
                 .billing(action -> GoetyResources.activation(charge).trigger(action), profile.repeated());
         boolean started = ExecutionSessions.start(session);
         if (!started && caster instanceof Player player)
@@ -73,8 +87,10 @@ public final class SoulBoltCasting {
         return true;
     }
     /** Retain native directional acceleration and initially unset model rotation. Ars selects aim/origin. */
-    private static SpellHurtingProjectile create(ServerLevel world, LivingEntity caster, Vec3 p, Vec3 direction) {
-        var spell = GoetyResources.spell();
+    private static SpellHurtingProjectile create(BoltFocus focus, ServerLevel world, LivingEntity caster, Vec3 p, Vec3 direction) {
+        if (focus == BoltFocus.MAGIC_BOLT)
+            return new MagicBolt(world, p.x, p.y, p.z, direction.x, direction.y, direction.z);
+        var spell = focus.spell();
         var staff = GoetyResources.staff(caster);
         SpellHurtingProjectile bolt;
         if (spell.typeStaff(staff, SpellType.WILD)) bolt = new PoisonBolt(p.x, p.y, p.z, direction.x, direction.y, direction.z, world);
@@ -110,10 +126,12 @@ public final class SoulBoltCasting {
     }
     private static final class BoltExecution implements ExecutionDriver<ResourceCharge> {
         private final SpellHurtingProjectile bolt;
+        private final BoltFocus focus;
         private final ArsTrajectory motion;
         private final EntityProjectileSpell carrier;
         private final float speedMultiplier;
-        private BoltExecution(SpellHurtingProjectile bolt, EntityProjectileSpell carrier, boolean arsDriven, float speedMultiplier) {
+        private BoltExecution(BoltFocus focus, SpellHurtingProjectile bolt, EntityProjectileSpell carrier, boolean arsDriven, float speedMultiplier) {
+            this.focus = focus;
             this.bolt = bolt;
             this.carrier = carrier;
             this.speedMultiplier = speedMultiplier;
@@ -131,9 +149,11 @@ public final class SoulBoltCasting {
                     : session.world().addFreshEntity(bolt);
             if (motion == null) carrier.discard();
             if (started) {
-                if (bolt instanceof NecroBolt) SoundUtil.playNecroBolt(session.caster());
+                if (bolt instanceof MagicBolt)
+                    ((com.Polarice3.Goety.common.magic.Spell)focus.spell()).playSound(session.world(), session.caster(), 1.0F, 1.0F);
+                else if (bolt instanceof NecroBolt) SoundUtil.playNecroBolt(session.caster());
                 else if (bolt instanceof WitherBolt) {
-                    var spell = (com.Polarice3.Goety.common.magic.Spell)GoetyResources.spell();
+                    var spell = (com.Polarice3.Goety.common.magic.Spell)focus.spell();
                     spell.playSound(session.world(), session.caster(), SoundEvents.WITHER_SHOOT, 0.5F, 0.25F);
                     spell.playSound(session.world(), session.caster(), ModSounds.HELL_BOLT_SHOOT.get());
                 }
