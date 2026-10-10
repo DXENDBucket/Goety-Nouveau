@@ -18,23 +18,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = WaterHurtingProjectile.class, remap = false)
 public abstract class GoetyMovementMixin {
     @Unique private Vec3 goetyNouveau$travelStart;
-    @Inject(method = "tick", remap = true, at = @At("HEAD"), cancellable = true)
+    @Inject(method = "tick", remap = true, at = @At("HEAD"))
     private void goetyNouveau$arsMovement(CallbackInfo ci) {
         if (!((Object)this instanceof ManagedBolt state) || !state.goetyNouveau$managed()) return;
         var entity = (WaterHurtingProjectile)(Object)this;
         if (entity instanceof SpellHurtingProjectile spell) spell.boltSpeed = state.goetyNouveau$nativeSpeed();
-        if (!state.goetyNouveau$arsDriven()) return;
-        entity.baseTick();
-        if (entity.level().isClientSide) {
-            entity.setPos(entity.position().add(entity.getDeltaMovement()));
-            ProjectileUtil.rotateTowardsMovement(entity, 0.2F);
-        }
-        ci.cancel();
     }
     @Inject(method = "hitDetection", at = @At("HEAD"), cancellable = true)
     private void goetyNouveau$nativeImpact(CallbackInfo ci) {
-        if (!((Object)this instanceof ManagedBolt state) || !state.goetyNouveau$managed()
-                || state.goetyNouveau$arsDriven()) return;
+        if (!((Object)this instanceof ManagedBolt state) || !state.goetyNouveau$managed()) return;
+        if (state.goetyNouveau$arsDriven()) { ci.cancel(); return; }
         var bolt = (WaterHurtingProjectile)(Object)this;
         if (bolt.level().isClientSide) return;
         var hit = ProjectileUtil.getHitResultOnMoveVector(bolt,
@@ -46,9 +39,17 @@ public abstract class GoetyMovementMixin {
     }
     // Run the original integrator in native velocity units, then scale its displacement and
     // resulting velocity. The default factor is exactly one; rotation and drag remain native.
-    @Inject(method = "travel", at = @At("HEAD"))
+    @Inject(method = "travel", at = @At("HEAD"), cancellable = true)
     private void goetyNouveau$beforeTravel(CallbackInfo ci) {
         goetyNouveau$travelStart = null;
+        if ((Object)this instanceof ManagedBolt state && state.goetyNouveau$managed() && state.goetyNouveau$arsDriven()) {
+            var bolt = (WaterHurtingProjectile)(Object)this;
+            if (bolt.level().isClientSide) {
+                bolt.setPos(bolt.position().add(bolt.getDeltaMovement()));
+                ProjectileUtil.rotateTowardsMovement(bolt, 0.2F);
+            }
+            ci.cancel(); return;
+        }
         if (!((Object)this instanceof ManagedBolt state) || !state.goetyNouveau$managed()
                 || state.goetyNouveau$arsDriven() || state.goetyNouveau$speedMultiplier() == 1.0F) return;
         var bolt = (WaterHurtingProjectile)(Object)this;

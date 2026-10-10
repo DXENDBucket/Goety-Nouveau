@@ -78,3 +78,13 @@
 - 两端 17 个魔符模型、全部 JSON 与原生模型父引用核对通过；发布 JAR 含 MIT 和第三方声明，未打包 GameTest 类或上游依赖。
 
 客户端真实粒子观感、第三方投射物事件取消、Curios 套装装备组合与多人同步仍不等同于这些服务端用例已经验证。本批没有启动真实客户端。
+
+## dev.8 special-carrier native ticks
+
+The previous special-carrier hooks cancelled `AbstractHurtingProjectile.tick` and `WaterHurtingProjectile.tick` completely. This lost the fireball self-burning flag, vanilla smoke/bubbles and WaterHurtingProjectile virtual `trailParticle` calls. Core correctly retained the Ars controller; the fault was in the Goety provider's native movement hook.
+
+For vanilla hurting projectiles, keep the original tick and suppress only its hit query, velocity integration and server position write while Ars-driven. Client position prediction, native fire state, bubbles and virtual trail particle selection still run. Ordinary managed shots retain native speed scaling, and unrelated projectiles are untouched. WaterHurtingProjectile retains its complete tick; only `travel` and `hitDetection` are intercepted. Arrow-family movement remains separate.
+
+The regression uses the actual optional NEG MissileProjectile when present, otherwise Ars Orbit. It checks the network-visible burning state, no duplicate movement/acceleration, actual NEG splash callbacks and native target damage/ignition, plus native fireball/Water trail calls. Client particle appearance and multiplayer interpolation still require visual checking.
+
+2026-10-11 dev.8 verification: NeoForge 1.21.1 with Iron and Not Enough Glyphs passed all 13 required tests (`build/special-projectile-coexistence.log`). Forge 1.20.1 without Iron/NEG passed all 20 required tests, using Ars Orbit for the special-carrier regression (`forge/build/special-projectile-gametest.log`). Both release/source JARs built; no real client was launched.

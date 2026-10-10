@@ -16,7 +16,8 @@
     "ManagedQuillHitMixin",
     "ManagedVanillaMovementMixin",
     "ArrowGroundAccess",
-    "QuillPiercingAccess"
+    "QuillPiercingAccess",
+    "ManagedHurtingMovementMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-dev.8
+
+- Keep native fireball ignition, smoke and water-projectile trails when Ars/Not Enough Glyphs owns the trajectory. Suppress only native movement and collision instead of cancelling the whole projectile tick.
+- Apply the same fix to orbit, splash, trail and other special carriers on both loaders; ordinary native flight remains unchanged.
+
 ## 0.1.0-dev.7
 
 - Add Fireball and Poison Dart projectile replacements, plus Shockwave and Cushion effects.

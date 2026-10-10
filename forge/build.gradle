@@ -51,6 +51,9 @@ minecraft {
 }
 dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    // Ars Conflux supplies the runtime; only expose the hook API/processor here.
+    compileOnly 'io.github.llamalad7:mixinextras-common:0.4.1'
+    annotationProcessor 'io.github.llamalad7:mixinextras-common:0.4.1'
     implementation project(':ars-conflux')
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.0'
     for (name in ['ars-nouveau', 'geckolib', 'curios', 'patchouli', 'goety']) {

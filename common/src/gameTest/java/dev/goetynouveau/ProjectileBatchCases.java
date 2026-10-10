@@ -208,6 +208,63 @@ public final class ProjectileBatchCases {
             h.succeed();
         } finally { player.discard(); ExecutionSessions.tick(); GoetyConfig.RESOURCE_SOURCE.set(previous); }
     }
+    public static void specialCarriersKeepNativeVisualTicks(GameTestHelper h, ServerPlayer player) {
+        prepare(h, player); player.setGameMode(GameType.CREATIVE);
+        try {
+            var splash = com.hollingsworth.arsnouveau.api.registry.GlyphRegistry.getSpellPart(CarrierRegistry.id("arsomega:glyph_missile"));
+            var marker = new Marker();
+            var cast = resolver(h, player, new Spell(splash != null ? splash : MethodProjectile.INSTANCE, GlyphCatalog.FIREBALL, marker));
+            cast.spellContext.nextPart();
+            EntityProjectileSpell carrier;
+            if (splash != null) {
+                carrier = (EntityProjectileSpell)Class.forName("alexthw.not_enough_glyphs.common.spell.MissileProjectile")
+                        .getConstructor(Level.class, SpellResolver.class).newInstance(h.getLevel(), cast);
+                carrier.setPos(player.position().add(0, 2, 0)); carrier.setDeltaMovement(new Vec3(.5, 0, 0));
+            } else {
+                carrier = new EntityOrbitProjectile(h.getLevel(), cast, player);
+                carrier.setPos(carrier.getNextHitPosition());
+            }
+            h.assertTrue(ProjectileDispatch.convert(carrier), "Special carrier uses real Core conversion");
+            var fire = entities(h, player, ModFireball.class).get(0);
+            var position = fire.position(); var velocity = fire.getDeltaMovement();
+            fire.tick(); fire.tick();
+            h.assertTrue(fire.isOnFire() && fire.getRemainingFireTicks() > 0, "Native self-burning state reaches the renderer");
+            h.assertTrue(fire.position().distanceTo(position) < .00001 && fire.getDeltaMovement().distanceTo(velocity) < .00001,
+                    "Native tick must not add movement or acceleration to the Ars trajectory");
+            if (splash != null) {
+                var target = cow(h, 6, 5);
+                var block = h.absolutePos(new BlockPos(6, 3, 5));
+                h.getLevel().setBlockAndUpdate(block, net.minecraft.world.level.block.Blocks.STONE.defaultBlockState());
+                var hit = new BlockHitResult(Vec3.atCenterOf(block).add(0, .5, 0), Direction.UP, block, false);
+                var onHit = carrier.getClass().getDeclaredMethod("onHit", HitResult.class); onHit.setAccessible(true); onHit.invoke(carrier, hit);
+                h.assertTrue(marker.hits > 0, "Real NEG splash detonation resumes the native payload and Ars continuation");
+                h.assertTrue(target.getHealth() < 200 && target.getRemainingFireTicks() > 0, "Native fireball damage and ignition survive the NEG area target callback");
+            }
+            var smoke = new CountingFireball(h.getLevel());
+            smoke.setPos(player.position().add(0, 4, 0)); smoke.setDeltaMovement(new Vec3(.4, .1, 0));
+            ((ManagedBolt)(Object)smoke).goetyNouveau$managed(true); ((ManagedBolt)(Object)smoke).goetyNouveau$arsDriven(true);
+            smoke.tick();
+            h.assertTrue(smoke.trailCalls == 1, "Native fireball smoke emission still executes");
+            var water = new CountingMagicBolt(h.getLevel(), player);
+            water.setPos(smoke.position()); water.setDeltaMovement(smoke.getDeltaMovement());
+            ((ManagedBolt)(Object)water).goetyNouveau$managed(true); ((ManagedBolt)(Object)water).goetyNouveau$arsDriven(true);
+            var waterPos = water.position(); water.tick();
+            h.assertTrue(water.trailCalls == 1 && water.position().distanceTo(waterPos) < .00001,
+                    "Water-based native trails still execute without duplicate server travel");
+            smoke.discard(); water.discard(); fire.discard(); carrier.discard(); h.succeed();
+        } catch (ReflectiveOperationException failure) { throw new RuntimeException(failure); }
+        finally { player.discard(); ExecutionSessions.tick(); }
+    }
+    private static final class CountingFireball extends ModFireball {
+        int trailCalls;
+        CountingFireball(Level world) { super(world, 0, 0, 0, 1, 0, 0); }
+        @Override protected net.minecraft.core.particles.ParticleOptions getTrailParticle() { ++trailCalls; return super.getTrailParticle(); }
+    }
+    private static final class CountingMagicBolt extends com.Polarice3.Goety.common.entities.projectiles.MagicBolt {
+        int trailCalls;
+        CountingMagicBolt(Level world, LivingEntity caster) { super(world, caster, 1, 0, 0); }
+        @Override public void trailParticle() { ++trailCalls; super.trailParticle(); }
+    }
     private static final class Marker extends AbstractEffect {
         int hits;
         Marker() { super(CarrierRegistry.id("goety_nouveau:glyph_batch_marker"), "Marker"); }
