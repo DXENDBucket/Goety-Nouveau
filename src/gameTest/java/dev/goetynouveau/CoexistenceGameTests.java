@@ -30,6 +30,12 @@ public final class CoexistenceGameTests {
         return player;
     }
     @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeFangGeometryAndBilling(GameTestHelper h) { FangCases.nativeFangGeometryAndBilling(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeFangAbsorptionAndSoulGain(GameTestHelper h) { FangCases.nativeFangAbsorptionAndSoulGain(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeIgniteInteractions(GameTestHelper h) { FangCases.nativeIgniteInteractions(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
     public static void specialCarriersKeepNativeVisualTicks(GameTestHelper h) { ProjectileBatchCases.specialCarriersKeepNativeVisualTicks(h, player(h)); }
     @GameTest(template="empty", timeoutTicks=40)
     public static void fireballNativeMotionAndSalvo(GameTestHelper h) { ProjectileBatchCases.fireballNativeMotionAndSalvo(h, player(h)); }

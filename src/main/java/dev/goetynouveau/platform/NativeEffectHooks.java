@@ -8,6 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 
 public final class NativeEffectHooks {
     private NativeEffectHooks() {}
+    public static int absorb(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.ABSORB, caster); }
+    public static int soulEater(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.SOUL_EATER, caster); }
     public static int duration(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.DURATION, caster); }
     public static int radius(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.RADIUS, caster); }
     public static MobEffectInstance freezing(int ticks, int amplifier) { return new MobEffectInstance(GoetyEffects.FREEZING, ticks, amplifier); }

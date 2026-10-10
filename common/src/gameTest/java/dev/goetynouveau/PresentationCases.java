@@ -22,7 +22,8 @@ public final class PresentationCases {
         }
         for (var part : GlyphCatalog.ALL)
             h.assertTrue(part instanceof dev.goetynouveau.glyph.GoetyBoltGlyph || part instanceof AbstractEffect
-                            || part == dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
+                            || part == dev.goetynouveau.glyph.AugmentBurning.INSTANCE
+                            || part instanceof dev.goetynouveau.glyph.AugmentGoety,
                     "Effect glyphs retain their actual category, independently of sorting");
         values.sort(registryOrder);
         verify(h, values);
@@ -37,13 +38,20 @@ public final class PresentationCases {
     private static void verify(GameTestHelper h, List<AbstractSpellPart> values) {
         String provider = "";
         int category = Integer.MIN_VALUE;
+        boolean goetyProjectileSeen = false;
         for (var part : values) {
             int nextCategory = part.getTypeIndex();
-            if (nextCategory != category) { category = nextCategory; provider = ""; }
+            if (nextCategory != category) { category = nextCategory; provider = ""; goetyProjectileSeen = false; }
             String namespace = part.getRegistryName().getNamespace();
             String next = namespace.equals("goety_nouveau") || namespace.equals("irons_nouveau") ? namespace : "";
             h.assertTrue(provider.compareTo(next) <= 0,
                     "Ordinary Ars/addon glyphs precede contiguous Goety and Iron groups within each category");
+            if (namespace.equals("goety_nouveau")) {
+                boolean projectile = part instanceof dev.arsconflux.api.projectile.ProjectileForm;
+                h.assertTrue(!goetyProjectileSeen || projectile,
+                        "Goety ordinary augments precede Goety projectile replacements without breaking provider grouping");
+                goetyProjectileSeen |= projectile;
+            }
             provider = next;
         }
     }

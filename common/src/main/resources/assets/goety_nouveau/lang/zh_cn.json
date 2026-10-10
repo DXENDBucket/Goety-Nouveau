@@ -34,6 +34,19 @@
   "goety_nouveau.glyph_name.glyph_cushion": "风垫",
   "goety_nouveau.glyph_desc.glyph_cushion": "在选中的实体或方块上方生成 Goety 原生风垫。扩散扩大范围，延长时效增加原生寿命。",
   "goety_nouveau.glyph_name.glyph_burning": "燃烧",
-  "goety_nouveau.glyph_desc.glyph_burning": "为支持的 Goety 法术增加一个原生燃烧单位。效果随法术而异，作用于火球或幽灵头骨。额外费用在实际触发时扣除。",
-  "goety_nouveau.validation.burning": "燃烧需要与 Goety 火球或幽灵头骨一起使用。"
+  "goety_nouveau.glyph_desc.glyph_burning": "为支持的 Goety 法术增加一个原生燃烧单位。效果随法术而异，作用于火球、幽灵头骨、尖牙或引燃。额外费用在实际触发时扣除。",
+  "goety_nouveau.validation.burning": "燃烧需要与 Goety 火球、幽灵头骨、尖牙或引燃一起使用。",
+  "goety_nouveau.glyph_name.glyph_fangs": "尖牙",
+  "goety_nouveau.glyph_desc.glyph_fangs": "从选中位置展开 Goety 原生尖牙，方向取弹射物来向或施法者朝向。潜行时改为环形；不祥法杖增加侧列或外圈。强化增加伤害，延伸为每列增加一枚尖牙；支持燃烧、生命吸收和噬魂。",
+  "goety_nouveau.glyph_name.glyph_ignite": "引燃",
+  "goety_nouveau.glyph_desc.glyph_ignite": "以 Goety 原生时长点燃选中的生物，或通过火焰弹原生交互点燃方块。每个燃烧增强为生物点火增加一秒。无效目标或没有改变的燃烧状态不收费。",
+  "goety_nouveau.glyph_name.glyph_extension": "延伸",
+  "goety_nouveau.glyph_desc.glyph_extension": "为支持的 Goety 法术增加一个原生长度单位。目前为直线尖牙的每列增加一枚尖牙、延长 1.25 格，不增加 Ars 选取距离，不改变潜行环形。",
+  "goety_nouveau.glyph_name.glyph_life_absorb": "生命吸收",
+  "goety_nouveau.glyph_desc.glyph_life_absorb": "让 Goety 尖牙具有原生吸血：玩家主人按原生伤害事件恢复生命。每段最多一个，与强化不兼容；吸血时不应用额外威力。额外资源在实际触发时扣除。",
+  "goety_nouveau.glyph_name.glyph_soul_eater": "噬魂",
+  "goety_nouveau.glyph_desc.glyph_soul_eater": "为 Goety 尖牙增加一级原生噬魂，最高十级。符合原生条件的成功命中按 Goety 配置返还灵魂能量，不是回蓝，也不保证对所有目标有效。额外费用使用选定的触发资源。",
+  "goety_nouveau.validation.native_parameter": "延伸、生命吸收和噬魂目前需要与 Goety 尖牙一起使用。",
+  "goety_nouveau.validation.augment_limit": "每段法术最多使用一个生命吸收、十个噬魂。",
+  "goety_nouveau.validation.absorb_potency": "生命吸收不能与强化同时使用。"
 }

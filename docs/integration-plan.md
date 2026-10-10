@@ -2,7 +2,7 @@
 
 ## 范围与边界
 
-这是独立附属，modid 为 `goety_nouveau`，依赖 Ars Nouveau、Goety 和 Ars Conflux；不依赖 Iron & Nouveau。`0.1.0-dev.7` 已有四种弹射物替换、十二种效果与燃烧增强，不调整整合包流程或擅自添加生存解锁配方。
+这是独立附属，modid 为 `goety_nouveau`，依赖 Ars Nouveau、Goety 和 Ars Conflux；不依赖 Iron & Nouveau。`0.1.0-dev.9` 已有四种弹射物替换、十四种效果与四种原生参数增强，不调整整合包流程或擅自添加生存解锁配方。
 
 Core 负责施法上下文、Ars 载体、延续编排、触发计费与物理资源池预留。Goety 附属负责 Goety 法术参数、实体、装备条件、资源访问和特有召唤行为。以后加入其他附属时，通过 Core 共用载体能力，不做 Goety 与 Iron 的互相依赖。
 
@@ -104,7 +104,7 @@ Ars 整合实机测试使用 `1.21.1-万法归一`，基础环境由用户部署
 
 ## 2026-10-11：原生参数与专用增强研究
 
-本节记录研究时的候选；随后 `0.1.0-dev.7` 已落实火球、毒镖、冲击波、风垫与燃烧增强。延伸、吸收、噬魂和磁引仍未实现。
+本节记录研究时的候选；随后 `0.1.0-dev.7` 已落实火球、毒镖、冲击波、风垫与燃烧增强。dev.9 已接入尖牙及延伸、生命吸收、噬魂；磁引仍随掘地法术留待后续。
 
 已用 `javap` 核对固定的 NeoForge 与 Forge Goety JAR：两端 `SpellStat` 都有 potency、duration、range、radius、burning、velocity 六个参数。附魔定义和法术消费者另外核对了上述固定提交的源码。接受某个附魔不等于已完整实现它的行为；接入时仍以发行 JAR 和实际消费者为准。
 
@@ -115,7 +115,7 @@ Ars 整合实机测试使用 `1.21.1-万法归一`，基础环境由用户部署
 | radius | Ars 扩散 | 调整效果半径；不是重新选取远处目标 |
 | velocity | Ars 加速／减速 | 保留各弹射物的原生速度、惯性和抛物线，再应用载体速度倍率 |
 | burning | “燃烧”增强已实现 | 直接增加原生 burning，含义由支持它的原生法术决定 |
-| range | “延伸”增强候选，后续再做 | 仅用于法术自身的攻击长度、数量等；不能绕开 Ars 形态的选点／射程规则 |
+| range | “延伸”增强已在 dev.9 接入尖牙 | 仅用于法术自身的攻击长度、数量等；不能绕开 Ars 形态的选点／射程规则 |
 
 优先考虑“燃烧”。火球、凋灵头颅、幽灵头骨、尖牙等均消费这一参数，适用范围不只一个法术。它和 Ars 点燃效果有区别：后者是命中后另执行一个效果，前者改变 Goety 原生攻击本身。原生 Ignite 每单位增加点燃秒数，尖牙按每单位五秒处理，掘地还会用 burning 判定是否烧炼掉落物；因此不宜把它描述为统一的“附加五秒点燃”。建议初版每个增强增加一个原生参数单位，只对明确支持的 Goety 魔符开放。
 
@@ -144,3 +144,13 @@ range 与 radius 必须保持独立。例如尖牙的 range 同时决定直线�
 参考：[SpellStat](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/magic/SpellStat.java)、[附魔注册](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/enchantments/ModEnchantments.java)、[ABSORB 兼容约束](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/enchantments/AbsorbEnchantment.java)。
 
 生命吸收的事件消费者：[ModEvents](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/events/ModEvents.java)。
+
+## 0.1.0-dev.9：尖牙与原生参数增强
+
+接入 `biting_focus` 与 `ignite_focus`。尖牙以 Ars 触发点为起点，优先沿来向展开；没有水平来向时使用施法者朝向。潜行保持环形模式，中心改为触发点。保留原生尖牙实体的全生命周期及全局伤害事件。仅在触发点附近寻找可承载地面，不以施法者的高度扫描远处洞穴。
+
+延伸每个增加一个原生 range 单位，直线每列多一枚尖牙并延长 1.25 格；不会扩大 Ars 目标选取，也不会改变原生潜行环形。生命吸收最多一个，与 Ars 强化不兼容，并禁止装备威力加成绕过这一规则。噬魂最高十级；固定 Forge 与 NeoForge 原生消费者对可回魂目标的判断差异仍由原生实体保留，不另写收益事件。
+
+三个新增配置费用均默认 5，与燃烧一样在真实触发报价中计算、按选定资源结算，再应用灵魂折扣与原生扣费事件。没有地面、无资源、无效原始编排或失败生成不扣费。吸血与回魂的所有者依照伤害主人，付款者保持施法者；不能把受击目标设为临时施法者，也不临时改装备附魔。
+
+引燃的生物分支调用完整原生 `touchResult`，方块分支调用原生火焰弹交互，但使用 Ars 的 `BlockHitResult`。不会调用 `rightBlock` 再读取玩家视线。只有实际改变燃烧状态或成功进行方块交互才付费。

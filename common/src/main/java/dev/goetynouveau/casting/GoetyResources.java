@@ -34,8 +34,12 @@ public final class GoetyResources {
             java.util.List<com.hollingsworth.arsnouveau.api.spell.AbstractAugment> augments) {
         var caster = CastContext.of(context, null, null).caster();
         int cost = caster == null ? spell.defaultSoulCost() : spell.soulCost(caster, staff(caster));
-        long burning = augments.stream().filter(a -> a == dev.goetynouveau.glyph.AugmentBurning.INSTANCE).count();
-        cost = (int)Math.min(Integer.MAX_VALUE, (long)Math.max(0, cost) + burning * GoetyConfig.BURNING_COST.get());
+        long total = Math.max(0, cost);
+        for (var augment : augments) {
+            if (augment == dev.goetynouveau.glyph.AugmentBurning.INSTANCE) total += GoetyConfig.BURNING_COST.get();
+            else if (augment instanceof dev.goetynouveau.glyph.AugmentGoety goety) total += goety.additionalCost();
+        }
+        cost = (int)Math.min(Integer.MAX_VALUE, total);
         if (GoetyConfig.RESOURCE_SOURCE.get() == ResourceSource.ARS_MANA)
             return new ResourceCharge(new ArsManaAccount(context.getCaster()), Math.max(0, cost));
         var account = new SoulAccount(caster instanceof Player player ? player : null);

@@ -63,6 +63,10 @@ public final class GoetyEffectCasting {
             case UPDRAFT -> GoetySimpleEffects.updraft(world, frame, spell, potency, radius);
             case SHOCKWAVE -> GoetySimpleEffects.shockwave(world, frame, spell, potency, radius);
             case CUSHION -> GoetySimpleEffects.cushion(world, frame, spell, duration, (int)radius);
+            case FANGS -> GoetyFangCasting.apply(world, frame, spell, defaults, ars);
+            case IGNITE -> GoetyIgniteCasting.apply(world, frame,
+                    (com.Polarice3.Goety.common.magic.spells.IgniteSpell)spell,
+                    defaults.burning() + ars.getBuffCount(dev.goetynouveau.glyph.AugmentBurning.INSTANCE));
         };
     }
     private static LivingEntity target(CastContext frame) {

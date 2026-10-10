@@ -29,12 +29,18 @@ public final class GlyphCatalog {
     public static final GoetyEffectGlyph UPDRAFT = new GoetyEffectGlyph(EffectFocus.UPDRAFT);
     public static final GoetyEffectGlyph SHOCKWAVE = new GoetyEffectGlyph(EffectFocus.SHOCKWAVE);
     public static final GoetyEffectGlyph CUSHION = new GoetyEffectGlyph(EffectFocus.CUSHION);
+    public static final GoetyEffectGlyph FANGS = new GoetyEffectGlyph(EffectFocus.FANGS);
+    public static final GoetyEffectGlyph IGNITE = new GoetyEffectGlyph(EffectFocus.IGNITE);
     public static final List<AbstractSpellPart> ALL = List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
-            SHOCKWAVE, CUSHION, dev.goetynouveau.glyph.AugmentBurning.INSTANCE);
+            SHOCKWAVE, CUSHION, FANGS, IGNITE, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
+            dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
+            dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER);
     private GlyphCatalog() {}
     public static void register() {
-        dev.arsconflux.api.glyph.GlyphPresentation.register("goety_nouveau");
+        // Secondary ordering runs within the provider group, never across providers.
+        dev.arsconflux.api.glyph.GlyphPresentation.register("goety_nouveau",
+                part -> part instanceof dev.arsconflux.api.projectile.ProjectileForm ? "1" : "0");
         ALL.forEach(GlyphRegistry::registerSpell);
         dev.arsconflux.api.glyph.SpellValidators.register(CarrierRegistry.id("goety_nouveau:augments"),
                 dev.goetynouveau.glyph.GoetyAugmentValidation::validate);

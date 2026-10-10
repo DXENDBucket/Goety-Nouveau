@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-dev.9
+
+- Sort projectile-replacement augments after the other augments within the Goety provider group; preserve categories and contiguous provider groups on both loaders.
+
+- Add Fangs and Ignite effect glyphs with real Ars hit-point/direction adaptation, native entities and native block/entity ignition.
+- Preserve grounded fang placement, warmup, player ownership, native ally filters, Ominous staff side rows/rings, animation and expiry. Native damage events handle lifesteal; native fang hits handle soul gains.
+- Add Extension, Life Absorb and Soul Eater dedicated augments. Extend straight fang rows, enable native absorption or add native Soul Eater levels; validate per-payload support, binary absorption, ten-level soul eating and Absorb/Amplify exclusion in both the editor and server execution.
+- Expand Burning to Fangs and Ignite; include all dedicated augment fees in trigger quotes and actual resource billing, with independent configuration keys and creative-mode exemption.
+- Add native-world coverage for batch geometry, staff variants, delayed damage/healing/soul gains, invalid/no-ground/denied/creative triggers and fire-charge interactions on both loaders.
+
 ## 0.1.0-dev.8
 
 - Keep native fireball ignition, smoke and water-projectile trails when Ars/Not Enough Glyphs owns the trajectory. Suppress only native movement and collision instead of cancelling the whole projectile tick.

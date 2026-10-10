@@ -41,7 +41,8 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
         if (focus.potency) { result.add(AugmentAmplify.INSTANCE); result.add(AugmentDampen.INSTANCE); }
         if (focus.duration) { result.add(AugmentExtendTime.INSTANCE); result.add(AugmentDurationDown.INSTANCE); }
         if (focus.radius) result.add(AugmentAOE.INSTANCE);
-        if (focus == EffectFocus.HAUNTED_SKULL) result.add(AugmentBurning.INSTANCE);
+        if (GoetyAugmentValidation.supportsBurning(focus)) result.add(AugmentBurning.INSTANCE);
+        for (var augment : AugmentGoety.ALL) if (augment.supports(focus)) result.add(augment);
         return result;
     }
     @Override public ResourceCharge firstCharge(SpellContext context, List<AbstractAugment> augments) {
@@ -50,6 +51,7 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
     @Override public void onResolve(HitResult hit, Level world, LivingEntity ignoredCaster, SpellStats stats,
                                      SpellContext context, SpellResolver resolver) {
         if (!(world instanceof ServerLevel server) || !isEnabled()) return;
+        if (!GoetyAugmentValidation.validEffect(focus, stats.getAugments())) return;
         var frame = CastContext.of(context, hit, null);
         var caster = frame.caster();
         if (caster == null || !caster.isAlive() || caster.level() != server) return;

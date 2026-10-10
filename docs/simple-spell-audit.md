@@ -88,3 +88,27 @@ For vanilla hurting projectiles, keep the original tick and suppress only its hi
 The regression uses the actual optional NEG MissileProjectile when present, otherwise Ars Orbit. It checks the network-visible burning state, no duplicate movement/acceleration, actual NEG splash callbacks and native target damage/ignition, plus native fireball/Water trail calls. Client particle appearance and multiplayer interpolation still require visual checking.
 
 2026-10-11 dev.8 verification: NeoForge 1.21.1 with Iron and Not Enough Glyphs passed all 13 required tests (`build/special-projectile-coexistence.log`). Forge 1.20.1 without Iron/NEG passed all 20 required tests, using Ars Orbit for the special-carrier regression (`forge/build/special-projectile-gametest.log`). Both release/source JARs built; no real client was launched.
+
+
+## 0.1.0-dev.9: Fangs, Ignite and dedicated native augments
+
+Fangs adapts the MIT upstream FangSpell/WandUtil placement to the actual Ars hit point and incoming direction. The first central fang starts at that point, the rest follow in 1.25-block increments. Sneaking creates the native rings; Ominous staff adds side rows/outer rings, with the original angular strides, delays and grounded placement. Extension adds one straight-row fang per unit, without changing Ars targeting or the sneaking rings.
+
+The real native Fangs entity owns animation, delayed damage, ally checks and expiry. Its normal seven-argument constructor is essential: the totem constructor disables ordinary spell soul gains. Life Absorb sets the actual native flag so the original global damage handler heals the player owner. Soul Eater sets the native level (maximum ten) and leaves native hit eligibility/configured gains intact. It returns Goety souls even when the trigger cost uses Ars mana. Life Absorb is binary and excludes Amplify/native positive potency; it does not introduce a second damage/healing event.
+
+Ignite calls the complete native entity touch result at the Ars-selected entity. Block hits use the native fire-charge use context at the actual hit face, retaining campfire/candle/fire placement rules without consuming or altering the caster's held item or tracing their view again. No stronger ignition/no successful block interaction means no charge.
+
+Burning now supports Fangs and Ignite in addition to Fireball and Haunted Skull. Extension, Life Absorb and Soul Eater are opt-in dedicated augments, currently for Fangs only. Their extra trigger fees are independently configurable, default five selected-resource units each before native soul discounts. Quotes and successful activations use the same augment list. Shared validation and server execution both reject unsupported payloads, duplicate absorption, excess Soul Eater and Absorb/Amplify combinations; generated spells cannot bypass the editor rules.
+
+Presentation uses Core's provider secondary key to put Goety ordinary augments before Goety projectile replacements. The key is evaluated inside the provider group, so it does not move all providers' projectiles to the global end or change effect/augment categories. Both Ars registry and client category sorting are covered.
+
+The new world checks cover the actual fang entities, staff geometry and one batch fee, native expiry, delayed damage/global lifesteal/soul gain, invalid/no-ground/denied/creative casts and real campfire ignition. Their elevated scene remains inside GameTest's already entity-ticking area: laying blocks in a remote area loads chunk data but does not immediately make all entity sections visible to native collision queries. This is a test-fixture constraint, not a production chunk loader.
+
+
+2026-10-11 dev.9 verification:
+
+- NeoForge 1.21.1 with Iron and Not Enough Glyphs: all 16 required tests passed (`build/fangs-coexistence.log`).
+- Forge 1.20.1 without Iron/NEG: all 23 required tests passed (`forge/build/fangs-gametest.log`). Both versions built release and source JARs.
+- All 24 JSON resources, 22 glyph models, Chinese/English name/description entries and referenced native focus parents were checked against both pinned Goety JARs.
+- Test-scene fixes precede these results: use entity-ticking GameTest chunks, explicitly clear the no-ground case in Forge's natural-terrain world, and avoid redundant configuration writes during Forge's file-watcher startup.
+- No real client was launched; native particle/animation appearance and multiplayer visual synchronization still need in-game observation. No new casting animation/cooldown or survival acquisition behavior is claimed.
