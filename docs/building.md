@@ -65,6 +65,8 @@ Forge's `:jar` also runs `reobfJar`. Neither addon artifact embeds Goety, Ars No
 
 Both targets expose `:runClient` and `:runServer`; server launches use `--nogui`. These runs include the local addon and Core source sets. Goety's own content remains present, so use disposable test worlds.
 
+Forge development runs explicitly register `ars_conflux.mixins.json`: an included Core source directory has no release-JAR manifest to register it automatically. Production JARs keep their own independent mixin declarations; the addon does not bundle Core.
+
 Use a dedicated Ars integration instance. Its local path can be recorded in the ignored `test-environment.local.json`; personal instance paths are not part of the public source. Build tasks do not automatically install into a game instance. Compilation alone does not verify mod loading, rendering or playable spell behavior.
 
 ## Focused runtime validation
@@ -78,6 +80,8 @@ cd forge
 ```
 
 Coverage: actual native hit damage and Ars continuation; no duplicated carriers; real player/totem storage, reduced scatter, creative bypass; Ars mana alternative and failed-action billing; repeated carrier payments and cleanup; native soul-loss event pricing; tick-by-tick launch, acceleration, displacement and gradual rotation against a bolt spawned by Goety's actual `SpellResult`, including accelerated travel. Headless tests check entity rotation, but do not inspect client rendering or animations.
+
+On 2026-10-11, the six Forge scenarios passed with Core 0.1.7 after correcting source-directory mixin registration. The launch log confirms Core's configuration is active; production addon code and its version remain unchanged by this development-launch fix.
 
 For the separate NeoForge coexistence test, place matching Iron & Nouveau, Iron's Spells 'n Spellbooks, irons_lib, Player Animator and Caelus JARs in the ignored `libs/coexistence/` directory. Run from the project root:
 

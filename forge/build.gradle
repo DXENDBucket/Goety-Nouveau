@@ -30,6 +30,8 @@ minecraft {
         configureEach {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            // Included source directories have no release-JAR manifest to register Core's mixins.
+            args '--mixin.config', 'ars_conflux.mixins.json'
         }
         client {
             workingDirectory project.file('run/client')
