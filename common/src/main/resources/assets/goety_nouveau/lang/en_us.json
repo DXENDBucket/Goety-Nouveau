@@ -10,5 +10,7 @@
   "goety_nouveau.glyph_desc.glyph_entangling": "Raises Goety's entangling vines at the selected enemy or location. Extend Time increases their lifetime; AOE selects nearby enemies. Wild staffs retain their group-targeting bonus.",
   "goety_nouveau.glyph_name.glyph_soul_heal": "Soul Heal",
   "goety_nouveau.glyph_desc.glyph_soul_heal": "Heals the selected ally or yourself with Goety's soul healing. Amplify increases potency; AOE also heals nearby allies. An invalid target or a fully healed group consumes no native resource.",
+  "goety_nouveau.glyph_name.glyph_haunted_skull": "Haunted Skull",
+  "goety_nouveau.glyph_desc.glyph_haunted_skull": "Summons native haunted skulls near the selected entity or location, retaining Goety pursuit, explosions, ownership and lifetime. Amplify boosts the summon, AOE increases explosion radius and Extend Time increases lifetime. Sneak-casting recalls existing skulls; no eligible skull means no charge.",
   "goety_nouveau.cast.unavailable": "The Goety spell could not be cast. Check your soul-energy container and spell conditions."
 }

@@ -10,5 +10,7 @@
   "goety_nouveau.glyph_desc.glyph_entangling": "在选中的敌人或位置生成 Goety 藤蔓。延长时效增加持续时间，扩散会选取附近敌人，野性法杖保留群体选取加成。",
   "goety_nouveau.glyph_name.glyph_soul_heal": "灵魂治疗",
   "goety_nouveau.glyph_desc.glyph_soul_heal": "治疗选中的友军或自身，保留 Goety 的灵魂治疗表现。强化增加威力，扩散还会治疗周围友军。目标无效或全部满血时不消耗原生资源。",
+  "goety_nouveau.glyph_name.glyph_haunted_skull": "幽灵头骨",
+  "goety_nouveau.glyph_desc.glyph_haunted_skull": "在选中的实体或位置附近召唤幽灵头骨，沿用 Goety 的追击、爆炸、归属和寿命。强化提升召唤增益，扩散增大爆炸范围，延长时效增加寿命。潜行施法召回已有头骨；没有可召回的头骨时不消耗资源。",
   "goety_nouveau.cast.unavailable": "未能施放 Goety 法术，请检查灵魂能量容器与施法条件。"
 }

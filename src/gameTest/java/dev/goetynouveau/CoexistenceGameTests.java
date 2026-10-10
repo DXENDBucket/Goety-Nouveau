@@ -23,6 +23,18 @@ import java.util.List;
 @GameTestHolder("goety_nouveau_coexistence") @PrefixGameTestTemplate(false)
 public final class CoexistenceGameTests {
     @GameTest(template="empty", timeoutTicks=40)
+    public static void providerGlyphGroupsKeepCategories(GameTestHelper h) {
+        PresentationCases.check(h, com.hollingsworth.arsnouveau.setup.registry.CreativeTabRegistry.COMPARE_SPELL_TYPE_NAME);
+    }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeSkullSummoning(GameTestHelper h) {
+        var player = net.neoforged.neoforge.common.util.FakePlayerFactory.get(h.getLevel(),
+                new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "ConfluxSummons"));
+        var mana = com.hollingsworth.arsnouveau.setup.registry.CapabilityRegistry.getMana(player);
+        mana.setMaxMana(10000); mana.setMana(10000);
+        SummonCases.nativeSkullsKeepTargetOwnerExpiryAndOneBatchCharge(h, player);
+    }
+    @GameTest(template="empty", timeoutTicks=40)
     public static void nativeGoetyBillsDoNotOverrideFollowingProviders(GameTestHelper h) {
         var player = net.neoforged.neoforge.common.util.FakePlayerFactory.get(h.getLevel(),
                 new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "ConfluxAccounts"));

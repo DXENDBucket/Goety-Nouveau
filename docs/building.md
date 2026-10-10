@@ -4,7 +4,7 @@
 
 ```text
 MinecraftDev/
-  Ars-Conflux/              # compatible Core checkout, at least 0.1.7
+  Ars-Conflux/              # compatible Core checkout, at least 0.1.8
   Goety-Nouveau/
     VERSION                 # single version for both targets
     common/src/main/        # shared integration source and resources
@@ -20,7 +20,7 @@ The root wrapper uses Gradle 9.2.1; the Forge wrapper uses Gradle 8.8. Do not re
 
 ## Prepare dependencies
 
-Prepare an Ars Conflux 0.1.7 source checkout beside this project, then run:
+Prepare an Ars Conflux 0.1.8 source checkout beside this project, then run:
 
 ```powershell
 python tools/fetch_dependencies.py
@@ -91,7 +91,9 @@ For the separate NeoForge coexistence test, place matching Iron & Nouveau, Iron'
 ./gradlew.bat :runGameTestServer -PwithIron=true --no-daemon --max-workers=2
 ```
 
-This selects the `goety_nouveau_coexistence` namespace and checks real Goety and Iron glyph registration, learning, native projectile dispatch and rejection of two replacement glyphs on a single projectile. It also drives a real Iron Firebolt into Goety's native vines and checks that native Goety payments do not become resource overrides for following providers. The three scenarios passed on 2026-10-11 with Goety & Nouveau 0.1.0-dev.4, Iron & Nouveau 0.17.6, Core 0.1.7, Iron's Spells 'n Spellbooks 3.16.3, irons_lib 2.2.0, Player Animator 2.0.4 and Caelus 7.0.1. These are optional development runtime dependencies, never bundled or required by this addon.
+This selects the `goety_nouveau_coexistence` namespace and checks real Goety and Iron glyph registration, learning, native projectile dispatch and rejection of two replacement glyphs on a single projectile. It also drives a real Iron Firebolt into Goety's native vines and checks that native Goety payments do not become resource overrides for following providers. The original three scenarios passed on 2026-10-11 with Goety & Nouveau 0.1.0-dev.4, Iron & Nouveau 0.17.6, Core 0.1.7, Iron's Spells 'n Spellbooks 3.16.3, irons_lib 2.2.0, Player Animator 2.0.4 and Caelus 7.0.1. These are optional development runtime dependencies, never bundled or required by this addon.
+
+For 0.1.0-dev.5, the focused NeoForge coexistence run passed all five scenarios with Iron & Nouveau 0.17.7 and Core 0.1.8. The two additional checks cover contiguous provider groups without changing glyph categories, and native skull batches, Ars-selected targets, owner identity, focus payment, summon limits and actual expiry removal. Core's same-rank effect/subform unit regressions also passed. The Forge build passed all twelve independent scenarios, including the same two new sorting/summoning cases. No client rendering check was performed.
 
 ## Version control
 

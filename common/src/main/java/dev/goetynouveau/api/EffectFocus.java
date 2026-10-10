@@ -8,7 +8,8 @@ public enum EffectFocus {
     ICE_CHUNK("ice_chunk", "iceology_focus", "Ice Chunk", true, false, false),
     FROST_NOVA("frost_nova", "frost_nova_focus", "Frost Nova", true, true, true),
     ENTANGLING("entangling", "entangling_focus", "Entangling", false, true, true),
-    SOUL_HEAL("soul_heal", "soul_heal_focus", "Soul Heal", true, false, true);
+    SOUL_HEAL("soul_heal", "soul_heal_focus", "Soul Heal", true, false, true),
+    HAUNTED_SKULL("haunted_skull", "skull_focus", "Haunted Skull", true, true, true);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

@@ -45,7 +45,8 @@ public final class GoetyEffectCasting {
             // Frost Nova natively grants half a potency per enchantment level.
             if (focus.potency && focus != EffectFocus.FROST_NOVA) potency += WandUtil.getPotencyLevel(caster);
             if (focus.duration) duration += NativeEffectHooks.duration(caster);
-            if (focus.radius && focus != EffectFocus.ENTANGLING) radius += NativeEffectHooks.radius(caster);
+            if (focus.radius && focus != EffectFocus.ENTANGLING)
+                radius += NativeEffectHooks.radius(caster) * (focus == EffectFocus.HAUNTED_SKULL ? 0.5 : 1);
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
@@ -53,6 +54,9 @@ public final class GoetyEffectCasting {
             case ENTANGLING -> entangling(world, frame, spell, parameters);
             case FROST_NOVA -> frostNova(world, frame, spell, parameters);
             case SOUL_HEAL -> soulHeal(world, frame, (SoulHealSpell)spell, parameters);
+            case HAUNTED_SKULL -> GoetySummonCasting.hauntedSkull(world, frame,
+                    (com.Polarice3.Goety.common.magic.spells.necromancy.HauntedSkullSpell)spell,
+                    potency, duration, radius);
         };
     }
     private static LivingEntity target(CastContext frame) {

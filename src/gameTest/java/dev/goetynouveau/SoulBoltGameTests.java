@@ -17,6 +17,12 @@ public final class SoulBoltGameTests {
         return player;
     }
     @GameTest(template="empty", timeoutTicks=40)
+    public static void providerGlyphGroupsKeepCategories(GameTestHelper h) {
+        PresentationCases.check(h, com.hollingsworth.arsnouveau.setup.registry.CreativeTabRegistry.COMPARE_SPELL_TYPE_NAME);
+    }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeSkullSummoning(GameTestHelper h) { SummonCases.nativeSkullsKeepTargetOwnerExpiryAndOneBatchCharge(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
     public static void nativeContinuationKeepsSourceAccount(GameTestHelper h) { EffectCases.nativeContinuationKeepsSourceAccount(h, player(h)); }
     @GameTest(template="empty", timeoutTicks=40)
     public static void nativeIceTracksSelectedTarget(GameTestHelper h) { EffectCases.nativeIceTracksSelectedTarget(h, player(h)); }

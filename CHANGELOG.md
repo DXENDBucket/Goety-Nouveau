@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.5
+
+- Group Goety glyphs after ordinary Ars/addon glyphs within their original categories, using the new shared Conflux presentation registry. Preserve separate Iron groups and native Iron school ordering.
+- Add Haunted Skull as an effect glyph: summon near the selected Ars entity/location, retain native ownership, pursuit, explosion and expiry, and support potency/duration/radius augments.
+- Retain native necromancy-staff batch bonuses, enchantments, cape upgrades and shift recall. Charge one focus cost per successful batch; refuse empty recalls, exhausted summon limits, zero lifetime and failed spawns.
+- Keep Forge/NeoForge native differences in owner resolution, nameless-staff count and duration enchantments; require Core 0.1.8.
+- Add focused category/group and native summon billing/lifetime tests.
+
 ## 0.1.0-dev.4
 
 - Add Ice Chunk, Frost Nova, Entangling and Soul Heal as Ars effect glyphs, with Chinese/English descriptions and native focus-model icons.
