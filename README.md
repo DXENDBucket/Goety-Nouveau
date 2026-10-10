@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.15`). Seventeen projectile replacements, twenty-one target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.16`). Seventeen projectile replacements, twenty-four target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -20,7 +20,7 @@ The glyphs are available in the creative tab; survival acquisition and ritual re
 
 ## Target and location effects
 
-These twenty-one glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+These twenty-four glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
@@ -44,6 +44,9 @@ These twenty-one glyphs are **effects**, placed after an Ars cast method. They u
 | Ghost Fire | Native four-flower ghost fire at the selected point, including ground placement, damage, animation and expiry. Necromancy staffs retain cross/full clusters; Forge's Nameless staff retains its tower cluster. | Amplify / Dampen, Extend Time / Duration Down |
 | Leeching | Drains a selected living enemy with native leech damage, healing percentage and both trail particles. Necromancy staffs weaken successful victims. Blocks, allies and failed damage are uncharged. | Amplify / Dampen |
 | Launch | Moves yourself or a selected ally in the recipient's facing direction. Caster equipment, native motion synchronization and fall-distance reset apply. Default speed/enchantment scaling retain each dependency version's behavior. | Amplify / Dampen |
+| Eruption | Native volcano at the selected point, retaining emergence, upward Pyroclast salvos, native explosions, burning and descent. Geomancy staffs create three for one charge. One duration unit is six seconds. | Amplify / Dampen, AOE, Extend Time / Duration Down, Burning |
+| Bio Mine | Four native mines around the selected point, retaining arming, enemy detection, explosion and Acid Pool aftermath. Abyss staffs create eight. | Amplify / Dampen, AOE, Extend Time / Duration Down |
+| Teeth | A native hovering tooth above the selected point, placed below a ceiling when present. Retains falling collision, particles and four follow-up Vicious Pikes. Ominous staff creates sixteen; sneaking changes to thirteen in rings. | Amplify / Dampen |
 | Ignite | Uses Goety's entity ignition and original fire-charge block interactions at the Ars hit. Lights supported campfires/candles and places fire without another view ray trace. | Burning |
 
 **Magic Bolt** is the second projectile replacement: **Projectile → Magic Bolt → Ignite**. It shares only the native `SpellHurtingProjectile` flight adapter with Soul Bolt. Its own native curse and lingering `MagicGround` run on impact before the remaining Ars effects, including block impacts. Amplify/Dampen modify potency; Extend Time/Duration Down modify its extra curse/ground duration. Native flight, initial model turn, trails and impact entities are preserved. Magic Bolt keeps its native five-second expiry; it does not inherit Soul Bolt's staff variants or velocity enchantment.

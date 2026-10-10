@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.16
+
+- Add Eruption, Bio Mine and Teeth effect glyphs on both loaders, using the actual native entities and their complete Pyroclast/Acid Pool/Vicious Pike aftermath.
+- Retain native arming, hover/fall, emergence/descent, expiry, ownership, ally rules, gear parameters and staff batches. One successful batch pays once; failed placement is uncharged.
+- Sample mine locations around the Ars hit rather than an unrelated caster bounding box; place Teeth below a solid ceiling rather than embedded in it. No second view ray trace is used.
+- Eruption supports Burning; Teeth has no invented duration or radius parameter. Zero-duration volcanoes are uncharged.
+- Catalogue: 17 projectile replacements, 24 target/location effects, 4 parameter augments (45 glyphs).
+
 ## 0.1.0-dev.15
 
 - Add Earth Fist, Ghost Fire, Leeching and Launch as Ars target/location effect glyphs, with native focus-model icons, both languages and existing Goety provider grouping.

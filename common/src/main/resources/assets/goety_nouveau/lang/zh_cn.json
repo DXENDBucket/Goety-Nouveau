@@ -88,5 +88,11 @@
   "goety_nouveau.glyph_name.glyph_leeching": "生命汲取",
   "goety_nouveau.glyph_desc.glyph_leeching": "汲取选中敌人的生命。保留原生汲取伤害与治疗；死灵魔杖还能使目标虚弱。",
   "goety_nouveau.glyph_name.glyph_launch": "疾风发射",
-  "goety_nouveau.glyph_desc.glyph_launch": "沿自身或选中友军的朝向推动其前进。风之魔杖增强推动力度。"
+  "goety_nouveau.glyph_desc.glyph_launch": "沿自身或选中友军的朝向推动其前进。风之魔杖增强推动力度。",
+  "goety_nouveau.glyph_name.glyph_eruption": "爆发",
+  "goety_nouveau.glyph_desc.glyph_eruption": "在落点升起喷发火山。地卜魔杖可生成三座；保留原生喷射、碎块与消退。",
+  "goety_nouveau.glyph_name.glyph_bio_mine": "生物地雷",
+  "goety_nouveau.glyph_desc.glyph_bio_mine": "在落点周围布置生物地雷，短暂待机后可被敌人触发并留下酸液池。深渊魔杖增加布置数量。",
+  "goety_nouveau.glyph_name.glyph_teeth": "魔牙",
+  "goety_nouveau.glyph_desc.glyph_teeth": "在落点上方召唤悬停后坠落的魔牙，命中后升起地刺。不祥魔杖可生成齐射，潜行时改为环形阵列。"
 }

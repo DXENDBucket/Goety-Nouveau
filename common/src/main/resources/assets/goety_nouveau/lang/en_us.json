@@ -88,5 +88,11 @@
   "goety_nouveau.glyph_name.glyph_leeching": "Leeching",
   "goety_nouveau.glyph_desc.glyph_leeching": "Drain the selected living enemy using native leech damage and healing. Necromancy staffs also weaken the victim.",
   "goety_nouveau.glyph_name.glyph_launch": "Launch",
-  "goety_nouveau.glyph_desc.glyph_launch": "Launch yourself or a selected ally in the recipient's facing direction. Wind staffs strengthen the launch."
+  "goety_nouveau.glyph_desc.glyph_launch": "Launch yourself or a selected ally in the recipient's facing direction. Wind staffs strengthen the launch.",
+  "goety_nouveau.glyph_name.glyph_eruption": "Eruption",
+  "goety_nouveau.glyph_desc.glyph_eruption": "Raises a native volcano at the selected point. Geomancy staffs raise three; its rocks, eruption and expiry remain native.",
+  "goety_nouveau.glyph_name.glyph_bio_mine": "Bio Mine",
+  "goety_nouveau.glyph_desc.glyph_bio_mine": "Places native mines around the selected point. They arm before exploding and leave acid pools; Abyss staffs double the batch.",
+  "goety_nouveau.glyph_name.glyph_teeth": "Teeth",
+  "goety_nouveau.glyph_desc.glyph_teeth": "Summons a hovering tooth above the selected point. It falls and raises native spikes; Ominous staffs add salvos or sneaking rings."
 }
