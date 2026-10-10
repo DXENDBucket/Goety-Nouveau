@@ -12,8 +12,15 @@ __pycache__/
 *.log
 *.class
 *.hprof
+*.jfr
+.DS_Store
+Thumbs.db
 .env
 .env.*
 *.key
 *.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
 test-environment.local.json

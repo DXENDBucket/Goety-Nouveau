@@ -7,4 +7,4 @@ Goety & Nouveau uses the public APIs of Ars Nouveau, Ars Conflux and Goety. Upst
 - Ars Nouveau: https://github.com/baileyholl/Ars-Nouveau.
 - Ars Conflux: MIT, EndXiom.
 
-The included Gradle wrappers are standard Gradle build tooling (Apache License 2.0). Native focus icons may be referenced by future glyph models through Goety's asset namespace; any copied or modified upstream assets must retain their required license notices.
+The included Gradle wrappers retain their original copyright headers and use Apache License 2.0. Its full text is included beside each wrapper JAR in `gradle/wrapper/LICENSE` and `forge/gradle/wrapper/LICENSE`. Native focus icons may be referenced by future glyph models through Goety's asset namespace; any copied or modified upstream assets must retain their required license notices.
