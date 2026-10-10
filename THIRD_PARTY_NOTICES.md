@@ -1,10 +1,34 @@
 # Third-party notices
 
-Goety & Nouveau uses the public APIs of Ars Nouveau, Ars Conflux and Goety. Upstream mod JARs and assets are not redistributed inside this addon.
+Goety & Nouveau uses the public APIs of Ars Nouveau, Ars Conflux and Goety. Upstream mod JARs and assets are not redistributed inside this addon. The location/target adapters in `GoetyEffectCasting` adapt parts of Polarice3's original MIT-licensed Frost Nova and Soul Heal implementations; their full license is retained below.
 
 - Goety 1.20 source: https://github.com/Polarice3/Goety-2 — MIT, Polarice3 and contributors.
-- Goety 1.21.1 source: https://github.com/Vivideru/Goety-3 — MIT, Polarice3, Vivideru and contributors.
+- Goety 1.21.1 source: https://github.com/Vivideru/Goety-3 — original `com/Polarice3` code/assets retain MIT; Vivideru-authored additions have separate reserved-rights terms. This addon references the dependency and does not redistribute those additions.
 - Ars Nouveau: https://github.com/baileyholl/Ars-Nouveau.
 - Ars Conflux: MIT, EndXiom.
 
-The included Gradle wrappers retain their original copyright headers and use Apache License 2.0. Its full text is included beside each wrapper JAR in `gradle/wrapper/LICENSE` and `forge/gradle/wrapper/LICENSE`. The Soul Bolt glyph model references Goety's native focus model by resource location; it does not copy the upstream model or texture. Any future copied or modified upstream assets must retain their required license notices.
+The included Gradle wrappers retain their original copyright headers and use Apache License 2.0. Its full text is included beside each wrapper JAR in `gradle/wrapper/LICENSE` and `forge/gradle/wrapper/LICENSE`. Glyph models reference Goety's native focus models by resource location; they do not copy the upstream models or textures. Any future copied or modified upstream assets must retain their required license notices.
+
+## Original Goety implementation license
+
+MIT License
+
+Copyright (c) 2023 Polarice3
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

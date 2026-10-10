@@ -4,7 +4,7 @@
 
 ```text
 MinecraftDev/
-  Ars-Conflux/              # compatible Core checkout, at least 0.1.6
+  Ars-Conflux/              # compatible Core checkout, at least 0.1.7
   Goety-Nouveau/
     VERSION                 # single version for both targets
     common/src/main/        # shared integration source and resources
@@ -20,7 +20,7 @@ The root wrapper uses Gradle 9.2.1; the Forge wrapper uses Gradle 8.8. Do not re
 
 ## Prepare dependencies
 
-Prepare an Ars Conflux 0.1.6 source checkout beside this project, then run:
+Prepare an Ars Conflux 0.1.7 source checkout beside this project, then run:
 
 ```powershell
 python tools/fetch_dependencies.py
@@ -71,7 +71,7 @@ Use a dedicated Ars integration instance. Its local path can be recorded in the 
 
 ## Focused runtime validation
 
-Each platform exposes `:runGameTestServer`, containing the same shared Soul Bolt scenarios with platform-specific test discovery and fake-player setup. These run with Ars, Goety and Core, without Iron:
+Each platform exposes `:runGameTestServer`, containing shared Soul Bolt and target/location-effect scenarios with platform-specific test discovery and fake-player setup. These run with Ars, Goety and Core, without Iron:
 
 ```powershell
 ./gradlew.bat :runGameTestServer --no-daemon --max-workers=2
@@ -79,9 +79,11 @@ cd forge
 ./gradlew.bat :runGameTestServer --no-daemon --max-workers=2
 ```
 
-Coverage: actual native hit damage and Ars continuation; no duplicated carriers; real player/totem storage, reduced scatter, creative bypass; Ars mana alternative and failed-action billing; repeated carrier payments and cleanup; native soul-loss event pricing; tick-by-tick launch, acceleration, displacement and gradual rotation against a bolt spawned by Goety's actual `SpellResult`, including accelerated travel. Headless tests check entity rotation, but do not inspect client rendering or animations.
+Coverage: actual native hit damage and Ars continuation; no duplicated carriers; real player/totem storage, reduced scatter, creative bypass; Ars mana alternative and failed-action billing; repeated carrier payments and cleanup; native soul-loss event pricing; tick-by-tick launch, acceleration, displacement and gradual rotation against a bolt spawned by Goety's actual `SpellResult`, including accelerated travel. Effect cases cover selected-target ice falling damage, native vine restraint/lifetime, block-hit placement, freezing area allies, selected-ally healing and per-focus fees. An account regression exercises native bolt → Goety effect → subsequent provider, preserving both an explicit source account and an absent source account. Headless tests do not inspect client rendering or animations.
 
 On 2026-10-11, the six Forge scenarios passed with Core 0.1.7 after correcting source-directory mixin registration. The launch log confirms Core's configuration is active; production addon code and its version remain unchanged by this development-launch fix.
+
+For 0.1.0-dev.4, nine NeoForge independent scenarios passed before the account regression was added. The final Forge build passed all ten independent scenarios, including that regression; the final NeoForge coexistence run also exercises the shared account regression together with real Iron integration. Both targets compile and produce release/source JARs. Focus-model parents exist in both pinned Goety JARs. Client appearance still requires an in-game check.
 
 For the separate NeoForge coexistence test, place matching Iron & Nouveau, Iron's Spells 'n Spellbooks, irons_lib, Player Animator and Caelus JARs in the ignored `libs/coexistence/` directory. Run from the project root:
 
@@ -89,7 +91,7 @@ For the separate NeoForge coexistence test, place matching Iron & Nouveau, Iron'
 ./gradlew.bat :runGameTestServer -PwithIron=true --no-daemon --max-workers=2
 ```
 
-This selects the `goety_nouveau_coexistence` namespace and checks real Goety and Iron glyph registration, learning, native projectile dispatch and rejection of two replacement glyphs on a single projectile. The verified versions are Goety & Nouveau 0.1.0-dev.3, Iron & Nouveau 0.17.5, Core 0.1.6, Iron's Spells 'n Spellbooks 3.16.3, irons_lib 2.2.0, Player Animator 2.0.4 and Caelus 7.0.1. These are optional development runtime dependencies, never bundled or required by this addon.
+This selects the `goety_nouveau_coexistence` namespace and checks real Goety and Iron glyph registration, learning, native projectile dispatch and rejection of two replacement glyphs on a single projectile. It also drives a real Iron Firebolt into Goety's native vines and checks that native Goety payments do not become resource overrides for following providers. The three scenarios passed on 2026-10-11 with Goety & Nouveau 0.1.0-dev.4, Iron & Nouveau 0.17.6, Core 0.1.7, Iron's Spells 'n Spellbooks 3.16.3, irons_lib 2.2.0, Player Animator 2.0.4 and Caelus 7.0.1. These are optional development runtime dependencies, never bundled or required by this addon.
 
 ## Version control
 

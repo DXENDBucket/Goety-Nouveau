@@ -17,6 +17,14 @@ public final class SoulBoltGameTests {
         return player;
     }
     @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeContinuationKeepsSourceAccount(GameTestHelper h) { EffectCases.nativeContinuationKeepsSourceAccount(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeIceTracksSelectedTarget(GameTestHelper h) { EffectCases.nativeIceTracksSelectedTarget(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeVinesAndBlockTarget(GameTestHelper h) { EffectCases.nativeVinesAndBlockTarget(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void novaAndHealingRespectAllies(GameTestHelper h) { EffectCases.novaAndHealingRespectAllies(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
     public static void nativeImpactAndContinuation(GameTestHelper h) { SoulBoltCases.nativeImpactAndContinuation(h, player(h)); }
     @GameTest(template="empty", timeoutTicks=40)
     public static void nativeLaunchMotionAndRotation(GameTestHelper h) { SoulBoltCases.nativeLaunchMotionAndRotation(h, player(h)); }

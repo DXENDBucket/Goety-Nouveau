@@ -2,5 +2,13 @@
   "itemGroup.goety_nouveau": "Goety 与新生魔艺",
   "goety_nouveau.glyph_name.glyph_soul_bolt": "灵魂箭",
   "goety_nouveau.glyph_desc.glyph_soul_bolt": "将 Ars 弹射物替换为 Goety 的灵魂箭，原生箭矢命中后继续执行剩余效果。每个强化增加一点威力，抑制则减少一点。每次发射消耗灵魂能量，重复触发的载体则在每次命中时消耗。",
-  "goety_nouveau.cast.unavailable": "未能施放灵魂箭，请检查灵魂能量容器与施法条件。"
+  "goety_nouveau.glyph_name.glyph_ice_chunk": "冰块",
+  "goety_nouveau.glyph_desc.glyph_ice_chunk": "在选中的实体或位置上方召唤 Goety 的原生冰块，保留凝结、追踪、坠落与命中效果。强化增加威力。",
+  "goety_nouveau.glyph_name.glyph_frost_nova": "霜冻新星",
+  "goety_nouveau.glyph_desc.glyph_frost_nova": "以选中的实体或位置为中心释放冰冻冲击，沿用 Goety 的伤害与友军规则。强化增加威力，扩散扩大范围，延长时效增加冰冻时间。",
+  "goety_nouveau.glyph_name.glyph_entangling": "缠绕",
+  "goety_nouveau.glyph_desc.glyph_entangling": "在选中的敌人或位置生成 Goety 藤蔓。延长时效增加持续时间，扩散会选取附近敌人，野性法杖保留群体选取加成。",
+  "goety_nouveau.glyph_name.glyph_soul_heal": "灵魂治疗",
+  "goety_nouveau.glyph_desc.glyph_soul_heal": "治疗选中的友军或自身，保留 Goety 的灵魂治疗表现。强化增加威力，扩散还会治疗周围友军。目标无效或全部满血时不消耗原生资源。",
+  "goety_nouveau.cast.unavailable": "未能施放 Goety 法术，请检查灵魂能量容器与施法条件。"
 }

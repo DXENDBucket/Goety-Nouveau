@@ -2,5 +2,13 @@
   "itemGroup.goety_nouveau": "Goety & Nouveau",
   "goety_nouveau.glyph_name.glyph_soul_bolt": "Soul Bolt",
   "goety_nouveau.glyph_desc.glyph_soul_bolt": "Replaces an Ars projectile with Goety's Soul Bolt. Native impacts are followed by the remaining spell effects. Amplify adds one potency; Dampen removes one. Consumes soul energy per launch, or per impact for repeating carriers.",
-  "goety_nouveau.cast.unavailable": "Soul Bolt could not be cast. Check your soul-energy container and spell conditions."
+  "goety_nouveau.glyph_name.glyph_ice_chunk": "Ice Chunk",
+  "goety_nouveau.glyph_desc.glyph_ice_chunk": "Summons Goety's native ice chunk above the selected entity or location. It gathers frost, tracks its target and falls with its native impact effects. Amplify increases potency.",
+  "goety_nouveau.glyph_name.glyph_frost_nova": "Frost Nova",
+  "goety_nouveau.glyph_desc.glyph_frost_nova": "Creates a freezing shockwave at the selected entity or location, using Goety's damage and alliance rules. Amplify increases potency, AOE expands its radius and Extend Time increases freezing duration.",
+  "goety_nouveau.glyph_name.glyph_entangling": "Entangling",
+  "goety_nouveau.glyph_desc.glyph_entangling": "Raises Goety's entangling vines at the selected enemy or location. Extend Time increases their lifetime; AOE selects nearby enemies. Wild staffs retain their group-targeting bonus.",
+  "goety_nouveau.glyph_name.glyph_soul_heal": "Soul Heal",
+  "goety_nouveau.glyph_desc.glyph_soul_heal": "Heals the selected ally or yourself with Goety's soul healing. Amplify increases potency; AOE also heals nearby allies. An invalid target or a fully healed group consumes no native resource.",
+  "goety_nouveau.cast.unavailable": "The Goety spell could not be cast. Check your soul-energy container and spell conditions."
 }

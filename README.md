@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: first playable development slice (`0.1.0-dev.3`). Soul Bolt is available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.4`). Soul Bolt and four target/location effects are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -14,7 +14,22 @@ Find **Soul Bolt** in the Goety & Nouveau creative tab and learn it by using the
 
 Amplify adds one native potency point; Dampen removes one, with a minimum of zero. Ordinary projectiles retain Goety's native launch offset, gradual acceleration, yaw/pitch rotation, collision loop and velocity enchantments. Ars selects the aim and scatter, and its acceleration statistic scales native travel. Special carriers such as Orbit keep their Ars trajectory. The native Goety entity supplies its renderer, animation, trail, impact particles, damage and staff-dependent Soul/Poison/Wither/Necro variants. Projectiles retain a maximum lifetime of ten seconds.
 
-The first slice supplies a creative glyph item; survival acquisition and ritual recipes remain undecided. It does not add Goety casting animations or cooldown enforcement yet.
+The glyphs are available in the creative tab; survival acquisition and ritual recipes remain undecided. Goety casting animations and cooldown enforcement are not added yet.
+
+## Target and location effects
+
+These four glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+
+| Glyph | Target and behavior | Ars augments |
+| --- | --- | --- |
+| Ice Chunk | A native Goety chunk appears four blocks above the entity/location, then gathers frost, tracks and falls using native collision and damage. Frost staffs retain their shorter hover time. | Amplify / Dampen |
+| Frost Nova | A freezing shockwave centered on the selected entity/location, with native Goety explosion, ally filtering, damage, freezing and particle types. Frost staffs retain their radius/freezing bonus. | Amplify / Dampen, AOE, Extend Time / Duration Down |
+| Entangling | Native vines bind the selected enemy or form a trap at the selected location. AOE selects nearby enemies; Wild staffs retain their larger group selection and target limit, and Wild robes retain vine damage. | AOE, Extend Time / Duration Down |
+| Soul Heal | Heals yourself or the selected native ally/owned creature. AOE also heals nearby native allies, using the original caster's alliance rules. Full-health groups and invalid targets are uncharged. | Amplify / Dampen, AOE |
+
+Examples: **Projectile → Ice Chunk**, **Touch → Entangling → Extend Time**, **Self → Frost Nova**, **Self → Soul Heal**. These are not projectile replacements: the Ars carrier reaches its hit first, then the effect runs. Native damage ownership stays with the original caster, independently of the selected target.
+
+Amplify/Dampen add/subtract Goety potency; Extend Time/Duration Down add/subtract its duration parameter; AOE adds to its radius. Supported native focus potency, duration and radius enchantments and staff/robe bonuses are preserved. Each effect quotes its own focus cost, charges only on a successful trigger, and can trigger again until the selected resource runs out. Their glyph cost is zero; the rest of the Ars spell follows Core's configured billing behavior.
 
 ## Integration
 
@@ -29,12 +44,14 @@ The first slice supplies a creative glyph item; survival acquisition and ritual 
 
 Quotes are side-effect-free and include native discounts. Soul-loss events run at actual activation, before the final price is reserved. If another mod changes the event price, its final amount can differ from the quote used for AI/scatter planning; every activation still checks that final amount before spawning or applying its impact.
 
+Each Goety trigger uses its own native payment account without replacing the source account inherited by later effects. An Iron effect after a Goety bolt/effect therefore retains its configured or explicitly supplied resource account.
+
 ## Dependencies and builds
 
 | Target | Ars Nouveau | Goety | Ars Conflux |
 | --- | --- | --- | --- |
-| 1.21.1 NeoForge | 5.13.1 | 3.2.0 | 0.1.6 |
-| 1.20.1 Forge | 4.12.7 | 2.5.58.4 | 0.1.6 |
+| 1.21.1 NeoForge | 5.13.1 | 3.2.0 | 0.1.7 |
+| 1.20.1 Forge | 4.12.7 | 2.5.58.4 | 0.1.7 |
 
 These are the pinned build dependencies. Transitive mod dependencies are included in the download manifest, but upstream mod JARs are not committed or bundled in this addon.
 

@@ -32,6 +32,7 @@ public final class SoulBoltCasting {
         if (!(carrier.level() instanceof ServerLevel world)) return false;
         var resolver = ArsSpellAccess.resolver(carrier);
         var context = CastContext.of(resolver.spellContext, null, null);
+        var inheritedAccount = context.account();
         var caster = context.caster();
         if (caster == null) return true;
         var spell = GoetyResources.spell();
@@ -60,7 +61,9 @@ public final class SoulBoltCasting {
         var session = new ExecutionSession<>(world, context, charge, Math.max(1, Math.min(200, carrier.getExpirationTime() + 1)), driver,
                 hit -> {
                     var child = continuation.clone();
-                    CastContexts.bind(child.spellContext, CastContexts.current());
+                    // The projectile's native bill is not a resource override for whatever
+                    // provider owns the next effect in the Ars recipe.
+                    CastContexts.bind(child.spellContext, CastContexts.current().withAccount(inheritedAccount));
                     child.onResolveEffect(world, hit);
                 }, () -> dev.goetynouveau.GlyphCatalog.SOUL_BOLT.isEnabled() && spell.conditionsMet(world, caster), ExecutionScope.DIRECT)
                 .billing(action -> GoetyResources.activation(charge).trigger(action), profile.repeated());

@@ -22,7 +22,7 @@ public final class GoetyNouveau {
         var tabs = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
         tabs.register("glyphs", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup.goety_nouveau"))
                 .icon(() -> GlyphCatalog.SOUL_BOLT.getGlyph().getDefaultInstance())
-                .displayItems((parameters, output) -> output.accept(GlyphCatalog.SOUL_BOLT.getGlyph())).build());
+                .displayItems((parameters, output) -> GlyphCatalog.ALL.forEach(glyph -> output.accept(glyph.getGlyph()))).build());
         tabs.register(bus);
     }
 }

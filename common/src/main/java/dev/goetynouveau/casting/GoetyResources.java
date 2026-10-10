@@ -25,8 +25,11 @@ public final class GoetyResources {
     }
     public static ItemStack staff(LivingEntity caster) { return caster == null ? ItemStack.EMPTY : WandUtil.findWand(caster); }
     public static ResourceCharge quote(SpellContext context) {
+        return quote(context, spell());
+    }
+    public static ResourceCharge quote(SpellContext context, ISpell spell) {
         var caster = CastContext.of(context, null, null).caster();
-        int cost = caster == null ? spell().defaultSoulCost() : spell().soulCost(caster, staff(caster));
+        int cost = caster == null ? spell.defaultSoulCost() : spell.soulCost(caster, staff(caster));
         if (GoetyConfig.RESOURCE_SOURCE.get() == ResourceSource.ARS_MANA)
             return new ResourceCharge(new ArsManaAccount(context.getCaster()), Math.max(0, cost));
         var account = new SoulAccount(caster instanceof Player player ? player : null);
