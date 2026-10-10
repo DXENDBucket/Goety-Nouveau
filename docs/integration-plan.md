@@ -53,12 +53,12 @@ source = "SOUL_ENERGY"
 
 ## 第一批接入候选
 
-灵魂箭、冰块、霜冻新星、缠绕、灵魂治疗已实现；火球、毒镖、幽灵颅骨仍是候选。
+灵魂箭、冰块、霜冻新星、缠绕、灵魂治疗、幽灵头骨已实现；火球、毒镖仍是候选。
 
 | 原生聚晶 ID | 原生法术 | 首先验证的行为 |
 | --- | --- | --- |
 | `goety:soul_bolt_focus` | Soul Bolt | Ars 载体替换、原生弹射物、完整命中与延续、灵魂计费 |
-| `goety:fireball_focus` | Fireball | 原生爆炸、装备导致的多发与变体、实际成功计费 |
+| `goety:fireball_focus` | Fireball | 普通火球的伤害与点火、装备导致的多发与地狱火变体、实际成功计费 |
 | `goety:poison_dart_focus` | Poison Dart | 原生毒镖与命中效果 |
 | `goety:iceology_focus` | Ice Chunk | 原生冰块弹射物、速度与落点 |
 | `goety:skull_focus` | Haunted Skull | 追踪目标、所有者与寿命 |
@@ -101,3 +101,42 @@ Ars 整合实机测试使用 `1.21.1-万法归一`，基础环境由用户部署
 魔法箭属于已有原生箭矢家族，共用飞行／碰撞适配，但保留它自己的诅咒、命中魔法区域、声音、时长与自然结束。铁皮和寒冰护体保留原生状态；虚弱不是只添加原版 Weakness；闪电保留避雷针偏转及风暴法杖绕过；上升气流直接使用原生延迟抬升实体。逐法术核对、未接入内容及客户端观察边界见 [本批行为记录](simple-spell-audit.md)。
 
 以后扩大法术池，沿用 Core 的通用核对文档，不能只看原生结果方法，也不能把服务端 GameTest 当作客户端动画验证。尤其先确认服务端，再查询需要假玩家回退的上下文。
+
+## 2026-10-11：原生参数与专用增强研究
+
+本节是后续设计候选，不表示已有新魔符。此次没有修改运行时代码、构建或部署。
+
+已用 `javap` 核对固定的 NeoForge 与 Forge Goety JAR：两端 `SpellStat` 都有 potency、duration、range、radius、burning、velocity 六个参数。附魔定义和法术消费者另外核对了上述固定提交的源码。接受某个附魔不等于已完整实现它的行为；接入时仍以发行 JAR 和实际消费者为准。
+
+| 原生参数 | 建议表达 | 边界 |
+| --- | --- | --- |
+| potency | Ars 强化／减弱 | 使用原生参数单位，各法术收益不同 |
+| duration | Ars 延长／缩短时效 | 使用原生单位，不统一宣称每次增加固定秒数 |
+| radius | Ars 扩散 | 调整效果半径；不是重新选取远处目标 |
+| velocity | Ars 加速／减速 | 保留各弹射物的原生速度、惯性和抛物线，再应用载体速度倍率 |
+| burning | 新增“燃烧”增强候选 | 直接增加原生 burning，含义由支持它的原生法术决定 |
+| range | “延伸”增强候选，后续再做 | 仅用于法术自身的攻击长度、数量等；不能绕开 Ars 形态的选点／射程规则 |
+
+优先考虑“燃烧”。火球、凋灵头颅、幽灵头骨、尖牙等均消费这一参数，适用范围不只一个法术。它和 Ars 点燃效果有区别：后者是命中后另执行一个效果，前者改变 Goety 原生攻击本身。原生 Ignite 每单位增加点燃秒数，尖牙按每单位五秒处理，掘地还会用 burning 判定是否烧炼掉落物；因此不宜把它描述为统一的“附加五秒点燃”。建议初版每个增强增加一个原生参数单位，只对明确支持的 Goety 魔符开放。
+
+range 与 radius 必须保持独立。例如尖牙的 range 同时决定直线尖牙数量及延伸距离，而风垫的 range 主要参与原生选点。转换为 Ars 触发后，风垫的位置已经由 Ars 决定，不能只因原生支持 RANGE 附魔就给它增加一个实际不起作用的“延伸”增强。
+
+### 附魔机制不是都能直接变成通用数值
+
+- **ABSORB**：原生附魔最高一级，并与 POTENCY 不兼容。已看到尖牙记录 Absorbing 标记，但当前核对的尖牙伤害方法没有直接消费该标记；尚未确认发行版是否由别处处理。不能仅凭名字实现成通用吸血增强。
+- **SOUL_EATER**：尖牙的回魂是符合原生条件的成功命中，且受 FangGainSouls 配置影响；并非统一的击杀回魂规则。涉及真实灵魂资源收益，后续需要单独核对并设计。
+- **MAGNET**：掘地原生代码将掉落物和经验交给玩家，可成为将来的收取增强候选；先核对 Ars 已有收取能力能否表达，避免重复魔符。
+- **ROYALTY**：属于另外的附魔机制，未确认有足够通用的法术参数含义，此次不列为优先候选。
+
+具体参数、兼容魔符和装备分支由 Goety 附属管理。Core 只保留通用上下文与增强传递，不加入 Goety 的 burning 等特有字段。增强值应进入本次施法的参数快照，并随延迟实体保留；不能临时给玩家装备或聚晶添加附魔再移除。专用增强的额外费用需要明确定义并纳入触发报价，不能假定原生聚晶费用会自动读取 Ars 增强。
+
+### 下一批法术核对重点
+
+1. **Fireball**：普通实体是 `SmallFireball` 家族，主要是伤害和点火，不能统称为爆炸火球。Nether 法杖会增加侧弹；Malefic Helm 影响出生位置与方向；Unholy 套装改为 HellBolt，命中后留下 Hellfire。普通火球和 HellBolt 不是现有 Soul／Magic Bolt 完全相同的继承链，需要分别保留原生飞行和命中行为。原生一组三发建议算一次聚晶施法费用，Ars 散射的每个独立触发再分别计费。
+2. **Poison Dart**：原生 `Arrow` 家族，保留重力、旋转、水中行为、穿透与已命中集合。Wild 法杖改变穿透，Wild 法袍会把普通毒性改为 ACID_VENOM；不能只做一个普通中毒箭外观。每个实际命中继续 Ars 编排，但同一实体不得因碰撞重入重复执行。
+3. **Shockwave**：复用原生随机伤害、范围、粒子与声音，中心改为 Ars 触发位置；支持强化和扩散。
+4. **Cushion**：创建原生风垫实体，使用 Ars 选点；支持时效和半径。保留实体原生生命周期和作用方式，不再根据施法者视线二次选点。
+
+优先顺序建议为这四种法术加“燃烧”增强。延伸、回魂、收取等在对应法术接入时再落实，不先批量注册没有实际消费者的增强。
+
+参考：[SpellStat](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/magic/SpellStat.java)、[附魔注册](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/enchantments/ModEnchantments.java)、[ABSORB 兼容约束](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/enchantments/AbsorbEnchantment.java)。
