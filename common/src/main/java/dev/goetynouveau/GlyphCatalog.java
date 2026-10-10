@@ -17,6 +17,7 @@ public final class GlyphCatalog {
     public static final GoetyBoltGlyph MAGIC_BOLT = new GoetyBoltGlyph(BoltFocus.MAGIC_BOLT);
     public static final GoetyBoltGlyph FIREBALL = new GoetyBoltGlyph(BoltFocus.FIREBALL);
     public static final GoetyBoltGlyph POISON_DART = new GoetyBoltGlyph(BoltFocus.POISON_DART);
+    public static final GoetyBoltGlyph WITHER_SKULL = new GoetyBoltGlyph(BoltFocus.WITHER_SKULL);
     public static final GoetyEffectGlyph ICE_CHUNK = new GoetyEffectGlyph(EffectFocus.ICE_CHUNK);
     public static final GoetyEffectGlyph FROST_NOVA = new GoetyEffectGlyph(EffectFocus.FROST_NOVA);
     public static final GoetyEffectGlyph ENTANGLING = new GoetyEffectGlyph(EffectFocus.ENTANGLING);
@@ -31,9 +32,10 @@ public final class GlyphCatalog {
     public static final GoetyEffectGlyph CUSHION = new GoetyEffectGlyph(EffectFocus.CUSHION);
     public static final GoetyEffectGlyph FANGS = new GoetyEffectGlyph(EffectFocus.FANGS);
     public static final GoetyEffectGlyph IGNITE = new GoetyEffectGlyph(EffectFocus.IGNITE);
-    public static final List<AbstractSpellPart> ALL = List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, ICE_CHUNK, FROST_NOVA,
+    public static final GoetyEffectGlyph FEAST = new GoetyEffectGlyph(EffectFocus.FEAST);
+    public static final List<AbstractSpellPart> ALL = List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
-            SHOCKWAVE, CUSHION, FANGS, IGNITE, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
+            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
             dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER);
     private GlyphCatalog() {}
@@ -45,15 +47,21 @@ public final class GlyphCatalog {
         dev.arsconflux.api.glyph.SpellValidators.register(CarrierRegistry.id("goety_nouveau:augments"),
                 dev.goetynouveau.glyph.GoetyAugmentValidation::validate);
     }
+    public static GoetyBoltGlyph projectile(BoltFocus focus) {
+        return switch (focus) {
+            case SOUL_BOLT -> SOUL_BOLT;
+            case MAGIC_BOLT -> MAGIC_BOLT;
+            case FIREBALL -> FIREBALL;
+            case POISON_DART -> POISON_DART;
+            case WITHER_SKULL -> WITHER_SKULL;
+        };
+    }
     public static void configureCarriers() {
         for (var profile : CarrierRegistry.profiles()) {
             var glyph = profile.glyph();
             if (glyph == null) continue;
             profile.rememberOriginalAugments(glyph);
-            glyph.compatibleAugments.add(SOUL_BOLT);
-            glyph.compatibleAugments.add(MAGIC_BOLT);
-            glyph.compatibleAugments.add(FIREBALL);
-            glyph.compatibleAugments.add(POISON_DART);
+            for (var focus : BoltFocus.values()) glyph.compatibleAugments.add(projectile(focus));
             glyph.compatibleAugments.add(dev.goetynouveau.glyph.AugmentBurning.INSTANCE);
             glyph.compatibleAugments.add(AugmentExtendTime.INSTANCE);
             glyph.compatibleAugments.add(AugmentDurationDown.INSTANCE);

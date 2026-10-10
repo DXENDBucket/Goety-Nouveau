@@ -34,7 +34,7 @@ public final class GoetyBoltCasting {
     private GoetyBoltCasting() {}
     public static boolean replace(BoltFocus focus, EntityProjectileSpell carrier, CarrierProfile profile) {
         if (!(carrier.level() instanceof ServerLevel world)) return false;
-        if (focus == BoltFocus.FIREBALL || focus == BoltFocus.POISON_DART)
+        if (focus == BoltFocus.FIREBALL || focus == BoltFocus.POISON_DART || focus == BoltFocus.WITHER_SKULL)
             return GoetyNativeProjectileCasting.replace(focus, carrier, profile);
         var resolver = ArsSpellAccess.resolver(carrier);
         var context = CastContext.of(resolver.spellContext, null, null);

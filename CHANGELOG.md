@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.10
+
+- Add Wither Skull projectile replacement with native flight, sneaking blue state, Nether-staff salvo, full Wither/kill-heal/explosion/loot behavior and Ars continuation. Native impacts remain complete on repeated Ars trajectories.
+- Add Feast as an Ars-centered area effect, retaining original alliance checks, Ominous-staff fang rings, native warmup/damage/absorption/expiry and one successful batch charge.
+- Extend Burning to Wither Skull and Feast, and Life Absorb to Feast; keep niche augment validation and trigger-only billing.
+- Shorten the Burning description without a payload support list. Keep narrow-scope descriptions for dedicated augments.
+- Add shared native-world checks for both loader builds, including real native explosions, delayed damage/healing, denied/creative casts and repeated-trigger resource exhaustion.
+
 ## 0.1.0-dev.9
 
 - Sort projectile-replacement augments after the other augments within the Goety provider group; preserve categories and contiguous provider groups on both loaders.

@@ -30,7 +30,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Goety Arrow/SmallFireball/WaterHurtingProjectile payloads. Ordinary forms use native ticks;
+/** Goety Arrow/SmallFireball/WitherSkull/WaterHurtingProjectile payloads. Ordinary forms use native ticks;
  * special Ars forms drive one native batch along their trajectory. Native virtual impacts
  * preserve equipment, damage, particles, poison and persistent fire. See THIRD_PARTY_NOTICES.md. */
 public final class GoetyNativeProjectileCasting {
@@ -50,7 +50,11 @@ public final class GoetyNativeProjectileCasting {
         int duration = defaults.getDuration() + (int)ars.getDurationMultiplier();
         int burning = defaults.getBurning() + (int)augments.stream().filter(a -> a == AugmentBurning.INSTANCE).count();
         float velocity = defaults.getVelocity();
-        if (WandUtil.enchantedFocus(caster)) {
+        if (focus == BoltFocus.WITHER_SKULL) {
+            // Native WitherSkullSpell reads these unconditionally, unlike Fireball.
+            potency += WandUtil.getPotencyLevel(caster);
+            burning += NativeSummonHooks.burning(caster);
+        } else if (WandUtil.enchantedFocus(caster)) {
             potency += WandUtil.getPotencyLevel(caster);
             if (focus == BoltFocus.FIREBALL) burning += NativeSummonHooks.burning(caster);
             else { duration += NativeEffectHooks.duration(caster); velocity += NativeBoltHooks.velocityLevel(caster) / 3.0F; }
@@ -78,6 +82,21 @@ public final class GoetyNativeProjectileCasting {
                 else fire.setDeltaMovement(fire.getDeltaMovement().scale(multiplier));
                 payloads.add(fire);
             }
+        } else if (focus == BoltFocus.WITHER_SKULL) {
+            float blast = (float)Math.max(0, defaults.getRadius() + ars.getAoeMultiplier())
+                    + NativeEffectHooks.radius(caster) / 2.0F;
+            boolean staff = spell.rightStaff(GoetyResources.staff(caster));
+            var origin = carrier.position().add(direction.x / 2, -0.1, direction.z / 2);
+            var main = witherSkull(world, caster, spell, origin, direction, potency, burning);
+            main.setExplosionPower(main.getExplosionPower() + blast);
+            NativeProjectileHooks.speed(main, multiplier); payloads.add(main);
+            if (staff) for (int i = 0; i < 2; ++i) {
+                var side = witherSkull(world, caster, spell,
+                        origin.add(world.random.nextGaussian(), 0, world.random.nextGaussian()), direction, potency, burning);
+                // Preserve the upstream staff branch's extra radius application to side shots.
+                side.setExplosionPower(main.getExplosionPower() + blast);
+                NativeProjectileHooks.speed(side, multiplier); payloads.add(side);
+            }
         } else {
             var quill = new PoisonQuill(world, caster);
             quill.setPos(carrier.position());
@@ -101,12 +120,19 @@ public final class GoetyNativeProjectileCasting {
                     var child = continuation.clone();
                     CastContexts.bind(child.spellContext, CastContexts.current().withAccount(inheritedAccount));
                     child.onResolveEffect(world, hit);
-                }, () -> (focus == BoltFocus.FIREBALL ? GlyphCatalog.FIREBALL : GlyphCatalog.POISON_DART).isEnabled()
+                }, () -> GlyphCatalog.projectile(focus).isEnabled()
                         && spell.conditionsMet(world, caster), ExecutionScope.DIRECT)
                 .billing(action -> GoetyResources.activation(quote).trigger(action), profile.repeated());
         if (!ExecutionSessions.start(session) && caster instanceof Player player)
             player.displayClientMessage(Component.translatable("goety_nouveau.cast.unavailable"), true);
         return true;
+    }
+    private static ModWitherSkull witherSkull(ServerLevel world, net.minecraft.world.entity.LivingEntity caster,
+                                              Spell spell, Vec3 origin, Vec3 direction, int potency, int burning) {
+        var skull = new ModWitherSkull(origin.x, origin.y, origin.z, direction.x, direction.y, direction.z, world);
+        skull.setDangerous(spell.isShifting(caster));
+        skull.setExtraDamage(potency); skull.setFiery(burning);
+        return skull;
     }
     /** Called after the vanilla/native projectile impact cancellation hook. */
     public static void nativeImpact(Projectile projectile, HitResult hit) {
@@ -197,6 +223,9 @@ public final class GoetyNativeProjectileCasting {
                 var spell = (Spell)batch.focus.spell();
                 if (batch.focus == BoltFocus.POISON_DART)
                     spell.playSound(session.world(), session.caster(), ModSounds.POISON_QUILL_VINE_SHOOT.get(), 1, spell.projPitch(session.world().random));
+                else if (batch.focus == BoltFocus.WITHER_SKULL)
+                    spell.playSound(session.world(), session.caster(), SoundEvents.WITHER_SHOOT, 2,
+                            (session.caster().getRandom().nextFloat() - session.caster().getRandom().nextFloat()) * .2F + 1);
                 else spell.playSound(session.world(), session.caster(), batch.projectiles.get(0) instanceof HellBolt
                         ? ModSounds.HELL_BOLT_SHOOT.get() : SoundEvents.BLAZE_SHOOT, 2, spell.projPitch(session.world().random));
             }

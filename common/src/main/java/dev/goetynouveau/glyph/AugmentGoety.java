@@ -20,7 +20,7 @@ public final class AugmentGoety extends AbstractAugment {
         this.kind = kind;
     }
     public Kind kind() { return kind; }
-    public boolean supports(EffectFocus focus) { return focus == EffectFocus.FANGS; }
+    public boolean supports(EffectFocus focus) { return focus == EffectFocus.FANGS || kind == Kind.LIFE_ABSORB && focus == EffectFocus.FEAST; }
     public int limit() { return kind == Kind.LIFE_ABSORB ? 1 : kind == Kind.SOUL_EATER ? 10 : Integer.MAX_VALUE; }
     public int additionalCost() {
         return switch (kind) {

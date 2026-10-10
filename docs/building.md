@@ -98,3 +98,6 @@ For 0.1.0-dev.5, the focused NeoForge coexistence run passed all five scenarios 
 ## Version control
 
 The initial version is `0.1.0-dev.1`. Dependencies, build scripts and shared code are committed; downloaded JARs, upstream audit checkouts and runtime directories are ignored. No remote publishing is part of the initial preparation.
+
+
+For 0.1.0-dev.10, the final NeoForge coexistence run passed all 19 required tests; the final Forge independent run passed all 26. New shared cases cover native Wither Skull flight, full hits/explosions, repeated activation and Feast alliance/delayed-damage/billing behavior. See `docs/simple-spell-audit.md` for the fixture corrections and visual-check limits. Both targets produced release/source JARs with current license notices.

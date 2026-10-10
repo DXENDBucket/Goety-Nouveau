@@ -34,8 +34,8 @@
   "goety_nouveau.glyph_name.glyph_cushion": "Cushion",
   "goety_nouveau.glyph_desc.glyph_cushion": "Create a native Goety cushion at the selected entity or above a selected block. AOE increases radius and Extend Time increases its native lifespan.",
   "goety_nouveau.glyph_name.glyph_burning": "Burning",
-  "goety_nouveau.glyph_desc.glyph_burning": "Add one native burning unit to a supported Goety spell. Its effect depends on the spell. Applies to Fireball, Haunted Skull, Fangs and Ignite; the additional resource cost is paid at the actual trigger.",
-  "goety_nouveau.validation.burning": "Burning requires a Goety Fireball, Haunted Skull, Fangs or Ignite in the same spell phrase.",
+  "goety_nouveau.glyph_desc.glyph_burning": "Increase native burning intensity. Its effect depends on the spell; additional resources are paid on activation.",
+  "goety_nouveau.validation.burning": "This spell does not support Burning.",
   "goety_nouveau.glyph_name.glyph_fangs": "Fangs",
   "goety_nouveau.glyph_desc.glyph_fangs": "Summon native Goety fangs from the selected point, using the incoming projectile direction or your facing. Sneaking creates native rings there; an Ominous staff adds side rows or outer rings. Amplify increases damage, Extension adds a fang to each row, and Burning, Life Absorb and Soul Eater modify native fangs.",
   "goety_nouveau.glyph_name.glyph_ignite": "Ignite",
@@ -43,10 +43,14 @@
   "goety_nouveau.glyph_name.glyph_extension": "Extension",
   "goety_nouveau.glyph_desc.glyph_extension": "Adds one native range unit to a supported Goety spell. Currently adds one fang and 1.25 blocks to each straight Fangs row. It does not increase Ars targeting range or change the sneaking rings.",
   "goety_nouveau.glyph_name.glyph_life_absorb": "Life Absorb",
-  "goety_nouveau.glyph_desc.glyph_life_absorb": "Enable native lifesteal on Goety Fangs. A player owner heals according to the native damage event. At most one per phrase, incompatible with Amplify; native potency bonuses are suppressed while absorbing. Costs extra resource at the actual trigger.",
+  "goety_nouveau.glyph_desc.glyph_life_absorb": "Fangs or Feast restore their player owner's health through native hits. At most one per phrase, incompatible with Amplify. Extra resources are paid on activation.",
   "goety_nouveau.glyph_name.glyph_soul_eater": "Soul Eater",
   "goety_nouveau.glyph_desc.glyph_soul_eater": "Add one native Soul Eater level to Goety Fangs, up to ten. Eligible successful hits return native soul energy according to Goety's configuration; this is not mana regeneration or a guaranteed gain against every target. Additional cost uses the selected trigger resource.",
-  "goety_nouveau.validation.native_parameter": "Extension, Life Absorb and Soul Eater currently require Goety Fangs in the same spell phrase.",
+  "goety_nouveau.validation.native_parameter": "This spell does not support the selected Goety-specific augment.",
   "goety_nouveau.validation.augment_limit": "At most one Life Absorb and ten Soul Eater augments per spell phrase.",
-  "goety_nouveau.validation.absorb_potency": "Life Absorb cannot be combined with Amplify."
+  "goety_nouveau.validation.absorb_potency": "Life Absorb cannot be combined with Amplify.",
+  "goety_nouveau.glyph_name.glyph_wither_skull": "Wither Skull",
+  "goety_nouveau.glyph_desc.glyph_wither_skull": "Replace a projectile with a native Wither Skull, retaining Wither, explosions and healing on kills. Amplify increases potency; AOE expands explosions. Sneaking creates blue skulls; Nether staff adds a native salvo.",
+  "goety_nouveau.glyph_name.glyph_feast": "Feast",
+  "goety_nouveau.glyph_desc.glyph_feast": "Attack enemies in the selected area with native fangs. AOE expands the search and Amplify increases potency. Ominous staff adds a ring of fangs around each enemy."
 }

@@ -18,7 +18,8 @@ public enum EffectFocus {
     SHOCKWAVE("shockwave", "shockwave_focus", "Shockwave", true, false, true),
     CUSHION("cushion", "cushion_focus", "Cushion", false, true, true),
     FANGS("fangs", "biting_focus", "Fangs", true, false, false),
-    IGNITE("ignite", "ignite_focus", "Ignite", false, false, false);
+    IGNITE("ignite", "ignite_focus", "Ignite", false, false, false),
+    FEAST("feast", "feast_focus", "Feast", true, false, true);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

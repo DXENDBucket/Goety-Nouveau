@@ -13,7 +13,10 @@ import java.util.List;
 public final class GoetyAugmentValidation {
     private GoetyAugmentValidation() {}
     public static boolean supportsBurning(EffectFocus focus) {
-        return focus == EffectFocus.HAUNTED_SKULL || focus == EffectFocus.FANGS || focus == EffectFocus.IGNITE;
+        return focus == EffectFocus.HAUNTED_SKULL || focus == EffectFocus.FANGS || focus == EffectFocus.IGNITE || focus == EffectFocus.FEAST;
+    }
+    public static boolean supportsBurning(BoltFocus focus) {
+        return focus == BoltFocus.FIREBALL || focus == BoltFocus.WITHER_SKULL;
     }
     /** Also enforced at server execution for generated/raw recipes that skip the editor. */
     public static boolean validEffect(EffectFocus focus, List<AbstractAugment> augments) {
@@ -33,7 +36,7 @@ public final class GoetyAugmentValidation {
             if (augments.contains(AugmentBurning.INSTANCE)) {
                 boolean supported = focus != null && supportsBurning(focus);
                 supported |= augments.stream().anyMatch(augment -> augment instanceof GoetyBoltGlyph bolt
-                        && bolt.focus() == BoltFocus.FIREBALL);
+                        && supportsBurning(bolt.focus()));
                 if (!supported) errors.add(new AugmentError(phrase.getFirstPosition(), phrase.getAction(), "burning"));
             }
             for (var augment : AugmentGoety.ALL) {

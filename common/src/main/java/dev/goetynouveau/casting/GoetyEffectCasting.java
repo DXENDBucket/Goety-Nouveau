@@ -63,6 +63,7 @@ public final class GoetyEffectCasting {
             case UPDRAFT -> GoetySimpleEffects.updraft(world, frame, spell, potency, radius);
             case SHOCKWAVE -> GoetySimpleEffects.shockwave(world, frame, spell, potency, radius);
             case CUSHION -> GoetySimpleEffects.cushion(world, frame, spell, duration, (int)radius);
+            case FEAST -> GoetyFangCasting.feast(world, frame, spell, defaults, ars);
             case FANGS -> GoetyFangCasting.apply(world, frame, spell, defaults, ars);
             case IGNITE -> GoetyIgniteCasting.apply(world, frame,
                     (com.Polarice3.Goety.common.magic.spells.IgniteSpell)spell,

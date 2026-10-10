@@ -112,3 +112,29 @@ The new world checks cover the actual fang entities, staff geometry and one batc
 - All 24 JSON resources, 22 glyph models, Chinese/English name/description entries and referenced native focus parents were checked against both pinned Goety JARs.
 - Test-scene fixes precede these results: use entity-ticking GameTest chunks, explicitly clear the no-ground case in Forge's natural-terrain world, and avoid redundant configuration writes during Forge's file-watcher startup.
 - No real client was launched; native particle/animation appearance and multiplayer visual synchronization still need in-game observation. No new casting animation/cooldown or survival acquisition behavior is claimed.
+
+
+## 0.1.0-dev.10: Wither Skull and Feast
+
+Wither Skull uses the original ModWitherSkull rather than a visual wrapper around another bolt. Its ordinary launch position, acceleration and yaw/pitch remain native on each loader; Ars supplies the aim and speed multiplier. Sneaking selects the native dangerous/blue state. Native potency, radius and Burning enchantments are read unconditionally as in WitherSkullSpell. Nether staff emits the primary and two randomly offset side shots, preserving the original extra radius application to side shots. A salvo has one trigger fee.
+
+Intercept ModWitherSkull's own complete onHit override, not vanilla WitherSkull.onHit or an entity-only callback. The original body applies Wither II, direct-kill healing, enchantment interactions, game events, fiery explosions, griefing/loot decisions and removal. Remaining Ars effects resume after this body. Special carriers defer only removal during continuing activations, retain renderer flags/native tick effects, and pay per whole triggered salvo until resources fail. Native explosions retain their own target rules; this addon does not replace them with a new damage handler.
+
+The native skull's duration handling is unusual: its hit code reads the victim player's native Duration enchantment, not the caster's SpellStat.duration. This adapter does not pretend Ars Extend Time changes that debuff. Ars trajectory lifetime modifiers still belong to the carrier. No caster charging animation or Goety cooldown enforcement is added in this batch.
+
+Feast uses the selected Ars entity/location as the native search-volume center. Native alliance filtering still refers to the actual caster, while fang ownership refers to the context's damage owner. One central fang is placed at each enemy with warmup 1; Ominous staff adds five radius-1.5 fangs with warmup 0 and native angles. Its Radius enchantment multiplies the search radius, rather than using the generic additive equipment conversion. Native block-dust circles execute once at activation and native poof particles accompany successful spawning; the repeated charging prelude is not implemented.
+
+Actual normal Fangs entities handle damage, player-owner absorption, soul-event eligibility and expiry. Feast accepts Burning and binary Life Absorb (incompatible with Amplify), while Extension/Soul Eater glyphs remain dedicated to Fangs. Native focus gear can still reach the original shared spawnFangs consumer. No enemies, only allies, unsupported ground, denied resource payment or invalid generated augments yields no fee. A successful multi-enemy/staff batch costs once.
+
+Player-facing Burning descriptions no longer enumerate a support list. Dedicated augments retain the short scope information needed to understand their narrow use. Core compatibility validation remains in place.
+
+
+2026-10-11 dev.10 verification:
+
+- NeoForge 1.21.1 with Iron and Not Enough Glyphs: all 19 required checks passed (`build/skull-feast-coexistence.log`).
+- Forge 1.20.1 without Iron/NEG: all 26 required checks passed (`forge/build/skull-feast-gametest.log`). Both targets built release/source JARs.
+- Wither checks compare surviving native flights tick by tick against Goety's own SpellResult, run serially to avoid projectile interference. They verify primary/side-shot radius, blue/fiery flags, full entity Wither/kill healing, block explosion damage, one-batch charges, denied/creative salvos and repeated Orbit exhaustion/cleanup.
+- Feast checks cover selected-region enemies, actual native ally exclusion, warmup/damage/global absorption/Burning, Ominous rings, one charge, allies-only/denied/creative casts and generated-recipe validation.
+- Initial Forge fixtures encountered natural terrain above GameTest's below-ground origin: the correct fang batch and charge appeared, but the surface was higher than the artificial floor. Final fixtures use a preloaded horizontal area near the build-height ceiling, an explicit clear corridor/floor and surviving-flight assertions. No production chunk loading or damage rules were changed to pass these checks.
+- All 24 glyph models, Chinese/English names/descriptions, JSON and native Goety parent references match both pinned dependencies. Release/source JARs include current MIT/third-party notices; release bytecode targets Java 21/17 correctly, excludes tests/dependencies, and Forge includes the complete native-hit refmap.
+- No real client was launched. Renderer appearance, particle shape and multiplayer visual synchronization still need in-game observation.
