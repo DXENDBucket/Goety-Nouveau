@@ -43,7 +43,7 @@ minecraft {
         }
         gameTestServer {
             workingDirectory project.file('run/gametest')
-            property 'forge.enabledGameTestNamespaces', 'goety_nouveau'
+            property 'forge.enabledGameTestNamespaces', providers.gradleProperty('gameTestNamespaces').getOrElse('goety_nouveau')
             jvmArgs '-Xmx2G'
             mods { ars_conflux { source confluxMain }; goety_nouveau { source sourceSets.main; source sourceSets.gameTest } }
         }

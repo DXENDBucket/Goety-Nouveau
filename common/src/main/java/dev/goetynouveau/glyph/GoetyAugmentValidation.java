@@ -18,6 +18,10 @@ public final class GoetyAugmentValidation {
     public static boolean supportsBurning(BoltFocus focus) {
         return focus == BoltFocus.FIREBALL || focus == BoltFocus.WITHER_SKULL;
     }
+    public static boolean validBolt(BoltFocus focus, List<AbstractAugment> augments) {
+        return (!augments.contains(AugmentBurning.INSTANCE) || supportsBurning(focus))
+                && augments.stream().noneMatch(AugmentGoety.class::isInstance);
+    }
     /** Also enforced at server execution for generated/raw recipes that skip the editor. */
     public static boolean validEffect(EffectFocus focus, List<AbstractAugment> augments) {
         if (augments.contains(AugmentBurning.INSTANCE) && !supportsBurning(focus)) return false;
@@ -37,7 +41,7 @@ public final class GoetyAugmentValidation {
                 boolean supported = focus != null && supportsBurning(focus);
                 supported |= augments.stream().anyMatch(augment -> augment instanceof GoetyBoltGlyph bolt
                         && supportsBurning(bolt.focus()));
-                if (!supported) errors.add(new AugmentError(phrase.getFirstPosition(), phrase.getAction(), "burning"));
+                if (!supported) addErrors(errors, recipe, phrase, AugmentBurning.INSTANCE, "burning");
             }
             for (var augment : AugmentGoety.ALL) {
                 long count = augments.stream().filter(a -> a == augment).count();
@@ -47,10 +51,20 @@ public final class GoetyAugmentValidation {
                         : augment == AugmentGoety.LIFE_ABSORB
                             && augments.contains(com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify.INSTANCE)
                                 ? "absorb_potency" : null;
-                if (key != null) errors.add(new AugmentError(phrase.getFirstPosition(), phrase.getAction(), key));
+                if (key != null) {
+                    addErrors(errors, recipe, phrase, augment, key);
+                    if (key.equals("absorb_potency")) addErrors(errors, recipe, phrase,
+                            com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify.INSTANCE, key);
+                }
             }
         }
         return errors;
+    }
+    private static void addErrors(List<SpellValidationError> errors, List<AbstractSpellPart> recipe,
+                                  SpellPhraseValidator.SpellPhrase phrase, AbstractAugment augment, String key) {
+        // Ars disables a palette button only if adding it reports an error at its own new slot.
+        for (int i = phrase.getFirstPosition() + 1; i < recipe.size() && recipe.get(i) instanceof AbstractAugment; i++)
+            if (recipe.get(i) == augment) errors.add(new AugmentError(i, augment, key));
     }
     private record AugmentError(int position, AbstractSpellPart spellPart, String key) implements SpellValidationError {
         public int getPosition() { return position; }

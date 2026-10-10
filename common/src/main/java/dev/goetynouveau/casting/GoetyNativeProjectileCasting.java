@@ -44,6 +44,7 @@ public final class GoetyNativeProjectileCasting {
         var inheritedAccount = frame.account();
         var spell = (Spell)focus.spell();
         var augments = resolver.spell.getAugments(0, caster);
+        if (!dev.goetynouveau.glyph.GoetyAugmentValidation.validBolt(focus, augments)) return true;
         var ars = resolver.getCastStats();
         var defaults = spell.defaultStats();
         int potency = defaults.getPotency() + (int)ars.getAmpMultiplier();

@@ -2,11 +2,13 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.10`). Five projectile replacements, fifteen target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.11`). Five projectile replacements, fifteen target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
 Goety & Nouveau and Iron & Nouveau can be installed together with one matching Ars Conflux build. A focused NeoForge server test verifies both providers cast their own native projectiles through the same Ars form, without claiming each other's payloads.
+
+Burning and other native parameter augments retain their actual compatibility restrictions. Unsupported choices are disabled in the Ars editor; generated projectile recipes are also checked at execution. Descriptions stay brief without listing every supported spell.
 
 ## Try Soul Bolt
 

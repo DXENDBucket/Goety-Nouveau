@@ -34,8 +34,6 @@ public final class GoetyBoltCasting {
     private GoetyBoltCasting() {}
     public static boolean replace(BoltFocus focus, EntityProjectileSpell carrier, CarrierProfile profile) {
         if (!(carrier.level() instanceof ServerLevel world)) return false;
-        if (focus == BoltFocus.FIREBALL || focus == BoltFocus.POISON_DART || focus == BoltFocus.WITHER_SKULL)
-            return GoetyNativeProjectileCasting.replace(focus, carrier, profile);
         var resolver = ArsSpellAccess.resolver(carrier);
         var context = CastContext.of(resolver.spellContext, null, null);
         var inheritedAccount = context.account();
@@ -43,6 +41,9 @@ public final class GoetyBoltCasting {
         if (caster == null) return true;
         var spell = focus.spell();
         var augments = resolver.spell.getAugments(0, caster);
+        if (!dev.goetynouveau.glyph.GoetyAugmentValidation.validBolt(focus, augments)) return true;
+        if (focus == BoltFocus.FIREBALL || focus == BoltFocus.POISON_DART || focus == BoltFocus.WITHER_SKULL)
+            return GoetyNativeProjectileCasting.replace(focus, carrier, profile);
         int potency = spell.defaultStats().getPotency();
         potency += augments.stream().filter(a -> a == AugmentAmplify.INSTANCE).count();
         potency -= augments.stream().filter(a -> a == AugmentDampen.INSTANCE).count();
