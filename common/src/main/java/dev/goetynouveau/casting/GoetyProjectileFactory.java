@@ -59,7 +59,7 @@ public final class GoetyProjectileFactory {
                     } else {
                         var lava=new Lavaball(world,p.x,p.y,p.z,direction.x,direction.y,direction.z);
                         lava.setExtraDamage(Math.max(0,potency)); lava.setFiery(Math.max(0,burning));
-                        lava.setDangerous(!spell.isShifting(caster)); lava.setUpgraded(right);
+                        lava.setDangerous(!GoetyResources.sneaking(caster)); lava.setUpgraded(right);
                         lava.setExplosionPower(lava.getExplosionPower()+(float)Math.max(0,radius)); projectile=lava;
                     }
                     if(!(projectile instanceof WaterHurtingProjectile)) NativeProjectileHooks.speed(projectile,speed);

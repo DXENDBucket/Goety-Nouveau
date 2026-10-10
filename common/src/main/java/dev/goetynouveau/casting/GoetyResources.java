@@ -24,6 +24,11 @@ public final class GoetyResources {
         return FocusSpells.read(CarrierRegistry.id("goety:soul_bolt_focus")).orElseThrow();
     }
     public static ItemStack staff(LivingEntity caster) { return caster == null ? ItemStack.EMPTY : WandUtil.findWand(caster); }
+    /** Ars is the casting tool here. Native Spell.isShifting additionally requires an IWand,
+     * which would disable alternate casts for a player holding only an Ars spellbook. */
+    public static boolean sneaking(LivingEntity caster) {
+        return caster != null && (caster.isCrouching() || caster.isShiftKeyDown());
+    }
     public static ResourceCharge quote(SpellContext context) {
         return quote(context, spell());
     }

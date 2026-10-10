@@ -79,7 +79,7 @@ public final class GoetyNativeProjectileCasting {
                 } else {
                     var normal = new ModFireball(world, p.x, p.y, p.z, d.x, d.y, d.z);
                     normal.setExtraDamage(potency); normal.setFiery(burning);
-                    normal.setDangerous(!spell.isShifting(caster)); fire = normal;
+                    normal.setDangerous(!GoetyResources.sneaking(caster)); fire = normal;
                 }
                 // WaterHurtingProjectile is scaled by its native travel adapter, not vanilla acceleration.
                 if (!(fire instanceof WaterHurtingProjectile)) NativeProjectileHooks.speed(fire, multiplier);
@@ -141,7 +141,7 @@ public final class GoetyNativeProjectileCasting {
     private static ModWitherSkull witherSkull(ServerLevel world, net.minecraft.world.entity.LivingEntity caster,
                                               Spell spell, Vec3 origin, Vec3 direction, int potency, int burning) {
         var skull = new ModWitherSkull(origin.x, origin.y, origin.z, direction.x, direction.y, direction.z, world);
-        skull.setDangerous(spell.isShifting(caster));
+        skull.setDangerous(GoetyResources.sneaking(caster));
         skull.setExtraDamage(potency); skull.setFiery(burning);
         return skull;
     }

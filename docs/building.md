@@ -106,3 +106,6 @@ For 0.1.0-dev.10, the final NeoForge coexistence run passed all 19 required test
 
 
 2026-10-11 dev.12: the two focused shared combat-effect GameTests passed on both NeoForge 1.21.1 and Forge 1.20.1. Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_combat --max-workers=2`; logs are `build/combat-effects.log` and `forge/build/combat-effects.log`. Checks exercise real native shield capabilities/damage cancellation, native electrical area damage and chain lightning, source ownership, alliance filtering, trigger payment/failure and creative bypass. Both targets build release/source JARs. Native parent models and both languages were checked in the artifacts; client rendering and natural shield expiry remain manual checks. This focused run does not repeat the full catalogue or Iron coexistence suite.
+
+
+2026-10-11 dev.14: both focused `goety_nouveau_variants` GameTests passed on each loader (`build/variant-report-tests.log` and `forge/build/variant-report-tests.log`). They use a real main-hand Ars book, verify book-only sneaking for Wither Skull/Lavaball/Fireball, and verify an offhand Goety Frost staff creates the native spear with a 50% speed bonus and actual two-target piercing. No broad suite or client launch was performed. These server checks do not establish the user's exact offhand item or verify client rendering.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-dev.14
+
+- Allow book-only sneaking to select native blue Wither Skulls and non-griefing Lavaballs/Fireballs. Goety's native wand requirement no longer suppresses projectile alternate casts in Ars.
+- Clarify that Ice Spike's spear variant requires Goety's Frost staff, avoiding confusion with Iron's ice staff.
+- Add two focused shared checks on both loaders: actual Ars book alternate casts and main-hand book/offhand Goety Frost staff with native speed and two-target piercing.
+
 ## 0.1.0-dev.10
 
 - Add Wither Skull projectile replacement with native flight, sneaking blue state, Nether-staff salvo, full Wither/kill-heal/explosion/loot behavior and Ars continuation. Native impacts remain complete on repeated Ars trajectories.

@@ -58,7 +58,7 @@
   "goety_nouveau.glyph_name.glyph_discharge": "放电",
   "goety_nouveau.glyph_desc.glyph_discharge": "在选中目标或位置释放电力冲击，保留原生电弧和范围伤害。强化提升伤害，扩散扩大范围；风暴法杖保留连锁闪电。",
   "goety_nouveau.glyph_name.glyph_ice_spike": "冰刺",
-  "goety_nouveau.glyph_desc.glyph_ice_spike": "发射原生冰刺，命中后冻结目标。冰霜法杖会将其变为更快、可穿透的冰矛。",
+  "goety_nouveau.glyph_desc.glyph_ice_spike": "发射原生冰刺，命中后冻结目标。Goety 的霜冻魔杖会将其变为更快、可穿透的冰矛。",
   "goety_nouveau.glyph_name.glyph_lavaball": "熔岩炸弹",
   "goety_nouveau.glyph_desc.glyph_lavaball": "发射原生熔岩炸弹，保留爆炸、燃烧和装备变体。潜行可关闭地形破坏；下界法杖会发射齐射。",
   "goety_nouveau.glyph_name.glyph_steam": "蒸汽飞弹",
