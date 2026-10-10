@@ -52,5 +52,9 @@
   "goety_nouveau.glyph_name.glyph_wither_skull": "凋零头颅",
   "goety_nouveau.glyph_desc.glyph_wither_skull": "将弹射物化作凋零头颅，保留原生凋零、爆炸及击杀恢复。强化增加威力，扩散扩大爆炸；潜行释放蓝色头颅，地狱法杖增加同批数量。",
   "goety_nouveau.glyph_name.glyph_feast": "盛宴",
-  "goety_nouveau.glyph_desc.glyph_feast": "在选定区域内以原生尖牙攻击敌人。扩散扩大搜索范围，强化增加威力；不祥法杖在各目标周围增加一圈尖牙。"
+  "goety_nouveau.glyph_desc.glyph_feast": "在选定区域内以原生尖牙攻击敌人。扩散扩大搜索范围，强化增加威力；不祥法杖在各目标周围增加一圈尖牙。",
+  "goety_nouveau.glyph_name.glyph_bulwark": "壁垒",
+  "goety_nouveau.glyph_desc.glyph_bulwark": "为自身或选中的友军提供原生壁垒护盾。强化增加护盾数量，延长时效增加持续时间。已有护盾时无法补充。",
+  "goety_nouveau.glyph_name.glyph_discharge": "放电",
+  "goety_nouveau.glyph_desc.glyph_discharge": "在选中目标或位置释放电力冲击，保留原生电弧和范围伤害。强化提升伤害，扩散扩大范围；风暴法杖保留连锁闪电。"
 }

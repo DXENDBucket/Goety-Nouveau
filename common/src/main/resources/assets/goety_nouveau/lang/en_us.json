@@ -52,5 +52,9 @@
   "goety_nouveau.glyph_name.glyph_wither_skull": "Wither Skull",
   "goety_nouveau.glyph_desc.glyph_wither_skull": "Replace a projectile with a native Wither Skull, retaining Wither, explosions and healing on kills. Amplify increases potency; AOE expands explosions. Sneaking creates blue skulls; Nether staff adds a native salvo.",
   "goety_nouveau.glyph_name.glyph_feast": "Feast",
-  "goety_nouveau.glyph_desc.glyph_feast": "Attack enemies in the selected area with native fangs. AOE expands the search and Amplify increases potency. Ominous staff adds a ring of fangs around each enemy."
+  "goety_nouveau.glyph_desc.glyph_feast": "Attack enemies in the selected area with native fangs. AOE expands the search and Amplify increases potency. Ominous staff adds a ring of fangs around each enemy.",
+  "goety_nouveau.glyph_name.glyph_bulwark": "Bulwark",
+  "goety_nouveau.glyph_desc.glyph_bulwark": "Protect yourself or the selected ally with Goety's native shields. Amplify increases their number; Extend Time increases their lifetime. Existing shields cannot be refilled.",
+  "goety_nouveau.glyph_name.glyph_discharge": "Discharge",
+  "goety_nouveau.glyph_desc.glyph_discharge": "Release an electrical burst at the selected entity or location, with native arcs and area damage. Amplify increases damage; AOE expands its radius. Storm staffs retain native chain lightning."
 }

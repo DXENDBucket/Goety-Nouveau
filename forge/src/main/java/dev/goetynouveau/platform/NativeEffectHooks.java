@@ -16,5 +16,6 @@ public final class NativeEffectHooks {
     public static MobEffectInstance ironHide(int ticks, int amplifier) { return new MobEffectInstance(GoetyEffects.IRON_HIDE.get(), ticks, amplifier, false, false, true); }
     public static MobEffectInstance chillHide(int ticks, int amplifier) { return new MobEffectInstance(GoetyEffects.CHILL_HIDE.get(), ticks, amplifier); }
     public static MobEffectInstance sapped(int ticks, int amplifier) { return new MobEffectInstance(GoetyEffects.SAPPED.get(), ticks, amplifier); }
+    public static MobEffectInstance spasms(int ticks) { return new MobEffectInstance(GoetyEffects.SPASMS.get(), ticks); }
     public static MobEffectInstance cursed(int ticks) { return new MobEffectInstance(GoetyEffects.CURSED.get(), ticks); }
 }

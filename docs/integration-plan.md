@@ -2,7 +2,7 @@
 
 ## 范围与边界
 
-这是独立附属，modid 为 `goety_nouveau`，依赖 Ars Nouveau、Goety 和 Ars Conflux；不依赖 Iron & Nouveau。`0.1.0-dev.9` 已有四种弹射物替换、十四种效果与四种原生参数增强，不调整整合包流程或擅自添加生存解锁配方。
+这是独立附属，modid 为 `goety_nouveau`，依赖 Ars Nouveau、Goety 和 Ars Conflux；不依赖 Iron & Nouveau。`0.1.0-dev.12` 已有五种弹射物替换、十七种效果与四种原生参数增强，不调整整合包流程或擅自添加生存解锁配方。
 
 Core 负责施法上下文、Ars 载体、延续编排、触发计费与物理资源池预留。Goety 附属负责 Goety 法术参数、实体、装备条件、资源访问和特有召唤行为。以后加入其他附属时，通过 Core 共用载体能力，不做 Goety 与 Iron 的互相依赖。
 

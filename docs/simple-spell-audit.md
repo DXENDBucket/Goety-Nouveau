@@ -146,3 +146,17 @@ The Ars spell editor disables a candidate only when validation reports an error 
 Burning remains opt-in for native consumers. Carrier-wide augment registration only permits composing a supported projectile replacement and Burning in the same phrase; it does not permit Burning on bare Ars projectiles, unsupported Goety payloads or a later unrelated effect. Both native projectile entry paths reject unsupported Burning and effect-only native parameters before creating projectiles or charging resources, including raw/generated recipes that bypass the spell editor. Player-facing descriptions remain unchanged and do not enumerate the support list.
 
 2026-10-11 dev.11: one focused GameTest passed on each platform (`build/burning-eligibility.log` and `forge/build/burning-eligibility.log`). It exercises the real Ars editor validator and appended-slot filter for all 20 current payload/effect glyphs, phrase isolation, both sides of native absorption/potency exclusion, and raw unsupported projectile recipes with no spawn/payment. Both targets built release/source JARs. No client was launched.
+
+
+## 0.1.0-dev.12：壁垒与放电
+
+本批新增 `Bulwark`、`Discharge` 效果魔符；不增加生存获取方式，不改 Core，也不加入吟唱/冷却。审查了固定依赖 Goety 3.2.0 和 2.5.58.4 的实际 `BulwarkSpell` / `DischargeSpell` 类，模型父级在两个发行 JAR 中均存在。
+
+- 壁垒：使用原生 `MiscCapHelper` 护盾数量、持续时间和同步。挡伤、破盾冷却、受击反击、到期和客户端护盾表现仍由 Goety 处理。Ars 选择自身或原生友军；“尚无护盾”的条件改为检查实际接收者，因此已受保护的施法者仍能保护别的友军。已有护盾不补充；敌对/无生命/方块目标不触发、不扣资源。
+- 壁垒参数：原版配置数量 + 原生 potency + Ars 强化/抑制；原生持续时间是刻，装备时长倍率保持至多四倍。原生正数 duration 覆盖值保留。Ars 延长/缩短时效分别增减一份基准持续时间，最终不足一刻不触发。原生默认持续时间没有被误读成秒或 1 刻。
+- 放电：中心为 Ars 命中位置或生物位置，不重新沿施法者视线选点。使用原生 `SpellExplosion`、冲击波/球形粒子、`SLightningPacket` 电弧和音效；不是只调用一次伤害。范围和装备法强按原版计算，装备 potency 只计一半。原生风暴法杖的连锁、痉挛概率和雷雨加成保留；无名法杖的绿色电弧也保留。
+- 放电原生电弧发给本维度 128 格内观察者；连锁继续使用原生 `WandUtil.chainLightning`（包含原生联盟、视线、逐跳伤害和特效）。真实伤害归属读取 Core 的 damageOwner，装备/费用和额外联盟排除使用原施法者。没有给 Ars 选中目标换成“施法者”。
+- 原生爆炸以零伤害参数作为自动伤害哨兵；本适配器拒绝随机结果为零的触发，避免配置/抑制造成零伤害时反而触发高伤爆炸。放电在空区域仍能正常施放、支付一次；壁垒重复保护目标不支付，两者资源不足时均无效果。
+- 两个魔符均为真正的效果类，复用原生聚晶物品模型与现有 Goety 分组排序。触发费用继续由既有报价/事务入口处理，默认灵魂能量、可配置 Ars Mana；不改变后续效果的来源资源账户。
+
+定向服务端测试覆盖：壁垒与实际原生 `SpellResult` 的基准一致；施法者已有盾时给队友施盾；数量/时长增强；原生伤害事件挡伤与扣盾；重复/敌对目标不收费；放电命中位置的实际伤害和原施法者归属；队友过滤、范围外风暴连锁、缺资源失败和创造免费。测试只加载 Goety、Ars 与 Core，不要求 Iron 或 Not Enough Glyphs。客户端护盾、电弧、绿色变体、痉挛视觉以及自然到期表现仍需人工游戏验证。

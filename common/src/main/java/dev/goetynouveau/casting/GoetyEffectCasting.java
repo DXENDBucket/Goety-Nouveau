@@ -68,6 +68,8 @@ public final class GoetyEffectCasting {
             case IGNITE -> GoetyIgniteCasting.apply(world, frame,
                     (com.Polarice3.Goety.common.magic.spells.IgniteSpell)spell,
                     defaults.burning() + ars.getBuffCount(dev.goetynouveau.glyph.AugmentBurning.INSTANCE));
+            case BULWARK -> GoetyCombatEffects.bulwark(world, frame, spell, defaults, ars);
+            case DISCHARGE -> GoetyCombatEffects.discharge(world, frame, spell, defaults, ars);
         };
     }
     private static LivingEntity target(CastContext frame) {

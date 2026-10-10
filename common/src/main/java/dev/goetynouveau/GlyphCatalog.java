@@ -33,9 +33,11 @@ public final class GlyphCatalog {
     public static final GoetyEffectGlyph FANGS = new GoetyEffectGlyph(EffectFocus.FANGS);
     public static final GoetyEffectGlyph IGNITE = new GoetyEffectGlyph(EffectFocus.IGNITE);
     public static final GoetyEffectGlyph FEAST = new GoetyEffectGlyph(EffectFocus.FEAST);
+    public static final GoetyEffectGlyph BULWARK = new GoetyEffectGlyph(EffectFocus.BULWARK);
+    public static final GoetyEffectGlyph DISCHARGE = new GoetyEffectGlyph(EffectFocus.DISCHARGE);
     public static final List<AbstractSpellPart> ALL = List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
-            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
+            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
             dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER);
     private GlyphCatalog() {}
