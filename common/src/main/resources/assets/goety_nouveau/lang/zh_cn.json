@@ -80,5 +80,13 @@
   "goety_nouveau.glyph_name.glyph_sword": "飞剑",
   "goety_nouveau.glyph_desc.glyph_sword": "发射主手或副手所持剑的原生副本，保留附魔和原生伤害。成功发射消耗十点耐久。",
   "goety_nouveau.glyph_name.glyph_razor_wind": "风刃",
-  "goety_nouveau.glyph_desc.glyph_razor_wind": "发射原生风刃，逐渐扩大并切穿敌人。虚空法杖会使其变为原生虚空斩击。"
+  "goety_nouveau.glyph_desc.glyph_razor_wind": "发射原生风刃，逐渐扩大并切穿敌人。虚空法杖会使其变为原生虚空斩击。",
+  "goety_nouveau.glyph_name.glyph_earth_fist": "撼地",
+  "goety_nouveau.glyph_desc.glyph_earth_fist": "在落点升起地拳，延迟打击并抬升敌人。地卜魔杖还能打击落点周围的敌人。",
+  "goety_nouveau.glyph_name.glyph_ghost_fire": "幽灵火",
+  "goety_nouveau.glyph_desc.glyph_ghost_fire": "在落点升起幽灵火，保留原生伤害、动画及法杖阵形。延长时效可延长其存留时间。",
+  "goety_nouveau.glyph_name.glyph_leeching": "生命汲取",
+  "goety_nouveau.glyph_desc.glyph_leeching": "汲取选中敌人的生命。保留原生汲取伤害与治疗；死灵魔杖还能使目标虚弱。",
+  "goety_nouveau.glyph_name.glyph_launch": "疾风发射",
+  "goety_nouveau.glyph_desc.glyph_launch": "沿自身或选中友军的朝向推动其前进。风之魔杖增强推动力度。"
 }

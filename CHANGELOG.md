@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.15
+
+- Add Earth Fist, Ghost Fire, Leeching and Launch as Ars target/location effect glyphs, with native focus-model icons, both languages and existing Goety provider grouping.
+- Preserve native delayed entities, animations, damage, upward lift, ghost-fire clusters, ally checks, expiry, leech particles/native healing events and recipient-facing launch motion.
+- Keep Forge-specific Nameless ghost-fire towers and each version's native Launch power/enchantment scaling; equipment remains associated with the actual caster.
+- Charge once on successful activation; reject invalid targets, blocked leech damage and exhausted resources, with creative exemption. Ars owns targeting and repeated trigger scheduling; native chanting/cooldowns remain outside this batch.
+- Add two focused shared native-world cases for placement/damage/expiry/staff branches and entity healing/movement/resource behavior.
+
 ## 0.1.0-dev.14
 
 - Allow book-only sneaking to select native blue Wither Skulls and non-griefing Lavaballs/Fireballs. Goety's native wand requirement no longer suppresses projectile alternate casts in Ars.

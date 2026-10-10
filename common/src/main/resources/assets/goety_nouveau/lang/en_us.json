@@ -80,5 +80,13 @@
   "goety_nouveau.glyph_name.glyph_sword": "Magic Sword",
   "goety_nouveau.glyph_desc.glyph_sword": "Fire a native copy of a sword held in either hand, retaining its enchantments and native damage. A successful launch consumes ten durability.",
   "goety_nouveau.glyph_name.glyph_razor_wind": "Razor Wind",
-  "goety_nouveau.glyph_desc.glyph_razor_wind": "Fire a native growing wind slash that cuts through enemies. Void staffs produce its native void variant."
+  "goety_nouveau.glyph_desc.glyph_razor_wind": "Fire a native growing wind slash that cuts through enemies. Void staffs produce its native void variant.",
+  "goety_nouveau.glyph_name.glyph_earth_fist": "Earth Fist",
+  "goety_nouveau.glyph_desc.glyph_earth_fist": "Raise a native earth fist at the selected point, with its delayed strike and lift. Geomancy staffs also strike nearby enemies.",
+  "goety_nouveau.glyph_name.glyph_ghost_fire": "Ghost Fire",
+  "goety_nouveau.glyph_desc.glyph_ghost_fire": "Raise native ghost-fire flowers at the selected point. Necromancy staffs retain their cluster variants; Extend Time increases their lifetime.",
+  "goety_nouveau.glyph_name.glyph_leeching": "Leeching",
+  "goety_nouveau.glyph_desc.glyph_leeching": "Drain the selected living enemy using native leech damage and healing. Necromancy staffs also weaken the victim.",
+  "goety_nouveau.glyph_name.glyph_launch": "Launch",
+  "goety_nouveau.glyph_desc.glyph_launch": "Launch yourself or a selected ally in the recipient's facing direction. Wind staffs strengthen the launch."
 }

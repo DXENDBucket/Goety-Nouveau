@@ -21,7 +21,11 @@ public enum EffectFocus {
     IGNITE("ignite", "ignite_focus", "Ignite", false, false, false),
     FEAST("feast", "feast_focus", "Feast", true, false, true),
     BULWARK("bulwark", "bulwark_focus", "Bulwark", true, true, false),
-    DISCHARGE("discharge", "discharge_focus", "Discharge", true, false, true);
+    DISCHARGE("discharge", "discharge_focus", "Discharge", true, false, true),
+    EARTH_FIST("earth_fist", "earth_punch_focus", "Earth Fist", true, false, true),
+    GHOST_FIRE("ghost_fire", "ghost_fire_focus", "Ghost Fire", true, true, false),
+    LEECHING("leeching", "leeching_focus", "Leeching", true, false, false),
+    LAUNCH("launch", "launch_focus", "Launch", true, false, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

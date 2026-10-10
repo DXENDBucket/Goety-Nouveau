@@ -35,6 +35,10 @@ public final class GlyphCatalog {
     public static final GoetyEffectGlyph FEAST = new GoetyEffectGlyph(EffectFocus.FEAST);
     public static final GoetyEffectGlyph BULWARK = new GoetyEffectGlyph(EffectFocus.BULWARK);
     public static final GoetyEffectGlyph DISCHARGE = new GoetyEffectGlyph(EffectFocus.DISCHARGE);
+    public static final GoetyEffectGlyph EARTH_FIST = new GoetyEffectGlyph(EffectFocus.EARTH_FIST);
+    public static final GoetyEffectGlyph GHOST_FIRE = new GoetyEffectGlyph(EffectFocus.GHOST_FIRE);
+    public static final GoetyEffectGlyph LEECHING = new GoetyEffectGlyph(EffectFocus.LEECHING);
+    public static final GoetyEffectGlyph LAUNCH = new GoetyEffectGlyph(EffectFocus.LAUNCH);
     public static final GoetyBoltGlyph ICE_SPIKE = new GoetyBoltGlyph(BoltFocus.ICE_SPIKE);
     public static final GoetyBoltGlyph LAVABALL = new GoetyBoltGlyph(BoltFocus.LAVABALL);
     public static final GoetyBoltGlyph STEAM = new GoetyBoltGlyph(BoltFocus.STEAM);
@@ -49,7 +53,7 @@ public final class GlyphCatalog {
     public static final GoetyBoltGlyph RAZOR_WIND = new GoetyBoltGlyph(BoltFocus.RAZOR_WIND);
     public static final List<AbstractSpellPart> ALL = List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
-            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
+            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
             dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER);
     private GlyphCatalog() {}
