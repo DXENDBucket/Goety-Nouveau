@@ -1,6 +1,6 @@
 # 简单效果／原生弹射物接入记录
 
-版本：`0.1.0-dev.6`。固定依赖：NeoForge Goety 3.2.0、Forge Goety 2.5.58.4。通用核对方法见 Ars Conflux 的 [`spell-adapter-checklist.md`](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/spell-adapter-checklist.md)，端侧事故见 [`side-boundaries.md`](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/side-boundaries.md)。
+版本：`0.1.0-dev.7`，包含 dev.6 与 dev.7 两批记录。固定依赖：NeoForge Goety 3.2.0、Forge Goety 2.5.58.4。通用核对方法见 Ars Conflux 的 [`spell-adapter-checklist.md`](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/spell-adapter-checklist.md)，端侧事故见 [`side-boundaries.md`](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/side-boundaries.md)。
 
 ## 这次实现的范围
 
@@ -25,7 +25,7 @@
 - 魔法箭的 NeoForge 原生依赖还声明了移植侧追踪附魔。原生实体及其依赖自身的钩子继续运行，本附属不复制移植者新增实现；特殊 Ars 轨迹仍以 Ars 运动为准。
 - 这批不增加 Goety 原生吟唱与冷却，不改变生存获取流程。
 - 原生实体负责自动发生的区域伤害、状态效果和自然结束；它们不是每 tick 再次执行魔符，所以不会逐 tick 重付魔符的触发费用。
-- 火球、毒镖使用不同实体家族，尚未加入。火球还有装备导致的多发和变体；毒镖还涉及投掷速度、枪矛／水下分支。不能直接复用本次箭矢适配器就宣称完整。
+- dev.6 时未加入火球、毒镖；dev.7 已通过分别管理原生实体家族接入，见下节。
 - 连续光束／吐息、普通仆从、位移和复杂条件法术仍需逐项接入，不批量盲调结果方法。
 
 ## 客户端／服务端核对
@@ -54,3 +54,27 @@
 - 本批没有启动真实客户端，也没有重放客户端生成包；客户端／服务端边界为代码核对，服务端启动和行为为自动验证。
 
 原生飞行对照首先发现了重复计算出生高度偏移，已修复；方块命中用例扩大挡板以容纳原版 Ars 发射误差，没有移除误差或改变散射方向。
+
+## 0.1.0-dev.7：不同弹射物家族与燃烧增强
+
+| 魔符 | 实现与边界 |
+| --- | --- |
+| 火球 | 普通 SmallFireball 飞行、点火、潜行不引燃方块、法袍伤害来源和 Unholy 套装的 HellBolt/Hellfire 保留。Nether 法杖三发一组收费；Forge 独有 Helm 分支按 Ars 发射参考点／方向计算，Neo 不引入不存在的分支。 |
+| 毒镖 | 保留 Arrow 的重力、转向与水中阻力，原生 Wild 法杖穿透和 Wild 法袍 Acid Venom 分支继续由原生实体处理。同一个普通毒镖的已命中集合防止对同一目标重复执行 Ars 后续。 |
+| 冲击波 | Ars 选定中心的原生 SpellExplosion、随机伤害、环／球粒子、灵魂粒子和声音；强化与扩散修改伤害及半径。 |
+| 风垫 | 选中实体的位置或方块上方创建真实 Cushion，范围与寿命使用原生方法，移动、作用和自然结束仍由原生实体负责。 |
+| 燃烧 | 同一编排段落内只接受火球或幽灵头骨。每个增加一个原生 burning 单位，费用纳入触发报价与实际激活，默认额外 5 单位资源，可配置；不是新追加一个 Ars 点燃效果。 |
+
+新增 `GoetyNativeProjectileCasting` 负责这些不同继承链的实体及原生多发批次；已有 Soul/Magic 的适配不被强行改成 SmallFireball 或 Arrow。网络同步状态只添加到对应 Goety 实体。原生普通碰撞仍先遵循加载器的 ProjectileImpact 事件；虚拟命中完整调用原生实体／方块处理，再继续 Ars。客户端不查询施法者、不收费。特殊载体仅取消基类运动，保留原生子类动画／尾迹／生命周期。
+
+特殊轨迹的法杖齐射明确按“一组共享 Ars 轨迹的载荷”处理，侧弹作为随动外观，各原生载荷在该轨迹命中时执行并分别接续 Ars；不声称有三个独立的原生轨迹。它每次齐射命中只付一次费用。特殊毒镖在每次载体触发时重置原生穿透历史，命中方块后清除原生地面锁定，允许 Ars 原有环绕、弹跳等轨迹继续工作。资源不足则关闭本次执行和全部随动实体。
+
+共享 `ProjectileBatchCases` 检查默认火球与原生法术产生的实体逐 tick 对照、三发收费、燃烧与原生命中、无资源和创造模式、毒镖原生重力／穿透／毒性与接续去重、冲击波实际伤害、风垫原生范围／寿命、幽灵头骨燃烧与费用，以及重复载体耗尽后真正移除。
+
+2026-10-11 dev.7 实际验证结果：
+
+- NeoForge 1.21.1：`:jar :sourcesJar :runGameTestServer -PwithIron=true`，12 项共存检查通过，日志 `build/native-projectiles-coexistence.log`。
+- Forge 1.20.1：`:jar :sourcesJar :runGameTestServer`，无 Iron 的 19 项检查通过，日志 `forge/build/native-projectiles-gametest.log`。
+- 两端 17 个魔符模型、全部 JSON 与原生模型父引用核对通过；发布 JAR 含 MIT 和第三方声明，未打包 GameTest 类或上游依赖。
+
+客户端真实粒子观感、第三方投射物事件取消、Curios 套装装备组合与多人同步仍不等同于这些服务端用例已经验证。本批没有启动真实客户端。

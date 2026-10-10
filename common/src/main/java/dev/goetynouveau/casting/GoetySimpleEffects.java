@@ -118,4 +118,40 @@ public final class GoetySimpleEffects {
         blast.setPos(point);
         return world.addFreshEntity(blast);
     }
+    public static boolean shockwave(ServerLevel world, CastContext frame, Spell spell, int potency, double radius) {
+        if (radius <= 0) return false;
+        var point = center(frame);
+        float minimum = SpellConfig.ShockwaveDamage.get().floatValue() * WandUtil.damageMultiply() + potency;
+        float maximum = SpellConfig.ShockwaveMaxDamage.get().floatValue() * WandUtil.damageMultiply() + potency;
+        float damage = Math.max(minimum, Math.min(maximum, minimum + com.Polarice3.Goety.utils.RandomUtil.nextInt(
+                world.getRandom(), Math.max(0, (int)(maximum - minimum)))));
+        for (int i = 0; i < 8; ++i) {
+            var particle = point.add(0, 0.5, 0).offsetRandom(world.random, (float)radius);
+            world.sendParticles(ModParticleTypes.SOUL_EXPLODE.get(), particle.x, particle.y, particle.z, 1, 0, 0, 0, 0);
+        }
+        var color = new ColorUtil(0x2ac9cf);
+        world.sendParticles(new com.Polarice3.Goety.client.particles.CircleExplodeParticleOption(
+                color.red(), color.green(), color.blue(), (float)radius, 1), point.x, point.y + 0.5, point.z, 0, 0, 0, 0, 0);
+        world.sendParticles(new com.Polarice3.Goety.client.particles.SphereExplodeParticleOption(
+                color.red(), color.green(), color.blue(), (float)radius, 1), point.x, point.y + 0.5, point.z, 1, 0, 0, 0, 0);
+        var damageOwner = owner(frame);
+        MobUtil.explosionDamage(world, damageOwner, world.damageSources().indirectMagic(damageOwner, damageOwner),
+                point.x, point.y, point.z, (float)radius, damage);
+        world.playSound(null, point.x, point.y, point.z, ModSounds.SOUL_EXPLODE.get(), spell.getSoundSource(), 2, 1);
+        return true;
+    }
+    public static boolean cushion(ServerLevel world, CastContext frame, Spell spell, int duration, int radius) {
+        if (duration < 0 || radius <= 0) return false;
+        var point = center(frame);
+        if (target(frame) == null && frame.target() instanceof BlockHitResult block)
+            point = Vec3.atBottomCenterOf(block.getBlockPos()).add(0, 1, 0);
+        var cushion = new com.Polarice3.Goety.common.entities.util.Cushion(ModEntityType.CUSHION.get(), world);
+        cushion.setRadius(radius);
+        cushion.increaseLifeSpan(duration);
+        cushion.setPos(point);
+        boolean added = world.addFreshEntity(cushion);
+        if (added) world.playSound(null, point.x, point.y, point.z, net.minecraft.sounds.SoundEvents.EVOKER_CAST_SPELL,
+                spell.getSoundSource(), 1, 1);
+        return added;
+    }
 }

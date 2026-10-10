@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-dev.7
+
+- Add Fireball and Poison Dart projectile replacements, plus Shockwave and Cushion effects.
+- Preserve native fireball flight, staff salvos, ignition, Unholy Hell Bolt/Hellfire, and the Forge-specific Malefic Helm geometry branch. One native salvo pays once; special Ars carriers move and trigger the native salvo as one batch.
+- Preserve native quill gravity, rotation, water behavior, Wild staff piercing, robe-dependent Acid Venom, and one Ars continuation per distinct native hit. Repeated Ars trajectories retain control after block hits and pay at each successful activation.
+- Add Burning as a compatible augment for Fireball and Haunted Skull. Each copy adds one native burning unit and a configurable trigger cost, default 5 selected-resource units before native soul discounts; creative casting remains free.
+- Validate Burning against the actual payload through Core, retain Goety provider grouping, add Chinese/English descriptions and native model references, and synchronize new native projectile management flags and speed modifiers.
+- Add native-world checks for default flight, full impacts, piercing, batch billing, denied/creative casts, native area entities, summon Burning and repeated-carrier resource exhaustion on both loaders.
+
 ## 0.1.0-dev.6
 
 - Add native Magic Bolt as a projectile replacement, retaining launch/flight/turn, curse, lingering magic ground on entity/block impact and Ars continuation. Share the native bolt adapter without applying Soul Bolt staff variants or velocity enchantments to Magic Bolt.

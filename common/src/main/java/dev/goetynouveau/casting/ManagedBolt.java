@@ -15,4 +15,6 @@ public interface ManagedBolt extends dev.arsconflux.api.projectile.CarrierProxy 
     void goetyNouveau$trajectory(com.hollingsworth.arsnouveau.common.entity.EntityProjectileSpell carrier);
     boolean goetyNouveau$impacting();
     void goetyNouveau$impacting(boolean value);
+    default boolean goetyNouveau$handlingHit() { return false; }
+    default void goetyNouveau$handlingHit(boolean value) {}
 }

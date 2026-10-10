@@ -22,7 +22,7 @@ public abstract class GoetyMovementMixin {
     private void goetyNouveau$arsMovement(CallbackInfo ci) {
         if (!((Object)this instanceof ManagedBolt state) || !state.goetyNouveau$managed()) return;
         var entity = (WaterHurtingProjectile)(Object)this;
-        ((SpellHurtingProjectile)entity).boltSpeed = state.goetyNouveau$nativeSpeed();
+        if (entity instanceof SpellHurtingProjectile spell) spell.boltSpeed = state.goetyNouveau$nativeSpeed();
         if (!state.goetyNouveau$arsDriven()) return;
         entity.baseTick();
         if (entity.level().isClientSide) {
@@ -40,7 +40,8 @@ public abstract class GoetyMovementMixin {
         var hit = ProjectileUtil.getHitResultOnMoveVector(bolt,
                 entity -> ((ProjectileHitAccess)bolt).goetyNouveau$canHit(entity));
         if (hit.getType() != HitResult.Type.MISS && !NativeBoltHooks.impactCancelled(bolt, hit))
-            GoetyBoltCasting.nativeImpact((SpellHurtingProjectile)bolt, hit);
+            if (bolt instanceof SpellHurtingProjectile spell) GoetyBoltCasting.nativeImpact(spell, hit);
+            else dev.goetynouveau.casting.GoetyNativeProjectileCasting.nativeImpact(bolt, hit);
         ci.cancel();
     }
     // Run the original integrator in native velocity units, then scale its displacement and

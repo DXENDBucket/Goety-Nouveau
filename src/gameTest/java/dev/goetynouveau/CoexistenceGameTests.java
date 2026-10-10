@@ -30,6 +30,14 @@ public final class CoexistenceGameTests {
         return player;
     }
     @GameTest(template="empty", timeoutTicks=40)
+    public static void fireballNativeMotionAndSalvo(GameTestHelper h) { ProjectileBatchCases.fireballNativeMotionAndSalvo(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void quillNativePhysicsAndPiercing(GameTestHelper h) { ProjectileBatchCases.quillNativePhysicsAndPiercing(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void areaEffectsAndBurningSummons(GameTestHelper h) { ProjectileBatchCases.areaEffectsAndBurningSummons(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
+    public static void repeatedNewPayloadBilling(GameTestHelper h) { ProjectileBatchCases.repeatedNewPayloadBilling(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
     public static void nativeBuffsAndWeakening(GameTestHelper h) { SimpleSpellCases.nativeBuffsAndWeakening(h, player(h)); }
     @GameTest(template="empty", timeoutTicks=40)
     public static void nativeLightningAndUpdraft(GameTestHelper h) { SimpleSpellCases.nativeLightningAndUpdraft(h, player(h)); }

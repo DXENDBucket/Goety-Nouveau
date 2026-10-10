@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public final class GoetySummonCasting {
     private GoetySummonCasting() {}
     public static boolean hauntedSkull(ServerLevel world, CastContext frame, HauntedSkullSpell spell,
-                                       int potency, int duration, double radius) {
+                                       int potency, int duration, double radius, int burning) {
         var caster = frame.caster();
         var owner = NativeSummonHooks.owner(caster);
         var owned = new ArrayList<HauntedSkull>();
@@ -38,7 +38,6 @@ public final class GoetySummonCasting {
         var staff = GoetyResources.staff(caster);
         int amount = Math.min(NativeSummonHooks.count(spell, staff), Math.max(0, spell.summonLimit() - owned.size()));
         if (amount == 0) return false;
-        int burning = NativeSpellStats.defaults(spell).burning();
         if (WandUtil.enchantedFocus(caster)) {
             burning += NativeSummonHooks.burning(caster);
             duration += NativeSummonHooks.additionalDuration(caster);

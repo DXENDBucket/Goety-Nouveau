@@ -41,10 +41,11 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
         if (focus.potency) { result.add(AugmentAmplify.INSTANCE); result.add(AugmentDampen.INSTANCE); }
         if (focus.duration) { result.add(AugmentExtendTime.INSTANCE); result.add(AugmentDurationDown.INSTANCE); }
         if (focus.radius) result.add(AugmentAOE.INSTANCE);
+        if (focus == EffectFocus.HAUNTED_SKULL) result.add(AugmentBurning.INSTANCE);
         return result;
     }
     @Override public ResourceCharge firstCharge(SpellContext context, List<AbstractAugment> augments) {
-        return GoetyResources.quote(context, focus.spell());
+        return GoetyResources.quote(context, focus.spell(), augments);
     }
     @Override public void onResolve(HitResult hit, Level world, LivingEntity ignoredCaster, SpellStats stats,
                                      SpellContext context, SpellResolver resolver) {
@@ -56,7 +57,7 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
         // Soul Heal's native mob condition checks the caster's health. An Ars target can be
         // a different injured ally, so validate the actual recipient in the adapter instead.
         if (focus != EffectFocus.SOUL_HEAL && focus != EffectFocus.IRON_HIDE && !spell.conditionsMet(server, caster)) return;
-        var charge = GoetyResources.quote(context, spell);
+        var charge = GoetyResources.quote(context, spell, stats.getAugments());
         // Preserve the chain's explicit source account. This focus's native payment belongs
         // to this activation; publishing it as the inherited account would redirect other
         // providers' later effects into Goety's soul pool.

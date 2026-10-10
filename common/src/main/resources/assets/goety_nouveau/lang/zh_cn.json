@@ -24,5 +24,16 @@
   "goety_nouveau.glyph_desc.glyph_lightning": "向选中的实体或方块降下 Goety 原生闪电。附近的避雷针会引走闪电，风暴法杖可避免偏转。强化增加伤害，保留原生雷电表现与交互。",
   "goety_nouveau.glyph_name.glyph_updraft": "上升气流",
   "goety_nouveau.glyph_desc.glyph_updraft": "在选中的实体或方块上方生成 Goety 原生气流冲击，保留伤害、抬升和粒子效果。风之法杖保留范围加成，强化增加伤害，扩散扩大范围。",
-  "goety_nouveau.cast.unavailable": "未能施放 Goety 法术，请检查灵魂能量容器与施法条件。"
+  "goety_nouveau.cast.unavailable": "未能施放 Goety 法术，请检查灵魂能量容器与施法条件。",
+  "goety_nouveau.glyph_name.glyph_fireball": "火球",
+  "goety_nouveau.glyph_desc.glyph_fireball": "将 Ars 弹射物替换为 Goety 火球，保留点火和装备导致的多发与地狱火变体。强化增加威力，燃烧增加原生燃烧参数；原生命中后继续执行剩余效果。",
+  "goety_nouveau.glyph_name.glyph_poison_dart": "毒镖",
+  "goety_nouveau.glyph_desc.glyph_poison_dart": "将 Ars 弹射物替换为 Goety 原生毒镖。普通发射保留抛物线、水中行为、野性法杖穿透与法袍毒性变化。强化增加威力，延长时效增加毒性时间。",
+  "goety_nouveau.glyph_name.glyph_shockwave": "冲击波",
+  "goety_nouveau.glyph_desc.glyph_shockwave": "以选中的实体或位置为中心释放 Goety 冲击波，保留原生范围伤害、粒子与声音。强化增加伤害，扩散扩大范围。",
+  "goety_nouveau.glyph_name.glyph_cushion": "风垫",
+  "goety_nouveau.glyph_desc.glyph_cushion": "在选中的实体或方块上方生成 Goety 原生风垫。扩散扩大范围，延长时效增加原生寿命。",
+  "goety_nouveau.glyph_name.glyph_burning": "燃烧",
+  "goety_nouveau.glyph_desc.glyph_burning": "为支持的 Goety 法术增加一个原生燃烧单位。效果随法术而异，作用于火球或幽灵头骨。额外费用在实际触发时扣除。",
+  "goety_nouveau.validation.burning": "燃烧需要与 Goety 火球或幽灵头骨一起使用。"
 }

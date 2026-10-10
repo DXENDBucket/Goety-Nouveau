@@ -6,11 +6,14 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public final class GoetyConfig {
     public static final ModConfigSpec SPEC;
     public static final ModConfigSpec.EnumValue<ResourceSource> RESOURCE_SOURCE;
+    public static final ModConfigSpec.IntValue BURNING_COST;
     static {
         var builder = new ModConfigSpec.Builder();
         builder.push("resources");
         RESOURCE_SOURCE = builder.comment("Resource used by Goety glyph triggers. Native Goety and other Ars glyphs retain their own rules.")
                 .defineEnum("source", ResourceSource.SOUL_ENERGY);
+        BURNING_COST = builder.comment("Additional trigger cost per Burning augment, before native soul discounts. Uses the selected resource.")
+                .defineInRange("burningCostPerUnit", 5, 0, 1000000);
         builder.pop();
         SPEC = builder.build();
     }

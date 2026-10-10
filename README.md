@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.6`). Two projectile replacements and ten target/location effects are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.7`). Four projectile replacements, twelve target/location effects and a Burning augment are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -18,22 +18,30 @@ The glyphs are available in the creative tab; survival acquisition and ritual re
 
 ## Target and location effects
 
-These ten glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+These twelve glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
 | Ice Chunk | A native Goety chunk appears four blocks above the entity/location, then gathers frost, tracks and falls using native collision and damage. Frost staffs retain their shorter hover time. | Amplify / Dampen |
 | Frost Nova | A freezing shockwave centered on the selected entity/location, with native Goety explosion, ally filtering, damage, freezing and particle types. Frost staffs retain their radius/freezing bonus. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Entangling | Native vines bind the selected enemy or form a trap at the selected location. AOE selects nearby enemies; Wild staffs retain their larger group selection and target limit, and Wild robes retain vine damage. | AOE, Extend Time / Duration Down |
-| Haunted Skull | Native skulls summon near the selected entity/location and keep their owner, AI, explosions and limited lifetime. Necromancy staffs retain batch bonuses; sneak-casting recalls existing skulls. One successful batch pays one focus charge. | Amplify / Dampen, AOE, Extend Time / Duration Down |
+| Haunted Skull | Native skulls summon near the selected entity/location and keep their owner, AI, explosions and limited lifetime. Necromancy staffs retain batch bonuses; sneak-casting recalls existing skulls. One successful batch pays one focus charge. | Amplify / Dampen, AOE, Extend Time / Duration Down, Burning |
 | Soul Heal | Heals yourself or the selected native ally/owned creature. AOE also heals nearby native allies, using the original caster's alliance rules. Full-health groups and invalid targets are uncharged. | Amplify / Dampen, AOE |
 | Iron Hide | Protects yourself or the selected ally using native Iron Hide, including its hidden effect particles. One duration unit is one minute. | Amplify / Dampen, Extend Time / Duration Down |
 | Chill Hide | Native Chill Hide protects yourself or the selected ally; a Frost staff also protects nearby allies. One duration unit is 45 seconds. | Amplify / Dampen, Extend Time / Duration Down |
 | Weakening | A native weakening wave at the selected entity/location, with both Weakness and Sapped, native particles/sounds and original-caster ally filtering. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Lightning | Native lightning at the selected entity/block, including native damage, visuals and interactions. Nearby rods redirect it unless using the native Storm staff. | Amplify / Dampen |
 | Updraft | Native delayed damage and upward launch at the selected entity or above the selected block. Wind staff retains its area bonus. | Amplify / Dampen, AOE |
+| Shockwave | Native area damage, ring/sphere particles and sound centered on the selected entity/location. | Amplify / Dampen, AOE |
+| Cushion | Creates a native cushion at the selected entity or above the selected block, retaining native interactions and expiry. | AOE, Extend Time / Duration Down |
 
 **Magic Bolt** is the second projectile replacement: **Projectile → Magic Bolt → Ignite**. It shares only the native `SpellHurtingProjectile` flight adapter with Soul Bolt. Its own native curse and lingering `MagicGround` run on impact before the remaining Ars effects, including block impacts. Amplify/Dampen modify potency; Extend Time/Duration Down modify its extra curse/ground duration. Native flight, initial model turn, trails and impact entities are preserved. Magic Bolt keeps its native five-second expiry; it does not inherit Soul Bolt's staff variants or velocity enchantment.
+
+**Fireball** and **Poison Dart** are also projectile replacements. Ordinary Fireball uses native SmallFireball flight, ignition and staff salvos; Unholy equipment selects a native Hell Bolt with lingering Hellfire. The Forge build retains its native Malefic Helm launch branch. Poison Dart retains native arrow gravity, rotation, underwater behavior, Wild staff piercing and robe-dependent Acid Venom. Amplify/Dampen modify their potency; Poison Dart also supports duration modifiers. Both support Ars speed modifiers. Poison Dart keeps its native five-second lifetime, while Fireball keeps ten seconds.
+
+**Burning** adds one native burning unit to Fireball or Haunted Skull in the same spell phrase. Example: **Projectile → Fireball → Burning → Amplify**. It changes the native payload rather than appending Ars Ignite. Each unit adds a configurable trigger cost (`resources.burningCostPerUnit`, default `5`, before soul discounts); creative casts are free. It has zero upfront Ars glyph cost. Unsupported payload combinations are rejected through Core's shared validator.
+
+A Nether staff's three-fireball salvo is one native batch and pays one focus charge. Ordinary salvos retain separate native flight and hits. For special Ars carriers, the salvo follows one shared Ars trajectory; its native payloads resolve at that trajectory's hit, each continuing the remaining Ars effects. Repeated carriers pay once per triggered batch, including Burning, and stop on insufficient resources. This is an explicit trajectory adaptation rather than three independent native orbit paths.
 
 Examples: **Projectile → Ice Chunk**, **Touch → Entangling → Extend Time**, **Self → Frost Nova**, **Self → Soul Heal**. These are not projectile replacements: the Ars carrier reaches its hit first, then the effect runs. Native damage ownership stays with the original caster, independently of the selected target.
 

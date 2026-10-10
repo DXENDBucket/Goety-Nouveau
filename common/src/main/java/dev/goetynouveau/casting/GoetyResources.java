@@ -28,8 +28,14 @@ public final class GoetyResources {
         return quote(context, spell());
     }
     public static ResourceCharge quote(SpellContext context, ISpell spell) {
+        return quote(context, spell, java.util.List.of());
+    }
+    public static ResourceCharge quote(SpellContext context, ISpell spell,
+            java.util.List<com.hollingsworth.arsnouveau.api.spell.AbstractAugment> augments) {
         var caster = CastContext.of(context, null, null).caster();
         int cost = caster == null ? spell.defaultSoulCost() : spell.soulCost(caster, staff(caster));
+        long burning = augments.stream().filter(a -> a == dev.goetynouveau.glyph.AugmentBurning.INSTANCE).count();
+        cost = (int)Math.min(Integer.MAX_VALUE, (long)Math.max(0, cost) + burning * GoetyConfig.BURNING_COST.get());
         if (GoetyConfig.RESOURCE_SOURCE.get() == ResourceSource.ARS_MANA)
             return new ResourceCharge(new ArsManaAccount(context.getCaster()), Math.max(0, cost));
         var account = new SoulAccount(caster instanceof Player player ? player : null);

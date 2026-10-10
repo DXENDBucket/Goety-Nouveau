@@ -2,7 +2,7 @@
 
 ## 范围与边界
 
-这是独立附属，modid 为 `goety_nouveau`，依赖 Ars Nouveau、Goety 和 Ars Conflux；不依赖 Iron & Nouveau。`0.1.0-dev.6` 已接通灵魂箭、魔法箭两种弹射物替换，以及冰块、霜冻新星、缠绕、灵魂治疗、幽灵头骨、铁皮、寒冰护体、虚弱、闪电、上升气流十种效果魔符，不调整整合包流程或擅自添加生存解锁配方。
+这是独立附属，modid 为 `goety_nouveau`，依赖 Ars Nouveau、Goety 和 Ars Conflux；不依赖 Iron & Nouveau。`0.1.0-dev.7` 已有四种弹射物替换、十二种效果与燃烧增强，不调整整合包流程或擅自添加生存解锁配方。
 
 Core 负责施法上下文、Ars 载体、延续编排、触发计费与物理资源池预留。Goety 附属负责 Goety 法术参数、实体、装备条件、资源访问和特有召唤行为。以后加入其他附属时，通过 Core 共用载体能力，不做 Goety 与 Iron 的互相依赖。
 
@@ -53,7 +53,7 @@ source = "SOUL_ENERGY"
 
 ## 第一批接入候选
 
-灵魂箭、冰块、霜冻新星、缠绕、灵魂治疗、幽灵头骨已实现；火球、毒镖仍是候选。
+下表中的灵魂箭、冰块、霜冻新星、缠绕、灵魂治疗、幽灵头骨、火球、毒镖均已实现。
 
 | 原生聚晶 ID | 原生法术 | 首先验证的行为 |
 | --- | --- | --- |
@@ -104,7 +104,7 @@ Ars 整合实机测试使用 `1.21.1-万法归一`，基础环境由用户部署
 
 ## 2026-10-11：原生参数与专用增强研究
 
-本节是后续设计候选，不表示已有新魔符。此次没有修改运行时代码、构建或部署。
+本节记录研究时的候选；随后 `0.1.0-dev.7` 已落实火球、毒镖、冲击波、风垫与燃烧增强。延伸、吸收、噬魂和磁引仍未实现。
 
 已用 `javap` 核对固定的 NeoForge 与 Forge Goety JAR：两端 `SpellStat` 都有 potency、duration、range、radius、burning、velocity 六个参数。附魔定义和法术消费者另外核对了上述固定提交的源码。接受某个附魔不等于已完整实现它的行为；接入时仍以发行 JAR 和实际消费者为准。
 
@@ -114,7 +114,7 @@ Ars 整合实机测试使用 `1.21.1-万法归一`，基础环境由用户部署
 | duration | Ars 延长／缩短时效 | 使用原生单位，不统一宣称每次增加固定秒数 |
 | radius | Ars 扩散 | 调整效果半径；不是重新选取远处目标 |
 | velocity | Ars 加速／减速 | 保留各弹射物的原生速度、惯性和抛物线，再应用载体速度倍率 |
-| burning | 新增“燃烧”增强候选 | 直接增加原生 burning，含义由支持它的原生法术决定 |
+| burning | “燃烧”增强已实现 | 直接增加原生 burning，含义由支持它的原生法术决定 |
 | range | “延伸”增强候选，后续再做 | 仅用于法术自身的攻击长度、数量等；不能绕开 Ars 形态的选点／射程规则 |
 
 优先考虑“燃烧”。火球、凋灵头颅、幽灵头骨、尖牙等均消费这一参数，适用范围不只一个法术。它和 Ars 点燃效果有区别：后者是命中后另执行一个效果，前者改变 Goety 原生攻击本身。原生 Ignite 每单位增加点燃秒数，尖牙按每单位五秒处理，掘地还会用 burning 判定是否烧炼掉落物；因此不宜把它描述为统一的“附加五秒点燃”。建议初版每个增强增加一个原生参数单位，只对明确支持的 Goety 魔符开放。
@@ -138,6 +138,8 @@ range 与 radius 必须保持独立。例如尖牙的 range 同时决定直线�
 4. **Cushion**：创建原生风垫实体，使用 Ars 选点；支持时效和半径。保留实体原生生命周期和作用方式，不再根据施法者视线二次选点。
 
 优先顺序建议为这四种法术加“燃烧”增强。延伸、回魂、收取等在对应法术接入时再落实，不先批量注册没有实际消费者的增强。
+
+`0.1.0-dev.7` 已完成上述优先项。燃烧每个增加一个原生单位，初版支持火球和幽灵头骨；额外费用配置为 `resources.burningCostPerUnit`，默认 5，随实际触发结算。特殊 Ars 载体的法杖火球齐射作为一组共享轨迹的载荷处理，同一次命中会执行各火球载荷与各自 Ars 后续效果，只收费一次；普通载体仍是独立的原生三发飞行。此项是明确新增的轨迹规则，并非原生已有的环绕齐射。
 
 参考：[SpellStat](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/magic/SpellStat.java)、[附魔注册](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/enchantments/ModEnchantments.java)、[ABSORB 兼容约束](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/enchantments/AbsorbEnchantment.java)。
 

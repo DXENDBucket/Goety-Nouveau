@@ -24,5 +24,16 @@
   "goety_nouveau.glyph_desc.glyph_lightning": "Calls Goety's native lightning onto the selected entity or block. Nearby lightning rods redirect it unless a Storm staff is used. Amplify increases damage. Native lightning visuals and interactions are retained.",
   "goety_nouveau.glyph_name.glyph_updraft": "Updraft",
   "goety_nouveau.glyph_desc.glyph_updraft": "Creates Goety's native updraft blast at the selected entity or above the selected block, including damage, lift and particles. Wind staffs retain their area bonus. Amplify increases damage; AOE increases its area.",
-  "goety_nouveau.cast.unavailable": "The Goety spell could not be cast. Check your soul-energy container and spell conditions."
+  "goety_nouveau.cast.unavailable": "The Goety spell could not be cast. Check your soul-energy container and spell conditions.",
+  "goety_nouveau.glyph_name.glyph_fireball": "Fireball",
+  "goety_nouveau.glyph_desc.glyph_fireball": "Replace an Ars projectile with a native Goety fireball. Retains ignition, staff salvos and equipment-dependent Hell Bolt variants. Amplify increases potency; Burning increases the native burning parameter. Native impacts continue the remaining Ars effects.",
+  "goety_nouveau.glyph_name.glyph_poison_dart": "Poison Dart",
+  "goety_nouveau.glyph_desc.glyph_poison_dart": "Replace an Ars projectile with a native Goety poison quill. Ordinary shots retain gravity, underwater behavior, Wild staff piercing and robe-dependent venom. Amplify increases potency and Extend Time increases venom duration.",
+  "goety_nouveau.glyph_name.glyph_shockwave": "Shockwave",
+  "goety_nouveau.glyph_desc.glyph_shockwave": "Release a native Goety shockwave at the selected entity or position, preserving area damage, particles and sound. Amplify increases damage and AOE increases radius.",
+  "goety_nouveau.glyph_name.glyph_cushion": "Cushion",
+  "goety_nouveau.glyph_desc.glyph_cushion": "Create a native Goety cushion at the selected entity or above a selected block. AOE increases radius and Extend Time increases its native lifespan.",
+  "goety_nouveau.glyph_name.glyph_burning": "Burning",
+  "goety_nouveau.glyph_desc.glyph_burning": "Add one native burning unit to a supported Goety spell. Its effect depends on the spell. Applies to Fireball and Haunted Skull; the additional resource cost is paid at the actual trigger.",
+  "goety_nouveau.validation.burning": "Burning requires a Goety Fireball or Haunted Skull in the same spell phrase."
 }

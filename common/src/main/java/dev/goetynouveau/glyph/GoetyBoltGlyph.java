@@ -24,7 +24,7 @@ public final class GoetyBoltGlyph extends AbstractAugment implements ProjectileF
         return GoetyBoltCasting.replace(focus, carrier, profile);
     }
     @Override public ResourceCharge initialCharge(SpellContext context, List<AbstractAugment> augments) {
-        return GoetyResources.quote(context, focus.spell());
+        return GoetyResources.quote(context, focus.spell(), augments);
     }
     @Override public int getDefaultManaCost() { return 0; }
     @Override public int getCastingCost() { return 0; }
