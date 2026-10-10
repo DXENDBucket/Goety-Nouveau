@@ -14,6 +14,7 @@ public abstract class GoetyBoltStateMixin implements ManagedBolt {
     @Unique private static final EntityDataAccessor<Boolean> goetyNouveau$DRIVEN =
             SynchedEntityData.defineId(SpellHurtingProjectile.class, EntityDataSerializers.BOOLEAN);
     @Unique private boolean goetyNouveau$impacting;
+    @Unique private boolean goetyNouveau$handlingHit;
     @Unique private static final EntityDataAccessor<Boolean> goetyNouveau$ARS_DRIVEN =
             SynchedEntityData.defineId(SpellHurtingProjectile.class, EntityDataSerializers.BOOLEAN);
     @Unique private static final EntityDataAccessor<Float> goetyNouveau$SPEED =
@@ -42,4 +43,6 @@ public abstract class GoetyBoltStateMixin implements ManagedBolt {
     public void goetyNouveau$trajectory(com.hollingsworth.arsnouveau.common.entity.EntityProjectileSpell carrier) { goetyNouveau$trajectory = carrier; }
     public boolean goetyNouveau$impacting() { return goetyNouveau$impacting; }
     public void goetyNouveau$impacting(boolean value) { goetyNouveau$impacting = value; }
+    public boolean goetyNouveau$handlingHit() { return goetyNouveau$handlingHit; }
+    public void goetyNouveau$handlingHit(boolean value) { goetyNouveau$handlingHit = value; }
 }

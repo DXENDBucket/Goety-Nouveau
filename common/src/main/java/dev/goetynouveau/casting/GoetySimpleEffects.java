@@ -141,7 +141,8 @@ public final class GoetySimpleEffects {
         return true;
     }
     public static boolean cushion(ServerLevel world, CastContext frame, Spell spell, int duration, int radius) {
-        if (duration < 0 || radius <= 0) return false;
+        // Radius is a bonus: native Cushion already has a three-block base radius.
+        if (duration < 0 || radius < 0) return false;
         var point = center(frame);
         if (target(frame) == null && frame.target() instanceof BlockHitResult block)
             point = Vec3.atBottomCenterOf(block.getBlockPos()).add(0, 1, 0);

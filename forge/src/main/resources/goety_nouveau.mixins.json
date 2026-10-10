@@ -19,7 +19,22 @@
     "QuillPiercingAccess",
     "ManagedHurtingMovementMixin",
     "GoetyWitherSkullStateMixin",
-    "ManagedWitherSkullHitMixin"
+    "ManagedWitherSkullHitMixin",
+    "GoetyIceSpikeStateMixin",
+    "GoetySwordProjectileStateMixin",
+    "GoetySpellTargetProjectileStateMixin",
+    "GoetySlashProjectileStateMixin",
+    "GoetyLavaballStateMixin",
+    "GoetyHellBlastStateMixin",
+    "ManagedAdditionalHitMixin",
+    "ManagedThrowableMovementMixin",
+    "ManagedSlashMixin",
+    "IceSpearPiercingAccess",
+    "NativeVoidBombAccess",
+    "NativeBubbleAccess",
+    "ManagedCustomTravelMixin",
+    "ManagedBubbleLifetimeMixin",
+    "ManagedNativeHomingMixin"
   ],
   "injectors": {
     "defaultRequire": 1

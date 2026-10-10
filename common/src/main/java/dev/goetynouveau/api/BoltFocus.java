@@ -9,9 +9,26 @@ public enum BoltFocus {
     MAGIC_BOLT("magic_bolt", "Magic Bolt"),
     FIREBALL("fireball", "Fireball"),
     POISON_DART("poison_dart", "Poison Dart"),
-    WITHER_SKULL("wither_skull", "Wither Skull");
+    WITHER_SKULL("wither_skull", "Wither Skull"),
+    ICE_SPIKE("ice_spike", "ice_spike_focus", "Ice Spike"),
+    LAVABALL("lavaball", "lavaball_focus", "Lava Bomb"),
+    STEAM("steam", "steaming_focus", "Steam Missile"),
+    BOUNCY_BUBBLE("bouncy_bubble", "bouncy_bubble_focus", "Bouncy Bubble"),
+    ELECTRO_ORB("electro_orb", "electrocute_focus", "Electro Orb"),
+    SURGING("surging", "surging_focus", "Surging Orb"),
+    SMACK_STONE("smack_stone", "smack_stone_focus", "Smack Stone"),
+    BLOSSOM("blossom", "blossoming_focus", "Blossom Ball"),
+    MAGMA("magma", "magma_bomb_focus", "Magma Bomb"),
+    VOID_BOMB("void_bomb", "void_flash_focus", "Void Bomb"),
+    SWORD("sword", "sword_focus", "Magic Sword"),
+    RAZOR_WIND("razor_wind", "razor_wind_focus", "Razor Wind");
 
-    public final String glyph, name;
-    BoltFocus(String glyph, String name) { this.glyph = glyph; this.name = name; }
-    public ISpell spell() { return FocusSpells.read(CarrierRegistry.id("goety:" + glyph + "_focus")).orElseThrow(); }
+    public final String glyph, focus, name;
+    BoltFocus(String glyph, String name) { this(glyph, glyph + "_focus", name); }
+    BoltFocus(String glyph, String focus, String name) { this.glyph = glyph; this.focus = focus; this.name = name; }
+    public boolean additional() { return switch (this) {
+        case SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL -> false;
+        default -> true;
+    }; }
+    public ISpell spell() { return FocusSpells.read(CarrierRegistry.id("goety:" + focus)).orElseThrow(); }
 }

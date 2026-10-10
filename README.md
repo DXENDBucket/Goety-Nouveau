@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.12`). Five projectile replacements, seventeen target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.13`). Seventeen projectile replacements, seventeen target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -35,7 +35,7 @@ These seventeen glyphs are **effects**, placed after an Ars cast method. They us
 | Lightning | Native lightning at the selected entity/block, including native damage, visuals and interactions. Nearby rods redirect it unless using the native Storm staff. | Amplify / Dampen |
 | Updraft | Native delayed damage and upward launch at the selected entity or above the selected block. Wind staff retains its area bonus. | Amplify / Dampen, AOE |
 | Shockwave | Native area damage, ring/sphere particles and sound centered on the selected entity/location. | Amplify / Dampen, AOE |
-| Cushion | Creates a native cushion at the selected entity or above the selected block, retaining native interactions and expiry. | AOE, Extend Time / Duration Down |
+| Cushion | Creates a native cushion at the selected entity or above the selected block, retaining native interactions and expiry. Unaugmented casts already have a three-block base radius; particles and fall protection begin after the native warmup. | AOE, Extend Time / Duration Down |
 | Fangs | Native delayed fangs start at the selected point, along the incoming projectile direction or caster facing. Sneaking switches to rings; Ominous staff adds side rows/outer rings. Actual native damage, animation, lifetime, lifesteal and soul gains remain native. | Amplify / Dampen, Burning, Extension, Life Absorb, Soul Eater |
 | Feast | Native fangs attack non-allied creatures in the selected area, with one charge for the whole batch. Ominous staff adds five surrounding fangs per enemy. | Amplify / Dampen, AOE, Burning, Life Absorb |
 | Bulwark | Native shields protect yourself or the selected ally. Native damage blocking, expiry and rendering remain in Goety. Existing shields cannot be refilled. Each duration modifier scales lifetime by one base lifetime; native gear duration keeps its original fourfold cap. | Amplify / Dampen, Extend Time / Duration Down |
@@ -59,13 +59,36 @@ Feast uses the Ars-selected center with the native search volume and ally rules.
 
 Fangs' geometry is adapted explicitly: its first central fang occupies the Ars-selected point; subsequent fangs follow the incoming direction, with grounded surface placement near each point. Sneaking rings are centered on that point. This does not ray-trace from the caster a second time. One successful row/ring batch pays once; no suitable ground or insufficient resources produces no paid spawn. Ignite only charges if ignition changes or a native block interaction succeeds.
 
-A Nether staff's three-fireball or three-skull salvo is one native batch and pays one focus charge. Ordinary salvos retain separate native flight and hits. For special Ars carriers, the salvo follows one shared Ars trajectory; its native payloads resolve at that trajectory's hit, each continuing the remaining Ars effects. Repeated carriers pay once per triggered batch, including Burning, and stop on insufficient resources. This is an explicit trajectory adaptation rather than three independent native orbit paths.
+A staff's native three-shot salvo is one native batch and pays one focus charge. Ordinary salvos retain separate native flight and hits. For special Ars carriers, the salvo follows one shared Ars trajectory; its native payloads resolve at that trajectory's hit, each continuing the remaining Ars effects. Repeated carriers pay once per triggered batch, including Burning, and stop on insufficient resources. This is an explicit trajectory adaptation rather than three independent native orbit paths.
 
 Examples: **Projectile → Ice Chunk**, **Touch → Entangling → Extend Time**, **Self → Frost Nova**, **Self → Soul Heal**. These are not projectile replacements: the Ars carrier reaches its hit first, then the effect runs. Native damage ownership stays with the original caster, independently of the selected target.
 
 Amplify/Dampen add/subtract Goety potency; Extend Time/Duration Down add/subtract its duration parameter; AOE adds to its radius. Supported native focus potency, duration and radius enchantments and staff/robe bonuses are preserved. Each effect quotes its own focus cost, charges only on a successful trigger, and can trigger again until the selected resource runs out. Their glyph cost is zero; the rest of the Ars spell follows Core's configured billing behavior.
 
 Within each original Ars category, ordinary Ars/addon glyphs come first, followed by contiguous Goety and Iron provider groups. Within the Goety group, its ordinary augments precede its projectile replacements, before the next provider group. This uses Conflux presentation registration; it does not reclassify effects or change glyph tiers.
+
+## Additional projectile replacements
+
+These twelve glyphs are replacement augments, grouped with the other Goety projectiles. Ordinary launches keep the real native entities and their own flight; special Ars carriers keep the Core trajectory while retaining native rendering, trails and full impacts.
+
+| Glyph | Native behavior retained | Adaptation |
+| --- | --- | --- |
+| Ice Spike | Gravity, freezing, block attachment; Frost staff selects a piercing Ice Spear. | Amplify / Dampen, Ars speed. |
+| Lava Bomb | Explosion, fire and native griefing; Nether staff upgrades the three-shot salvo; Unholy equipment selects Hell Blast. | Amplify / Dampen, AOE, Burning, Ars speed. |
+| Steam Missile | Native accelerating steam missile, sounds, trails and full hit. | Amplify / Dampen, Ars speed; one missile per Ars trigger, rather than Goety's sustained barrage. |
+| Bouncy Bubble | Native gravity, bouncing, explosion and size; Abyss staff retains its salvo. | Amplify / Dampen, AOE, Ars speed. |
+| Electro Orb | Native targeting, homing, electrical impact and Storm-staff burst. | Amplify / Dampen, Ars speed. Initial target selection follows the Ars launch ray. |
+| Surging Orb | Native homing, electrical impact, Storm-staff chaining and Nether-staff color. | Amplify / Dampen, Ars speed. Special carriers keep their Ars direction. |
+| Smack Stone | Native gravity, damage, burning and Geomancy-staff salvo. | Amplify / Dampen, Burning, Ars speed. |
+| Blossom Ball | Native poison, persistent thorns, duration and Wild-staff bonuses. | Amplify / Dampen, AOE, duration, Ars speed. |
+| Magma Bomb | Native explosion, temporary magma-cube servants and Nether-staff bonuses. | Amplify / Dampen, AOE, duration, Ars speed. |
+| Void Bomb | Native impact growth, magic fire and all eight secondary shocks; Void staff retains its salvo. | Amplify / Dampen, Ars speed. A settling ordinary bomb continues Ars effects once. |
+| Magic Sword | Copies the held sword, native weapon damage and enchantments; successful launch costs ten weapon durability. | Ars speed. Requires a sword or native shootable weapon; repeat carriers cost durability per successful activation. |
+| Razor Wind | Native growing hit volume, one hit per victim, particles; Void staff selects Void Slash. | Amplify / Dampen, AOE, Ars speed; native two-second lifespan. |
+
+An ordinary native staff salvo pays once. A repeat carrier pays once for each successful triggered batch, then continues the remaining Ars effects for each native payload. Failed or unaffordable triggers do not apply impacts. Native aftermath entities keep Goety's own lifetime and are not independently rebilled each tick.
+
+Cyclone, Grapple and rain/cloud/barrage spells still need their own lifecycle or effect adapters. See the [projectile audit](docs/projectile-spell-audit.md) for the remaining scope and native exceptions.
 
 ## Integration
 

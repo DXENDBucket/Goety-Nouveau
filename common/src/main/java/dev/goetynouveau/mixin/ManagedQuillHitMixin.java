@@ -10,12 +10,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** Quill inherits Projectile.onHit: wrap its full native virtual hit without replacing arrow physics. */
+/** Managed arrows inherit Projectile.onHit: wrap its full native virtual hit without replacing arrow physics. */
 @Mixin(Projectile.class)
 public abstract class ManagedQuillHitMixin {
     @Inject(method = "onHit", at = @At("HEAD"), cancellable = true)
     private void goetyNouveau$impact(HitResult hit, CallbackInfo ci) {
-        if (!((Object)this instanceof PoisonQuill) || !((Object)this instanceof ManagedBolt state)
+        if (!((Object)this instanceof net.minecraft.world.entity.projectile.AbstractArrow) || !((Object)this instanceof ManagedBolt state)
                 || !state.goetyNouveau$managed() || state.goetyNouveau$handlingHit()) return;
         var projectile = (Projectile)(Object)this;
         if (projectile.level().isClientSide) return;

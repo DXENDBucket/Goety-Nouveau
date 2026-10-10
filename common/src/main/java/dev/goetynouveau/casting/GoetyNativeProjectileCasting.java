@@ -64,7 +64,10 @@ public final class GoetyNativeProjectileCasting {
         float multiplier = Math.max(0.1F, 0.75F + ars.getAccMultiplier() / 2) / 0.75F;
         var direction = TriggerGeometry.direction(carrier);
         var payloads = new ArrayList<Projectile>();
-        if (focus == BoltFocus.FIREBALL) {
+        if (focus.additional()) {
+            payloads.addAll(GoetyProjectileFactory.create(focus, world, frame, carrier.position(), direction, ars, multiplier));
+            if (payloads.isEmpty()) return true;
+        } else if (focus == BoltFocus.FIREBALL) {
             boolean staff = spell.rightStaff(GoetyResources.staff(caster));
             for (var launch : NativeProjectileHooks.fireball(caster, carrier.position(), direction, staff)) {
                 var p = launch.origin(); var d = launch.direction();
@@ -107,14 +110,21 @@ public final class GoetyNativeProjectileCasting {
             quill.setExtraDamage(potency); quill.setDuration(duration);
             quill.setAqua(caster.isUnderWater()); payloads.add(quill);
         }
-        payloads.forEach(p -> p.setOwner(frame.damageOwner() != null ? frame.damageOwner() : caster));
+        payloads.forEach(p -> {
+            var owner = frame.damageOwner() != null ? frame.damageOwner() : caster;
+            p.setOwner(owner);
+            // This native family overloads setOwner(LivingEntity) and resolves its own synced UUID.
+            // Updating vanilla Projectile.owner alone would leave native damage/ally checks on the old caster.
+            if (p instanceof SpellTargetProjectile targeted && (Entity)owner instanceof net.minecraft.world.entity.LivingEntity living) targeted.setOwner(living);
+        });
         var quote = GoetyResources.quote(resolver.spellContext, spell, augments);
         var selected = frame.withAccount(quote.account()).withIncomingDirection(direction);
         CastContexts.bind(resolver.spellContext, selected);
         var continuation = resolver.clone();
         var parameters = new Batch(focus, payloads, quote, direction);
         var driver = new NativeFlight(parameters, carrier, profile.arsDriven(), multiplier);
-        int lifetime = focus == BoltFocus.POISON_DART ? 100 : 200;
+        int lifetime = focus == BoltFocus.POISON_DART || focus == BoltFocus.BOUNCY_BUBBLE ? 100
+                : focus == BoltFocus.RAZOR_WIND ? 41 : 200;
         var session = new ExecutionSession<>(world, selected, parameters,
                 Math.max(1, Math.min(lifetime, carrier.getExpirationTime() + 1)), driver,
                 hit -> {
@@ -122,7 +132,7 @@ public final class GoetyNativeProjectileCasting {
                     CastContexts.bind(child.spellContext, CastContexts.current().withAccount(inheritedAccount));
                     child.onResolveEffect(world, hit);
                 }, () -> GlyphCatalog.projectile(focus).isEnabled()
-                        && spell.conditionsMet(world, caster), ExecutionScope.DIRECT)
+                        && (focus == BoltFocus.SWORD || spell.conditionsMet(world, caster)), ExecutionScope.DIRECT)
                 .billing(action -> GoetyResources.activation(quote).trigger(action), profile.repeated());
         if (!ExecutionSessions.start(session) && caster instanceof Player player)
             player.displayClientMessage(Component.translatable("goety_nouveau.cast.unavailable"), true);
@@ -135,15 +145,19 @@ public final class GoetyNativeProjectileCasting {
         skull.setExtraDamage(potency); skull.setFiery(burning);
         return skull;
     }
+    public static boolean manages(Projectile projectile) {
+        return projectile instanceof ManagedBolt state && state.goetyNouveau$session() != null
+                && state.goetyNouveau$session().parameters() instanceof Batch;
+    }
     /** Called after the vanilla/native projectile impact cancellation hook. */
     public static void nativeImpact(Projectile projectile, HitResult hit) {
         if (projectile.level().isClientSide || projectile.isRemoved()) return;
         var state = (ManagedBolt)projectile;
         var session = state.goetyNouveau$session();
         if (session == null || !(session.parameters() instanceof Batch batch)) return;
-        if (!valid(projectile, hit)) return;
+        if (!valid(projectile, hit) || batch.settled.contains(projectile)) return;
         batch.direction = projectile.getDeltaMovement().normalize();
-        if (!session.activate(() -> { fullImpact(session, projectile, hit, false); return true; }))
+        if (!session.activate(() -> fullImpact(session, projectile, hit, false)))
             session.finish(ExecutionSession.EndReason.DENIED);
         else if (batch.projectiles.stream().allMatch(Entity::isRemoved))
             session.finish(ExecutionSession.EndReason.COMPLETED);
@@ -152,29 +166,45 @@ public final class GoetyNativeProjectileCasting {
         return hit.getType() != HitResult.Type.MISS && (!(hit instanceof EntityHitResult entity)
                 || ((ProjectileHitAccess)projectile).goetyNouveau$canHit(entity.getEntity()));
     }
-    private static void fullImpact(ExecutionSession<?> session, Projectile projectile, HitResult hit, boolean repeated) {
+    private static boolean fullImpact(ExecutionSession<?> session, Projectile projectile, HitResult hit, boolean repeated) {
         var state = (ManagedBolt)projectile;
         var velocity = projectile.getDeltaMovement();
+        var batch = (Batch)session.parameters();
+        if (repeated && batch.focus == BoltFocus.SWORD && GoetyProjectileFactory.sword(session.caster()).isEmpty()) return false;
         state.goetyNouveau$handlingHit(true); state.goetyNouveau$impacting(repeated);
         try {
             if (repeated) {
                 projectile.setPos(hit.getLocation());
-                if (projectile instanceof PoisonQuill) ((QuillPiercingAccess)projectile).goetyNouveau$resetPiercing();
+                resetPiercing(projectile);
+                if (projectile instanceof VoidShockBomb) ((dev.goetynouveau.mixin.NativeVoidBombAccess)projectile).goetyNouveau$growTick(0);
             }
-            ((ProjectileHitAccess)projectile).goetyNouveau$hit(hit);
+            if (projectile instanceof SlashProjectile slash && hit instanceof EntityHitResult entity) slash.damageEntity(entity.getEntity());
+            else ((ProjectileHitAccess)projectile).goetyNouveau$hit(hit);
+            if (!repeated && projectile instanceof VoidShockBomb) batch.settled.add(projectile);
+            if (repeated && projectile instanceof VoidShockBomb) ((dev.goetynouveau.mixin.NativeVoidBombAccess)projectile).goetyNouveau$growTick(0);
+            if (repeated && projectile instanceof BouncyBubble bubble && ((dev.goetynouveau.mixin.NativeBubbleAccess)bubble).goetyNouveau$exploding()) {
+                ((dev.goetynouveau.mixin.NativeBubbleAccess)bubble).goetyNouveau$exploding(false); bubble.setBounceTimes(0);
+            }
             // Arrow block hits normally latch into the ground. Ars special carriers own that decision.
-            if (repeated && projectile instanceof PoisonQuill) {
+            if (repeated && projectile instanceof net.minecraft.world.entity.projectile.AbstractArrow) {
                 ((ArrowGroundAccess)projectile).goetyNouveau$inGround(false);
                 projectile.setDeltaMovement(velocity);
             }
         } finally { state.goetyNouveau$impacting(false); state.goetyNouveau$handlingHit(false); }
         session.impact(hit);
+        if (repeated && batch.focus == BoltFocus.SWORD) GoetyProjectileFactory.wearSword(session.caster());
+        return true;
+    }
+    private static void resetPiercing(Projectile projectile) {
+        if (projectile instanceof PoisonQuill) ((QuillPiercingAccess)projectile).goetyNouveau$resetPiercing();
+        if (projectile instanceof IceSpear) ((dev.goetynouveau.mixin.IceSpearPiercingAccess)projectile).goetyNouveau$resetPiercing();
     }
     private static final class Batch {
         final BoltFocus focus;
         final List<Projectile> projectiles;
         final ResourceCharge charge;
         Vec3 direction;
+        final java.util.Set<Projectile> settled = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
         Batch(BoltFocus focus, List<Projectile> projectiles, ResourceCharge charge, Vec3 direction) {
             this.focus = focus; this.projectiles = List.copyOf(projectiles); this.charge = charge; this.direction = direction;
         }
@@ -197,19 +227,20 @@ public final class GoetyNativeProjectileCasting {
                 var state = (ManagedBolt)p;
                 state.goetyNouveau$managed(true); state.goetyNouveau$arsDriven(motion != null);
                 state.goetyNouveau$speedMultiplier(speed); state.goetyNouveau$session(session);
+                if (p instanceof SpellHurtingProjectile spell) state.goetyNouveau$nativeSpeed(spell.boltSpeed);
                 state.goetyNouveau$trajectory(motion != null ? carrier : null);
             }
             boolean added = false;
             if (motion != null) {
                 added = motion.start(session.world(), () -> {}, hit -> {
                     // The staff's native salvo is one paid activation of this Ars trajectory.
-                    if (batch.projectiles.get(0) instanceof PoisonQuill)
-                        ((QuillPiercingAccess)batch.projectiles.get(0)).goetyNouveau$resetPiercing();
+                    resetPiercing(batch.projectiles.get(0));
                     if (!valid(batch.projectiles.get(0), hit)) return;
                     batch.direction = motion.incomingDirection();
                     if (!session.activate(() -> {
-                        for (var p : batch.projectiles) if (!p.isRemoved() && valid(p, hit)) fullImpact(session, p, hit, true);
-                        return true;
+                        boolean success = false;
+                        for (var p : batch.projectiles) if (!p.isRemoved() && valid(p, hit)) success |= fullImpact(session, p, hit, true);
+                        return success;
                     })) session.finish(ExecutionSession.EndReason.DENIED);
                 });
                 if (added) for (int i = 1; i < batch.projectiles.size(); ++i) {
@@ -221,8 +252,10 @@ public final class GoetyNativeProjectileCasting {
                 carrier.discard();
             }
             if (added) {
+                if (batch.focus == BoltFocus.SWORD && motion == null) GoetyProjectileFactory.wearSword(session.caster());
                 var spell = (Spell)batch.focus.spell();
-                if (batch.focus == BoltFocus.POISON_DART)
+                if (batch.focus.additional()) GoetyProjectileFactory.sound(batch.focus, session.world(), session.caster());
+                else if (batch.focus == BoltFocus.POISON_DART)
                     spell.playSound(session.world(), session.caster(), ModSounds.POISON_QUILL_VINE_SHOOT.get(), 1, spell.projPitch(session.world().random));
                 else if (batch.focus == BoltFocus.WITHER_SKULL)
                     spell.playSound(session.world(), session.caster(), SoundEvents.WITHER_SHOOT, 2,

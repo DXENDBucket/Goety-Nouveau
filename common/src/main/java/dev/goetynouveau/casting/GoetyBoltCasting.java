@@ -42,7 +42,7 @@ public final class GoetyBoltCasting {
         var spell = focus.spell();
         var augments = resolver.spell.getAugments(0, caster);
         if (!dev.goetynouveau.glyph.GoetyAugmentValidation.validBolt(focus, augments)) return true;
-        if (focus == BoltFocus.FIREBALL || focus == BoltFocus.POISON_DART || focus == BoltFocus.WITHER_SKULL)
+        if (focus.additional() || focus == BoltFocus.FIREBALL || focus == BoltFocus.POISON_DART || focus == BoltFocus.WITHER_SKULL)
             return GoetyNativeProjectileCasting.replace(focus, carrier, profile);
         int potency = spell.defaultStats().getPotency();
         potency += augments.stream().filter(a -> a == AugmentAmplify.INSTANCE).count();
@@ -110,6 +110,7 @@ public final class GoetyBoltCasting {
     /** Called by the native collision loop, after the loader's original projectile impact event. */
     public static void nativeImpact(SpellHurtingProjectile bolt, HitResult hit) {
         var session = ((ManagedBolt)bolt).goetyNouveau$session();
+        if (GoetyNativeProjectileCasting.manages(bolt)) { GoetyNativeProjectileCasting.nativeImpact(bolt, hit); return; }
         if (session != null) impact(session, bolt, hit, false);
     }
     private static void impact(ExecutionSession<?> session, SpellHurtingProjectile bolt, HitResult hit, boolean deferRemoval) {

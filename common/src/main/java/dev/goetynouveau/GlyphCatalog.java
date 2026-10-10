@@ -35,9 +35,21 @@ public final class GlyphCatalog {
     public static final GoetyEffectGlyph FEAST = new GoetyEffectGlyph(EffectFocus.FEAST);
     public static final GoetyEffectGlyph BULWARK = new GoetyEffectGlyph(EffectFocus.BULWARK);
     public static final GoetyEffectGlyph DISCHARGE = new GoetyEffectGlyph(EffectFocus.DISCHARGE);
+    public static final GoetyBoltGlyph ICE_SPIKE = new GoetyBoltGlyph(BoltFocus.ICE_SPIKE);
+    public static final GoetyBoltGlyph LAVABALL = new GoetyBoltGlyph(BoltFocus.LAVABALL);
+    public static final GoetyBoltGlyph STEAM = new GoetyBoltGlyph(BoltFocus.STEAM);
+    public static final GoetyBoltGlyph BOUNCY_BUBBLE = new GoetyBoltGlyph(BoltFocus.BOUNCY_BUBBLE);
+    public static final GoetyBoltGlyph ELECTRO_ORB = new GoetyBoltGlyph(BoltFocus.ELECTRO_ORB);
+    public static final GoetyBoltGlyph SURGING = new GoetyBoltGlyph(BoltFocus.SURGING);
+    public static final GoetyBoltGlyph SMACK_STONE = new GoetyBoltGlyph(BoltFocus.SMACK_STONE);
+    public static final GoetyBoltGlyph BLOSSOM = new GoetyBoltGlyph(BoltFocus.BLOSSOM);
+    public static final GoetyBoltGlyph MAGMA = new GoetyBoltGlyph(BoltFocus.MAGMA);
+    public static final GoetyBoltGlyph VOID_BOMB = new GoetyBoltGlyph(BoltFocus.VOID_BOMB);
+    public static final GoetyBoltGlyph SWORD = new GoetyBoltGlyph(BoltFocus.SWORD);
+    public static final GoetyBoltGlyph RAZOR_WIND = new GoetyBoltGlyph(BoltFocus.RAZOR_WIND);
     public static final List<AbstractSpellPart> ALL = List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
-            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
+            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
             dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER);
     private GlyphCatalog() {}
@@ -56,6 +68,18 @@ public final class GlyphCatalog {
             case FIREBALL -> FIREBALL;
             case POISON_DART -> POISON_DART;
             case WITHER_SKULL -> WITHER_SKULL;
+            case ICE_SPIKE -> ICE_SPIKE;
+            case LAVABALL -> LAVABALL;
+            case STEAM -> STEAM;
+            case BOUNCY_BUBBLE -> BOUNCY_BUBBLE;
+            case ELECTRO_ORB -> ELECTRO_ORB;
+            case SURGING -> SURGING;
+            case SMACK_STONE -> SMACK_STONE;
+            case BLOSSOM -> BLOSSOM;
+            case MAGMA -> MAGMA;
+            case VOID_BOMB -> VOID_BOMB;
+            case SWORD -> SWORD;
+            case RAZOR_WIND -> RAZOR_WIND;
         };
     }
     public static void configureCarriers() {
