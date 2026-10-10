@@ -19,6 +19,8 @@ public final class SoulBoltGameTests {
     @GameTest(template="empty", timeoutTicks=40)
     public static void nativeImpactAndContinuation(GameTestHelper h) { SoulBoltCases.nativeImpactAndContinuation(h, player(h)); }
     @GameTest(template="empty", timeoutTicks=40)
+    public static void nativeLaunchMotionAndRotation(GameTestHelper h) { SoulBoltCases.nativeLaunchMotionAndRotation(h, player(h)); }
+    @GameTest(template="empty", timeoutTicks=40)
     public static void storageBudgetAndCreative(GameTestHelper h) { SoulBoltCases.storageBudgetAndCreative(h, player(h)); }
     @GameTest(template="empty", timeoutTicks=40)
     public static void arsManaAlternativeAndFailedSpawn(GameTestHelper h) {

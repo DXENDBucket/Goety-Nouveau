@@ -3,6 +3,7 @@ package dev.goetynouveau.casting;
 import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.entities.projectiles.*;
 import com.Polarice3.Goety.common.items.ModItems;
+import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.SoundUtil;
 import com.Polarice3.Goety.utils.WandUtil;
@@ -15,19 +16,22 @@ import dev.arsconflux.api.glyph.ArsSpellAccess;
 import dev.arsconflux.api.projectile.*;
 import dev.arsconflux.api.resource.ResourceCharge;
 import dev.goetynouveau.mixin.ProjectileHitAccess;
+import dev.goetynouveau.platform.NativeBoltHooks;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.sounds.SoundEvents;
 
 public final class SoulBoltCasting {
     private SoulBoltCasting() {}
     public static boolean replace(EntityProjectileSpell carrier, CarrierProfile profile) {
+        if (!(carrier.level() instanceof ServerLevel world)) return false;
         var resolver = ArsSpellAccess.resolver(carrier);
         var context = CastContext.of(resolver.spellContext, null, null);
-        if (!(carrier.level() instanceof ServerLevel world)) return true;
         var caster = context.caster();
         if (caster == null) return true;
         var spell = GoetyResources.spell();
@@ -36,14 +40,23 @@ public final class SoulBoltCasting {
         potency += augments.stream().filter(a -> a == AugmentAmplify.INSTANCE).count();
         potency -= augments.stream().filter(a -> a == AugmentDampen.INSTANCE).count();
         if (WandUtil.enchantedFocus(caster)) potency += WandUtil.getPotencyLevel(caster);
-        var projectile = create(world, caster);
+        var direction = TriggerGeometry.direction(carrier);
+        var origin = profile.arsDriven() ? carrier.position()
+                : carrier.position().add(direction.x / 2, -0.1, direction.z / 2);
+        var projectile = create(world, caster, origin, direction);
         projectile.setExtraDamage(Math.max(0, potency));
+        float velocity = spell.defaultStats().getVelocity();
+        if (WandUtil.enchantedFocus(caster)) velocity += NativeBoltHooks.velocityLevel(caster);
+        projectile.setBoltSpeed((int)velocity);
         projectile.setOwner(context.damageOwner());
         var charge = GoetyResources.quote(resolver.spellContext);
         context = context.withAccount(charge.account()).withIncomingDirection(carrier.getDeltaMovement());
         CastContexts.bind(resolver.spellContext, context);
         var continuation = resolver.clone();
-        var driver = new BoltExecution(projectile, carrier);
+        // Read Ars' acceleration statistic, not the jittered launch-vector length. Native speed
+        // must be exactly unchanged with no speed modifiers, even when Ars adds shot inaccuracy.
+        float speedMultiplier = Math.max(0.1F, 0.75F + resolver.getCastStats().getAccMultiplier() / 2) / 0.75F;
+        var driver = new BoltExecution(projectile, carrier, profile.arsDriven(), speedMultiplier);
         var session = new ExecutionSession<>(world, context, charge, Math.max(1, Math.min(200, carrier.getExpirationTime() + 1)), driver,
                 hit -> {
                     var child = continuation.clone();
@@ -56,56 +69,82 @@ public final class SoulBoltCasting {
             player.displayClientMessage(Component.translatable("goety_nouveau.cast.unavailable"), true);
         return true;
     }
-    /** Match SoulBoltSpell's native staff variants; geometry always comes from the Ars carrier. */
-    private static SpellHurtingProjectile create(ServerLevel world, LivingEntity caster) {
+    /** Retain native directional acceleration and initially unset model rotation. Ars selects aim/origin. */
+    private static SpellHurtingProjectile create(ServerLevel world, LivingEntity caster, Vec3 p, Vec3 direction) {
         var spell = GoetyResources.spell();
         var staff = GoetyResources.staff(caster);
-        var p = caster.getEyePosition();
         SpellHurtingProjectile bolt;
-        if (spell.typeStaff(staff, SpellType.WILD)) bolt = new PoisonBolt(p.x, p.y, p.z, 0, 0, 0, world);
+        if (spell.typeStaff(staff, SpellType.WILD)) bolt = new PoisonBolt(p.x, p.y, p.z, direction.x, direction.y, direction.z, world);
         else if (spell.typeStaff(staff, SpellType.NETHER) && CuriosFinder.hasNetherSet(caster))
-            bolt = new WitherBolt(p.x, p.y, p.z, 0, 0, 0, world);
-        else if (staff.is(ModItems.NAMELESS_STAFF.get())) bolt = new NecroBolt(p.x, p.y, p.z, 0, 0, 0, world);
+            bolt = new WitherBolt(p.x, p.y, p.z, direction.x, direction.y, direction.z, world);
+        else if (staff.is(ModItems.NAMELESS_STAFF.get())) bolt = new NecroBolt(p.x, p.y, p.z, direction.x, direction.y, direction.z, world);
         else {
-            var soul = new SoulBolt(p.x, p.y, p.z, 0, 0, 0, world);
+            var soul = new SoulBolt(p.x, p.y, p.z, direction.x, direction.y, direction.z, world);
             soul.setNecro(spell.typeStaff(staff, SpellType.NECROMANCY));
             bolt = soul;
         }
         return bolt;
     }
+    /** Called by the native collision loop, after the loader's original projectile impact event. */
+    public static void nativeImpact(SpellHurtingProjectile bolt, HitResult hit) {
+        var session = ((ManagedBolt)bolt).goetyNouveau$session();
+        if (session != null) impact(session, bolt, hit, false);
+    }
+    private static void impact(ExecutionSession<?> session, SpellHurtingProjectile bolt, HitResult hit, boolean deferRemoval) {
+        if (hit.getType() == HitResult.Type.MISS) return;
+        if (hit instanceof EntityHitResult entity && !((ProjectileHitAccess)bolt).goetyNouveau$canHit(entity.getEntity())) return;
+        if (!session.activate(() -> {
+            var state = (ManagedBolt)bolt;
+            // The native collision loop keeps its own impact position. Special carriers supply theirs.
+            if (deferRemoval) bolt.setPos(hit.getLocation());
+            state.goetyNouveau$impacting(deferRemoval);
+            try { ((ProjectileHitAccess)bolt).goetyNouveau$hit(hit); }
+            finally { state.goetyNouveau$impacting(false); }
+            session.impact(hit);
+            return true;
+        })) session.finish(ExecutionSession.EndReason.DENIED);
+        else if (!deferRemoval && bolt.isRemoved()) session.finish(ExecutionSession.EndReason.COMPLETED);
+    }
     private static final class BoltExecution implements ExecutionDriver<ResourceCharge> {
         private final SpellHurtingProjectile bolt;
         private final ArsTrajectory motion;
-        private BoltExecution(SpellHurtingProjectile bolt, EntityProjectileSpell carrier) {
+        private final EntityProjectileSpell carrier;
+        private final float speedMultiplier;
+        private BoltExecution(SpellHurtingProjectile bolt, EntityProjectileSpell carrier, boolean arsDriven, float speedMultiplier) {
             this.bolt = bolt;
-            motion = new ArsTrajectory(bolt, carrier);
+            this.carrier = carrier;
+            this.speedMultiplier = speedMultiplier;
+            motion = arsDriven ? new ArsTrajectory(bolt, carrier) : null;
         }
-        @Override public net.minecraft.world.phys.Vec3 incomingDirection() { return motion.incomingDirection(); }
+        @Override public Vec3 incomingDirection() { return motion != null ? motion.incomingDirection() : bolt.getDeltaMovement().normalize(); }
         public boolean start(ExecutionSession<ResourceCharge> session) {
-            boolean started = motion.start(session.world(), () -> ((ManagedBolt)bolt).goetyNouveau$managed(true),
-                    hit -> impact(session, hit));
+            var state = (ManagedBolt)bolt;
+            state.goetyNouveau$managed(true); state.goetyNouveau$arsDriven(motion != null);
+            state.goetyNouveau$session(session); state.goetyNouveau$trajectory(motion != null ? carrier : null);
+            state.goetyNouveau$speedMultiplier(speedMultiplier); state.goetyNouveau$nativeSpeed(bolt.boltSpeed);
+            if (motion == null) bolt.setDeltaMovement(bolt.getDeltaMovement().scale(speedMultiplier));
+            boolean started = motion != null
+                    ? motion.start(session.world(), () -> {}, hit -> impact(session, bolt, hit, true))
+                    : session.world().addFreshEntity(bolt);
+            if (motion == null) carrier.discard();
             if (started) {
                 if (bolt instanceof NecroBolt) SoundUtil.playNecroBolt(session.caster());
+                else if (bolt instanceof WitherBolt) {
+                    var spell = (com.Polarice3.Goety.common.magic.Spell)GoetyResources.spell();
+                    spell.playSound(session.world(), session.caster(), SoundEvents.WITHER_SHOOT, 0.5F, 0.25F);
+                    spell.playSound(session.world(), session.caster(), ModSounds.HELL_BOLT_SHOOT.get());
+                }
                 else SoundUtil.playSoulBolt(session.caster());
             }
             return started;
         }
-        private void impact(ExecutionSession<ResourceCharge> session, HitResult hit) {
-            if (hit.getType() == HitResult.Type.MISS) return;
-            if (hit instanceof EntityHitResult entity && !((ProjectileHitAccess)bolt).goetyNouveau$canHit(entity.getEntity())) return;
-            if (!session.activate(() -> {
-                // Native impacts discard their projectile. A carrier such as orbit/pierce may
-                // continue; defer that discard until Conflux's trajectory actually ends.
-                var state = (ManagedBolt)bolt;
-                bolt.setPos(hit.getLocation());
-                state.goetyNouveau$impacting(true);
-                try { ((ProjectileHitAccess)bolt).goetyNouveau$hit(hit); }
-                finally { state.goetyNouveau$impacting(false); }
-                session.impact(hit);
-                return true;
-            })) session.finish(ExecutionSession.EndReason.DENIED);
+        public boolean tick(ExecutionSession<ResourceCharge> session) {
+            return motion != null ? motion.tick(session.world()) : bolt.isRemoved() || !session.world().hasChunkAt(bolt.blockPosition());
         }
-        public boolean tick(ExecutionSession<ResourceCharge> session) { return motion.tick(session.world()); }
-        public void close(ExecutionSession<ResourceCharge> session, ExecutionSession.EndReason reason) { motion.close(); }
+        public void close(ExecutionSession<ResourceCharge> session, ExecutionSession.EndReason reason) {
+            var state = (ManagedBolt)bolt; state.goetyNouveau$session(null); state.goetyNouveau$trajectory(null);
+            if (motion != null) motion.close();
+            else { bolt.discard(); carrier.discard(); }
+        }
     }
 }

@@ -4,7 +4,7 @@
 
 ```text
 MinecraftDev/
-  Ars-Conflux/              # compatible Core checkout, at least 0.1.5
+  Ars-Conflux/              # compatible Core checkout, at least 0.1.6
   Goety-Nouveau/
     VERSION                 # single version for both targets
     common/src/main/        # shared integration source and resources
@@ -20,7 +20,7 @@ The root wrapper uses Gradle 9.2.1; the Forge wrapper uses Gradle 8.8. Do not re
 
 ## Prepare dependencies
 
-Prepare an Ars Conflux 0.1.5 source checkout beside this project, then run:
+Prepare an Ars Conflux 0.1.6 source checkout beside this project, then run:
 
 ```powershell
 python tools/fetch_dependencies.py
@@ -77,7 +77,7 @@ cd forge
 ./gradlew.bat :runGameTestServer --no-daemon --max-workers=2
 ```
 
-Coverage: actual native hit damage and Ars continuation; no duplicated carriers; real player/totem storage, reduced scatter, creative bypass; Ars mana alternative and failed-action billing; repeated carrier payments and cleanup; native soul-loss event pricing. Headless tests do not inspect client rendering or animations.
+Coverage: actual native hit damage and Ars continuation; no duplicated carriers; real player/totem storage, reduced scatter, creative bypass; Ars mana alternative and failed-action billing; repeated carrier payments and cleanup; native soul-loss event pricing; tick-by-tick launch, acceleration, displacement and gradual rotation against a bolt spawned by Goety's actual `SpellResult`, including accelerated travel. Headless tests check entity rotation, but do not inspect client rendering or animations.
 
 For the separate NeoForge coexistence test, place matching Iron & Nouveau, Iron's Spells 'n Spellbooks, irons_lib, Player Animator and Caelus JARs in the ignored `libs/coexistence/` directory. Run from the project root:
 
@@ -85,7 +85,7 @@ For the separate NeoForge coexistence test, place matching Iron & Nouveau, Iron'
 ./gradlew.bat :runGameTestServer -PwithIron=true --no-daemon --max-workers=2
 ```
 
-This selects the `goety_nouveau_coexistence` namespace and checks real Goety and Iron glyph registration, learning, native projectile dispatch and rejection of two replacement glyphs on a single projectile. The verified versions are Iron & Nouveau 0.17.4, Iron's Spells 'n Spellbooks 3.16.3, irons_lib 2.2.0, Player Animator 2.0.4 and Caelus 7.0.1. These are optional development runtime dependencies, never bundled or required by this addon.
+This selects the `goety_nouveau_coexistence` namespace and checks real Goety and Iron glyph registration, learning, native projectile dispatch and rejection of two replacement glyphs on a single projectile. The verified versions are Goety & Nouveau 0.1.0-dev.3, Iron & Nouveau 0.17.5, Core 0.1.6, Iron's Spells 'n Spellbooks 3.16.3, irons_lib 2.2.0, Player Animator 2.0.4 and Caelus 7.0.1. These are optional development runtime dependencies, never bundled or required by this addon.
 
 ## Version control
 

@@ -14,10 +14,32 @@ public abstract class GoetyBoltStateMixin implements ManagedBolt {
     @Unique private static final EntityDataAccessor<Boolean> goetyNouveau$DRIVEN =
             SynchedEntityData.defineId(SpellHurtingProjectile.class, EntityDataSerializers.BOOLEAN);
     @Unique private boolean goetyNouveau$impacting;
+    @Unique private static final EntityDataAccessor<Boolean> goetyNouveau$ARS_DRIVEN =
+            SynchedEntityData.defineId(SpellHurtingProjectile.class, EntityDataSerializers.BOOLEAN);
+    @Unique private static final EntityDataAccessor<Float> goetyNouveau$SPEED =
+            SynchedEntityData.defineId(SpellHurtingProjectile.class, EntityDataSerializers.FLOAT);
+    @Unique private static final EntityDataAccessor<Float> goetyNouveau$NATIVE_SPEED =
+            SynchedEntityData.defineId(SpellHurtingProjectile.class, EntityDataSerializers.FLOAT);
+    @Unique private dev.arsconflux.api.execution.ExecutionSession<?> goetyNouveau$session;
+    @Unique private com.hollingsworth.arsnouveau.common.entity.EntityProjectileSpell goetyNouveau$trajectory;
     @Inject(method = "defineSynchedData", remap = true, at = @At("TAIL"))
-    private void goetyNouveau$define(CallbackInfo ci) { ((SpellHurtingProjectile)(Object)this).getEntityData().define(goetyNouveau$DRIVEN, false); }
+    private void goetyNouveau$define(CallbackInfo ci) {
+        var data = ((SpellHurtingProjectile)(Object)this).getEntityData();
+        data.define(goetyNouveau$DRIVEN, false); data.define(goetyNouveau$ARS_DRIVEN, false);
+        data.define(goetyNouveau$SPEED, 1.0F); data.define(goetyNouveau$NATIVE_SPEED, 0.0F);
+    }
     public boolean goetyNouveau$managed() { return ((SpellHurtingProjectile)(Object)this).getEntityData().get(goetyNouveau$DRIVEN); }
     public void goetyNouveau$managed(boolean value) { ((SpellHurtingProjectile)(Object)this).getEntityData().set(goetyNouveau$DRIVEN, value); }
+    public boolean goetyNouveau$arsDriven() { return ((SpellHurtingProjectile)(Object)this).getEntityData().get(goetyNouveau$ARS_DRIVEN); }
+    public void goetyNouveau$arsDriven(boolean value) { ((SpellHurtingProjectile)(Object)this).getEntityData().set(goetyNouveau$ARS_DRIVEN, value); }
+    public float goetyNouveau$speedMultiplier() { return ((SpellHurtingProjectile)(Object)this).getEntityData().get(goetyNouveau$SPEED); }
+    public void goetyNouveau$speedMultiplier(float value) { ((SpellHurtingProjectile)(Object)this).getEntityData().set(goetyNouveau$SPEED, value); }
+    public float goetyNouveau$nativeSpeed() { return ((SpellHurtingProjectile)(Object)this).getEntityData().get(goetyNouveau$NATIVE_SPEED); }
+    public void goetyNouveau$nativeSpeed(float value) { ((SpellHurtingProjectile)(Object)this).getEntityData().set(goetyNouveau$NATIVE_SPEED, value); }
+    public dev.arsconflux.api.execution.ExecutionSession<?> goetyNouveau$session() { return goetyNouveau$session; }
+    public void goetyNouveau$session(dev.arsconflux.api.execution.ExecutionSession<?> session) { goetyNouveau$session = session; }
+    public com.hollingsworth.arsnouveau.common.entity.EntityProjectileSpell confluxTrajectory() { return goetyNouveau$trajectory; }
+    public void goetyNouveau$trajectory(com.hollingsworth.arsnouveau.common.entity.EntityProjectileSpell carrier) { goetyNouveau$trajectory = carrier; }
     public boolean goetyNouveau$impacting() { return goetyNouveau$impacting; }
     public void goetyNouveau$impacting(boolean value) { goetyNouveau$impacting = value; }
 }

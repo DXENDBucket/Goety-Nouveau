@@ -73,7 +73,9 @@ public final class SoulBoltCases {
             h.assertTrue(((ManagedBolt)bolt).goetyNouveau$managed() && !bolt.shouldBeSaved(), "Managed native entity is transient");
             h.assertTrue(h.getLevel().getEntitiesOfClass(EntityProjectileSpell.class, player.getBoundingBox().inflate(32), e -> e.getOwner() == player).isEmpty(), "Original carrier is not also spawned");
             float health = target.getHealth();
-            for (int i = 0; i < 20 && marker.hits.get() == 0; i++) ExecutionSessions.tick();
+            for (int i = 0; i < 30 && marker.hits.get() == 0; i++) {
+                ++bolt.tickCount; bolt.tick(); ExecutionSessions.tick();
+            }
             ExecutionSessions.tick();
             h.assertTrue(target.getHealth() < health, "Actual Goety onHitEntity damages target");
             h.assertTrue(marker.hits.get() == 1, "Remaining Ars effect resolves once with attribution");
@@ -141,6 +143,8 @@ public final class SoulBoltCases {
             orbit.setPos(orbit.getNextHitPosition());
             h.assertTrue(ProjectileDispatch.convert(orbit), "Actual Orbit carrier dispatches through Conflux");
             var bolt = bolts(h, player).get(0);
+            h.assertTrue(((ManagedBolt)bolt).goetyNouveau$arsDriven()
+                    && ((ManagedBolt)bolt).confluxTrajectory() == orbit, "Orbit keeps its Ars trajectory and excludes its own replacement from queries");
             h.assertTrue(SEHelper.getSESouls(player) == price * 2, "Repeating carrier does not prepay every future impact");
             for (int i = 0; i < 3; i++) {
                 var target = h.spawn(EntityType.COW, 8, 3, 2);
@@ -157,6 +161,54 @@ public final class SoulBoltCases {
             h.assertTrue(SEHelper.getSESouls(player) == 0 && bolt.isRemoved(), "Empty pool stops repeating execution and removes native entity");
             player.discard(); h.succeed();
         } finally { GoetyConfig.RESOURCE_SOURCE.set(previous); }
+    }
+    public static void nativeLaunchMotionAndRotation(GameTestHelper h, net.minecraft.server.level.ServerPlayer player) {
+        player.setPos(h.absoluteVec(new Vec3(2, 5, 2))); player.setYRot(-90); player.setXRot(-15);
+        player.setGameMode(GameType.CREATIVE);
+        var nativeSpell = GoetyResources.spell();
+        nativeSpell.SpellResult(h.getLevel(), player, ItemStack.EMPTY, nativeSpell.defaultStats());
+        var reference = bolts(h, player).get(0);
+        var direction = player.getViewVector(1.0F);
+        for (float speed : new float[]{0.75F, 1.25F}) {
+            var cast = resolver(h, player, speed == 0.75F
+                    ? new Spell(MethodProjectile.INSTANCE, GlyphCatalog.SOUL_BOLT)
+                    : new Spell(MethodProjectile.INSTANCE, GlyphCatalog.SOUL_BOLT, AugmentAccelerate.INSTANCE));
+            cast.spellContext.nextPart();
+            var carrier = new EntityProjectileSpell(h.getLevel(), cast);
+            carrier.setDeltaMovement(direction.scale(speed));
+            h.assertTrue(ProjectileDispatch.convert(carrier), "Ordinary Ars carrier converts to native Goety flight");
+            var bolt = bolts(h, player).stream().filter(e -> ((ManagedBolt)e).goetyNouveau$managed()).findFirst().orElseThrow();
+            var state = (ManagedBolt)bolt;
+            float multiplier = speed / 0.75F;
+            h.assertTrue(state.goetyNouveau$managed() && !state.goetyNouveau$arsDriven(), "Ordinary flight runs Goety, not Ars movement");
+            // Native Mth view vectors are only approximately unit length; Core normalizes aim.
+            h.assertTrue(bolt.position().distanceTo(reference.position()) < 1.0e-4, "Launch offset matches real Goety SpellResult: speed="
+                    + speed + ", actual=" + bolt.position() + ", native=" + reference.position() + ", carrier=" + carrier.position());
+            h.assertTrue(bolt.getDeltaMovement().distanceTo(reference.getDeltaMovement().scale(multiplier)) < 1.0e-6
+                    && bolt.getYRot() == reference.getYRot(), "Initial velocity and unturned model match Goety");
+            Vec3 origin = reference.position();
+            Vec3 actualOrigin = bolt.position();
+            float initialRotation = reference.getYRot();
+            for (int i = 0; i < 15; i++) {
+                reference.tick(); bolt.tick();
+                h.assertTrue(bolt.position().subtract(actualOrigin).distanceTo(reference.position().subtract(origin).scale(multiplier)) < 1.0e-5,
+                        "Native acceleration/displacement is retained: tick=" + i + ", speed=" + speed + ", factor=" + state.goetyNouveau$speedMultiplier()
+                                + ", actual=" + bolt.position().subtract(actualOrigin) + ", native=" + reference.position().subtract(origin)
+                                + ", velocities=" + bolt.getDeltaMovement() + " / " + reference.getDeltaMovement());
+                h.assertTrue(bolt.getDeltaMovement().distanceTo(reference.getDeltaMovement().scale(multiplier)) < 1.0e-5,
+                        "Native velocity curve is retained at tick " + i);
+                h.assertTrue(Math.abs(bolt.getYRot() - reference.getYRot()) < 1.0e-4
+                        && Math.abs(bolt.getXRot() - reference.getXRot()) < 1.0e-4, "Native gradual yaw/pitch is retained at tick " + i);
+                h.assertTrue(!bolt.isRemoved(), "Native comparison stays in unobstructed loaded space");
+            }
+            h.assertTrue(Math.abs(reference.getYRot() - initialRotation) > 30, "The model actually turns toward its flight direction");
+            bolt.discard(); ExecutionSessions.tick(); reference.discard();
+            if (speed == 0.75F) {
+                nativeSpell.SpellResult(h.getLevel(), player, ItemStack.EMPTY, nativeSpell.defaultStats());
+                reference = bolts(h, player).get(0);
+            }
+        }
+        player.discard(); h.succeed();
     }
     public static void nativeLossEvent(GameTestHelper h, net.minecraft.server.level.ServerPlayer player, java.util.function.IntSupplier eventCount) {
         var previous = GoetyConfig.RESOURCE_SOURCE.get();

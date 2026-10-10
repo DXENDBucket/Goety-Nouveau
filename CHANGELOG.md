@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.3
+
+- Restore native Goety launch offset, acceleration, gradual model rotation and collision behavior for ordinary Soul Bolt projectiles; special Ars carriers retain their shared trajectory.
+- Preserve native velocity enchantments, synchronize motion modifiers and retain exact default speed independently of Ars shot inaccuracy.
+- Restore Wither Bolt's native launch sounds and expose the off-world carrier through Core's carrier proxy contract.
+- Keep native impacts, Ars continuation, soul billing and repeated-carrier cleanup; compare real Goety and integration motion tick by tick on both loaders.
+- Require Core 0.1.6, whose projectile dispatcher ignores client spawn packets before reading a server-only caster context.
+
 ## 0.1.0-dev.2
 
 - Add the Soul Bolt projectile replacement glyph, with native Goety projectile rendering and complete impacts followed by remaining Ars effects.

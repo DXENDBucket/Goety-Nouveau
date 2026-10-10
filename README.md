@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: first playable development slice (`0.1.0-dev.2`). Soul Bolt is available; this is not yet a complete Goety spell catalogue.**
+**Status: first playable development slice (`0.1.0-dev.3`). Soul Bolt is available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -12,7 +12,7 @@ Goety & Nouveau and Iron & Nouveau can be installed together with one matching A
 
 Find **Soul Bolt** in the Goety & Nouveau creative tab and learn it by using the glyph item. In an Ars spellbook, compose **Projectile → Soul Bolt**. Soul Bolt is a projectile replacement augment; effects placed after it resolve on impact. For example, **Projectile → Soul Bolt → Ignite** uses the native Goety bolt, then applies Ars Ignite.
 
-Amplify adds one native potency point; Dampen removes one, with a minimum of zero. Ars controls trajectory, acceleration, scattering and supported carrier behavior. The native Goety entity supplies its renderer, animation, trail, impact particles, damage and staff-dependent Soul/Poison/Wither/Necro variants. Projectiles retain a maximum lifetime of ten seconds.
+Amplify adds one native potency point; Dampen removes one, with a minimum of zero. Ordinary projectiles retain Goety's native launch offset, gradual acceleration, yaw/pitch rotation, collision loop and velocity enchantments. Ars selects the aim and scatter, and its acceleration statistic scales native travel. Special carriers such as Orbit keep their Ars trajectory. The native Goety entity supplies its renderer, animation, trail, impact particles, damage and staff-dependent Soul/Poison/Wither/Necro variants. Projectiles retain a maximum lifetime of ten seconds.
 
 The first slice supplies a creative glyph item; survival acquisition and ritual recipes remain undecided. It does not add Goety casting animations or cooldown enforcement yet.
 
@@ -33,8 +33,8 @@ Quotes are side-effect-free and include native discounts. Soul-loss events run a
 
 | Target | Ars Nouveau | Goety | Ars Conflux |
 | --- | --- | --- | --- |
-| 1.21.1 NeoForge | 5.13.1 | 3.2.0 | 0.1.5 |
-| 1.20.1 Forge | 4.12.7 | 2.5.58.4 | 0.1.5 |
+| 1.21.1 NeoForge | 5.13.1 | 3.2.0 | 0.1.6 |
+| 1.20.1 Forge | 4.12.7 | 2.5.58.4 | 0.1.6 |
 
 These are the pinned build dependencies. Transitive mod dependencies are included in the download manifest, but upstream mod JARs are not committed or bundled in this addon.
 
