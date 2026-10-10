@@ -123,7 +123,7 @@ range 与 radius 必须保持独立。例如尖牙的 range 同时决定直线�
 
 ### 附魔机制不是都能直接变成通用数值
 
-- **ABSORB**：原生附魔最高一级，并与 POTENCY 不兼容。已看到尖牙记录 Absorbing 标记，但当前核对的尖牙伤害方法没有直接消费该标记；尚未确认发行版是否由别处处理。不能仅凭名字实现成通用吸血增强。
+- **ABSORB**：原生“生命吸收”附魔最高一级，并与 POTENCY 不兼容。后续检查已找到消费者：`ModEvents.DamageEvent` 对具有 Absorbing 标记、主人为玩家的尖牙按伤害事件当前值等量回血。实际固定 JAR 两端的字节码也已确认；Forge 使用 `LivingDamageEvent.getAmount()`，NeoForge 使用 `LivingDamageEvent.Pre.getNewDamage()`。因此原生确有吸血，但当前这一处理专用于尖牙，不是任意法术都能吸血。仅看实体内部方法会漏掉全局事件消费者。
 - **SOUL_EATER**：尖牙的回魂是符合原生条件的成功命中，且受 FangGainSouls 配置影响；并非统一的击杀回魂规则。涉及真实灵魂资源收益，后续需要单独核对并设计。
 - **MAGNET**：掘地原生代码将掉落物和经验交给玩家，可成为将来的收取增强候选；先核对 Ars 已有收取能力能否表达，避免重复魔符。
 - **ROYALTY**：属于另外的附魔机制，未确认有足够通用的法术参数含义，此次不列为优先候选。
@@ -140,3 +140,5 @@ range 与 radius 必须保持独立。例如尖牙的 range 同时决定直线�
 优先顺序建议为这四种法术加“燃烧”增强。延伸、回魂、收取等在对应法术接入时再落实，不先批量注册没有实际消费者的增强。
 
 参考：[SpellStat](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/magic/SpellStat.java)、[附魔注册](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/enchantments/ModEnchantments.java)、[ABSORB 兼容约束](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/enchantments/AbsorbEnchantment.java)。
+
+生命吸收的事件消费者：[ModEvents](https://github.com/Polarice3/Goety-2/blob/1.20/src/main/java/com/Polarice3/Goety/common/events/ModEvents.java)。
