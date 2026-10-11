@@ -100,5 +100,6 @@
   "goety_nouveau.glyph_name.glyph_hail": "冰雹",
   "goety_nouveau.glyph_desc.glyph_hail": "在落点上方唤出冰雹云，冰冻下方的敌人。霜冻魔杖可让云层跟随目标。",
   "goety_nouveau.glyph_name.glyph_monsoon": "季风",
-  "goety_nouveau.glyph_desc.glyph_monsoon": "在落点上方唤出季风云，保留降雨与雷击。风暴魔杖扩大云层，并使雷击产生连锁。"
+  "goety_nouveau.glyph_desc.glyph_monsoon": "在落点上方唤出季风云，保留降雨与雷击。风暴魔杖扩大云层，并使雷击产生连锁。",
+  "goety_nouveau.cast.cooldown": "%s 尚未冷却完成"
 }

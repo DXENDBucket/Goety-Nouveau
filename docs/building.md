@@ -4,7 +4,7 @@
 
 ```text
 MinecraftDev/
-  Ars-Conflux/              # compatible Core checkout, at least 0.1.8
+  Ars-Conflux/              # compatible Core checkout, at least 0.1.10
   Goety-Nouveau/
     VERSION                 # single version for both targets
     common/src/main/        # shared integration source and resources
@@ -20,7 +20,7 @@ The root wrapper uses Gradle 9.2.1; the Forge wrapper uses Gradle 8.8. Do not re
 
 ## Prepare dependencies
 
-Prepare an Ars Conflux 0.1.8 source checkout beside this project, then run:
+Prepare an Ars Conflux 0.1.10 source checkout beside this project, then run:
 
 ```powershell
 python tools/fetch_dependencies.py
@@ -118,3 +118,6 @@ For 0.1.0-dev.10, the final NeoForge coexistence run passed all 19 required test
 
 
 2026-10-11 dev.17: both focused shared `goety_nouveau_weather` cases passed on each loader. NeoForge used `-PwithIron=true` (Iron/NEG coexistence); Forge used the standalone set. Final logs: `build/weather-effects-tests-final.log` and `forge/build/weather-effects-tests-final.log`. Actual native-world checks cover Thunderbolt damage/owner/rod/chaining/rejected damage and cloud warmup/frost/ally filtering/tracking/stationary lightning/expiry/low-ceiling placement/color/billing. First run corrected a fixture assumption: native clouds discard on the tick after active lifetime reaches zero, not that last active tick. No production lifetime change, full catalogue rerun or client launch. Both release/source JARs and 48 glyph models, languages, native model parents, licenses, Java 21/17 bytecode and Forge refmap verified.
+
+
+2026-10-11 dev.18: focused active-casting checks passed on NeoForge (5 cases with Iron 0.17.11 / NEG) and Forge (4 cases without Iron). Namespaces: `goety_nouveau_casting,goety_nouveau_native_casting`. Checks cover one shared preparation, nested active hooks, cancellation, denied releases, pure Ars passthrough, native Goety focus cooldowns, native charging preparation, and actual Ars caster-tool dispatch. The NeoForge mixed recipe applies both native effects and commits both native cooldowns. Logs: `build/active-casting-release-final.log`, `forge/build/active-casting-tests-final.log`. The shared mock-dispatch fixture uses a player wrapper on both loaders; Ars 4 rejected the former non-player wrapper, correctly producing no release callback. Native Iron Hide is used for the actual preparation test because native Soul Heal is instantaneous. No client was launched; native HUD appearance remains a manual check.

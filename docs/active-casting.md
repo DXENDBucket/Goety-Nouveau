@@ -1,0 +1,34 @@
+# Goety 主动吟唱、冷却与特殊蓄力边界
+
+0.1.0-dev.18 接入 Conflux 0.1.10 的主动施法入口。Goety 与 Iron 可独立存在；混合编排只进入一次准备和释放流程。
+
+## 配置与普通规则
+
+`goety_nouveau-server.toml`：`[chanting].enabled=true`、`[cooldowns].enabled=true`，两者可以独立关闭。关闭吟唱恢复即时释放；关闭冷却不清除原生已有记录，只让此桥接不检查／新增。聚合规则由 Core `[active_casting].chant_mode` 控制，默认最长，可选累加。
+
+普通聚晶调用 `ISpell.castDuration(caster, staff)`，使用已有法杖查找和原生装备／属性修正。`IChargingSpell` 只调用 `castUp`；其常见 72000 tick 默认值是占用物品的上限，不是吟唱时间。
+
+冷却读取 `SEHelper.isOnCooldown`，通过 `SEHelper.addCooldown` 写入原生聚晶记录并同步。不同 Ars 编排与 Goety 原生法杖共享对应聚晶冷却。有效主动发射后每种聚晶只增加一次 `spellCooldown(caster)`，重复魔符／散射不会重复登记；一次编排中有聚晶冷却未结束会拒绝整次主动施法。生物／假玩家不获得新的玩家冷却记录。
+
+创造模式沿用原生 Goety 的冷却行为，资源仍免费。取消准备和失败发射不产生冷却。发射后即使未命中仍进入冷却；在途与持续触发继续执行、按次支付原有资源。
+
+## 原生显示
+
+在 Goety 原生 `SoulEnergyGui` 内使用相同的 `goety:textures/gui/soul_energy.png` 进度区域与原生位置／显示配置，读取 Core 通知的独立计时。没有灵魂容器但使用 Ars Mana 时也可以显示同样样式的吟唱条。Goety 自己正在施法时优先显示原生状态，不改写玩家正在使用的聚晶、法杖 NBT 或原生施法能力。
+
+混合编排会向开启吟唱的相关提供者发送同一进度：Iron 使用自己的吟唱条，Goety 使用自己的条。两边不读取对方的类或假造对方的状态。
+
+## 后续特别审查清单
+
+当前不追求完全重现 Goety 的法杖交互。新增以下法术前必须明确映射：
+
+1. `IChargingSpell / ChargingSpell`：起手用 `castUp`；不能用 `defaultCastDuration`。松手释放、蓄力倍率和中断成本需逐法术设计。
+2. `EverChargeSpell`：起手、射击间隔、弹匣／shots、按秒扣费与停止后的冷却分别处理。当前蒸汽魔符仍按现有一次投射逻辑，不引入原生连发控制。
+3. `useSpell / stopSpell`：不要仅调用 `SpellResult` 就宣称持续行为完整。需要列出必须保留的粒子、伤害与清理；也可以选择适合 Ars 的固定时长表示。
+4. `hasCustomCooldown`：可能由法术内部按目标、召唤、停止或结果登记，不能当成只读的数值查询调用。当前桥接统一用有效基础 `spellCooldown` 登记聚晶冷却，不复刻原生按受击数变化等特殊冷却；以后若保留原生内部登记，须避免再次登记。
+5. 法杖物品 NBT 中的 `Cool / Cooldown / Shots / Seconds`：属于原生连续使用，不修改副手法杖来模拟 Ars 连发。
+6. 聚晶专用 NBT／specific cooldown：没有对应具体带数据的聚晶实例时，不伪造其绑定身份。当前普通登记聚晶足够；未来回魂等要另外审查。
+7. 召唤的数量限制、SummonDown 和维护消耗不是普通冷却，必须保持各自规则。
+8. 原生弹射物／云的生成预热继续由实体管理，不能为了吟唱而删除，也不能误当成持续频道长度。
+
+持续会话与实际触发费用已有独立 Core API；新增特殊行为时先确定一次主动施法和后续触发的边界，再决定接入方式。

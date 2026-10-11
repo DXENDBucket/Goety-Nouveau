@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-dev.18
+
+- Register native preparation and focus cooldowns with Conflux 0.1.10. Mixed recipes prepare and release once.
+- Independent chanting/cooldown switches default on; native effective times, soul HUD appearance and focus cooldown storage are reused.
+- Record charging, continuous-use, native custom cooldown and summoning boundaries.
+
 ## 0.1.0-dev.17
 
 - Add Thunderbolt, Hail and Monsoon effect glyphs on both loaders (48 glyphs: 17 projectile replacements, 27 effects, 4 native parameter augments).

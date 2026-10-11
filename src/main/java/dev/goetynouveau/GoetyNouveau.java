@@ -16,7 +16,9 @@ public final class GoetyNouveau {
     public static final String MOD_ID = "goety_nouveau";
     public GoetyNouveau(IEventBus bus, ModContainer container) {
         container.registerConfig(ModConfig.Type.SERVER, GoetyConfig.SPEC, "goety_nouveau-server.toml");
+        bus.addListener(dev.goetynouveau.network.ChantStatePayload::register);
         GlyphCatalog.register();
+        dev.goetynouveau.casting.GoetyActiveCastProvider.register();
         bus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(GlyphCatalog::configureCarriers));
         var tabs = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
         tabs.register("glyphs", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup.goety_nouveau"))

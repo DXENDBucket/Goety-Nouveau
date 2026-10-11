@@ -7,6 +7,7 @@ public final class GoetyConfig {
     public static final ModConfigSpec SPEC;
     public static final ModConfigSpec.EnumValue<ResourceSource> RESOURCE_SOURCE;
     public static final ModConfigSpec.IntValue BURNING_COST, EXTENSION_COST, LIFE_ABSORB_COST, SOUL_EATER_COST;
+    public static final ModConfigSpec.BooleanValue CHANTING_ENABLED, COOLDOWNS_ENABLED;
     static {
         var builder = new ModConfigSpec.Builder();
         builder.push("resources");
@@ -21,7 +22,25 @@ public final class GoetyConfig {
         SOUL_EATER_COST = builder.comment("Additional trigger cost per Soul Eater augment, before native soul discounts.")
                 .defineInRange("soulEaterCostPerUnit", 5, 0, 1000000);
         builder.pop();
+        builder.push("chanting");
+        CHANTING_ENABLED = builder.comment("Native Goety preparation on active Ars recipes containing Goety glyphs. Mixed casts prepare once via Conflux.",
+                "Includes native casting-speed/gear adjustments. Charging focuses contribute castUp, not item-use lifetime.",
+                "Does not reproduce hold-to-charge, magazine cadence or charge-dependent strength.",
+                "False restores immediate casting. Hits, Orbit/Echo and passive triggers never re-chant.")
+                .define("enabled", true);
+        builder.pop();
+        builder.push("cooldowns");
+        COOLDOWNS_ENABLED = builder.comment("Native focus cooldowns shared with Goety wands and other Ars recipes. Includes native cooldown reduction.",
+                "Check before preparation and again on release. An acknowledged release starts each distinct focus cooldown once.",
+                "Creative retains native Goety cooldowns; resource costs remain free.",
+                "Existing projectiles and repeated triggers continue; custom charge/stop-based cooldown lifecycles are not reproduced.",
+                "Automatic devices, passive effects and third-party direct resolvers are unaffected unless explicitly integrated.")
+                .define("enabled", true);
+        builder.pop();
         SPEC = builder.build();
     }
     private GoetyConfig() {}
+    private static <T> T read(ModConfigSpec.ConfigValue<T> value) { return SPEC.isLoaded() ? value.get() : value.getDefault(); }
+    public static boolean chantingEnabled() { return read(CHANTING_ENABLED); }
+    public static boolean cooldownsEnabled() { return read(COOLDOWNS_ENABLED); }
 }
