@@ -40,7 +40,13 @@ public enum EffectFocus {
     OVERGROWTH("overgrowth", "overgrowth_focus", "Overgrowth", true, true, false),
     ZOMBIE("zombie", "rotting_focus", "Summon Zombie", true, true, false),
     SKELETON("skeleton", "osseous_focus", "Summon Skeleton", true, true, false),
-    VEX("vex", "vexing_focus", "Summon Vex", true, true, false);
+    VEX("vex", "vexing_focus", "Summon Vex", true, true, false),
+    SENSING("sensing", "sensing_focus", "Sensing", true, true, false),
+    ROTATION("rotation", "rotation_focus", "Rotation", false, false, false),
+    TREMBLING("trembling", "trembling_focus", "Trembling", true, true, true),
+    CHARGE("charge", "charge_focus", "Charge", false, false, false),
+    SPIKES("spikes", "shredding_focus", "Spikes", true, false, false),
+    LEAPING("leaping", "leaping_focus", "Summon Leapleaf", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

@@ -16,6 +16,8 @@ public final class NativeEffectHooks {
         if(spell.typeStaff(staff,com.Polarice3.Goety.api.magic.SpellType.VOID)) target.addEffect(new MobEffectInstance(GoetyEffects.VOID_TOUCHED.get(),100));
         if(spell.typeStaff(staff,com.Polarice3.Goety.api.magic.SpellType.NETHER)) target.setSecondsOnFire(5);
     }
+    public static MobEffectInstance sensing(int ticks, int amplifier) { return new MobEffectInstance(GoetyEffects.TREMOR_SENSE.get(),ticks,amplifier,false,false,true); }
+    public static MobEffectInstance charged(LivingEntity entity) { return entity.getEffect(GoetyEffects.CHARGED.get()); }
     public static int absorb(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.ABSORB.get(), caster); }
     public static int soulEater(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.SOUL_EATER.get(), caster); }
     public static int duration(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.DURATION.get(), caster); }

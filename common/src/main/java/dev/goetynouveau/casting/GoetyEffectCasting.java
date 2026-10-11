@@ -74,7 +74,9 @@ public final class GoetyEffectCasting {
             case THUNDERBOLT, HAIL, MONSOON -> GoetyWeatherEffects.apply(focus, world, frame, spell, defaults, ars);
             case ERUPTION, BIO_MINE, TEETH -> GoetyHazardEffects.apply(focus, world, frame, spell, defaults, ars);
             case WIND_BLAST, OVERGROWTH -> GoetyNatureEffects.apply(focus, world, frame, spell, defaults, ars);
-            case ZOMBIE, SKELETON, VEX -> GoetyServantCasting.apply(focus, world, frame, (com.Polarice3.Goety.common.magic.SummonSpell)spell, defaults, ars);
+            case SENSING, ROTATION, TREMBLING, CHARGE -> GoetyUtilityEffects.apply(focus, world, frame, spell, defaults, ars);
+            case SPIKES -> GoetySpikeCasting.apply(world, frame, spell, defaults, ars);
+            case ZOMBIE, SKELETON, VEX, LEAPING -> GoetyServantCasting.apply(focus, world, frame, (com.Polarice3.Goety.common.magic.SummonSpell)spell, defaults, ars);
             case EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH -> GoetyLocationEffects.apply(focus, world, frame, spell, defaults, ars);
         };
     }

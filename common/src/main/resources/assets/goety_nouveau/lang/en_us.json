@@ -121,5 +121,17 @@
   "goety_nouveau.glyph_name.glyph_skeleton": "Summon Skeleton",
   "goety_nouveau.glyph_desc.glyph_skeleton": "Summon native skeleton servants near the selected point, sharing Goety limits and retaining staff variants. Sneak-casting recalls them.",
   "goety_nouveau.glyph_name.glyph_vex": "Summon Vex",
-  "goety_nouveau.glyph_desc.glyph_vex": "Summon native allied vexes near the selected point. Sneak-casting dismisses your vexes, following native behavior."
+  "goety_nouveau.glyph_desc.glyph_vex": "Summon native allied vexes near the selected point. Sneak-casting dismisses your vexes, following native behavior.",
+  "goety_nouveau.glyph_name.glyph_sensing": "Sensing",
+  "goety_nouveau.glyph_desc.glyph_sensing": "Grant native Tremor Sense to yourself or a selected ally.",
+  "goety_nouveau.glyph_name.glyph_rotation": "Rotation",
+  "goety_nouveau.glyph_desc.glyph_rotation": "Rotate the selected block using native rotation rules.",
+  "goety_nouveau.glyph_name.glyph_trembling": "Trembling",
+  "goety_nouveau.glyph_desc.glyph_trembling": "Push enemies away from the selected point and slow their movement and digging.",
+  "goety_nouveau.glyph_name.glyph_charge": "Charge",
+  "goety_nouveau.glyph_desc.glyph_charge": "Apply native electrical charge to a selected creature. Repeated charges retain their native effects.",
+  "goety_nouveau.glyph_name.glyph_spikes": "Spikes",
+  "goety_nouveau.glyph_desc.glyph_spikes": "Raise native royal spikes from the selected point. Sneak-casting creates rings.",
+  "goety_nouveau.glyph_name.glyph_leaping": "Summon Leapleaf",
+  "goety_nouveau.glyph_desc.glyph_leaping": "Summon native Leapleaf servants near the selected point. Sneak-casting recalls them."
 }

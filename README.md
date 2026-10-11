@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.22`). Eighteen projectile replacements, thirty-six target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.23`). Eighteen projectile replacements, forty-two target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -20,7 +20,7 @@ The glyphs are available in the creative tab; survival acquisition and ritual re
 
 ## Target and location effects
 
-These thirty-six glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+These forty-two glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
@@ -55,6 +55,12 @@ These thirty-six glyphs are **effects**, placed after an Ars cast method. They u
 | Flame Strike | Native fire pillars around the selected point. An entity target receives native outer rings; self/location or sneaking uses native radial formations. Nether staff adds outer rings. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Void Rift | Native rift at the selected point, including pulling, central damage, native staff behavior, closing animation and final burst. Original griefing rules remain native. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Ignite | Uses Goety's entity ignition and original fire-charge block interactions at the Ars hit. Lights supported campfires/candles and places fire without another view ray trace. | Burning |
+| Sensing | Grant native Tremor Sense to yourself or an Ars-selected ally; native grounded detection stays unchanged. | Amplify / Dampen, Extend Time / Duration Down |
+| Rotation | Rotate the actual selected block, retaining native excluded block types and survival checks. Only a successful rotation charges. | None |
+| Trembling | Native wind-horn radial push, movement/mining slowdown, particles and staff radius bonus at the selected point. | Amplify / Dampen, AOE, Extend Time / Duration Down |
+| Charge | Native electrical charge on the selected living entity, including overcharge damage and native Storm-staff chaining. | None |
+| Spikes | Native royal spikes: a line rooted at the Ars point, native sneaking rings and Ominous-staff side rows/outer ring. | Amplify / Dampen, Burning |
+| Summon Leapleaf | Native Leapleaf servant, Wild-staff batch, shared owner quota, duration, summon decay and book-only sneak recall. | Amplify / Dampen, Extend Time / Duration Down |
 | Wind Blast | A directional native gust from the Ars-selected point; knockback, elemental staff effects, wind-powered blocks and enemy cyclone removal. | Amplify / Dampen, AOE |
 | Overgrowth | Native vine traps around the selected entity/location; sneaking creates native poison-quill turrets. Wild staff retains its two-turret branch. | Amplify / Dampen, Extend Time / Duration Down |
 | Summon Zombie / Skeleton / Vex | Native owned servants at the Ars-selected point, sharing their owner's native configured quota with ordinary Goety summons. Staff variants, equipment, lifetime and summon decay remain native. | Amplify / Dampen, Extend Time / Duration Down |
@@ -116,7 +122,7 @@ Flame Strike and Void Rift activate after Conflux preparation without repeating 
 
 **Projectile ? Glow Light** launches Goety's native light projectile. Entity hits apply Glowing; block hits place its native light block. Both native particle layers are retained, including for special Ars carriers. Ars speed modifiers scale its native flight; it is not a damaging arrow.
 
-Zombie, Skeleton and Vex use their respective native limits, counting living loaded servants of the same owner. Each new batch is additionally clipped to the remaining quota. Crouching with an Ars book preserves native recall for undead/skulls and native dismissal for Vex/Irk. These are the original Goety servants with their own AI; the addon does not replace their command system. Native ordinary undead lose health after their random lifespan runs out; skulls retain their separate expiry behavior. See [the nature and summon audit](docs/nature-summon-audit.md) for version differences and scope.
+Zombie, Skeleton and Vex use their respective native limits, counting living loaded servants of the same owner. Each new batch is additionally clipped to the remaining quota. Crouching with an Ars book preserves native recall for undead/skulls and native dismissal for Vex/Irk. These are the original Goety servants with their own AI; the addon does not replace their command system. Native ordinary undead lose health after their random lifespan runs out; skulls retain their separate expiry behavior. See [the utility spell audit](docs/utility-spell-audit.md) and [the nature and summon audit](docs/nature-summon-audit.md) for version differences and scope.
 
 ## Integration
 

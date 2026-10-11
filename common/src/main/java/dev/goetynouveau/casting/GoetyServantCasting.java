@@ -60,7 +60,7 @@ public final class GoetyServantCasting {
             var pos=focus==EffectFocus.VEX ? BlockPos.containing(center).offset(-2+world.random.nextInt(5),1,-2+world.random.nextInt(5))
                     : BlockFinder.SummonRadius(BlockPos.containing(center),servant,world);
             if(!world.hasChunkAt(pos) || pos.getY()<world.getMinBuildHeight() || pos.getY()>=world.getMaxBuildHeight()) { servant.discard(); continue; }
-            if(focus!=EffectFocus.VEX && !special(spell,staff)) {
+            if((focus==EffectFocus.ZOMBIE || focus==EffectFocus.SKELETON) && !special(spell,staff)) {
                 var variant=servant.getVariant(caster instanceof Player p?p:null,world,pos);
                 if(variant!=null && variant.create(world) instanceof Owned alternative && spell.summonPredicate().test(alternative)) {
                     servant.discard(); servant=alternative;
@@ -84,11 +84,13 @@ public final class GoetyServantCasting {
         if(added) {
             spell.SummonDown(caster);
             if(focus==EffectFocus.VEX) spell.playSound(world,caster,SoundEvents.EVOKER_CAST_SPELL);
+            else if(focus==EffectFocus.LEAPING) spell.playSound(world,caster,com.Polarice3.Goety.init.ModSounds.SUMMON_SPELL.get());
             else SoundUtil.playNecromancerSummon(caster);
         }
         return added;
     }
     private static int count(EffectFocus focus,SummonSpell spell,LivingEntity caster,ItemStack staff) {
+        if(focus==EffectFocus.LEAPING) return spell.rightStaff(staff) && caster.getRandom().nextBoolean()?2:1;
         if(focus==EffectFocus.VEX) return spell.rightStaff(staff)?3+caster.getRandom().nextInt(3):3;
         if(staff.is(ModItems.NAMELESS_STAFF.get())) return 7;
         return spell.rightStaff(staff)?2+caster.getRandom().nextInt(4):special(spell,staff)?2:1;
@@ -98,6 +100,7 @@ public final class GoetyServantCasting {
     }
     private static Owned create(EffectFocus focus,ServerLevel world,SummonSpell spell,ItemStack staff) {
         if(focus==EffectFocus.VEX) return ModEntityType.VEX_SERVANT.get().create(world);
+        if(focus==EffectFocus.LEAPING) return ModEntityType.LEAPLEAF.get().create(world);
         boolean zombie=focus==EffectFocus.ZOMBIE;
         EntityType<? extends Owned> type=zombie?ModEntityType.ZOMBIE_SERVANT.get():ModEntityType.SKELETON_SERVANT.get();
         if(special(spell,staff)) {
