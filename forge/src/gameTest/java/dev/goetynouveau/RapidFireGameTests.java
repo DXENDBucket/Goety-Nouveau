@@ -3,7 +3,7 @@ import net.minecraft.gametest.framework.*;
 import net.minecraftforge.gametest.*;
 @GameTestHolder("goety_nouveau_rapid_fire") @PrefixGameTestTemplate(false)
 public final class RapidFireGameTests {
-    private static net.minecraft.server.level.ServerPlayer player(GameTestHelper h) {
+    static net.minecraft.server.level.ServerPlayer player(GameTestHelper h) {
         var player=new net.minecraft.server.level.ServerPlayer(h.getLevel().getServer(),h.getLevel(),new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "CastStudent"));
         var connection=new net.minecraft.network.Connection(net.minecraft.network.protocol.PacketFlow.SERVERBOUND);
         new io.netty.channel.embedded.EmbeddedChannel(connection);

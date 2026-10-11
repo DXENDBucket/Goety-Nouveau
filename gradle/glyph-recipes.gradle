@@ -1,0 +1,46 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
+// One data definition; native Ars 4/5 formats remain loader-local build outputs.
+def definitions = new File(glyphRecipeRoot, 'common/recipes/glyphs.json')
+def generated = layout.buildDirectory.dir('generated/glyph-recipes')
+def generateGlyphRecipes = tasks.register('generateGlyphRecipes') {
+    group = 'build'
+    description = 'Generate native Ars Scribe recipes for this loader.'
+    inputs.file definitions
+    inputs.property 'loader', glyphRecipeLoader
+    outputs.dir generated
+    doLast {
+        def targetRoot = generated.get().asFile
+        if (!targetRoot.toPath().normalize().startsWith(layout.buildDirectory.get().asFile.toPath().normalize())) {
+            throw new GradleException('Generated recipes must stay in this project build directory')
+        }
+        def definitionsMap = new JsonSlurper().parse(definitions, 'UTF-8')
+        def selected = definitionsMap.findAll { name, recipe -> !recipe.loaders || glyphRecipeLoader in recipe.loaders }
+        selected.each { name, recipe ->
+            if (!(name ==~ /glyph_[a-z0-9_]+/) || recipe.type != 'ars_nouveau:glyph'
+                    || recipe.output.id != "goety_nouveau:${name}" || recipe.output.count != 1
+                    || recipe.inputs.size() != 2 || recipe.inputs[1].item != 'ars_nouveau:source_gem') {
+                throw new GradleException("Invalid glyph recipe: ${name}")
+            }
+        }
+        // Remove stale files if a platform selection or recipe ID changes.
+        delete targetRoot
+        selected.each { name, recipe ->
+            def output = glyphRecipeLoader == 'forge'
+                    ? [type: recipe.type, exp: recipe.exp, output: recipe.output.id,
+                       count: recipe.output.count, inputItems: recipe.inputs.collect { [item: it] }]
+                    : [type: recipe.type, exp: recipe.exp, inputs: recipe.inputs, output: recipe.output]
+            def directory = glyphRecipeLoader == 'forge' ? 'recipes' : 'recipe'
+            def file = new File(targetRoot, "data/goety_nouveau/${directory}/${name}.json")
+            file.parentFile.mkdirs()
+            file.setText(JsonOutput.prettyPrint(JsonOutput.toJson(output)) + '\n', 'UTF-8')
+        }
+    }
+}
+sourceSets.main.resources.srcDir generated
+tasks.named('processResources') { dependsOn generateGlyphRecipes }
+tasks.named('sourcesJar') {
+    dependsOn generateGlyphRecipes
+    from(definitions) { into 'recipe-definitions' }
+}

@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.50`). Twenty projectile replacements, ninety-nine shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.51`). Twenty projectile replacements, ninety-nine shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -213,3 +213,9 @@ Active preparation, native cooldowns and charging boundaries: [implementation no
 Player preparation movement follows native Goety rules (20% walking speed, or full stop with native `fullStopCast`), with an independent `chanting.movementRestrictions` switch. Bridge cooldowns bypass creative by default; opt in with `cooldowns.creativeCooldown`.
 
 Native infinite held channels need a finite lifespan when triggered by an Ars hit. `channels.unboundedDurationTicks` defaults to 200 ticks (10 seconds); Corrupted Beam and Water Jet use this fallback when Goety's native corruption duration is zero. Positive native durations are retained, and Ars duration augments scale the base. Warding, Flying, Telekinesis, Burrowing and Illuminate also use this fallback because their native held channels are unbounded. The native Goety wand is unchanged.
+
+## Survival glyph crafting
+
+All 124 registered glyphs on each supported version now have ordinary Ars Scribe's Table recipes. Focus-backed recipes consume one corresponding native Goety focus and one Ars Source Gem. Warding has no registered focus and uses a Cursed Ingot instead. Every recipe costs 27 experience points. Craft the native focus first, select the glyph through a spell book at the Scribe's Table, then supply the two ingredients. Learn the resulting glyph by right-clicking it as with other Ars glyphs. These native glyph recipes appear in Ars' existing JEI category when JEI is installed.
+
+The four bridge-only augments use one Source Gem and one thematic material: Burning uses Blaze Powder; Extension uses Savage Tooth; Life Absorb uses Ectoplasm; Soul Eater uses Soul Emerald. Recipes can be replaced by a datapack. Shared definitions and platform IDs are described in [glyph-crafting.md](docs/glyph-crafting.md).

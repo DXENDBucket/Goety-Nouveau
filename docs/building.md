@@ -315,3 +315,7 @@ Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_menus` from each load
 ## Unlimited-fire payload timing (dev.50)
 
 Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_rapid_fire` on each loader; Neo can include `-PwithIron=true`. Two focused cases verify consecutive actual native SurgingOrb emission/payment/old-cooldown isolation and mixed recipe timing/cooldowns with ordinary charged/channel exclusions. No historical suite rerun. See rapid-fire-audit.md.
+
+## Native glyph crafting (dev.51)
+
+Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_recipes` on each loader; Neo may use `-PwithIron=true`. One focused case checks all native recipe entries and completes actual focus/augment crafts through the original Scribe table and right-click learning. Recipe generation and platform filtering use the shared JSON definition in common/recipes. See glyph-crafting.md.

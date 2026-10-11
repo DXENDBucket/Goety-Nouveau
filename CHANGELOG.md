@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-dev.51
+
+- Add native Ars Scribe recipes for all 124 registered glyphs per loader. Focus-backed glyphs consume their corresponding Goety focus (Warding has no native focus and consumes a Cursed Ingot) plus one Source Gem. The four dedicated augments use thematic materials plus one Source Gem. Native 27 XP cost, table animations/ingredient handling, glyph learning and JEI display are retained.
+- Share recipe definitions across Ars 4/Forge and Ars 5/NeoForge; only native Breeze or Temblor Clap is generated for the respective version. Datapacks can override the recipes.
+
+- Validation: one focused native recipe/crafting/learning GameTest passed on each loader; both binary/source artifacts contain all 124 platform recipes. JEI uses the native category; client visuals remain a manual check.
+
 ## 0.1.0-dev.50
 
 - Restore corrupted Chinese names/descriptions for Pulverize, Scatter Mines and End Walk. They had been saved as literal question marks, not missing translations.

@@ -62,3 +62,7 @@ tasks.named('sourcesJar') { from('LICENSE', 'THIRD_PARTY_NOTICES.md') }
 
 ext.glyphLocalizationRoot = file("common/src/main/resources/assets/goety_nouveau/lang")
 apply from: "gradle/validate-localization.gradle"
+
+ext.glyphRecipeRoot = file(".")
+ext.glyphRecipeLoader = "neoforge"
+apply from: "gradle/glyph-recipes.gradle"

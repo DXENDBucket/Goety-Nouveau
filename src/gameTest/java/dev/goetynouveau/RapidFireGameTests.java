@@ -3,7 +3,7 @@ import net.minecraft.gametest.framework.*;
 import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("goety_nouveau_rapid_fire") @PrefixGameTestTemplate(false)
 public final class RapidFireGameTests {
-    private static net.minecraft.server.level.ServerPlayer player(GameTestHelper h) {
+    static net.minecraft.server.level.ServerPlayer player(GameTestHelper h) {
         var cookie=net.minecraft.server.network.CommonListenerCookie.createInitial(new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "CastStudent"),false);
         var player=new net.minecraft.server.level.ServerPlayer(h.getLevel().getServer(),h.getLevel(),cookie.gameProfile(),cookie.clientInformation());
         var connection=new net.minecraft.network.Connection(net.minecraft.network.protocol.PacketFlow.SERVERBOUND);
