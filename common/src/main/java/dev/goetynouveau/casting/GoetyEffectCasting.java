@@ -50,6 +50,7 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
+            case VOID_SHOCK, QUAKING, WARDING -> GoetyGroundChannelCasting.apply(focus, world, frame, ars, charge);
             case WATER_JET -> GoetyWaterJetCasting.apply(world, frame, ars, charge);
             case PRISMA_BEAM -> GoetyPrismaBeamCasting.start(world, frame, ars, charge);
             case CORRUPTED_BEAM -> GoetyCorruptedBeamCasting.apply(world, frame, ars, charge);

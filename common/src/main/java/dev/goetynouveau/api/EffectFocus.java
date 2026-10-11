@@ -83,7 +83,10 @@ public enum EffectFocus {
     TRIDENT_STORM("trident_storm", "trident_storm_focus", "Trident Storm", true, false, false),
     CORRUPTED_BEAM("corrupted_beam", "corruption_focus", "Corrupted Beam", true, true, false),
     WATER_JET("water_jet", "water_jet_focus", "Water Jet", true, true, false),
-    PRISMA_BEAM("prisma_beam", "prisma_beam_focus", "Prisma Beam", true, true, false);
+    PRISMA_BEAM("prisma_beam", "prisma_beam_focus", "Prisma Beam", true, true, false),
+    VOID_SHOCK("void_shock", "stellar_focus", "Void Shock", true, true, true),
+    QUAKING("quaking", "quaking_focus", "Quaking", true, false, true),
+    WARDING("warding", "warding_charm", "Warding", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;
@@ -93,6 +96,7 @@ public enum EffectFocus {
     }
     public boolean breathing() { return this == FIRE_BREATH || this == FROST_BREATH || this == SWARM; }
     public boolean rain() { return this == ARROW_RAIN || this == BLIZZARD || this == METEOR_SHOWER || this == BOMBARDMENT; }
-    public boolean channel() { return breathing() || rain() || this == THUNDERSTORM || this == CORRUPTED_BEAM || this == WATER_JET || this == PRISMA_BEAM; }
-    public ISpell spell() { return FocusSpells.read(CarrierRegistry.id("goety:" + focus)).orElseThrow(); }
+    public boolean channel() { return breathing() || rain() || this == THUNDERSTORM || this == CORRUPTED_BEAM || this == WATER_JET || this == VOID_SHOCK || this == QUAKING || this == WARDING || this == PRISMA_BEAM; }
+    public net.minecraft.resources.ResourceLocation focusId() {return CarrierRegistry.id(this==WARDING?"goety_nouveau:glyph_warding":"goety:"+focus);}
+    public ISpell spell() { return FocusSpells.read(focusId()).orElseThrow(()->new IllegalStateException("Missing native spell binding: "+focusId())); }
 }

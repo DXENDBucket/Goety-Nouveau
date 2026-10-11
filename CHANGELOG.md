@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-dev.35
+
+- Add Void Shock, Quaking and Warding on both loaders: 104 shared glyphs, 105 on NeoForge.
+- Void Shock executes the native Stellar Focus useSpell barrage, preserving hover, homing/trails, actual explosions, explicit owner and two/five-tick staff cadence. Yourself or an ally supplies the executor; original caster supplies gear/payment. Upkeep uses the shared per-20-tick sustained mapping.
+- Quaking executes original forward lanes, sneaking rings and Geomancy-staff arcs, damage/shield breaking, debris and sounds. Original-caster equipment and sneaking remain separate from the allied executor. Bound the native downward ring search at build/unloaded boundaries without creating fake bedrock or forcing unloaded chunks.
+- Warding exposes the native unregistered utility spell using this addon glyph as its casting key and the existing charm asset as its icon. Only allied players receive native ward storage (cap 20, five-recipient-tick cadence); cost remains zero. Native mob ward storage is not invented.
+- Separate preparation from actual attack phases: ten ticks for the void barrage and native warmup for Quaking. Warding uses the configurable finite duration fallback. Ordinary Goety item casting stays unchanged.
+- Six focused server cases passed on each loader, covering damage/ownership, native cadence and variants, interruption/creative/resource gates, void-boundary termination and actual player ward data. Actual client appearance/audio remain manual checks.
+
 ## 0.1.0-dev.34
 
 - Add Water Jet and Prisma Beam on both loaders: 101 shared glyphs, 102 on NeoForge.

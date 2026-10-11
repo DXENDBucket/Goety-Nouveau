@@ -213,3 +213,11 @@ Both loaders add native water callbacks and native charged prism results. Real a
 Focused `goety_nouveau_water_prism` server cases cover real damage/explicit owner, native water extinguishing/Burning/Sapped, visual metadata/live aim, upkeep and empty accounts, creative payment, charged prism timing/final payment, friendly-target and alliance interruption, plus prior corrupted-beam regression. Five cases passed on each loader. Client appearance/audio/interpolation remain manual checks.
 
 Release/source checks: 102 NeoForge / 101 Forge glyph models and bilingual entries, native parent resources, version/Core metadata, MIT and third-party notices, Java 21/17 bytecode, channel display registration and client-only draw accessors, Forge refmap, no bundled dependencies/test classes, no Vivideru/Breeze in Forge. See `water-prism-audit.md` for boundaries and remaining work.
+
+## Native ground/void/ward channels (dev.35)
+
+Void Shock binds to `stellar_focus` (the item class name/asset name is not `void_shock_focus`). Warding has no registered native focus/charm item in the pinned JARs; its native utility callback is exposed through this addon glyph key and the existing charm asset. Quaking has its native forward/radial/staff callbacks, scoped source ownership and bounded downward ground search.
+
+Six targeted `goety_nouveau_ground_channels` cases passed on both loaders: native real damage and owner, ordinary/void-staff emission cadence and hover, upkeep/creative/interruption, native Quaking forward/staff/ring debris, true build-bottom ground search, native player ward data and invalid/unsupported/unfunded recipients. No broad historical catalogue rerun. Actual client appearance/audio remain manual checks.
+
+Release/source checks: 105 NeoForge / 104 Forge glyph models and bilingual entries, native model resources, MIT/notices, version/Core metadata, Java 21/17 bytecode, new mixins/Forge refmap, no bundled dependencies/tests, no Vivideru/Breeze in Forge. Remaining scope is tracked in `ground-channel-audit.md`.

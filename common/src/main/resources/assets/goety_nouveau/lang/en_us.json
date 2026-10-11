@@ -209,5 +209,11 @@
   "goety_nouveau.glyph_name.glyph_water_jet": "Water Jet",
   "goety_nouveau.glyph_desc.glyph_water_jet": "Grant yourself or an ally a sustained jet of water.",
   "goety_nouveau.glyph_name.glyph_prisma_beam": "Prisma Beam",
-  "goety_nouveau.glyph_desc.glyph_prisma_beam": "Grant yourself or an ally a charging prism beam that strikes when fully charged."
+  "goety_nouveau.glyph_desc.glyph_prisma_beam": "Grant yourself or an ally a charging prism beam that strikes when fully charged.",
+  "goety_nouveau.glyph_name.glyph_void_shock": "Void Shock",
+  "goety_nouveau.glyph_desc.glyph_void_shock": "Choose yourself or an ally to sustain native seeking void shocks.",
+  "goety_nouveau.glyph_name.glyph_quaking": "Quaking",
+  "goety_nouveau.glyph_desc.glyph_quaking": "Choose yourself or an ally to send native tremors forward. Sneaking expands them in rings.",
+  "goety_nouveau.glyph_name.glyph_warding": "Warding",
+  "goety_nouveau.glyph_desc.glyph_warding": "Sustain native soul-energy warding for yourself or an allied player."
 }

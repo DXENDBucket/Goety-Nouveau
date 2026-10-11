@@ -55,7 +55,10 @@
     "NativeBeamStateMixin",
     "NativeBeamTargetStateMixin",
     "NativeWaterDamageMixin",
-    "NativePrismaGeometryMixin"
+    "NativePrismaGeometryMixin",
+    "NativeVoidShockGeometryMixin",
+    "NativeWardingRecipientMixin",
+    "NativeQuakingMixin"
   ],
   "injectors": {
     "defaultRequire": 1

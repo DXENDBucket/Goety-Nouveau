@@ -23,8 +23,8 @@ import java.util.*;
 public final class GoetyActiveCastProvider implements ActiveCastProvider {
     public static void register() { ActiveCasts.register(CarrierRegistry.id("goety_nouveau:active_casting"), new GoetyActiveCastProvider()); }
     private static ResourceLocation focus(com.hollingsworth.arsnouveau.api.spell.AbstractSpellPart part) {
-        String id = part instanceof GoetyBoltGlyph glyph ? glyph.focus().focus
-                : part instanceof GoetyEffectGlyph glyph ? glyph.focus().focus : null;
+        if(part instanceof GoetyEffectGlyph effect)return effect.focus().focusId();
+        String id = part instanceof GoetyBoltGlyph glyph ? glyph.focus().focus : null;
         return id == null ? null : CarrierRegistry.id("goety:" + id);
     }
     private static List<ResourceLocation> focuses(Spell recipe) {
@@ -37,6 +37,8 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
     public static int preparationTicks(ISpell spell, net.minecraft.world.entity.LivingEntity caster, ItemStack staff) {
         // Its real target-dependent charge is displayed and completed after the Ars hit.
         if(spell instanceof com.Polarice3.Goety.common.magic.spells.abyss.PrismaBeamSpell)return 0;
+        if(spell instanceof com.Polarice3.Goety.common.magic.spells.void_spells.VoidShockSpell)return 10;
+        if(spell instanceof com.Polarice3.Goety.common.magic.spells.geomancy.QuakingSpell)return Math.max(0,spell.defaultCastDuration());
         // 72000 is an item-use lifetime. Only castUp is the preparation of a charging spell.
         return Math.max(0, spell instanceof IChargingSpell charging ? charging.castUp(caster, staff) : spell.castDuration(caster, staff));
     }

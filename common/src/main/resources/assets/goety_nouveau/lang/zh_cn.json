@@ -209,5 +209,11 @@
   "goety_nouveau.glyph_name.glyph_water_jet": "水流",
   "goety_nouveau.glyph_desc.glyph_water_jet": "令自己或友军持续喷射水流。",
   "goety_nouveau.glyph_name.glyph_prisma_beam": "棱彩射线",
-  "goety_nouveau.glyph_desc.glyph_prisma_beam": "令自己或友军蓄积棱彩射线，蓄满后打击目标。"
+  "goety_nouveau.glyph_desc.glyph_prisma_beam": "令自己或友军蓄积棱彩射线，蓄满后打击目标。",
+  "goety_nouveau.glyph_name.glyph_void_shock": "虚空冲击",
+  "goety_nouveau.glyph_desc.glyph_void_shock": "选择自己或友军持续放出追击敌人的虚空冲击。",
+  "goety_nouveau.glyph_name.glyph_quaking": "震地",
+  "goety_nouveau.glyph_desc.glyph_quaking": "选择自己或友军向前激起震波；潜行时震波向周围扩散。",
+  "goety_nouveau.glyph_name.glyph_warding": "守护",
+  "goety_nouveau.glyph_desc.glyph_warding": "为自己或友方玩家持续补充灵魂能量护盾。"
 }

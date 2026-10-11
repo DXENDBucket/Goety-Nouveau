@@ -29,8 +29,8 @@ public abstract class NativeSpellGeometryMixin implements ISpell {
     @Inject(method="isShifting",at=@At("HEAD"),cancellable=true)
     private void goetyNouveau$sneak(LivingEntity caster,CallbackInfoReturnable<Boolean> cir) {
         var view=GoetyNativeGeometry.current();
-        if(view!=null && view.spell()==(Object)this && caster==view.context().caster())
-            cir.setReturnValue(dev.goetynouveau.casting.GoetyResources.sneaking(caster));
+        if(view!=null && view.spell()==(Object)this && (caster==view.context().caster() || caster==view.host()))
+            cir.setReturnValue(dev.goetynouveau.casting.GoetyResources.sneaking(view.context().caster()));
     }
     @Inject(method="getTarget(Lnet/minecraft/world/entity/LivingEntity;I)Lnet/minecraft/world/entity/LivingEntity;",
             at=@At("HEAD"),cancellable=true)
