@@ -79,7 +79,11 @@
     "NativeScatterMineMixin",
     "NativeScatterEnchantMixin",
     "NativeTunnelSpellMixin",
-    "NativeTunnelHoleMixin"
+    "NativeTunnelHoleMixin",
+    "NativeGrappleSpellMixin",
+    "NativeGrappleLeaseMixin",
+    "NativeGrappleStateMixin",
+    "NativeGrappleEnchantMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -88,6 +92,7 @@
     "NativeChantBarMixin",
     "NativeChantMovementMixin",
     "client.NativeWaterRenderAccess",
-    "client.NativePrismaRenderAccess"
+    "client.NativePrismaRenderAccess",
+    "client.NativeGrappleHandMixin"
   ]
 }

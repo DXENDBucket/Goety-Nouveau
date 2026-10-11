@@ -73,6 +73,8 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         var distinct = new LinkedHashSet<ResourceLocation>();
         for (var recipe : recipes) distinct.addAll(focuses(recipe));
         for (var id : distinct) FocusSpells.read(id).ifPresent(spell -> {
+            // Native grapples cool down on retrieval/end, not on initial launch.
+            if(spell instanceof com.Polarice3.Goety.common.magic.spells.wild.GrappleSpell)return;
             int ticks = Math.max(0, spell.spellCooldown(player));
             GoetyFocusCooldowns.atLeast(player, BuiltInRegistries.ITEM.get(id), ticks);
         });

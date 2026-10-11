@@ -98,7 +98,8 @@ public enum EffectFocus {
     ILLUMINATE("illuminate", "illuminate_focus", "Illuminate", false, true, true),
     PULVERIZE("pulverize", "pulverize_focus", "Pulverize", false, false, true),
     SCATTER("scatter", "scatter_focus", "Scatter Mines", true, true, true),
-    TUNNEL("tunnel", "tunnel_focus", "Tunnel", false, true, false);
+    TUNNEL("tunnel", "tunnel_focus", "Tunnel", false, true, false),
+    GRAPPLE("grapple", "grapple_focus", "Grapple", false, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

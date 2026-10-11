@@ -271,3 +271,9 @@ Release/source checks cover 116 NeoForge / 115 Forge glyph resources, bilingual/
 Run the four focused cases with `:runGameTestServer -PgameTestNamespaces=goety_nouveau_tunnel` from each loader project. Use `goety_nouveau_tunnel_edge` for the one additional int-depth/native-isolation check. The actual native save/load/update-tag entrypoints are exercised through the loader-specific test wrappers.
 
 Both sets passed on both loaders. Release/source checks cover 117 NeoForge / 116 Forge glyph resources, native parents and bilingual text, Java 21/17 bytecode, tunnel mixins and loader-specific Neo save bridge, Forge refmap, Core/version/license metadata and dependency/test isolation. See tunnel-audit.md for native expansion/restore and serialization boundaries; client rendering remains manual.
+
+## Native grapple lease (dev.43)
+
+Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_grapple` from each loader project. Four focused cases passed on both loaders: actual native attachment/player pulling/free recall, independent source and allied-player state/fee/synchronized hand, replacement ownership/native-wand isolation, and invalid recipients/resources/creative/bounded expiry. No historical catalogue rerun.
+
+Release/source checks cover 118 NeoForge / 117 Forge glyph resources, bilingual/native parents, Java 21/17 bytecode, grapple mixins and Forge refmap, Core/version/license metadata and no bundled dependencies/tests. See grapple-audit.md for player-only scope, resource/lease contracts and manual client checks.

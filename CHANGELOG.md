@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-dev.43
+
+- Add Grapple on both loaders: 117 shared glyphs, 118 on NeoForge. Execute the actual native GrappleSpell/VineHook and player-state pulling, preserving hook collision, attachment, rope renderer, sounds and original-caster staff/Velocity behavior.
+- Restrict the actual hooked player to self or an ally. Source resources and native equipment remain separate from the player being pulled; quote the target player’s hook state rather than an unrelated source hook. Launch pays once, recall is free, and creative is free; no continuous resource drain is invented.
+- Use a finite non-exclusive Core execution lease. Expiry, alliance loss or replacement ends the managed hook. Do not take over an ordinary wand hook or another caster’s hook, and do not clear a newer hook when the old one closes. Apply the native focus cooldown on managed completion rather than the launch callback’s zero cooldown.
+- Synchronize the Ars casting hand for the native rope renderer without requiring a Goety wand to stay held. Four focused runtime cases passed per loader; actual client rope appearance and cooldown HUD remain manual checks. Six registered NeoForge focus keys remain without glyph entry points.
+
 ## 0.1.0-dev.42
 
 - Add Tunnel on both loaders: 116 shared glyphs, 117 on NeoForge. Execute the complete native block callback at the actual Ars block/face, preserving native depth propagation, Void-staff width, block-entity/blacklist/fluid/unbreakable exclusions, particles and original block-state restoration.

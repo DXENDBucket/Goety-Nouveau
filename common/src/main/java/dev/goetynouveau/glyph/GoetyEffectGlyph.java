@@ -62,6 +62,7 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
         if (!focus.channel() && focus != EffectFocus.KILLING && focus != EffectFocus.SOUL_HEAL && focus != EffectFocus.IRON_HIDE && focus != EffectFocus.BULWARK
                 && !(spell instanceof com.Polarice3.Goety.common.magic.SummonSpell && GoetyResources.sneaking(caster))
                 && !spell.conditionsMet(server, caster)) return;
+        if(focus==EffectFocus.GRAPPLE){dev.goetynouveau.casting.GoetyGrappleCasting.apply(server,frame,stats,context);return;}
         var charge = GoetyResources.quote(context, spell, stats.getAugments());
         // Preserve the chain's explicit source account. This focus's native payment belongs
         // to this activation; publishing it as the inherited account would redirect other

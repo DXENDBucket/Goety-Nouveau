@@ -239,5 +239,7 @@
   "goety_nouveau.glyph_name.glyph_scatter": "????",
   "goety_nouveau.glyph_desc.glyph_scatter": "?????????????????????????????",
   "goety_nouveau.glyph_name.glyph_tunnel": "隧道",
-  "goety_nouveau.glyph_desc.glyph_tunnel": "在选中的方块处暂时打开一道通路。"
+  "goety_nouveau.glyph_desc.glyph_tunnel": "在选中的方块处暂时打开一道通路。",
+  "goety_nouveau.glyph_name.glyph_grapple": "藤蔓钩索",
+  "goety_nouveau.glyph_desc.glyph_grapple": "使自己或友军玩家发射藤蔓钩索，再次触发即可收回。"
 }
