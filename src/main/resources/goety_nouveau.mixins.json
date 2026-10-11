@@ -51,13 +51,18 @@
     "NativeSpellEntityStateMixin",
     "NativeBeamExecutionMixin",
     "NativeCorruptedBeamDamageMixin",
-    "NativeBeamStateMixin"
+    "NativeBeamStateMixin",
+    "NativeBeamTargetStateMixin",
+    "NativeWaterDamageMixin",
+    "NativePrismaGeometryMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
     "NativeChantBarMixin",
-    "NativeChantMovementMixin"
+    "NativeChantMovementMixin",
+    "client.NativeWaterRenderAccess",
+    "client.NativePrismaRenderAccess"
   ]
 }

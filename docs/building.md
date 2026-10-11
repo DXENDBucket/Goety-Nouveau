@@ -205,3 +205,11 @@ Four focused shared `goety_nouveau_beams` cases passed on both loaders. NeoForge
 The first run exposed the native default CorruptionDuration=0 (infinite held casting), which the bounded adapter had rejected. The final integration gives native infinite channels a configurable finite Ars lifetime, default 200 ticks, without changing ordinary Goety wands. Subsequent checks include damage before committing the first fee so an exact-cost cast is effective, and immediate role/lifetime validation before the native entity damage tick. No native damage, wall collision or rendering method was replaced just to satisfy a fixture.
 
 Both release/source artifacts verified: 100 NeoForge / 99 Forge models and bilingual entries, native parent resources, version/Core metadata, current MIT/third-party notices, Java 21/17 bytecode, new beam hooks and Forge refmap, no bundled dependencies/test classes, and no Vivideru/Breeze references in Forge. Actual native beam render/audio and multiplayer interpolation remain manual checks; see `beam-channel-audit.md`.
+
+## Water Jet and Prisma Beam (dev.34)
+
+Both loaders add native water callbacks and native charged prism results. Real allied executors receive a transient tracked display; native player held-wand rendering/state is not impersonated. Water pays per 20 pulses; prism setup is free and its final callback pays once. Extend Time stretches prism charge with native particle phase clamped to 0..1 to avoid negative bubble spacing.
+
+Focused `goety_nouveau_water_prism` server cases cover real damage/explicit owner, native water extinguishing/Burning/Sapped, visual metadata/live aim, upkeep and empty accounts, creative payment, charged prism timing/final payment, friendly-target and alliance interruption, plus prior corrupted-beam regression. Five cases passed on each loader. Client appearance/audio/interpolation remain manual checks.
+
+Release/source checks: 102 NeoForge / 101 Forge glyph models and bilingual entries, native parent resources, version/Core metadata, MIT and third-party notices, Java 21/17 bytecode, channel display registration and client-only draw accessors, Forge refmap, no bundled dependencies/test classes, no Vivideru/Breeze in Forge. See `water-prism-audit.md` for boundaries and remaining work.

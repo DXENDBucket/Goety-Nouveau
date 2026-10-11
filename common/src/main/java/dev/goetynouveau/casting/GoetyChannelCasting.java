@@ -20,6 +20,12 @@ public final class GoetyChannelCasting {
         }
     }
     private GoetyChannelCasting() {}
+    static void movement(ExecutionSession<?> session,LivingEntity host,int ticks,int remaining) {
+        if(host instanceof net.minecraft.server.level.ServerPlayer player && !player.hasDisconnected()
+                && dev.goetynouveau.platform.ActiveCastingPlatform.realPlayer(host))
+            dev.goetynouveau.platform.ActiveCastingPlatform.chant(player,
+                    new dev.goetynouveau.network.ChantStatePayload(session.id(),ticks,remaining,true));
+    }
     /** An infinite native held cast needs a finite duration when activated by one Ars hit. */
     public static int boundedTicks(int nativeTicks,double durationModifier) {
         double base=nativeTicks>0?nativeTicks:dev.goetynouveau.platform.GoetyConfig.unboundedChannelTicks();
@@ -41,10 +47,7 @@ public final class GoetyChannelCasting {
             private int emitted;
             private long nextEmission,nextSound,lastTick=Long.MIN_VALUE;
             private void movement(ExecutionSession<SpellStat> session,int remaining) {
-                if(host instanceof net.minecraft.server.level.ServerPlayer player && !player.hasDisconnected()
-                        && dev.goetynouveau.platform.ActiveCastingPlatform.realPlayer(host))
-                    dev.goetynouveau.platform.ActiveCastingPlatform.chant(player,
-                            new dev.goetynouveau.network.ChantStatePayload(session.id(),ticks,remaining,true));
+                GoetyChannelCasting.movement(session,host,ticks,remaining);
             }
             private void sound(SoundEvent sound) {
                 if(sound!=null) spell.playSound(world,host,sound,spell.castingVolume(),spell.castingPitch());

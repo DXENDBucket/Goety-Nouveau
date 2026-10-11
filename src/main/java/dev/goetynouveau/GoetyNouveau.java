@@ -17,6 +17,7 @@ public final class GoetyNouveau {
     public GoetyNouveau(IEventBus bus, ModContainer container) {
         container.registerConfig(ModConfig.Type.SERVER, GoetyConfig.SPEC, "goety_nouveau-server.toml");
         bus.addListener(dev.goetynouveau.network.ChantStatePayload::register);
+        dev.goetynouveau.entity.GoetyEntities.register(bus);
         GlyphCatalog.register();
         dev.goetynouveau.casting.GoetyActiveCastProvider.register();
         bus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(GlyphCatalog::configureCarriers));

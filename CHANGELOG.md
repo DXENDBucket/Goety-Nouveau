@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.34
+
+- Add Water Jet and Prisma Beam on both loaders: 101 shared glyphs, 102 on NeoForge.
+- Water Jet retains its native trace, damage, extinguishing, Burning branch, Abyss-staff Sapped, loop sound and paid upkeep. Yourself or a native ally supplies the live spatial executor; original caster supplies equipment and payment, with explicit damage ownership retained.
+- Prisma Beam keeps native target-dependent charging, bubble particles and final magic/attack callbacks. Charge setup is free; the successful final callback pays once. No duplicate pre-hit preparation; Ars duration scales the charge without pushing native particle spacing beyond its safe range.
+- Add a transient tracked visual entity for both beams, reusing native water draw routines/textures and prism vertices/charge animation. Real player/mob executors render from their eyes without faking held-wand player capabilities. Friendly targets, lost alliance, removal, empty accounts and expiry clean up owned state. Ordinary Goety wand behavior remains unchanged.
+- Five focused server cases passed on each loader, including a corrupted-beam regression; actual client appearance, audio and multiplayer interpolation remain manual checks.
+
 ## 0.1.0-dev.33
 
 - Add Corrupted Beam on both loaders: 99 shared glyphs, 100 on NeoForge.

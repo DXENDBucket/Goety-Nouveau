@@ -35,6 +35,8 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
     @Override public boolean supports(Spell spell) { return !focuses(spell).isEmpty(); }
     @Override public boolean chantingEnabled(ActiveCastRequest request) { return GoetyConfig.chantingEnabled(); }
     public static int preparationTicks(ISpell spell, net.minecraft.world.entity.LivingEntity caster, ItemStack staff) {
+        // Its real target-dependent charge is displayed and completed after the Ars hit.
+        if(spell instanceof com.Polarice3.Goety.common.magic.spells.abyss.PrismaBeamSpell)return 0;
         // 72000 is an item-use lifetime. Only castUp is the preparation of a charging spell.
         return Math.max(0, spell instanceof IChargingSpell charging ? charging.castUp(caster, staff) : spell.castDuration(caster, staff));
     }

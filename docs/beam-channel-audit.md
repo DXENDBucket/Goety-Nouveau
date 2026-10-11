@@ -30,6 +30,6 @@ Ars 生成的光束不发送原生持杖 CBeamPacket：位置／朝向来自真�
 
 定向用例验证真实光束伤害／归属、存活靶的转向和墙体阻挡、友军／执行者排除、同步主人和来源、普通原生持杖取消、按秒费用、恰好一次费用的实际伤害、资源不足、关系变化、创造自然结束、双方移除与孤儿清理。包含前一批流星雨间隔／资源回归；未重跑整个目录。服务器验证不能证明客户端实际观感，光束外观、声音和多人插值仍需人工观察。
 
-Water Jet 与 Prisma Beam 仍待接入。两者的原生渲染入口限定玩家并检查使用物品／聚晶，不能仅调用伤害回调。WaterJetRenderer 的 renderJetLayer 可复用原生几何与双层贴图；PrismaBeamRenderer 还依赖目标、施法时长和渐变动画。未来显示入口必须能为真实非玩家友军服务，并有可跟踪的持续状态，不能用替身玩家模拟。
+dev.33 时 Water Jet 与 Prisma Beam 仍待接入；现已于 dev.34 接入，见 water-prism-audit.md。以下保留当时对原生入口的审计：两者的原生渲染入口限定玩家并检查使用物品／聚晶，不能仅调用伤害回调。WaterJetRenderer 的 renderJetLayer 可复用原生几何与双层贴图；PrismaBeamRenderer 还依赖目标、施法时长和渐变动画。未来显示入口必须能为真实非玩家友军服务，并有可跟踪的持续状态，不能用替身玩家模拟。
 
 区域／持续余项仍需逐项核对：Void Shock、Quaking、Warding，以及 Telekinesis、Shocking、Whirlwind、Flying、Burrowing 等。已有 Leeching／Surging／Steam／Feast 的效果或弹射物表示不等同于已复现全部持杖交互。这是接入范围记录，未据此宣布整个持续法术目标完成。

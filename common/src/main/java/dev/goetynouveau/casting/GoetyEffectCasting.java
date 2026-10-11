@@ -50,6 +50,8 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
+            case WATER_JET -> GoetyWaterJetCasting.apply(world, frame, ars, charge);
+            case PRISMA_BEAM -> GoetyPrismaBeamCasting.start(world, frame, ars, charge);
             case CORRUPTED_BEAM -> GoetyCorruptedBeamCasting.apply(world, frame, ars, charge);
             case THUNDERSTORM -> GoetyThunderstormCasting.apply(world, frame, ars, charge);
             case TRIDENT_STORM -> GoetyTridentCasting.apply(world, frame, spell, ars);

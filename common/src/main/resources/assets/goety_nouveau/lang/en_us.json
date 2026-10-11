@@ -205,5 +205,9 @@
   "goety_nouveau.glyph_name.glyph_trident_storm": "Trident Storm",
   "goety_nouveau.glyph_desc.glyph_trident_storm": "Raise native lightning tridents around the selected location.",
   "goety_nouveau.glyph_name.glyph_corrupted_beam": "Corrupted Beam",
-  "goety_nouveau.glyph_desc.glyph_corrupted_beam": "Grant yourself or an ally a sustained beam of corruption."
+  "goety_nouveau.glyph_desc.glyph_corrupted_beam": "Grant yourself or an ally a sustained beam of corruption.",
+  "goety_nouveau.glyph_name.glyph_water_jet": "Water Jet",
+  "goety_nouveau.glyph_desc.glyph_water_jet": "Grant yourself or an ally a sustained jet of water.",
+  "goety_nouveau.glyph_name.glyph_prisma_beam": "Prisma Beam",
+  "goety_nouveau.glyph_desc.glyph_prisma_beam": "Grant yourself or an ally a charging prism beam that strikes when fully charged."
 }

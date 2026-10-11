@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.33`). Nineteen projectile replacements, seventy-six shared target/location effects, one additional NeoForge Breeze effect and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.34`). Nineteen projectile replacements, seventy-eight shared target/location effects, one additional NeoForge Breeze effect and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -84,6 +84,8 @@ These glyphs are **effects**, placed after an Ars cast method. They use the actu
 | Watching / Snaring / Blasting | Native Watchling, Snareling and Blastling servants at the selected point. Void staff retains 2?5 batches; teleport/hiding, web shots and alternating goo attacks remain native. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
 | Fire Breath / Frost Breath / Swarm | Grants yourself or an ally a sustained native breath. The selected ally supplies the eyes and facing; the original caster supplies gear, damage and energy. Native results run each tick, with one focus charge per second. | Amplify / Dampen, Extend Time / Duration Down; Burning on Fire Breath |
 | Arrow Rain / Blizzard / Meteor Shower | Sustained native rain executed by yourself or a selected ally. The executor supplies live aim or mob target; the original caster supplies gear and energy. Arrow Rain and Blizzard emit each tick; Meteor Shower retains its native salvo interval. Extend Time scales the finite emission count. | Amplify / Dampen, Extend Time / Duration Down; Burning on Arrow Rain / Meteor Shower; AOE on Meteor Shower |
+| Water Jet | Yourself or an allied executor emits native water damage, extinguishing, Burning and Abyss-staff Sapped from its live aim. A tracked display reuses Goety water textures and draw routines. Original caster pays upkeep. | Amplify / Dampen, Extend Time / Duration Down, Burning |
+| Prisma Beam | Yourself or an allied executor charges against its native enemy target, then resolves the original magic/attack result. Charge visuals are tracked for players and mobs; payment occurs once at the final result. Invalid/friendly targets and interruptions cancel the charge. | Amplify / Dampen, Extend Time / Duration Down |
 | Corrupted Beam | Grant yourself or an ally a real native beam, following that executor's position and facing with native block collision, damage and renderer. The original caster pays ongoing upkeep and supplies potency. Empty accounts, expired duration, lost alliance or removal stop and remove it. | Amplify / Dampen, Extend Time / Duration Down |
 | Bombardment | A sustained native fireball barrage from yourself or a selected ally, with native hovering, staff salvos, Unholy Hell Bolts and sneak-safe fireballs. Original caster supplies gear, damage ownership and energy. | Amplify / Dampen, Extend Time / Duration Down, Burning |
 | Thunderstorm | Sustained native lightning traps around yourself or an allied executor; the early phase uses that executor's target. Native Storm/Void/Nameless staff variants and electric particles remain active. | Amplify / Dampen, AOE, Extend Time / Duration Down |
@@ -186,4 +188,4 @@ Active preparation, native cooldowns and charging boundaries: [implementation no
 
 Player preparation movement follows native Goety rules (20% walking speed, or full stop with native `fullStopCast`), with an independent `chanting.movementRestrictions` switch. Bridge cooldowns bypass creative by default; opt in with `cooldowns.creativeCooldown`.
 
-Native infinite held channels need a finite lifespan when triggered by an Ars hit. `channels.unboundedDurationTicks` defaults to 200 ticks (10 seconds); Corrupted Beam uses this fallback when Goety's native corruption duration is zero. Positive native durations are retained, and Ars duration augments scale the base. The native Goety wand is unchanged.
+Native infinite held channels need a finite lifespan when triggered by an Ars hit. `channels.unboundedDurationTicks` defaults to 200 ticks (10 seconds); Corrupted Beam and Water Jet use this fallback when Goety's native corruption duration is zero. Positive native durations are retained, and Ars duration augments scale the base. The native Goety wand is unchanged.

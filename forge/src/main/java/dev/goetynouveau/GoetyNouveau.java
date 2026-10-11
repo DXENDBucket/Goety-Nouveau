@@ -18,6 +18,7 @@ public final class GoetyNouveau {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, GoetyConfig.SPEC, "goety_nouveau-server.toml");
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
         dev.goetynouveau.network.ForgeNetwork.register();
+        dev.goetynouveau.entity.GoetyEntities.register(bus);
         GlyphCatalog.register();
         dev.goetynouveau.casting.GoetyActiveCastProvider.register();
         bus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(GlyphCatalog::configureCarriers));
