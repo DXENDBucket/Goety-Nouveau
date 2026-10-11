@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 public final class NativeBreathHooks {
     private NativeBreathHooks() {}
-    public static void result(BreathingSpell spell, ServerLevel world, LivingEntity caster, ItemStack staff, SpellStat stats) {
+    public static void result(com.Polarice3.Goety.common.magic.Spell spell, ServerLevel world, LivingEntity caster, ItemStack staff, SpellStat stats) {
         com.Vivideru.Goety.common.magic.SpellTypeDamage.cast(spell, () -> spell.SpellResult(world, caster, staff, stats));
     }
 }

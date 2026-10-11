@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-dev.31
+
+- Add Arrow Rain, Blizzard and Meteor Shower effects, plus the Ice Storm projectile replacement on both loaders: 95 shared glyphs, 96 on NeoForge.
+- Use native rain callbacks and entities, cloud particles, impact behavior, staff/enchantment variants and explicit damage ownership. Rains run from yourself or an allied executor; caster gear and source account stay on the original caster.
+- Share the bounded channel driver with breaths. Preserve native rain cadence and emission limits; ever-charge prepayment repeats per 20 native emissions, not per 20 elapsed ticks. Empty accounts, changed alliances, removal and natural expiry stop the channel. First rain batch triggers immediately after Ars preparation.
+- Preserve the native moving ice cloud's growth, area freezing, snow trail, staff size and lifetime, with Conflux carrier compatibility.
+- Five focused server cases passed on each loader, including a breath regression; client appearance and audio remain manual checks.
+
+
 ## 0.1.0-dev.30
 
 - Add Ministrous and Hogging summon effects on both loaders, and native Breeze on NeoForge: 91 shared glyphs, 92 on NeoForge.

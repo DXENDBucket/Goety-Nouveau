@@ -44,6 +44,15 @@ public final class GoetyProjectileFactory {
                 // Native shootFromRotation adds one facing unit to its nominal 1.5 speed.
                 light.shoot(direction.x,direction.y,direction.z,2.5F*speed,0); result.add(light);
             }
+            case ICE_STORM -> {
+                int range=defaults.getRange();
+                if(enchanted) { potency+=gearPotency; duration+=gearDuration; range+=WandUtil.getRangeLevel(caster); velocity+=gearVelocity; }
+                var storm=new IceStorm(origin.x,origin.y,origin.z,direction.x,direction.y,direction.z,world);
+                storm.setExtraDamage(Math.max(0,potency)); storm.setDuration(Math.max(0,duration));
+                storm.setRange(Math.max(0,range)); storm.setBoltSpeed((int)velocity);
+                if(right) storm.setSize(1);
+                NativeProjectileHooks.speed(storm,speed); result.add(storm);
+            }
             case ICE_SPIKE -> {
                 if(enchanted) { potency+=gearPotency; velocity+=gearVelocity/3F; }
                 IceSpike spike=right?new IceSpear(caster,world):new IceSpike(caster,world);
@@ -183,6 +192,7 @@ public final class GoetyProjectileFactory {
     public static void sound(BoltFocus focus, ServerLevel world, LivingEntity caster) {
         var spell=(Spell)focus.spell();
         switch(focus) {
+            case ICE_STORM -> spell.playSound(world,caster,ModSounds.WIND_BLAST.get(),1,.75F);
             case ICE_SPIKE -> spell.playSound(world,caster,ModSounds.ICE_SPIKE_CAST.get(),1,spell.projPitch(world.random));
             case LAVABALL -> spell.playSound(world,caster,SoundEvents.GHAST_SHOOT,2,spell.projPitch(world.random));
             case GLOW_LIGHT -> spell.playSound(world,caster,1,1);

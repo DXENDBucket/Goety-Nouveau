@@ -41,7 +41,9 @@
     "ManagedLightProjectileMixin",
     "NativeBreathingGeometryMixin",
     "NativeBreathingResultMixin",
-    "NativeBreathingDamageMixin"
+    "NativeBreathingDamageMixin",
+    "NativeRainGeometryMixin",
+    "NativeRainResultMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -67,7 +67,9 @@ public final class RemainingProjectileCases {
         var old=GoetyConfig.RESOURCE_SOURCE.get(); GoetyConfig.RESOURCE_SOURCE.set(ResourceSource.SOUL_ENERGY);
         try {
             prepare(h,p);
-            for(var focus:BoltFocus.values()) if(focus.additional() && focus!=BoltFocus.GLOW_LIGHT) {
+            // Ice Storm is an autonomous area cloud, not a direct-impact damage projectile.
+            // Its native damage/growth/flight/expiry are covered by RainStormCases.
+            for(var focus:BoltFocus.values()) if(focus.additional() && focus!=BoltFocus.GLOW_LIGHT && focus!=BoltFocus.ICE_STORM) {
                 clear(h,p); p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(Items.IRON_SWORD));
                 focus.spell().SpellResult(h.getLevel(),p,ItemStack.EMPTY,focus.spell().defaultStats());
                 var reference=shots(h,p).get(0); var origin=reference.position(); var family=reference.getClass();

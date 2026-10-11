@@ -22,7 +22,8 @@ public enum BoltFocus {
     VOID_BOMB("void_bomb", "void_flash_focus", "Void Bomb"),
     SWORD("sword", "sword_focus", "Magic Sword"),
     RAZOR_WIND("razor_wind", "razor_wind_focus", "Razor Wind"),
-    GLOW_LIGHT("glow_light", "glow_light_focus", "Glow Light");
+    GLOW_LIGHT("glow_light", "glow_light_focus", "Glow Light"),
+    ICE_STORM("ice_storm", "ice_storm_focus", "Ice Storm");
 
     public final String glyph, focus, name;
     BoltFocus(String glyph, String name) { this(glyph, glyph + "_focus", name); }

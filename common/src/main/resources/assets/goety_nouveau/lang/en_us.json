@@ -189,5 +189,13 @@
   "goety_nouveau.glyph_name.glyph_hogging": "Hogging",
   "goety_nouveau.glyph_desc.glyph_hogging": "Summons short-lived burning hoglins beside the selected location. They charge and explode.",
   "goety_nouveau.glyph_name.glyph_breeze": "Summon Breeze",
-  "goety_nouveau.glyph_desc.glyph_breeze": "Summons native breeze servants near the selected location."
+  "goety_nouveau.glyph_desc.glyph_breeze": "Summons native breeze servants near the selected location.",
+  "goety_nouveau.glyph_name.glyph_arrow_rain": "Arrow Rain",
+  "goety_nouveau.glyph_desc.glyph_arrow_rain": "Choose yourself or an allied living creature to sustain a native arrow rain at its aim.",
+  "goety_nouveau.glyph_name.glyph_blizzard": "Blizzard",
+  "goety_nouveau.glyph_desc.glyph_blizzard": "Choose yourself or an allied living creature to sustain a native blizzard at its aim.",
+  "goety_nouveau.glyph_name.glyph_meteor_shower": "Meteor Shower",
+  "goety_nouveau.glyph_desc.glyph_meteor_shower": "Choose yourself or an allied living creature to sustain native meteor salvos at its aim.",
+  "goety_nouveau.glyph_name.glyph_ice_storm": "Ice Storm",
+  "goety_nouveau.glyph_desc.glyph_ice_storm": "Replace an Ars projectile with a growing native ice storm."
 }
