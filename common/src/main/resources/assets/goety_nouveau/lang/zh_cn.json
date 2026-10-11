@@ -229,5 +229,7 @@
   "goety_nouveau.glyph_name.glyph_cyclone": "龙卷风",
   "goety_nouveau.glyph_desc.glyph_cyclone": "在选中位置释放一团移动的龙卷风。",
   "goety_nouveau.glyph_name.glyph_tidal": "潮汐",
-  "goety_nouveau.glyph_desc.glyph_tidal": "从选中位置涌出向前推进的水浪。"
+  "goety_nouveau.glyph_desc.glyph_tidal": "从选中位置涌出向前推进的水浪。",
+  "goety_nouveau.glyph_name.glyph_water_whip": "水鞭",
+  "goety_nouveau.glyph_desc.glyph_water_whip": "让自身或友军挥出一道水触手。"
 }

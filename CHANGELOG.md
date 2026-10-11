@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.39
+
+- Add Water Whip on both loaders: 112 shared glyphs, 113 on NeoForge. Use actual native GulfTentacle entities rather than a visual-only whip or synthetic channel.
+- Only yourself or allied living executors receive the attached strike. Native synchronized ownership follows the actual executor for live attachment/client facing; original caster provides staff/focus potency, range and payment; explicit damage ownership remains separate.
+- Retain original spawn/range/reposition packets and animation, ticks 8–11 attack trace, drench damage, hit sounds and twenty-tick expiry. Native Abyss-staff success emits native extra tentacles with original buff, range, arm offset and non-recursive staff flag; source/damage roles are copied and persisted.
+- Original source allies and explicit damage owner allies are protected. Lost alliance or removed/dead executors stop the strike; ordinary unmarked Goety tentacles retain native behavior. Failed resources/invalid recipients are uncharged; creative bypasses payment.
+- Four focused server cases passed per loader, covering actual native damage/following/expiry, staff offspring and NBT, ally filters/interruption, native isolation, rejection/creative and native animation event. Client appearance/audio remain manual checks. Eleven registered NeoForge focus keys remain without glyph entry points.
+
 ## 0.1.0-dev.38
 
 - Add Cyclone and Tidal on both loaders: 111 shared glyphs, 112 on NeoForge. Both are one-charge native moving area entities, rather than artificial held channels.

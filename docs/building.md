@@ -241,3 +241,11 @@ Release/source checks cover 110 NeoForge / 109 Forge glyph models, bilingual ent
 Cyclone and Tidal use actual native mobile area entities at Ars impact points. Four focused `goety_nouveau_moving_areas` cases passed per loader: native retarget replacement and NBT provenance, explicit damage owner, source gear/fire variant, source ally protection, actual wave motion/damage/slam/expiry, Abyss staff spread and failed-charge/creative gates. No historical catalogue rerun. Native client visuals/audio remain manual checks.
 
 Release/source checks cover 112 NeoForge / 111 Forge glyph models, bilingual entries/native parents, Core/version/licenses, Java 21/17 classes, scoped mixins/Forge refmap and no bundled dependencies/tests. See moving-area-audit.md for impact-origin timing and remaining water-whip work.
+
+## Native attached water strike (dev.39)
+
+Water Whip uses the actual native GulfTentacle, retaining native packets/animation, warmup trace, damage, expiry and staff-created extra tentacles. Actual synchronized owner is the allied executor; original source and explicit damage owner use separate persistent provenance.
+
+Four focused `goety_nouveau_tentacles` cases passed per loader after replacing a protected fresh FakePlayer native-isolation damage probe with a real Cow. Real native damage, attachment, offspring/NBT, ally filtering/interruption, unmarked native behavior, resource/recipient rejection and creative/animation hooks are covered. No historical catalogue rerun; actual client visuals/audio remain manual checks.
+
+Release/source checks cover 113 NeoForge / 112 Forge glyph models, bilingual text/native parents, Core/version/licenses, Java 21/17 bytecode, mixins/Forge refmap and no bundled dependencies/tests. See tentacle-audit.md for role boundaries and native timing.
