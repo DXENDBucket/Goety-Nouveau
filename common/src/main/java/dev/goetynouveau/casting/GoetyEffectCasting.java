@@ -50,6 +50,7 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
+            case TEMBLOR_CLAP -> dev.goetynouveau.platform.NativeAreaHooks.temblor(world,frame,ars);
             case BLINK -> GoetyBlinkCasting.apply(world, frame);
             case BANISH -> GoetyBanishCasting.apply(world, frame);
             case END_WALK -> GoetyEndWalkCasting.apply(world, frame, ars);

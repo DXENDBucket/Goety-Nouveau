@@ -132,6 +132,8 @@ public final class GlyphCatalog {
     public static final GoetyEffectGlyph TIDAL = new GoetyEffectGlyph(EffectFocus.TIDAL);
     public static final GoetyEffectGlyph BREEZE = dev.goetynouveau.platform.NativeSummonHooks.breezeSupported()
             ? new GoetyEffectGlyph(EffectFocus.BREEZE) : null;
+    public static final GoetyEffectGlyph TEMBLOR_CLAP = dev.goetynouveau.platform.NativeAreaHooks.temblorSupported()
+            ? new GoetyEffectGlyph(EffectFocus.TEMBLOR_CLAP) : null;
     public static final List<AbstractSpellPart> ALL = withNativeExtras(List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
             SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, SENSING, ROTATION, TREMBLING, CHARGE, SPIKES, LEAPING, BARRICADE, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, VANGUARD, BLACKGUARD, KILLING, BOLTING, ILLUSION, BLAZING, GHASTLY, GUARDIAN, WATCHING, SNARING, BLASTING, FIRE_BREATH, FROST_BREATH, SWARM, MINISTROUS, HOGGING, ARROW_RAIN, BLIZZARD, METEOR_SHOWER, BOMBARDMENT, THUNDERSTORM, TRIDENT_STORM, CORRUPTED_BEAM, WATER_JET, PRISMA_BEAM, VOID_SHOCK, QUAKING, WARDING, FLYING, WHIRLWIND, SHOCKING, TELEKINESIS, BURROWING, CYCLONE, TIDAL, WATER_WHIP, ILLUMINATE, PULVERIZE, SCATTER, TUNNEL, GRAPPLE, END_WALK, BANISH, BLINK, ICE_STORM, GLOW_LIGHT, SOUL_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
@@ -139,9 +141,10 @@ public final class GlyphCatalog {
             dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER));
     private static List<AbstractSpellPart> withNativeExtras(List<AbstractSpellPart> shared) {
         // Do not construct an unavailable glyph: even construction registers its spell school.
-        if (BREEZE == null) return shared;
+        if (BREEZE == null && TEMBLOR_CLAP == null) return shared;
         var parts = new java.util.ArrayList<>(shared);
-        parts.add(parts.indexOf(HOGGING) + 1, BREEZE);
+        if (BREEZE != null) parts.add(parts.indexOf(HOGGING) + 1, BREEZE);
+        if (TEMBLOR_CLAP != null) parts.add(parts.indexOf(QUAKING), TEMBLOR_CLAP);
         return List.copyOf(parts);
     }
     private GlyphCatalog() {}

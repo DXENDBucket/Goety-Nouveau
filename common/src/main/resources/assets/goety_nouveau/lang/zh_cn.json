@@ -249,5 +249,7 @@
   "goety_nouveau.glyph_name.glyph_banish": "放逐",
   "goety_nouveau.glyph_desc.glyph_banish": "将选中的敌人放逐到周围的随机落点。",
   "goety_nouveau.glyph_name.glyph_blink": "闪烁",
-  "goety_nouveau.glyph_desc.glyph_blink": "让自己或友军沿其朝向闪烁。潜行时随机传送。"
+  "goety_nouveau.glyph_desc.glyph_blink": "让自己或友军沿其朝向闪烁。潜行时随机传送。",
+  "goety_nouveau.glyph_name.glyph_temblor_clap": "震击",
+  "goety_nouveau.glyph_desc.glyph_temblor_clap": "以地脉震波冲击选中的区域，使附近敌人眩晕。"
 }

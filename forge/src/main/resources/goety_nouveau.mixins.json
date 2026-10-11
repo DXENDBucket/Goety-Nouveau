@@ -87,7 +87,9 @@
     "NativeEndWalkMixin",
     "NativeBanishMixin",
     "NativeBlinkMixin",
-    "NativeBlinkTeleportMixin"
+    "NativeBlinkTeleportMixin",
+    "NativeTemblorGeometryMixin",
+    "NativeTemblorAlliesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

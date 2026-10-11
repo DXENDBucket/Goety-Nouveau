@@ -11,6 +11,8 @@ import net.minecraft.world.phys.Vec3;
 /** Preserve the pinned native version's fire particles and mapped ignition API. */
 public final class NativeAreaHooks {
     private NativeAreaHooks() {}
+    public static boolean temblorSupported(){return false;}
+    public static boolean temblor(ServerLevel world,dev.arsconflux.api.context.CastContext frame,com.hollingsworth.arsnouveau.api.spell.SpellStats ars){return false;}
     public static SoundEvent explosionSound() { return SoundEvents.GENERIC_EXPLODE.value(); }
     public static void ignite(LivingEntity target, int seconds) { target.igniteForSeconds(seconds); }
     public static void fireBlastParticles(ServerLevel world, Vec3 point, float radius, boolean staff, ColorUtil color) {

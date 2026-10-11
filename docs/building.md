@@ -301,3 +301,9 @@ Release/source checks cover 121 NeoForge / 120 Forge glyph resources, bilingual/
 Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_blink` from each loader project. Four focused cases passed per loader: forward landing/fall reset/native isolation, source enchanted range/staff and allied body separation, actual entity-approach/random teleports with identical native seeds, and event/Ender Ground/recipient/resource/creative gates. FakePlayer teleportTo is observed using a test-only position probe; allied cows use actual native teleports. No historical catalogue rerun.
 
 Release/source checks cover 122 NeoForge / 121 Forge glyph resources, bilingual/native parents, Java 21/17 bytecode, native Blink mixins and Forge teleport refmap, Core/version/license metadata and dependency/test isolation. See blink-audit.md for native branch rules and client verification limits.
+
+## Forge native Temblor Clap and complete registry inventory (dev.48)
+
+Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_temblor` from either loader project. Forge runs four native damage/stun/alliance/attribution, ground/staff/Ars parameter, resource/creative/bounds and wand-isolation checks. Neo runs one actual missing-focus registration check. Both print the live native IFocus inventory; each has 124 valid native focus items and the same seven interface/bound-command items without glyph entries.
+
+Release checks cover 122 models on each loader, appropriate native parent assets, Java 21/17 bytecode, license/version/Core metadata, loader-local Temblor mixins/model and Forge geometry refmap, plus no bundled dependencies or test resources. No historical catalogue rerun; retained successful logs are reviewed by family for the scope audit. See temblor-audit.md and scope-completion-audit.md.

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-dev.48
+
+- Add the Forge-native Temblor Clap focus as an area effect. Both loaders now contain 122 glyphs: 121 shared, plus NeoForge Breeze or Forge Temblor Clap. Neo does not register a glyph or model for its missing focus.
+- Run the full native TemblorClapSpell callback at the Ars-selected location: native explosion/random damage, three-second Stunned, ground/staff radius bonuses, map-colour Smash particles and native sound. Original source retains equipment and the soul account; explicit damage-owner attribution retains the native mob-attack damage type. Protect both source and damage-owner allies before native hurt/knockback/Stunned. Ordinary wand casts are unchanged.
+- Four focused Forge runtime cases cover real native damage/stun/alliance/attribution, native ground/staff/Ars parameter comparison, resource/creative/target boundaries and wand isolation. One Neo case verifies missing-focus isolation. Release checks keep the model and mixins loader-local.
+- Replace the earlier partial ModItems bytecode coverage count with live IFocus registry evidence: each pinned loader has 124 native focus items, 117 with glyph entries. The seven remaining items are Crafting/Ender Chest and bound-data command/order/call/recall/troop controls. ElderCurse and Neo WarStomp have no registered focus and no native callsite found in the pinned JARs; they are dormant class implementations, not evidence of a missing user-accessible focus.
+
 ## 0.1.0-dev.47
 
 - Add Blink on both loaders: 121 shared glyphs, 122 on NeoForge. Execute the complete native BlinkSpell from yourself or an allied living executor, retaining native sight-target approach, forward ledge/landing search, source-sneak random teleport, native teleport events, fall reset, particles and sounds. Ordinary Goety wand behavior is unchanged.

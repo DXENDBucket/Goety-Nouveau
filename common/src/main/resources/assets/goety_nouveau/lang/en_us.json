@@ -249,5 +249,7 @@
   "goety_nouveau.glyph_name.glyph_banish": "Banish",
   "goety_nouveau.glyph_desc.glyph_banish": "Banish the selected enemy to a random nearby landing.",
   "goety_nouveau.glyph_name.glyph_blink": "Blink",
-  "goety_nouveau.glyph_desc.glyph_blink": "Blink yourself or an ally using their aim. Sneak to teleport randomly."
+  "goety_nouveau.glyph_desc.glyph_blink": "Blink yourself or an ally using their aim. Sneak to teleport randomly.",
+  "goety_nouveau.glyph_name.glyph_temblor_clap": "Temblor Clap",
+  "goety_nouveau.glyph_desc.glyph_temblor_clap": "Strike the selected area with a stunning geomantic shockwave."
 }

@@ -1,32 +1,39 @@
-# 原生聚晶绑定覆盖核对（dev.47）
+# 原生聚晶与法术覆盖核对（dev.48）
 
-固定 NeoForge Goety 3.2.0。按实际 ModItems 的字节码与 BootstrapMethods 映射注册物品→供应器→法术类，再与 BoltFocus／EffectFocus 的有效键比较；不能仅依据物品名猜测对应法术。这个表是覆盖审计，未注册的原生辅助法术、跨版本差异和具体行为完整性仍需单独核对。
+## 运行时清点
 
-118 个注册聚晶法术绑定中，116 个键已有魔符入口；不同魔符可共用一个聚晶，也可能有不对应原生注册聚晶的辅助入口，所以此数字不能代替魔符数或完整行为验证。
+固定 NeoForge Goety 3.2.0／Forge Goety 2.5.58.4。分别在真实加载器 GameTest 中遍历 BuiltInRegistries.ITEM 的 goety 物品，按实际 IFocus.getSpell 获取法术类，再对照已构造的 GlyphCatalog.ALL。此方法包含自定义聚晶自己的 getSpell 实现，不再只依赖 ModItems 的 lambda／BootstrapMethods。
 
-以下 2 个聚晶键尚未接入。它们不是全部可直接实现的区域／持续效果；下一步要检查真实回调、目标与客户端入口，再决定接入方式。
+两端各 124 个有效原生 IFocus 物品；各 117 个有魔符入口。剩余七项完全一致：
 
-| 聚晶键 | 原生法术类 |
-| --- | --- |
-| crafting_focus | CraftingSpell |
-| ender_chest_focus | EnderChestSpell |
+| 聚晶 | 实际法术 | 接入边界 |
+| --- | --- | --- |
+| crafting_focus | CraftingSpell | 玩家物品操作界面 |
+| ender_chest_focus | EnderChestSpell | 玩家末影箱界面 |
+| command_focus | CommandSpell | 聚晶物品自身的指挥交互；此 Spell 类没有实际 SpellResult |
+| order_focus | CommandSpell | 另一种原生指挥交互，同上 |
+| call_focus | CallSpell | 依赖聚晶中已绑定的仆从数据，调用 CallFocus.call |
+| recall_focus | RecallSpell | 依赖聚晶绑定的目的地，含原生有效性与物品专属冷却 |
+| troop_focus | TroopSpell | 依赖聚晶绑定的仆从类型，调用 TroopFocus.call |
 
-仆从命令、物品操作界面、两次交互、传送／连续寻路等不能仅靠注册一个效果魔符证明完成；需要保留原生行为的接入证据。现有召唤限制、区域回调与持续执行检查分别记录在各批 audit 文档中。
+以上不是尚未实现的普通“生成一批召唤物／创建区域／持续攻击”回调；不能把不含聚晶数据的 Ars 效果硬当成绑定聚晶实例。它们属于后续物品界面、绑定与仆从指挥设计。现有各类生成召唤物保留原生召唤限制、有限生命与维护机制。
 
-GrappleSpell 已接入：实际 VineHook、玩家原生牵引、再次触发免费收回与共享槽位归属已验证；原生绳索渲染器读取同步的 Ars 施法手。只对自己或友军玩家生效，不接管普通法杖钩索。客户端外观与冷却 HUD 仍需人工检查，详见 grapple-audit.md。
+旧文档的 118 项是 ModItems 静态绑定的局部提取，遗漏了动态聚晶和跨版本差异；不能作为全量分母。dev.48 的运行时清点修正此结论。魔符数与原生聚晶数也不同：当前两端各 122 魔符，其中 121 共享，另有 Neo Breeze 或 Forge Temblor Clap；辅助魔符和部分共用聚晶入口不能用物品总数直接推算覆盖率。
 
-EndWalkSpell 已接入：实际融身入影效果与执行者自己的原生返回锚点、原生事件终止／返回处理。只有自己或友军玩家可作为执行者，不覆盖任何已有锚点。原来源装备、费用与 Ars 增强独立处理，详见 endwalk-audit.md。
+## 非注册类核对
 
-SoulLightSpell 已作为原生光源弹射物接入（dev.45），与 Glow Light 共用 LightProjectile 的完整飞行／命中与两层粒子适配；效果是原生灵魂光方块和实体发光，不伪装为伤害法术。详见 soul-light-audit.md。
+独立读取两个固定 JAR 的 class 常量池与 superclass 链，com/Polarice3 下各有 125 个非抽象 Spell 派生类。Warding 没有注册聚晶，但已以自己的魔符物品作为施法键接入。
 
-剩余两项的已核对边界：Crafting／Ender Chest 属于玩家物品操作界面。
+ElderCurse、Neo WarStomp 没有注册聚晶；扫描所有原生 class 未找到对它们的实际调用点（WarStomp 仅被其匿名内部类引用）。因此当前依赖中没有它们可直接复用的原生玩家入口，不能误写成已有可用聚晶或断言它们目前由原生生物使用。将来把这些遗留类做成新魔符是另一项新增内容。
 
-BanishSpell 已接入（dev.46）：原生完整目标限制与随机落点回调使用 Ars 实际选中的敌对生物，成功传送才扣费；自身／友军不作为控制目标。普通原生法杖保持视线选点，详见 banish-audit.md。
+Forge TemblorClap 则是真实注册聚晶，已在 dev.48 补齐；此前用 Neo 的映射作为 Forge 的清点依据遗漏了它。两版 FireBreath 的包路径不同，但已由实际聚晶绑定接入。Neo Breeze 位于其移植作者包，由平台入口接入，不在上述原作者包 class 数量中。
 
-BlinkSpell 已接入（dev.47）：完整原生实体靠近／朝前落点／潜行随机传送，执行者只能为自身或友军；原来源范围、法杖和费用独立，实际成功传送才扣费。详见 blink-audit.md。
+## 持续与移动边界
 
-## 未注册聚晶的具体法术类
+所有 Goety 持续执行入口使用实际自身／原生友军作为 executor，原来源装备／费用独立，并持续复查存活、维度、友军关系、魔符开关与资源。各批实际回调、资源中断及结束清理证据见下列 audit 文档与 scope-completion-audit.md。
 
-对固定两个 JAR 的 class 常量池与 superclass 链独立清点，com/Polarice3 下各有 125 个非抽象 Spell 派生类；这不等于 125 个聚晶。Neo 注册列表外还存在 Warding（已接入）、ElderCurse、WarStomp、Command、Call、Recall、Troop。Forge 的额外类为 Warding、ElderCurse、TemblorClap、Command、Call、Recall、Troop；FireBreathSpell 的包路径与 Neo 不同，已由跨版本聚晶绑定接入。Neo 的 Breeze 另属其移植作者包，不包含在这个原作者包清点中。
+Grapple、End Walk 和 Blink 已接入，分别保留原生钩索、原生返回锚点／事件、完整三分支瞬间传送。只有自身或友军可执行；不接管未经附属标记的原生状态。Banish 是负面控制而非友军移动增益，作用于 Ars 选中的敌人，保留原生限制和传送事件，成功才付费。
 
-ElderCurse、WarStomp／TemblorClap 是否属于这次可明确实现的区域／效果，需要检查真实回调；Command／Call／Recall／Troop 属于仆从交互辅助入口，不能把聚晶缺省列表当作它们已完成的证明。目标完成审计需继续覆盖这些非注册类。
+Soul Light／Glow Light 保留实际 LightProjectile 飞行、两层粒子和完整无直接伤害的命中。Forge Temblor Clap 保留完整原生爆炸与眩晕；模型、Mixin 和原生类依赖不进入缺少此聚晶的 Neo 包。
+
+客户端人工观看尚未作为全目录验收；各批服务器验证证明所述实际回调和状态，不能替代所有画面、音效、网络插值的人工评估。此清点不宣称全 Goety 的界面、物品交互和指挥行为均已联动。
