@@ -231,5 +231,7 @@
   "goety_nouveau.glyph_name.glyph_tidal": "Tidal",
   "goety_nouveau.glyph_desc.glyph_tidal": "Unleash a surging wave from the selected point.",
   "goety_nouveau.glyph_name.glyph_water_whip": "Water Whip",
-  "goety_nouveau.glyph_desc.glyph_water_whip": "Yourself or an ally strikes with a native water tentacle."
+  "goety_nouveau.glyph_desc.glyph_water_whip": "Yourself or an ally strikes with a native water tentacle.",
+  "goety_nouveau.glyph_name.glyph_illuminate": "Illuminate",
+  "goety_nouveau.glyph_desc.glyph_illuminate": "Yourself or an ally periodically places native lights in nearby dark space."
 }

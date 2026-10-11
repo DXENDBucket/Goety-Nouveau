@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.40
+
+- Add Illuminate on both loaders: 113 shared glyphs, 114 on NeoForge. Run the native periodic dark-space scan/visibility/support/placement/Soul Light conversion with a live allied executor and original-caster focus statistics.
+- Pay one native focus charge only for each real successful light placement/conversion. Empty searches remain active and unpaid, live movement updates the search, and lack of resources, alliance loss or bounded expiry stops it. Use existing Core sessions/resource transactions and native particles/sounds.
+- Use native IlluminateChargeUp for preparation instead of the 72000-tick held-item duration. The existing finite channel fallback and Ars time augments determine execution length; native scan interval remains native. Reject zero scan period before its modulo callback can throw.
+- Scoped native placement avoids unloaded/build-boundary reads. Apply the same eventual native support tests before expensive visibility rays; native wand calls outside the addon scope remain unchanged.
+- Four focused server cases and one zero-period case passed per loader. Native client appearance/audio remain manual checks. Ten registered NeoForge focus keys remain without glyph entry points.
+
 ## 0.1.0-dev.39
 
 - Add Water Whip on both loaders: 112 shared glyphs, 113 on NeoForge. Use actual native GulfTentacle entities rather than a visual-only whip or synthetic channel.

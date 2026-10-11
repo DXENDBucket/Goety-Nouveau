@@ -70,7 +70,9 @@
     "NativeCycloneCopyMixin",
     "NativeFireCycloneGearMixin",
     "NativeTidalAreaMixin",
-    "NativeTentacleRolesMixin"
+    "NativeTentacleRolesMixin",
+    "NativeIlluminateMixin",
+    "NativeIlluminateEnchantMixin"
   ],
   "injectors": {
     "defaultRequire": 1

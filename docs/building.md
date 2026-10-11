@@ -249,3 +249,11 @@ Water Whip uses the actual native GulfTentacle, retaining native packets/animati
 Four focused `goety_nouveau_tentacles` cases passed per loader after replacing a protected fresh FakePlayer native-isolation damage probe with a real Cow. Real native damage, attachment, offspring/NBT, ally filtering/interruption, unmarked native behavior, resource/recipient rejection and creative/animation hooks are covered. No historical catalogue rerun; actual client visuals/audio remain manual checks.
 
 Release/source checks cover 113 NeoForge / 112 Forge glyph models, bilingual text/native parents, Core/version/licenses, Java 21/17 bytecode, mixins/Forge refmap and no bundled dependencies/tests. See tentacle-audit.md for role boundaries and native timing.
+
+## Native periodic illumination (dev.40)
+
+Illuminate uses native scan/place/convert callbacks and original focus parameters, with live allied-executor geometry. A successful native block change pays through the existing Core resource transaction; empty searches remain unpaid and can follow movement. Actual charge-up replaces the held-item duration in preparation.
+
+Four focused goety_nouveau_illuminate cases passed per loader after clearing the full source/host/support fixture boundary. A separate goety_nouveau_illuminate_edge case also passed on each loader for zero native scan period. Real native light blocks/conversion, source geometry, fee/cadence, empty searching, interrupted/expired execution, creative, invalid recipients and loaded/build bounds are covered. No historical catalogue rerun. Client appearance/audio remain manual checks.
+
+Release/source checks cover 114 NeoForge / 113 Forge glyph models and bilingual/native resources, Java 21/17 classes, scoped mixins/Forge refmap, Core/version/license metadata and no bundled dependencies/tests. See illuminate-audit.md for timing, payment and native-scope boundaries.

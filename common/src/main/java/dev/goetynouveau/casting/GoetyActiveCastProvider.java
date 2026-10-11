@@ -39,6 +39,7 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         if(spell instanceof com.Polarice3.Goety.common.magic.spells.abyss.PrismaBeamSpell)return 0;
         if(spell instanceof com.Polarice3.Goety.common.magic.spells.void_spells.VoidShockSpell)return 10;
         if(spell instanceof com.Polarice3.Goety.common.magic.spells.geomancy.QuakingSpell)return Math.max(0,spell.defaultCastDuration());
+        if(spell instanceof com.Polarice3.Goety.common.magic.spells.utility.IlluminateSpell)return Math.max(0,com.Polarice3.Goety.config.SpellConfig.IlluminateChargeUp.get());
         // 72000 is an item-use lifetime. Only castUp is the preparation of a charging spell.
         return Math.max(0, spell instanceof IChargingSpell charging ? charging.castUp(caster, staff) : spell.castDuration(caster, staff));
     }

@@ -68,6 +68,10 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
         // providers' later effects into Goety's soul pool.
         CastContexts.bind(context, frame);
         var selected = frame.withAccount(charge.account());
+        if(focus==EffectFocus.ILLUMINATE) {
+            CastContexts.scoped(selected,()->dev.goetynouveau.casting.GoetyIlluminateCasting.start(server,selected,stats,charge));
+            return;
+        }
         if(focus==EffectFocus.PRISMA_BEAM) {
             // Charged prism beams pay on their final native result, not on visual setup.
             CastContexts.scoped(selected,()->dev.goetynouveau.casting.GoetyPrismaBeamCasting.start(server,selected,stats,charge));

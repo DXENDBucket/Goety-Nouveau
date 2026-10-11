@@ -94,7 +94,8 @@ public enum EffectFocus {
     BURROWING("burrowing", "burrowing_focus", "Burrowing", true, true, false),
     CYCLONE("cyclone", "cyclone_focus", "Cyclone", true, true, true),
     TIDAL("tidal", "tidal_focus", "Tidal", true, true, false),
-    WATER_WHIP("water_whip", "water_whip_focus", "Water Whip", true, false, false);
+    WATER_WHIP("water_whip", "water_whip_focus", "Water Whip", true, false, false),
+    ILLUMINATE("illuminate", "illuminate_focus", "Illuminate", false, true, true);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;
@@ -104,7 +105,7 @@ public enum EffectFocus {
     }
     public boolean breathing() { return this == FIRE_BREATH || this == FROST_BREATH || this == SWARM; }
     public boolean rain() { return this == ARROW_RAIN || this == BLIZZARD || this == METEOR_SHOWER || this == BOMBARDMENT; }
-    public boolean channel() { return breathing() || rain() || this == THUNDERSTORM || this == CORRUPTED_BEAM || this == WATER_JET || this == VOID_SHOCK || this == QUAKING || this == WARDING || this == PRISMA_BEAM || this == FLYING || this == WHIRLWIND || this == SHOCKING || this == TELEKINESIS || this == BURROWING; }
+    public boolean channel() { return breathing() || rain() || this == THUNDERSTORM || this == CORRUPTED_BEAM || this == WATER_JET || this == VOID_SHOCK || this == QUAKING || this == WARDING || this == PRISMA_BEAM || this == FLYING || this == WHIRLWIND || this == SHOCKING || this == TELEKINESIS || this == BURROWING || this == ILLUMINATE; }
     public net.minecraft.resources.ResourceLocation focusId() {return CarrierRegistry.id(this==WARDING?"goety_nouveau:glyph_warding":"goety:"+focus);}
     public ISpell spell() { return FocusSpells.read(focusId()).orElseThrow(()->new IllegalStateException("Missing native spell binding: "+focusId())); }
 }
