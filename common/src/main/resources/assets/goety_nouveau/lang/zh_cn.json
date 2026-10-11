@@ -233,5 +233,9 @@
   "goety_nouveau.glyph_name.glyph_water_whip": "水鞭",
   "goety_nouveau.glyph_desc.glyph_water_whip": "让自身或友军挥出一道水触手。",
   "goety_nouveau.glyph_name.glyph_illuminate": "照明",
-  "goety_nouveau.glyph_desc.glyph_illuminate": "让自身或友军持续在附近暗处放置光源。"
+  "goety_nouveau.glyph_desc.glyph_illuminate": "让自身或友军持续在附近暗处放置光源。",
+  "goety_nouveau.glyph_name.glyph_pulverize": "??",
+  "goety_nouveau.glyph_desc.glyph_pulverize": "?????????????",
+  "goety_nouveau.glyph_name.glyph_scatter": "????",
+  "goety_nouveau.glyph_desc.glyph_scatter": "?????????????????????????????"
 }

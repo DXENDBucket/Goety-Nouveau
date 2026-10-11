@@ -257,3 +257,11 @@ Illuminate uses native scan/place/convert callbacks and original focus parameter
 Four focused goety_nouveau_illuminate cases passed per loader after clearing the full source/host/support fixture boundary. A separate goety_nouveau_illuminate_edge case also passed on each loader for zero native scan period. Real native light blocks/conversion, source geometry, fee/cadence, empty searching, interrupted/expired execution, creative, invalid recipients and loaded/build bounds are covered. No historical catalogue rerun. Client appearance/audio remain manual checks.
 
 Release/source checks cover 114 NeoForge / 113 Forge glyph models and bilingual/native resources, Java 21/17 classes, scoped mixins/Forge refmap, Core/version/license metadata and no bundled dependencies/tests. See illuminate-audit.md for timing, payment and native-scope boundaries.
+
+## Native geomancy processing and deployment (dev.41)
+
+Run the four focused checks with `:runGameTestServer -PgameTestNamespaces=goety_nouveau_geomancy` from each loader project. Root task qualification avoids running the included Core tests under this namespace.
+
+The cases cover native recipes/item drops, native rectangle orientation at the real Ars hit, mine persistence/roles/real damage/expiry/native isolation, complete staff cadence and grouped payment, and resource/creative/loaded-boundary/alliance rejection. Neo Ars capability lookup occurs before addon callbacks; the unloaded-chunk test therefore checks the addon entry boundary directly.
+
+Release/source checks cover 116 NeoForge / 115 Forge glyph resources, bilingual/native parents, Java 21/17 bytecode, scoped mixins/Forge refmap, version/Core/license metadata and no bundled dependencies/tests. See geomancy-audit.md for native timing, ownership and client verification limits.

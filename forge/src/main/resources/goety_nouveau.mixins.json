@@ -72,7 +72,12 @@
     "NativeTidalAreaMixin",
     "NativeTentacleRolesMixin",
     "NativeIlluminateMixin",
-    "NativeIlluminateEnchantMixin"
+    "NativeIlluminateEnchantMixin",
+    "NativePulverizeMixin",
+    "NativeSelectedBlockFaceMixin",
+    "NativeScatterSpellMixin",
+    "NativeScatterMineMixin",
+    "NativeScatterEnchantMixin"
   ],
   "injectors": {
     "defaultRequire": 1

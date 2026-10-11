@@ -95,7 +95,9 @@ public enum EffectFocus {
     CYCLONE("cyclone", "cyclone_focus", "Cyclone", true, true, true),
     TIDAL("tidal", "tidal_focus", "Tidal", true, true, false),
     WATER_WHIP("water_whip", "water_whip_focus", "Water Whip", true, false, false),
-    ILLUMINATE("illuminate", "illuminate_focus", "Illuminate", false, true, true);
+    ILLUMINATE("illuminate", "illuminate_focus", "Illuminate", false, true, true),
+    PULVERIZE("pulverize", "pulverize_focus", "Pulverize", false, false, true),
+    SCATTER("scatter", "scatter_focus", "Scatter Mines", true, true, true);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

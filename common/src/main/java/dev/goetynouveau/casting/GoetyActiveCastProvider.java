@@ -40,6 +40,8 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         if(spell instanceof com.Polarice3.Goety.common.magic.spells.void_spells.VoidShockSpell)return 10;
         if(spell instanceof com.Polarice3.Goety.common.magic.spells.geomancy.QuakingSpell)return Math.max(0,spell.defaultCastDuration());
         if(spell instanceof com.Polarice3.Goety.common.magic.spells.utility.IlluminateSpell)return Math.max(0,com.Polarice3.Goety.config.SpellConfig.IlluminateChargeUp.get());
+        // Staff Scatter emits during its cast window; that window is the channel, not an extra warmup.
+        if(spell instanceof com.Polarice3.Goety.common.magic.spells.geomancy.ScatterSpell scatter && scatter.rightStaff(staff))return 0;
         // 72000 is an item-use lifetime. Only castUp is the preparation of a charging spell.
         return Math.max(0, spell instanceof IChargingSpell charging ? charging.castUp(caster, staff) : spell.castDuration(caster, staff));
     }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.41
+
+- Add Pulverize and Scatter on both loaders: 115 shared glyphs, 116 on NeoForge. Pulverize uses actual native recipes/block processing/drop counts; native staff/AOE geometry uses the Ars-selected face rather than another caster ray trace.
+- Ordinary Scatter deploys three real native mines around the Ars point and incoming horizontal heading. Geomancy staff runs native timed deployment around a live self/allied executor, preserving focus stats, staff behavior, mine damage/detection/growth/events and both native expiry branches.
+- Retain original-caster equipment, soul account and mine base-damage rules independently of explicit damage attribution. Persistent roles supplement native ally filtering; unmarked native mines retain their original behavior.
+- Staff execution uses the original five-tick cadence and 21-emission window without duplicating that window as preparation. Bill the first successful native result and each subsequent group of twenty emissions; rejected recipients/resources produce no mines and creative is free.
+- Four focused runtime cases passed per loader, including native recipes/item counts, hit-face geometry, real mine damage/expiry/save-load/native isolation, staff cadence/payment/expiry, and boundary/resource/alliance gates. Client animation/audio remain manual checks. Eight registered NeoForge focus keys remain without entry points.
+
 ## 0.1.0-dev.40
 
 - Add Illuminate on both loaders: 113 shared glyphs, 114 on NeoForge. Run the native periodic dark-space scan/visibility/support/placement/Soul Light conversion with a live allied executor and original-caster focus statistics.
