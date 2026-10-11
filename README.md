@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.45`). Twenty projectile replacements, ninety-five shared target/location effects, one additional NeoForge Breeze effect and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.46`). Twenty projectile replacements, ninety-six shared target/location effects, one additional NeoForge Breeze effect and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -26,6 +26,7 @@ These glyphs are **effects**, placed after an Ars cast method. They use the actu
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
+| Banish | Randomly teleport the Ars-selected enemy using native Goety health limits, immunity/blacklist, teleport events and safe-landing search. A successful teleport pays once; canceled or failed searches are free. Void staffs retain native range bonuses. | Native range equipment |
 | End Walk | Yourself or an allied player receives the complete native Shadow Walk effect and a separate native return anchor. Native expiry, removal, attacks, projectile creation and ordinary interactions retain Goety return behavior. Active anchors cannot be overwritten by repeat casts. | Amplify / Dampen, Extend Time / Duration Down |
 | Grapple | Launch a native vine hook from yourself or an allied player; repeat the effect to retrieve it for free. Native collision, attachment, rope and player pulling remain in Goety. Original caster pays once; the finite lease ends on expiry or alliance loss. | Extend Time / Duration Down |
 | Tunnel | Temporarily open the native Goety tunnel at the Ars-selected block and face. Native depth propagation, 3-wide / Void-staff 5-wide footprint, protected-block exclusions, particles and original-state restoration are retained. One successful initial hole pays once. | Extend Time / Duration Down |

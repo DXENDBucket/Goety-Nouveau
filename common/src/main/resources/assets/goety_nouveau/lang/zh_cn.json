@@ -245,5 +245,7 @@
   "goety_nouveau.glyph_name.glyph_end_walk": "????",
   "goety_nouveau.glyph_desc.glyph_end_walk": "???????????????????????",
   "goety_nouveau.glyph_name.glyph_soul_light": "灵魂光源",
-  "goety_nouveau.glyph_desc.glyph_soul_light": "将弹射物化为灵魂光，照亮落点并使命中的生物发光。"
+  "goety_nouveau.glyph_desc.glyph_soul_light": "将弹射物化为灵魂光，照亮落点并使命中的生物发光。",
+  "goety_nouveau.glyph_name.glyph_banish": "放逐",
+  "goety_nouveau.glyph_desc.glyph_banish": "将选中的敌人放逐到周围的随机落点。"
 }

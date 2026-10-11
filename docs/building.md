@@ -289,3 +289,9 @@ Release/source checks cover 119 NeoForge / 118 Forge glyph resources and bilingu
 Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_soul_light` from each loader project. Four focused runtime cases passed per loader: real world native flight, native source/trail/block identity, full native glow/block impacts and continuation, orbit and per-trigger resource exhaustion, native Burning exclusion, creative and acceleration. No historical catalogue rerun.
 
 Release/source checks cover 120 NeoForge / 119 Forge glyph resources, native model parents and bilingual text, Java 21/17 bytecode, existing complete light-projectile state/impact mixins and Forge refmap, Core/version/license metadata and no bundled dependencies/tests. See soul-light-audit.md; actual client particle appearance/audio remain manual checks.
+
+## Native selected-target banishment (dev.46)
+
+Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_banish` from each loader project. Four focused cases cover actual native teleport and caster/sight-decoy isolation, native candidate sequence/range/staff and failed search, selected-target health/blacklist/test-only immunity/event cancellation/Ender Ground, and recipient/resource/creative gates. No historical catalogue rerun.
+
+Release/source checks cover 121 NeoForge / 120 Forge glyph resources, bilingual/native parents, Java 21/17 bytecode, native Banish mixin and Forge teleport refmap, Core/version/license metadata and no bundled dependencies/tests/test tags. See banish-audit.md; actual client teleport presentation and sound remain manual checks.

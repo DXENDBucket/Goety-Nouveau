@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-dev.46
+
+- Add Banish on both loaders: 120 shared glyphs, 121 on NeoForge. Execute the native BanishSpell conditions and random-teleport callback against the actual Ars-selected enemy, retaining native max-health limits, immunity tags, blacklist, teleport events, candidate generation, safe landing, dismounting and sounds. Ordinary Goety wand casts remain unchanged.
+- Keep original-caster focus/staff parameters and soul account separate from the control target. Reject self/allies, creative-player targets, nonliving/block targets and invalid or unloaded destinations. Pay only after an actual successful native teleport; canceled or exhausted searches are free, and creative casting is free.
+- Four focused runtime cases per loader cover actual teleport/source isolation, native range/staff candidate sequences and failed search, native target restrictions/event cancellation/Ender Ground, and alliance/resource/creative gates. Test-only immune tags are excluded from release artifacts. Client appearance/audio remain manual checks. Three registered NeoForge focus keys remain without glyph entries.
+
 ## 0.1.0-dev.45
 
 - Add Soul Light as the twentieth native projectile replacement on both loaders: 119 shared glyphs, 120 on NeoForge. Reuse the existing native LightProjectile integration; retain actual SoulLight entity/type, eye-origin launch, native no-gravity 2.5 speed, soul source particles, bullet trail, native launch sound and native Soul Light placement/ten-second Glowing results.
