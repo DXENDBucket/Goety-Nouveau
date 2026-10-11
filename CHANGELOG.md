@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-dev.53
+
+- Require a real Goety brew containing the matching native effect for Leaf Shell, Thorn Trap, Transpose and Corrosion glyphs, plus one Source Gem at the Scribe's Table. Raw flowers / chorus are no longer sufficient.
+- Match effect contents across drinkable, splash, lingering and gas forms, allowing stronger and mixed brews. The rule checks the brew, not its creator. Expose correctly populated brew examples to native Ars JEI.
+- Add loader-local custom ingredient serialization with shared matching behavior; retain datapack recipe overrides and native glyph crafting.
+- Validation: one focused recipe/crafting/learning GameTest passed on each loader, including effect matching, JSON/network round trips and rejecting the wrong brew at a real Scribe's Table. Binary/source artifacts verified; client JEI visuals remain a manual check.
+
 ## 0.1.0-dev.52
 
 - Add eleven non-focus abilities: native Snareling Shot / Trap, Snap / Blast / Berserk fungus replacements, Berserk Cloud, Bone Pull and four native brews (Leaf Shell, Thorn Trap, Transpose, Corrosion). Native entities and complete impacts retain traps, splash, secondary effects, particles and owner rules.

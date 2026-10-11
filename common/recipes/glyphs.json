@@ -2122,7 +2122,8 @@
     "exp": 27,
     "inputs": [
       {
-        "item": "minecraft:peony"
+        "type": "goety_nouveau:brew_effect",
+        "effect": "leaf_shell"
       },
       {
         "item": "ars_nouveau:source_gem"
@@ -2138,7 +2139,8 @@
     "exp": 27,
     "inputs": [
       {
-        "item": "minecraft:rose_bush"
+        "type": "goety_nouveau:brew_effect",
+        "effect": "thorn_trap"
       },
       {
         "item": "ars_nouveau:source_gem"
@@ -2154,7 +2156,8 @@
     "exp": 27,
     "inputs": [
       {
-        "item": "minecraft:popped_chorus_fruit"
+        "type": "goety_nouveau:brew_effect",
+        "effect": "transpose"
       },
       {
         "item": "ars_nouveau:source_gem"
@@ -2170,7 +2173,8 @@
     "exp": 27,
     "inputs": [
       {
-        "item": "minecraft:lily_of_the_valley"
+        "type": "goety_nouveau:brew_effect",
+        "effect": "corrosion"
       },
       {
         "item": "ars_nouveau:source_gem"

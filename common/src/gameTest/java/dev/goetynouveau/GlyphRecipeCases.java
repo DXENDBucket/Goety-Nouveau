@@ -20,6 +20,33 @@ import java.util.function.*;
 
 public final class GlyphRecipeCases {
     private static Item item(String id) { return BuiltInRegistries.ITEM.get(CarrierRegistry.id(id)); }
+    private static ItemStack materialStack(AbstractSpellPart part) {
+        var ability=dev.goetynouveau.api.AbilitySpells.ability(part.getRegistryName().getPath().substring(6)).filter(a->a.brew!=null);
+        return ability.map(a->dev.goetynouveau.crafting.BrewIngredients.examples(a.brew).findFirst().orElseThrow())
+                .orElseGet(()->new ItemStack(material(part)));
+    }
+    public static void brewPredicates(GameTestHelper h,Function<String,GlyphRecipe> lookup,
+            Function<net.minecraft.world.item.crafting.Ingredient,net.minecraft.world.item.crafting.Ingredient> roundtrip) {
+        var abilities=java.util.List.of("leaf_shell","thorn_trap","transpose","corrosion");
+        for(var effect:abilities) {
+            var original=lookup.apply("goety_nouveau:glyph_"+effect).inputs.get(0);
+            var synced=roundtrip.apply(original);
+            for(var ingredient:java.util.List.of(original,synced)) {
+                h.assertTrue(!ingredient.isEmpty() && !ingredient.isSimple() && ingredient.getItems().length==4,"Brew ingredient exposes all four native forms with effect-sensitive matching");
+                for(var example:dev.goetynouveau.crafting.BrewIngredients.examples(effect).toList())
+                    h.assertTrue(ingredient.test(example),"Matching brew form survives data and network serialization");
+                h.assertTrue(!ingredient.test(new ItemStack(com.Polarice3.Goety.common.items.ModItems.BREW.get())) && !ingredient.test(ItemStack.EMPTY),"Empty brew and empty stack do not satisfy the effect requirement");
+                var other=abilities.stream().filter(id->!id.equals(effect)).findFirst().orElseThrow();
+                h.assertTrue(!ingredient.test(dev.goetynouveau.crafting.BrewIngredients.examples(other).findFirst().orElseThrow()),"Wrong brew effect is rejected even with the same bottle item");
+                var expected=dev.goetynouveau.api.AbilitySpells.ability(effect).orElseThrow().brewEffect();
+                var extra=dev.goetynouveau.api.AbilitySpells.ability(other).orElseThrow().brewEffect();
+                var mixed=com.Polarice3.Goety.utils.BrewUtils.setCustomEffects(new ItemStack(com.Polarice3.Goety.common.items.ModItems.BREW.get()),java.util.List.of(),
+                        java.util.List.of(new com.Polarice3.Goety.common.effects.brew.BrewEffectInstance(extra,40,0),new com.Polarice3.Goety.common.effects.brew.BrewEffectInstance(expected,80,2)));
+                h.assertTrue(ingredient.test(mixed),"Stronger, longer or mixed native brews are accepted by contained effect");
+                h.assertTrue(!ingredient.test(new ItemStack(material(GlyphCatalog.ALL.stream().filter(g->g.getRegistryName().getPath().equals("glyph_"+effect)).findFirst().orElseThrow()))),"Raw catalyst no longer crafts the brew glyph");
+            }
+        }
+    }
     private static Item material(AbstractSpellPart part) {
         String glyph=part.getRegistryName().getPath().substring(6);
         switch(glyph) {
@@ -55,11 +82,11 @@ public final class GlyphRecipeCases {
             for (var part : GlyphCatalog.ALL) {
                 String id = BuiltInRegistries.ITEM.getKey(part.getGlyph()).toString();
                 var recipe = lookup.apply(id);
-                var required = material(part);
+                var required = materialStack(part);
                 h.assertTrue(recipe != null && recipe.getSpellPart() == part && recipe.output.getCount() == 1,
                         "Native Ars recipe produces exactly this registered glyph: " + id);
-                h.assertTrue(required != Items.AIR && recipe.inputs.size() == 2
-                        && recipe.inputs.get(0).test(new ItemStack(required))
+                h.assertTrue(!required.isEmpty() && recipe.inputs.size() == 2
+                        && recipe.inputs.get(0).test(required)
                         && recipe.inputs.get(1).test(new ItemStack(item("ars_nouveau:source_gem"))) && recipe.exp == 27,
                         "Native recipe resolves real materials and source gem: " + id);
             }
@@ -75,8 +102,8 @@ public final class GlyphRecipeCases {
             // ordinary player's block simulation distance on either loader.
             h.onEachTick(() -> { if (h.getLevel().getBlockEntity(table.getBlockPos()) == table) table.tick(); });
             Runnable cleanup = p::discard;
-            h.assertTrue(!knows.apply(GlyphCatalog.FIREBALL), "Fixture starts without the Goety glyph");
-            craft(h,p,table,GlyphCatalog.FIREBALL,select,knows,cleanup,() ->
+            h.assertTrue(!knows.apply(GlyphCatalog.LEAF_SHELL), "Fixture starts without the Goety glyph");
+            craft(h,p,table,GlyphCatalog.LEAF_SHELL,select,knows,cleanup,() ->
                     craft(h,p,table,AugmentGoety.LIFE_ABSORB,select,knows,cleanup,() -> {cleanup.run();h.succeed();}));
         } catch (Throwable error) { p.discard(); throw error; }
     }
@@ -88,7 +115,10 @@ public final class GlyphRecipeCases {
         h.assertTrue(table.recipe != null && ScribesTile.getTotalPlayerExperience(p) == before - 27,
                 "Real Scribe accepts the recipe and charges native XP: " + id);
         var block = table.getBlockPos();
-        var input = new ItemEntity(h.getLevel(),block.getX()+0.5,block.getY()+1.2,block.getZ()+0.5,new ItemStack(material(part)));
+        var input = new ItemEntity(h.getLevel(),block.getX()+0.5,block.getY()+1.2,block.getZ()+0.5,materialStack(part));
+        ItemEntity wrong=part==GlyphCatalog.LEAF_SHELL?new ItemEntity(h.getLevel(),block.getX()+0.5,block.getY()+1.2,block.getZ()+0.5,
+                dev.goetynouveau.crafting.BrewIngredients.examples("corrosion").findFirst().orElseThrow()):null;
+        if(wrong!=null){wrong.setNoGravity(true);h.getLevel().addFreshEntity(wrong);}
         var gem = new ItemEntity(h.getLevel(),block.getX()+0.5,block.getY()+1.2,block.getZ()+0.5,new ItemStack(item("ars_nouveau:source_gem")));
         input.setNoGravity(true);gem.setNoGravity(true);
         h.getLevel().addFreshEntity(input);h.getLevel().addFreshEntity(gem);
@@ -98,6 +128,7 @@ public final class GlyphRecipeCases {
                 h.assertTrue((input.isRemoved() || input.getItem().isEmpty()) && (gem.isRemoved() || gem.getItem().isEmpty())
                         && output.size()==1 && output.get(0).getItem().getCount()==1,
                         "Dropped ingredients are consumed and native table emits one glyph: " + id+", input="+input.getItem()+", gem="+gem.getItem()+", outputs="+output.size()+", crafting="+table.crafting+", ticks="+table.craftingTicks+", present="+(h.getLevel().getBlockEntity(block)==table));
+                if(wrong!=null){h.assertTrue(!wrong.isRemoved() && !wrong.getItem().isEmpty(),"Native table ignores the wrong brew instead of matching bottles by item ID alone");wrong.discard();}
                 p.setItemInHand(InteractionHand.MAIN_HAND,output.get(0).getItem().copy());output.get(0).discard();
                 part.getGlyph().use(h.getLevel(),p,InteractionHand.MAIN_HAND);
                 h.assertTrue(knows.apply(part), "Crafted glyph learns through ordinary Ars right-click: " + id);
