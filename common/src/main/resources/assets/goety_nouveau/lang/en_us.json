@@ -159,5 +159,11 @@
   "goety_nouveau.glyph_name.glyph_vanguard": "Vanguard",
   "goety_nouveau.glyph_desc.glyph_vanguard": "Summon native vanguard servants near the selected point, retaining their staff rules and lifecycle. Sneak to recall.",
   "goety_nouveau.glyph_name.glyph_blackguard": "Blackguard",
-  "goety_nouveau.glyph_desc.glyph_blackguard": "Summon native blackguard servants near the selected point, retaining their staff rules and lifecycle. Sneak to recall."
+  "goety_nouveau.glyph_desc.glyph_blackguard": "Summon native blackguard servants near the selected point, retaining their staff rules and lifecycle. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_killing": "Killing",
+  "goety_nouveau.glyph_desc.glyph_killing": "Curse the selected enemy at a cost to your own health.",
+  "goety_nouveau.glyph_name.glyph_bolting": "Bolting",
+  "goety_nouveau.glyph_desc.glyph_bolting": "Dash toward the selected target or point, shocking nearby enemies. Self casts follow your facing.",
+  "goety_nouveau.glyph_name.glyph_illusion": "Illusion",
+  "goety_nouveau.glyph_desc.glyph_illusion": "Create your doubles near the selected point. Sneak-casting dismisses established doubles."
 }

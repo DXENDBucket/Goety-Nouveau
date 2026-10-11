@@ -17,6 +17,13 @@ public final class NativeVisualTracking {
                 ? List.of((byte)4,(byte)5) : List.of((byte)4);
     }
     public static void startTracking(ServerPlayer observer,Entity entity) {
+        // This native packet binds the clone to the receiving player. Never broadcast it
+        // to other observers; native owner UUID/client ID metadata serves those clients.
+        if (entity instanceof com.Polarice3.Goety.common.entities.ally.Doppelganger clone
+                && clone.getPersistentData().getBoolean(GoetyPersonalEffects.CLONE_MARKER)
+                && observer.getUUID().equals(clone.getOwnerId()))
+            com.Polarice3.Goety.common.network.ModNetwork.sendTo(observer,
+                    new com.Polarice3.Goety.common.network.server.SSetPlayerOwnerPacket(clone));
         for (byte event:events(entity)) observer.connection.send(new ClientboundEntityEventPacket(entity,event));
     }
 }

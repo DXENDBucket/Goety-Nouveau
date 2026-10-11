@@ -159,5 +159,11 @@
   "goety_nouveau.glyph_name.glyph_vanguard": "先锋",
   "goety_nouveau.glyph_desc.glyph_vanguard": "在选定位置附近召唤先锋。无名法杖保留列阵效果，潜行施法召回。",
   "goety_nouveau.glyph_name.glyph_blackguard": "黑卫",
-  "goety_nouveau.glyph_desc.glyph_blackguard": "在选定位置附近召唤黑卫。无名法杖保留列阵效果，潜行施法召回。"
+  "goety_nouveau.glyph_desc.glyph_blackguard": "在选定位置附近召唤黑卫。无名法杖保留列阵效果，潜行施法召回。",
+  "goety_nouveau.glyph_name.glyph_killing": "索命",
+  "goety_nouveau.glyph_desc.glyph_killing": "对选中的敌人施加死亡诅咒，同时承受生命反噬。",
+  "goety_nouveau.glyph_name.glyph_bolting": "冲刺",
+  "goety_nouveau.glyph_desc.glyph_bolting": "朝选中的目标或位置电光冲刺，攻击沿途敌人。自身触发时沿自身朝向。",
+  "goety_nouveau.glyph_name.glyph_illusion": "幻象",
+  "goety_nouveau.glyph_desc.glyph_illusion": "在选定位置附近制造自己的幻象。潜行施法遣散成熟的幻象。"
 }

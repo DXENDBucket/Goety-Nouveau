@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.25`). Eighteen projectile replacements, fifty-five target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.26`). Eighteen projectile replacements, fifty-eight target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -20,7 +20,7 @@ The glyphs are available in the creative tab; survival acquisition and ritual re
 
 ## Target and location effects
 
-These fifty-five glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+These fifty-eight glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
@@ -75,6 +75,9 @@ These fifty-five glyphs are **effects**, placed after an Ars cast method. They u
 | Frostborn | Native Ice Golem, Frost-staff batch and shared owner quota. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
 | Sprite | Native airborne lightning sprites, Storm-staff batch and native lifetime. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
 | Vanguard / Blackguard | Native guard servants, Necromancy-staff batches and Nameless-staff row formations. Forge retains its Ominous royal Blackguards. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
+| Killing | Native death curse on the actual selected enemy, including caster health feedback and low-health damage restriction. Self/allies/blocks fail; feedback immunity blocks survival execution. | None |
+| Bolting | The caster dashes toward the selected enemy/point, or faces forward on a self hit. Native spin, nearby shock attacks, staff/weather effects and termination remain active. | Amplify / Dampen, Accelerate / Decelerate |
+| Illusion | Native doubles around the selected point; Nameless staff/set and Illusion robe retain their branches. Recast replaces mature doubles; sneak-casting dismisses them. | None |
 
 
 
@@ -160,7 +163,7 @@ Each Goety trigger uses its own native payment account without replacing the sou
 
 These are the pinned build dependencies. Transitive mod dependencies are included in the download manifest, but upstream mod JARs are not committed or bundled in this addon.
 
-See [building instructions](docs/building.md), the [integration plan and API audit](docs/integration-plan.md), the [per-spell behavior audit](docs/simple-spell-audit.md), the [servants and barricade audit](docs/summon-wall-audit.md), the [creature summon audit](docs/creature-summon-audit.md), and [third-party notices](THIRD_PARTY_NOTICES.md). The shared [adapter checklist](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/spell-adapter-checklist.md) covers full native behavior, logical sides and both loaders.
+See [building instructions](docs/building.md), the [integration plan and API audit](docs/integration-plan.md), the [per-spell behavior audit](docs/simple-spell-audit.md), the [servants and barricade audit](docs/summon-wall-audit.md), the [creature summon audit](docs/creature-summon-audit.md), the [personal spell audit](docs/personal-spell-audit.md), and [third-party notices](THIRD_PARTY_NOTICES.md). The shared [adapter checklist](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/spell-adapter-checklist.md) covers full native behavior, logical sides and both loaders.
 
 ## License
 

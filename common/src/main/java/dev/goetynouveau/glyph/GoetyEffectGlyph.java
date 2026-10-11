@@ -41,6 +41,7 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
         if (focus.potency) { result.add(AugmentAmplify.INSTANCE); result.add(AugmentDampen.INSTANCE); }
         if (focus.duration) { result.add(AugmentExtendTime.INSTANCE); result.add(AugmentDurationDown.INSTANCE); }
         if (focus.radius) result.add(AugmentAOE.INSTANCE);
+        if (focus == EffectFocus.BOLTING) { result.add(AugmentAccelerate.INSTANCE); result.add(AugmentDecelerate.INSTANCE); }
         if (GoetyAugmentValidation.supportsBurning(focus)) result.add(AugmentBurning.INSTANCE);
         for (var augment : AugmentGoety.ALL) if (augment.supports(focus)) result.add(augment);
         return result;
@@ -58,7 +59,7 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
         var spell = focus.spell();
         // Soul Heal's native mob condition checks the caster's health. An Ars target can be
         // a different injured ally, so validate the actual recipient in the adapter instead.
-        if (focus != EffectFocus.SOUL_HEAL && focus != EffectFocus.IRON_HIDE && focus != EffectFocus.BULWARK
+        if (focus != EffectFocus.KILLING && focus != EffectFocus.SOUL_HEAL && focus != EffectFocus.IRON_HIDE && focus != EffectFocus.BULWARK
                 && !(spell instanceof com.Polarice3.Goety.common.magic.SummonSpell && GoetyResources.sneaking(caster))
                 && !spell.conditionsMet(server, caster)) return;
         var charge = GoetyResources.quote(context, spell, stats.getAugments());

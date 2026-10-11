@@ -59,7 +59,10 @@ public enum EffectFocus {
     FROSTBORN("frostborn", "frostborn_focus", "Frostborn", true, true, false),
     SPRITE("sprite", "sprightly_focus", "Sprite", true, true, false),
     VANGUARD("vanguard", "vanguard_focus", "Vanguard", true, true, false),
-    BLACKGUARD("blackguard", "blackguard_focus", "Blackguard", true, true, false);
+    BLACKGUARD("blackguard", "blackguard_focus", "Blackguard", true, true, false),
+    KILLING("killing", "killing_focus", "Killing", false, false, false),
+    BOLTING("bolting", "bolting_focus", "Bolting", true, false, false),
+    ILLUSION("illusion", "illusion_focus", "Illusion", false, false, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;
