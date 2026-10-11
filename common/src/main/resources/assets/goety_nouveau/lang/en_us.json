@@ -197,5 +197,11 @@
   "goety_nouveau.glyph_name.glyph_meteor_shower": "Meteor Shower",
   "goety_nouveau.glyph_desc.glyph_meteor_shower": "Choose yourself or an allied living creature to sustain native meteor salvos at its aim.",
   "goety_nouveau.glyph_name.glyph_ice_storm": "Ice Storm",
-  "goety_nouveau.glyph_desc.glyph_ice_storm": "Replace an Ars projectile with a growing native ice storm."
+  "goety_nouveau.glyph_desc.glyph_ice_storm": "Replace an Ars projectile with a growing native ice storm.",
+  "goety_nouveau.glyph_name.glyph_bombardment": "Bombardment",
+  "goety_nouveau.glyph_desc.glyph_bombardment": "Choose yourself or an ally to hover and sustain native fireball salvos.",
+  "goety_nouveau.glyph_name.glyph_thunderstorm": "Thunderstorm",
+  "goety_nouveau.glyph_desc.glyph_thunderstorm": "Choose yourself or an ally to sustain a native lightning storm.",
+  "goety_nouveau.glyph_name.glyph_trident_storm": "Trident Storm",
+  "goety_nouveau.glyph_desc.glyph_trident_storm": "Raise native lightning tridents around the selected location."
 }

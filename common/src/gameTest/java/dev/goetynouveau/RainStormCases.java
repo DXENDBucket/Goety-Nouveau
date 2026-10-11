@@ -26,17 +26,17 @@ import java.util.*;
 
 /** Check native entities and behavior, the actual resource account and remote executor geometry. */
 public final class RainStormCases {
-    private static Vec3 scene(GameTestHelper h) {
+    static Vec3 scene(GameTestHelper h) {
         var p=h.absolutePos(new BlockPos(4,0,4));return new Vec3(p.getX()+.5,h.getLevel().getMaxBuildHeight()-48,p.getZ()+.5);
     }
-    private static <T extends Entity> List<T> entities(GameTestHelper h,Class<T> type) {
+    static <T extends Entity> List<T> entities(GameTestHelper h,Class<T> type) {
         return h.getLevel().getEntitiesOfClass(type,new AABB(scene(h),scene(h)).inflate(64));
     }
-    private static void clear(GameTestHelper h,ServerPlayer p) {
+    static void clear(GameTestHelper h,ServerPlayer p) {
         for(var e:h.getLevel().getEntities(p,new AABB(scene(h),scene(h)).inflate(64))) e.discard();
         ExecutionSessions.tick();
     }
-    private static void prepare(GameTestHelper h,ServerPlayer p) {
+    static void prepare(GameTestHelper h,ServerPlayer p) {
         clear(h,p);p.setPos(scene(h).add(-24,0,0));p.setNoGravity(true);h.getLevel().addNewPlayer(p);
         p.setYRot(-90);p.setXRot(0);p.setGameMode(GameType.SURVIVAL);
         p.setItemInHand(InteractionHand.MAIN_HAND,ItemStack.EMPTY);p.setItemInHand(InteractionHand.OFF_HAND,ItemStack.EMPTY);
@@ -46,7 +46,7 @@ public final class RainStormCases {
         for(int x=-16;x<=16;x++) for(int z=-16;z<=24;z++) for(int y=0;y<=25;y++)
             h.getLevel().setBlock(center.offset(x,y,z),net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(),2);
     }
-    private static Mob host(GameTestHelper h,ServerPlayer p) {
+    static Mob host(GameTestHelper h,ServerPlayer p) {
         var host=EntityType.ZOMBIE.create(h.getLevel());host.setNoAi(true);host.setNoGravity(true);host.setPos(scene(h));
         h.getLevel().addFreshEntity(host);
         var board=h.getLevel().getScoreboard();var team=board.getPlayersTeam(p.getScoreboardName());
@@ -55,7 +55,7 @@ public final class RainStormCases {
         var target=EntityType.COW.create(h.getLevel());target.setNoAi(true);target.setNoGravity(true);
         target.setPos(scene(h).add(0,0,8));h.getLevel().addFreshEntity(target);host.setTarget(target);return host;
     }
-    private static int cast(GameTestHelper h,ServerPlayer p,GoetyEffectGlyph glyph,LivingEntity host,LivingEntity owner,boolean success,AbstractAugment... augments) {
+    static int cast(GameTestHelper h,ServerPlayer p,GoetyEffectGlyph glyph,LivingEntity host,LivingEntity owner,boolean success,AbstractAugment... augments) {
         var spell=new Spell(MethodTouch.INSTANCE,glyph);for(var a:augments) spell=spell.add(a);
         var resolver=new SpellResolver(new SpellContext(h.getLevel(),spell,p,LivingCaster.from(p),ItemStack.EMPTY));
         resolver.spellContext.nextPart();var hit=new EntityHitResult(host);
@@ -82,7 +82,7 @@ public final class RainStormCases {
                 h.assertTrue(glyph!=GlyphCatalog.METEOR_SHOWER || batch.get(0) instanceof Lavaball,"Native meteor");
                 int before=SEHelper.getSESouls(p);cast(h,p,glyph,host.getTarget(),p,false);
                 h.assertTrue(before==SEHelper.getSESouls(p),"An enemy cannot sustain the spell");
-                h.assertTrue(GoetyRainGeometry.current()==null,"Native scope is restored after the callback");
+                h.assertTrue(GoetyNativeGeometry.current()==null,"Native scope is restored after the callback");
             }
             clear(h,p);var host=host(h,p);
             p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(ModItems.FROST_STAFF.get()));

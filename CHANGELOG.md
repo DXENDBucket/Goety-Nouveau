@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-dev.32
+
+- Add Bombardment, Thunderstorm and Trident Storm effects on both loaders: 98 shared glyphs, 99 on NeoForge.
+- Preserve native fireball/Unholy/staff salvos, hover motion, lightning trap variants and particles, and trident formations, delayed real strikes and expiry. Sustained executors must be yourself or an ally; original caster supplies equipment and payment, with explicit damage ownership retained.
+- Bombardment keeps native emission cadence and pays per 20 salvos. Thunderstorm uses native per-tick callbacks with ongoing payment per 20 pulses; Ars preparation replaces its initial 20-tick warmup. Trident Storm is a single paid area effect.
+- Sync and persist Ars provenance for native trident entities so they survive preactivation without a held Goety wand. Ordinary native wand traps retain their original cancellation rule.
+- Four focused server cases passed on each loader, including the previous meteor cadence/resource regression. Actual client appearance and audio remain manual checks.
+
+
 ## 0.1.0-dev.31
 
 - Add Arrow Rain, Blizzard and Meteor Shower effects, plus the Ice Storm projectile replacement on both loaders: 95 shared glyphs, 96 on NeoForge.

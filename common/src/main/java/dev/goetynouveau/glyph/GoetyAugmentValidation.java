@@ -13,7 +13,7 @@ import java.util.List;
 public final class GoetyAugmentValidation {
     private GoetyAugmentValidation() {}
     public static boolean supportsBurning(EffectFocus focus) {
-        return focus == EffectFocus.ARROW_RAIN || focus == EffectFocus.METEOR_SHOWER || focus == EffectFocus.FIRE_BREATH || focus == EffectFocus.HAUNTED_SKULL || focus == EffectFocus.FANGS || focus == EffectFocus.IGNITE || focus == EffectFocus.FEAST || focus == EffectFocus.ERUPTION || focus == EffectFocus.FIRE_BLAST || focus == EffectFocus.SPIKES;
+        return focus == EffectFocus.BOMBARDMENT || focus == EffectFocus.ARROW_RAIN || focus == EffectFocus.METEOR_SHOWER || focus == EffectFocus.FIRE_BREATH || focus == EffectFocus.HAUNTED_SKULL || focus == EffectFocus.FANGS || focus == EffectFocus.IGNITE || focus == EffectFocus.FEAST || focus == EffectFocus.ERUPTION || focus == EffectFocus.FIRE_BLAST || focus == EffectFocus.SPIKES;
     }
     public static boolean supportsBurning(BoltFocus focus) {
         return focus == BoltFocus.FIREBALL || focus == BoltFocus.WITHER_SKULL

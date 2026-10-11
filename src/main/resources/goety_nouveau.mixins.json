@@ -42,8 +42,13 @@
     "NativeBreathingGeometryMixin",
     "NativeBreathingResultMixin",
     "NativeBreathingDamageMixin",
-    "NativeRainGeometryMixin",
-    "NativeRainResultMixin"
+    "NativeSpellGeometryMixin",
+    "NativeRainResultMixin",
+    "NativeBombardmentGeometryMixin",
+    "NativeThunderstormGeometryMixin",
+    "NativeTridentGeometryMixin",
+    "NativeTridentLifetimeMixin",
+    "NativeSpellEntityStateMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -197,5 +197,11 @@
   "goety_nouveau.glyph_name.glyph_meteor_shower": "流星雨",
   "goety_nouveau.glyph_desc.glyph_meteor_shower": "选中自身或友方生物，分批向其瞄准位置降下流星雨。",
   "goety_nouveau.glyph_name.glyph_ice_storm": "冰风暴",
-  "goety_nouveau.glyph_desc.glyph_ice_storm": "将新生魔艺弹射物替换为逐渐扩大的冰风暴。"
+  "goety_nouveau.glyph_desc.glyph_ice_storm": "将新生魔艺弹射物替换为逐渐扩大的冰风暴。",
+  "goety_nouveau.glyph_name.glyph_bombardment": "轰击",
+  "goety_nouveau.glyph_desc.glyph_bombardment": "选中自身或友方生物，使其悬浮并持续发射火球。",
+  "goety_nouveau.glyph_name.glyph_thunderstorm": "雷暴",
+  "goety_nouveau.glyph_desc.glyph_thunderstorm": "选中自身或友方生物，持续降下雷暴。",
+  "goety_nouveau.glyph_name.glyph_trident_storm": "三叉戟风暴",
+  "goety_nouveau.glyph_desc.glyph_trident_storm": "在选中位置周围唤出雷击三叉戟。"
 }

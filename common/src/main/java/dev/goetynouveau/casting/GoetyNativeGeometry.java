@@ -5,10 +5,10 @@ import net.minecraft.world.entity.LivingEntity;
 import java.util.function.Supplier;
 
 /** A synchronous native callback scope; equipment and ownership continue to use the caster. */
-public final class GoetyRainGeometry {
+public final class GoetyNativeGeometry {
     public record View(CastContext context, LivingEntity host, com.Polarice3.Goety.common.magic.Spell spell) {}
     private static final ThreadLocal<View> CURRENT = new ThreadLocal<>();
-    private GoetyRainGeometry() {}
+    private GoetyNativeGeometry() {}
     public static View current() { return CURRENT.get(); }
     public static LivingEntity spatial(Object spell, LivingEntity caster) {
         var view=current();

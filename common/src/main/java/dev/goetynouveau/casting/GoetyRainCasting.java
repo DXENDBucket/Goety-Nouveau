@@ -27,11 +27,15 @@ public final class GoetyRainCasting {
         stats.setPotency(Math.max(0,stats.getPotency()+(int)ars.getAmpMultiplier()));
         stats.setRadius(Math.max(0,stats.getRadius()+(float)ars.getAoeMultiplier()));
         stats.setBurning(stats.getBurning()+ars.getBuffCount(AugmentBurning.INSTANCE));
-        var view=new GoetyRainGeometry.View(frame.withExecutor(host),host,spell);
-        Runnable pulse=()->GoetyRainGeometry.scoped(view,()->{
+        var view=new GoetyNativeGeometry.View(frame.withExecutor(host),host,spell);
+        Runnable pulse=()->GoetyNativeGeometry.scoped(view,()->{
             dev.goetynouveau.platform.NativeBreathHooks.result(spell,world,frame.caster(),staff,stats);return null;
         });
         return GoetyChannelCasting.start(focus,world,frame,host,spell,stats,charge,
-                new GoetyChannelCasting.Program(shots,interval,pulse,()->{},null,null));
+                new GoetyChannelCasting.Program(shots,interval,pulse,()->{
+                    if(focus==EffectFocus.BOMBARDMENT) GoetyNativeGeometry.scoped(view,()->{
+                        spell.useSpell(world,frame.caster(),staff,0,stats);return null;
+                    });
+                },focus==EffectFocus.BOMBARDMENT?spell.CastingSound(frame.caster()):null,null));
     }
 }

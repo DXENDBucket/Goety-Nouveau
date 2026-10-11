@@ -50,7 +50,9 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
-            case ARROW_RAIN, BLIZZARD, METEOR_SHOWER -> GoetyRainCasting.apply(focus, world, frame, ars, charge);
+            case THUNDERSTORM -> GoetyThunderstormCasting.apply(world, frame, ars, charge);
+            case TRIDENT_STORM -> GoetyTridentCasting.apply(world, frame, spell, ars);
+            case ARROW_RAIN, BLIZZARD, METEOR_SHOWER, BOMBARDMENT -> GoetyRainCasting.apply(focus, world, frame, ars, charge);
             case HOGGING -> GoetyHoggingCasting.apply(world, frame, (com.Polarice3.Goety.common.magic.SummonSpell)spell, defaults, ars);
             case MINISTROUS, BREEZE -> GoetyServantCasting.apply(focus, world, frame,
                     (com.Polarice3.Goety.common.magic.SummonSpell)spell, defaults, ars);
