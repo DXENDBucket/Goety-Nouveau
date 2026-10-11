@@ -6,12 +6,12 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 public final class ForgeNetwork {
-    private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(CarrierRegistry.id("goety_nouveau:casting"), () -> "1", "1"::equals, "1"::equals);
+    private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(CarrierRegistry.id("goety_nouveau:casting"), () -> "2", "2"::equals, "2"::equals);
     private ForgeNetwork() {}
     public static void register() {
         CHANNEL.messageBuilder(ChantStatePayload.class, 0, NetworkDirection.PLAY_TO_CLIENT)
-                .encoder((data, buf) -> { buf.writeUUID(data.token()); buf.writeVarInt(data.duration()); buf.writeVarInt(data.remaining()); })
-                .decoder(buf -> new ChantStatePayload(buf.readUUID(), buf.readVarInt(), buf.readVarInt()))
+                .encoder((data, buf) -> { buf.writeUUID(data.token()); buf.writeVarInt(data.duration()); buf.writeVarInt(data.remaining()); buf.writeBoolean(data.channeling()); })
+                .decoder(buf -> new ChantStatePayload(buf.readUUID(), buf.readVarInt(), buf.readVarInt(), buf.readBoolean()))
                 .consumerMainThread((data, context) -> {
                     if (net.minecraftforge.fml.loading.FMLEnvironment.dist == net.minecraftforge.api.distmarker.Dist.CLIENT)
                         dev.goetynouveau.client.ChantHudState.accept(data);

@@ -177,5 +177,11 @@
   "goety_nouveau.glyph_name.glyph_snaring": "Snaring",
   "goety_nouveau.glyph_desc.glyph_snaring": "Summon native snarelings at the selected point. Sneak to recall.",
   "goety_nouveau.glyph_name.glyph_blasting": "Blasting",
-  "goety_nouveau.glyph_desc.glyph_blasting": "Summon native blastlings at the selected point. Sneak to recall."
+  "goety_nouveau.glyph_desc.glyph_blasting": "Summon native blastlings at the selected point. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_fire_breath": "Fire Breath",
+  "goety_nouveau.glyph_desc.glyph_fire_breath": "Grants yourself or an ally a sustained breath, consuming resources while active.",
+  "goety_nouveau.glyph_name.glyph_frost_breath": "Frost Breath",
+  "goety_nouveau.glyph_desc.glyph_frost_breath": "Grants yourself or an ally a sustained breath, consuming resources while active.",
+  "goety_nouveau.glyph_name.glyph_swarm": "Swarm",
+  "goety_nouveau.glyph_desc.glyph_swarm": "Grants yourself or an ally a sustained breath, consuming resources while active."
 }

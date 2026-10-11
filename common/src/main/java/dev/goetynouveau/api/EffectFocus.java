@@ -68,7 +68,10 @@ public enum EffectFocus {
     GUARDIAN("guardian", "guardian_focus", "Guardian", true, true, false),
     WATCHING("watching", "watching_focus", "Watching", true, true, false),
     SNARING("snaring", "snaring_focus", "Snaring", true, true, false),
-    BLASTING("blasting", "blasting_focus", "Blasting", true, true, false);
+    BLASTING("blasting", "blasting_focus", "Blasting", true, true, false),
+    FIRE_BREATH("fire_breath", "fire_breath_focus", "Fire Breath", true, true, false),
+    FROST_BREATH("frost_breath", "frost_breath_focus", "Frost Breath", true, true, false),
+    SWARM("swarm", "swarm_focus", "Swarm", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;
@@ -76,5 +79,6 @@ public enum EffectFocus {
         this.glyph = glyph; this.focus = focus; this.name = name;
         this.potency = potency; this.duration = duration; this.radius = radius;
     }
+    public boolean breathing() { return this == FIRE_BREATH || this == FROST_BREATH || this == SWARM; }
     public ISpell spell() { return FocusSpells.read(CarrierRegistry.id("goety:" + focus)).orElseThrow(); }
 }

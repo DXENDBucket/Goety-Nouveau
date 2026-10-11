@@ -9,7 +9,7 @@ import net.minecraft.client.player.LocalPlayer;
 public final class CastingMovement {
     private CastingMovement() {}
     public static void apply(LocalPlayer player, Input input) {
-        if (!GoetyConfig.movementEnabled() || !ChantHudState.chanting() || player.isPassenger()) return;
+        if (!GoetyConfig.movementEnabled() || !(ChantHudState.chanting() || ChantHudState.channeling()) || player.isPassenger()) return;
         if (SpellConfig.FullStopCast.get()) {
             input.leftImpulse = 0;
             input.forwardImpulse = 0;

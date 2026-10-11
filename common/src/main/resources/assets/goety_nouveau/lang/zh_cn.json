@@ -177,5 +177,11 @@
   "goety_nouveau.glyph_name.glyph_snaring": "迷惑召唤",
   "goety_nouveau.glyph_desc.glyph_snaring": "在选中位置召唤迷惑仆从。潜行施法可召回。",
   "goety_nouveau.glyph_name.glyph_blasting": "爆破召唤",
-  "goety_nouveau.glyph_desc.glyph_blasting": "在选中位置召唤爆破仆从。潜行施法可召回。"
+  "goety_nouveau.glyph_desc.glyph_blasting": "在选中位置召唤爆破仆从。潜行施法可召回。",
+  "goety_nouveau.glyph_name.glyph_fire_breath": "火焰吐息",
+  "goety_nouveau.glyph_desc.glyph_fire_breath": "让自身或友军持续喷吐，期间持续消耗能量。",
+  "goety_nouveau.glyph_name.glyph_frost_breath": "冰霜吐息",
+  "goety_nouveau.glyph_desc.glyph_frost_breath": "让自身或友军持续喷吐，期间持续消耗能量。",
+  "goety_nouveau.glyph_name.glyph_swarm": "虫群吐息",
+  "goety_nouveau.glyph_desc.glyph_swarm": "让自身或友军持续喷吐，期间持续消耗能量。"
 }

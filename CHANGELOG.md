@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.29
+
+- Add Fire Breath, Frost Breath and Swarm as sustained effect glyphs: 89 glyphs covering 85 native focuses.
+- Retain native per-tick results, breath particle helpers, equipment variants, damage types, freezing, fire and kill-produced swarms; bill the native focus once per second while active.
+- Select only the caster or a native Goety ally as executor. Track that entity's eyes/facing, preserve original stats/payer and explicit damage ownership, and terminate on loss of alliance, resources or finite duration.
+- Reuse Conflux execution sessions and Goety preparation movement configuration for channeling. Native Goety casts outside the scoped adapter remain unchanged.
+- Two focused shared server cases passed on each loader. Client appearance, audio and input slowdown remain manual checks.
+
 ## 0.1.0-dev.28
 
 - Add Watching, Snaring and Blasting summon effect glyphs on both loaders: 86 glyphs covering 82 native focuses.

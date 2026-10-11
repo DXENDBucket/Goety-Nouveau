@@ -10,21 +10,35 @@ import java.lang.ref.WeakReference;
 /** A visual bridge only. Does not change native Goety capabilities, held focuses or casting status. */
 public final class ChantHudState {
     private static final ChantProgressTimer TIMER = new ChantProgressTimer();
+    private static final java.util.Map<java.util.UUID, Long> CHANNELS = new java.util.HashMap<>();
     private static WeakReference<ClientLevel> world = new WeakReference<>(null);
     private ChantHudState() {}
     public static void accept(ChantStatePayload data) {
         var client = Minecraft.getInstance();
-        if (client.level != world.get()) TIMER.clear();
+        if (client.level != world.get()) { TIMER.clear(); CHANNELS.clear(); }
         world = new WeakReference<>(client.level);
+        if (data.channeling()) {
+            if (client.level != null && data.remaining() > 0) CHANNELS.put(data.token(), client.level.getGameTime() + data.remaining());
+            else CHANNELS.remove(data.token());
+            return;
+        }
         if (client.level != null) TIMER.update(data.token(), data.duration(), data.remaining(), client.level.getGameTime());
     }
     public static boolean chanting() {
         var client = Minecraft.getInstance();
         var level = world.get();
         if (level == null || level != client.level || client.player == null || !client.player.isAlive() || client.player.isSpectator()) {
-            TIMER.clear(); world.clear(); return false;
+            TIMER.clear(); CHANNELS.clear(); world.clear(); return false;
         }
         return TIMER.active(level.getGameTime());
+    }
+    public static boolean channeling() {
+        var client = Minecraft.getInstance();
+        if (world.get() != client.level || client.level == null || client.player == null || !client.player.isAlive()) {
+            CHANNELS.clear(); return false;
+        }
+        CHANNELS.values().removeIf(end -> end <= client.level.getGameTime());
+        return !CHANNELS.isEmpty();
     }
     public static boolean visible() {
         return chanting() && !MobUtil.isSpellCasting(Minecraft.getInstance().player);

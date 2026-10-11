@@ -33,7 +33,7 @@ import net.minecraft.world.phys.Vec3;
 public final class GoetyEffectCasting {
     private GoetyEffectCasting() {}
     private record Parameters(int potency, int duration, double radius) {}
-    public static boolean apply(EffectFocus focus, ServerLevel world, CastContext frame, SpellStats ars) {
+    public static boolean apply(EffectFocus focus, ServerLevel world, CastContext frame, SpellStats ars, dev.arsconflux.api.resource.ResourceCharge charge) {
         if (frame.target() == null || frame.target().getType() == HitResult.Type.MISS) return false;
         var caster = frame.caster();
         var spell = (Spell)focus.spell();
@@ -50,6 +50,7 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
+            case FIRE_BREATH, FROST_BREATH, SWARM -> GoetyBreathingCasting.apply(focus, world, frame, ars, charge);
             case ICE_CHUNK -> iceChunk(world, frame, spell, parameters);
             case ENTANGLING -> entangling(world, frame, spell, parameters);
             case FROST_NOVA -> frostNova(world, frame, spell, parameters);

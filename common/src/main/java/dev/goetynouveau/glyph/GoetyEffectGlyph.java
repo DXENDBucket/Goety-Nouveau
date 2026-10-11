@@ -59,7 +59,7 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
         var spell = focus.spell();
         // Soul Heal's native mob condition checks the caster's health. An Ars target can be
         // a different injured ally, so validate the actual recipient in the adapter instead.
-        if (focus != EffectFocus.KILLING && focus != EffectFocus.SOUL_HEAL && focus != EffectFocus.IRON_HIDE && focus != EffectFocus.BULWARK
+        if (!focus.breathing() && focus != EffectFocus.KILLING && focus != EffectFocus.SOUL_HEAL && focus != EffectFocus.IRON_HIDE && focus != EffectFocus.BULWARK
                 && !(spell instanceof com.Polarice3.Goety.common.magic.SummonSpell && GoetyResources.sneaking(caster))
                 && !spell.conditionsMet(server, caster)) return;
         var charge = GoetyResources.quote(context, spell, stats.getAugments());
@@ -69,6 +69,6 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
         CastContexts.bind(context, frame);
         var selected = frame.withAccount(charge.account());
         CastContexts.scoped(selected, () -> GoetyResources.activation(charge).trigger(
-                () -> GoetyEffectCasting.apply(focus, server, selected, stats)));
+                () -> GoetyEffectCasting.apply(focus, server, selected, stats, charge)));
     }
 }

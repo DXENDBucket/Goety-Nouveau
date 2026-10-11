@@ -39,7 +39,10 @@
     "ManagedBubbleLifetimeMixin",
     "ManagedNativeHomingMixin",
     "GoetyLightProjectileStateMixin",
-    "ManagedLightProjectileMixin"
+    "ManagedLightProjectileMixin",
+    "NativeBreathingGeometryMixin",
+    "NativeBreathingResultMixin",
+    "NativeBreathingDamageMixin"
   ],
   "injectors": {
     "defaultRequire": 1

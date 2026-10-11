@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.28`). Eighteen projectile replacements, sixty-four target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.29`). Eighteen projectile replacements, sixty-seven target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -20,7 +20,7 @@ The glyphs are available in the creative tab; survival acquisition and ritual re
 
 ## Target and location effects
 
-These fifty-eight glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+These glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
@@ -82,6 +82,7 @@ These fifty-eight glyphs are **effects**, placed after an Ars cast method. They 
 | Ghastly | Native mini-ghasts; Nether robe selects large ghasts and the full Unholy set selects Malghasts. Native fireball/explosion potency and weakness remain active. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
 | Guardian | Native guardian servants around the selected point, with water placement and an Abyss-staff pair. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
 | Watching / Snaring / Blasting | Native Watchling, Snareling and Blastling servants at the selected point. Void staff retains 2?5 batches; teleport/hiding, web shots and alternating goo attacks remain native. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
+| Fire Breath / Frost Breath / Swarm | Grants yourself or an ally a sustained native breath. The selected ally supplies the eyes and facing; the original caster supplies gear, damage and energy. Native results run each tick, with one focus charge per second. | Amplify / Dampen, Extend Time / Duration Down; Burning on Fire Breath |
 
 
 
