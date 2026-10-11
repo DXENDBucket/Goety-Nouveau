@@ -29,10 +29,11 @@ public final class GoetySummonCasting {
         for (var entity : world.getAllEntities())
             if (entity instanceof HauntedSkull skull && skull.isAlive() && owner.getUUID().equals(skull.getOwnerId()))
                 owned.add(skull);
-        if (spell.isShifting(caster)) {
+        if (GoetyResources.sneaking(caster)) {
             // Native shift-casting recalls existing servants rather than creating another batch.
             if (owned.stream().noneMatch(skull -> skull.getTrueOwner() == caster && !SEHelper.isGrounded(caster, skull))) return false;
-            spell.commonResult(world, caster);
+            for (var skull:owned) spell.teleportServants(caster,skull);
+            spell.commonResultHit(world,caster);
             return true;
         }
         var staff = GoetyResources.staff(caster);

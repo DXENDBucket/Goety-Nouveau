@@ -123,7 +123,7 @@ public final class GoetyNativeProjectileCasting {
         var continuation = resolver.clone();
         var parameters = new Batch(focus, payloads, quote, direction);
         var driver = new NativeFlight(parameters, carrier, profile.arsDriven(), multiplier);
-        int lifetime = focus == BoltFocus.POISON_DART || focus == BoltFocus.BOUNCY_BUBBLE ? 100
+        int lifetime = focus == BoltFocus.GLOW_LIGHT ? 600 : focus == BoltFocus.POISON_DART || focus == BoltFocus.BOUNCY_BUBBLE ? 100
                 : focus == BoltFocus.RAZOR_WIND ? 41 : 200;
         var session = new ExecutionSession<>(world, selected, parameters,
                 Math.max(1, Math.min(lifetime, carrier.getExpirationTime() + 1)), driver,

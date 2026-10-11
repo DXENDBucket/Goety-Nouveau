@@ -109,5 +109,17 @@
   "goety_nouveau.glyph_name.glyph_flame_strike": "Flame Strike",
   "goety_nouveau.glyph_desc.glyph_flame_strike": "Summons native fire pillars at the trigger point, surrounding a selected entity.",
   "goety_nouveau.glyph_name.glyph_void_rift": "Void Rift",
-  "goety_nouveau.glyph_desc.glyph_void_rift": "Opens a native void rift at the trigger point, pulling nearby enemies and harming those at its center."
+  "goety_nouveau.glyph_desc.glyph_void_rift": "Opens a native void rift at the trigger point, pulling nearby enemies and harming those at its center.",
+  "goety_nouveau.glyph_name.glyph_wind_blast": "Wind Blast",
+  "goety_nouveau.glyph_desc.glyph_wind_blast": "Blow a native gust from the selected point. Staff effects and wind-powered devices remain supported.",
+  "goety_nouveau.glyph_name.glyph_overgrowth": "Overgrowth",
+  "goety_nouveau.glyph_desc.glyph_overgrowth": "Raise native vines around the selected enemy or point. Sneak-casting creates poison-quill vine turrets.",
+  "goety_nouveau.glyph_name.glyph_glow_light": "Glow Light",
+  "goety_nouveau.glyph_desc.glyph_glow_light": "Replace an Ars projectile with native Glow Light. Impacts illuminate creatures or place a native light block.",
+  "goety_nouveau.glyph_name.glyph_zombie": "Summon Zombie",
+  "goety_nouveau.glyph_desc.glyph_zombie": "Summon native zombie servants near the selected point, sharing Goety limits and retaining staff variants. Sneak-casting recalls them.",
+  "goety_nouveau.glyph_name.glyph_skeleton": "Summon Skeleton",
+  "goety_nouveau.glyph_desc.glyph_skeleton": "Summon native skeleton servants near the selected point, sharing Goety limits and retaining staff variants. Sneak-casting recalls them.",
+  "goety_nouveau.glyph_name.glyph_vex": "Summon Vex",
+  "goety_nouveau.glyph_desc.glyph_vex": "Summon native allied vexes near the selected point. Sneak-casting dismisses your vexes, following native behavior."
 }

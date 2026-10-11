@@ -35,7 +35,12 @@ public enum EffectFocus {
     FIRE_BLAST("fire_blast", "fire_blast_focus", "Fire Blast", true, false, true),
     SONIC_BOOM("sonic_boom", "sonic_boom_focus", "Sonic Boom", true, false, false),
     FLAME_STRIKE("flame_strike", "flame_strike_focus", "Flame Strike", true, true, true),
-    VOID_RIFT("void_rift", "rupture_focus", "Void Rift", true, true, true);
+    VOID_RIFT("void_rift", "rupture_focus", "Void Rift", true, true, true),
+    WIND_BLAST("wind_blast", "wind_blast_focus", "Wind Blast", true, false, true),
+    OVERGROWTH("overgrowth", "overgrowth_focus", "Overgrowth", true, true, false),
+    ZOMBIE("zombie", "rotting_focus", "Summon Zombie", true, true, false),
+    SKELETON("skeleton", "osseous_focus", "Summon Skeleton", true, true, false),
+    VEX("vex", "vexing_focus", "Summon Vex", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

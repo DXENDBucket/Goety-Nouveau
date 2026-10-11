@@ -37,7 +37,9 @@
     "NativeBubbleAccess",
     "ManagedCustomTravelMixin",
     "ManagedBubbleLifetimeMixin",
-    "ManagedNativeHomingMixin"
+    "ManagedNativeHomingMixin",
+    "GoetyLightProjectileStateMixin",
+    "ManagedLightProjectileMixin"
   ],
   "injectors": {
     "defaultRequire": 1

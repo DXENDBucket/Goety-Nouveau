@@ -61,9 +61,15 @@ public final class GlyphCatalog {
     public static final GoetyBoltGlyph VOID_BOMB = new GoetyBoltGlyph(BoltFocus.VOID_BOMB);
     public static final GoetyBoltGlyph SWORD = new GoetyBoltGlyph(BoltFocus.SWORD);
     public static final GoetyBoltGlyph RAZOR_WIND = new GoetyBoltGlyph(BoltFocus.RAZOR_WIND);
+    public static final GoetyEffectGlyph WIND_BLAST = new GoetyEffectGlyph(EffectFocus.WIND_BLAST);
+    public static final GoetyEffectGlyph OVERGROWTH = new GoetyEffectGlyph(EffectFocus.OVERGROWTH);
+    public static final GoetyEffectGlyph ZOMBIE = new GoetyEffectGlyph(EffectFocus.ZOMBIE);
+    public static final GoetyEffectGlyph SKELETON = new GoetyEffectGlyph(EffectFocus.SKELETON);
+    public static final GoetyEffectGlyph VEX = new GoetyEffectGlyph(EffectFocus.VEX);
+    public static final GoetyBoltGlyph GLOW_LIGHT = new GoetyBoltGlyph(BoltFocus.GLOW_LIGHT);
     public static final List<AbstractSpellPart> ALL = List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
-            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
+            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, GLOW_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
             dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER);
     private GlyphCatalog() {}
@@ -94,6 +100,7 @@ public final class GlyphCatalog {
             case VOID_BOMB -> VOID_BOMB;
             case SWORD -> SWORD;
             case RAZOR_WIND -> RAZOR_WIND;
+            case GLOW_LIGHT -> GLOW_LIGHT;
         };
     }
     public static void configureCarriers() {

@@ -109,5 +109,17 @@
   "goety_nouveau.glyph_name.glyph_flame_strike": "烈焰打击",
   "goety_nouveau.glyph_desc.glyph_flame_strike": "在触发位置召出火柱；选中其他实体时，火柱环绕目标出现。",
   "goety_nouveau.glyph_name.glyph_void_rift": "虚空裂隙",
-  "goety_nouveau.glyph_desc.glyph_void_rift": "在触发位置开启虚空裂隙，牵引附近敌人并伤害靠近中心的目标。"
+  "goety_nouveau.glyph_desc.glyph_void_rift": "在触发位置开启虚空裂隙，牵引附近敌人并伤害靠近中心的目标。",
+  "goety_nouveau.glyph_name.glyph_wind_blast": "风冲击",
+  "goety_nouveau.glyph_desc.glyph_wind_blast": "从选定位置吹出强风，击退敌人。保留法杖附加效果与风力装置交互。",
+  "goety_nouveau.glyph_name.glyph_overgrowth": "藤蔓生长",
+  "goety_nouveau.glyph_desc.glyph_overgrowth": "在选定敌人或位置周围生成藤蔓。潜行施法改为生成毒刺藤蔓炮台。",
+  "goety_nouveau.glyph_name.glyph_glow_light": "发光投射物",
+  "goety_nouveau.glyph_desc.glyph_glow_light": "将弹射物替换为发光投射物。命中生物令其发光，命中方块放置原生光源。",
+  "goety_nouveau.glyph_name.glyph_zombie": "召唤僵尸",
+  "goety_nouveau.glyph_desc.glyph_zombie": "在选定位置附近召唤僵尸仆从，共用 Goety 数量限制并保留法杖变体。潜行施法召回仆从。",
+  "goety_nouveau.glyph_name.glyph_skeleton": "召唤骷髅",
+  "goety_nouveau.glyph_desc.glyph_skeleton": "在选定位置附近召唤骷髅仆从，共用 Goety 数量限制并保留法杖变体。潜行施法召回仆从。",
+  "goety_nouveau.glyph_name.glyph_vex": "召唤恼鬼",
+  "goety_nouveau.glyph_desc.glyph_vex": "在选定位置附近召唤友方恼鬼。潜行施法按原生规则消灭自己的恼鬼。"
 }

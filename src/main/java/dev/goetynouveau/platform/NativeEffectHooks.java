@@ -8,6 +8,14 @@ import net.minecraft.world.entity.LivingEntity;
 
 public final class NativeEffectHooks {
     private NativeEffectHooks() {}
+    public static void windStaff(com.Polarice3.Goety.common.magic.Spell spell, LivingEntity caster, net.minecraft.world.item.ItemStack staff, LivingEntity target) {
+        if(spell.typeStaff(staff,com.Polarice3.Goety.api.magic.SpellType.FROST)) target.addEffect(freezing(100,0));
+        if(spell.typeStaff(staff,com.Polarice3.Goety.api.magic.SpellType.WILD)) target.addEffect(new MobEffectInstance(
+                com.Polarice3.Goety.utils.CuriosFinder.hasWildRobe(caster)?GoetyEffects.ACID_VENOM:net.minecraft.world.effect.MobEffects.POISON,100));
+        if(spell.typeStaff(staff,com.Polarice3.Goety.api.magic.SpellType.STORM)) target.addEffect(spasms(100));
+        if(spell.typeStaff(staff,com.Polarice3.Goety.api.magic.SpellType.VOID)) target.addEffect(new MobEffectInstance(GoetyEffects.VOID_TOUCHED,100));
+        if(spell.typeStaff(staff,com.Polarice3.Goety.api.magic.SpellType.NETHER)) target.igniteForSeconds(5);
+    }
     public static int absorb(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.ABSORB, caster); }
     public static int soulEater(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.SOUL_EATER, caster); }
     public static int duration(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.DURATION, caster); }

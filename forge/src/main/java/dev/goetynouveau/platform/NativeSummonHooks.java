@@ -1,7 +1,6 @@
 package dev.goetynouveau.platform;
 
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
-import com.Polarice3.Goety.common.entities.ally.undead.HauntedSkull;
 import com.Polarice3.Goety.common.items.ModItems;
 import com.Polarice3.Goety.common.magic.spells.necromancy.HauntedSkullSpell;
 import com.Polarice3.Goety.utils.WandUtil;
@@ -20,7 +19,11 @@ public final class NativeSummonHooks {
     }
     public static int burning(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.BURNING.get(), caster); }
     public static int additionalDuration(LivingEntity caster) { return 1; }
-    public static void finalizeSpawn(ServerLevel world, HauntedSkull skull, BlockPos position) {
+    public static void sharpen(com.Polarice3.Goety.common.entities.ally.illager.raider.AllyVex vex, int potency) {
+        vex.getMainHandItem().enchant(net.minecraft.world.item.enchantment.Enchantments.SHARPNESS,potency);
+        vex.setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND,vex.getMainHandItem());
+    }
+    public static void finalizeSpawn(ServerLevel world, net.minecraft.world.entity.Mob skull, BlockPos position) {
         skull.finalizeSpawn(world, world.getCurrentDifficultyAt(position), MobSpawnType.MOB_SUMMONED, null, null);
     }
 }
