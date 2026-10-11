@@ -31,7 +31,11 @@ public enum EffectFocus {
     TEETH("teeth", "teeth_focus", "Teeth", true, false, false),
     THUNDERBOLT("thunderbolt", "thunderbolt_focus", "Thunderbolt", true, false, false),
     HAIL("hail", "hail_focus", "Hail", true, true, true),
-    MONSOON("monsoon", "monsoon_focus", "Monsoon", true, true, true);
+    MONSOON("monsoon", "monsoon_focus", "Monsoon", true, true, true),
+    FIRE_BLAST("fire_blast", "fire_blast_focus", "Fire Blast", true, false, true),
+    SONIC_BOOM("sonic_boom", "sonic_boom_focus", "Sonic Boom", true, false, false),
+    FLAME_STRIKE("flame_strike", "flame_strike_focus", "Flame Strike", true, true, true),
+    VOID_RIFT("void_rift", "rupture_focus", "Void Rift", true, true, true);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

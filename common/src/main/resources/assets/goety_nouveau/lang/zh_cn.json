@@ -101,5 +101,13 @@
   "goety_nouveau.glyph_desc.glyph_hail": "在落点上方唤出冰雹云，冰冻下方的敌人。霜冻魔杖可让云层跟随目标。",
   "goety_nouveau.glyph_name.glyph_monsoon": "季风",
   "goety_nouveau.glyph_desc.glyph_monsoon": "在落点上方唤出季风云，保留降雨与雷击。风暴魔杖扩大云层，并使雷击产生连锁。",
-  "goety_nouveau.cast.cooldown": "%s 尚未冷却完成"
+  "goety_nouveau.cast.cooldown": "%s 尚未冷却完成",
+  "goety_nouveau.glyph_name.glyph_fire_blast": "烈焰爆发",
+  "goety_nouveau.glyph_desc.glyph_fire_blast": "在触发位置爆发烈焰，伤害、击退并点燃附近敌人。",
+  "goety_nouveau.glyph_name.glyph_sonic_boom": "音爆",
+  "goety_nouveau.glyph_desc.glyph_sonic_boom": "向选中的目标发出穿透护甲的音爆，造成伤害和击退。",
+  "goety_nouveau.glyph_name.glyph_flame_strike": "烈焰打击",
+  "goety_nouveau.glyph_desc.glyph_flame_strike": "在触发位置召出火柱；选中其他实体时，火柱环绕目标出现。",
+  "goety_nouveau.glyph_name.glyph_void_rift": "虚空裂隙",
+  "goety_nouveau.glyph_desc.glyph_void_rift": "在触发位置开启虚空裂隙，牵引附近敌人并伤害靠近中心的目标。"
 }

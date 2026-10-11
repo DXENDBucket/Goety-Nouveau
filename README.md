@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.19`). Seventeen projectile replacements, twenty-seven target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.20`). Seventeen projectile replacements, thirty-one target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -50,6 +50,10 @@ These twenty-seven glyphs are **effects**, placed after an Ars cast method. They
 | Thunderbolt | Native thick lightning beam to the selected enemy/location, with shock damage, Spasms chance, lightning rod redirection and Storm-staff chaining/weather bonuses. Nameless staff retains its green beam. | Amplify / Dampen |
 | Hail | Native hail cloud above the selected point, with warmup, snowfall, freezing damage, ally/overhead-obstruction rules and expiry. Frost staffs retain native target following. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Monsoon | Native stationary storm cloud above the selected point, retaining rain, water-sensitive damage, random lightning, rod redirection, Spasms and chaining. Storm staffs enlarge it; Nameless staff retains green lightning. | Amplify / Dampen, AOE, Extend Time / Duration Down |
+| Fire Blast | Native non-destructive fiery burst at the selected point, retaining knockback, ignition and robe-dependent damage. Nether staff increases radius; Forge retains its additional large-fire particles. | Amplify / Dampen, AOE, Burning |
+| Sonic Boom | Native sonic damage and knockback against the selected enemy, bypassing armor. Self casts emit forward and block casts aim at that point; no second view-target search. | Amplify / Dampen |
+| Flame Strike | Native fire pillars around the selected point. An entity target receives native outer rings; self/location or sneaking uses native radial formations. Nether staff adds outer rings. | Amplify / Dampen, AOE, Extend Time / Duration Down |
+| Void Rift | Native rift at the selected point, including pulling, central damage, native staff behavior, closing animation and final burst. Original griefing rules remain native. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Ignite | Uses Goety's entity ignition and original fire-charge block interactions at the Ars hit. Lights supported campfires/candles and places fire without another view ray trace. | Burning |
 
 **Magic Bolt** is the second projectile replacement: **Projectile → Magic Bolt → Ignite**. It shares only the native `SpellHurtingProjectile` flight adapter with Soul Bolt. Its own native curse and lingering `MagicGround` run on impact before the remaining Ars effects, including block impacts. Amplify/Dampen modify potency; Extend Time/Duration Down modify its extra curse/ground duration. Native flight, initial model turn, trails and impact entities are preserved. Magic Bolt keeps its native five-second expiry; it does not inherit Soul Bolt's staff variants or velocity enchantment.
@@ -101,6 +105,8 @@ These twelve glyphs are replacement augments, grouped with the other Goety proje
 An ordinary native staff salvo pays once. A repeat carrier pays once for each successful triggered batch, then continues the remaining Ars effects for each native payload. Failed or unaffordable triggers do not apply impacts. Native aftermath entities keep Goety's own lifetime and are not independently rebilled each tick.
 
 Hail and Monsoon now have native cloud effect adapters. Cyclone, Grapple and the other rain/cloud/barrage spells still need their own lifecycle or effect adapters. See the [projectile audit](docs/projectile-spell-audit.md) for the remaining scope and native exceptions.
+
+Flame Strike and Void Rift activate after Conflux preparation without repeating the native overlapping cast warmup. Their native active and closing entities remain intact. See the [area spell audit](docs/area-effect-audit.md).
 
 ## Integration
 

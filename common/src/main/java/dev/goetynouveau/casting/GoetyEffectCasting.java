@@ -70,6 +70,7 @@ public final class GoetyEffectCasting {
                     defaults.burning() + ars.getBuffCount(dev.goetynouveau.glyph.AugmentBurning.INSTANCE));
             case BULWARK -> GoetyCombatEffects.bulwark(world, frame, spell, defaults, ars);
             case DISCHARGE -> GoetyCombatEffects.discharge(world, frame, spell, defaults, ars);
+            case FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT -> GoetyAreaEffects.apply(focus, world, frame, spell, defaults, ars);
             case THUNDERBOLT, HAIL, MONSOON -> GoetyWeatherEffects.apply(focus, world, frame, spell, defaults, ars);
             case ERUPTION, BIO_MINE, TEETH -> GoetyHazardEffects.apply(focus, world, frame, spell, defaults, ars);
             case EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH -> GoetyLocationEffects.apply(focus, world, frame, spell, defaults, ars);

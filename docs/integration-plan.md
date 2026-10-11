@@ -163,3 +163,8 @@ range 与 radius 必须保持独立。例如尖牙的 range 同时决定直线�
 ## 主动施法进展
 
 0.1.0-dev.18 已接入普通吟唱与原生聚晶冷却；特殊蓄力不以完整还原为目标。边界和后续审查项见 [主动施法](active-casting.md)。
+
+
+## 0.1.0-dev.20：成熟区域效果批次
+
+新增 Fire Blast、Sonic Boom、Flame Strike、Void Rift。共 17 种弹射物替换、31 种效果、4 种增强；全部仍是独立能力，不新增生存获取规则。参见 [区域法术核对](area-effect-audit.md)，列出两版粒子差异、重叠预热与 Conflux 吟唱边界，以及暂不按单次效果处理的持续法术。

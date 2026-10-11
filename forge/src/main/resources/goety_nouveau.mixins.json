@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "goety_nouveau.refmap.json",
   "mixins": [
+    "ArsRiftActivationMixin",
     "ProjectileHitAccess",
     "ManagedEntityMixin",
     "GoetyMovementMixin",

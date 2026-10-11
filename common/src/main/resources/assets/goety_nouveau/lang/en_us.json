@@ -101,5 +101,13 @@
   "goety_nouveau.glyph_desc.glyph_hail": "Creates a native hail cloud above the selected point. It freezes enemies below; Frost staffs let the cloud follow its target.",
   "goety_nouveau.glyph_name.glyph_monsoon": "Monsoon",
   "goety_nouveau.glyph_desc.glyph_monsoon": "Creates a native storm cloud above the selected point, retaining rain and lightning. Storm staffs increase its area and allow chain lightning.",
-  "goety_nouveau.cast.cooldown": "%s is still on cooldown"
+  "goety_nouveau.cast.cooldown": "%s is still on cooldown",
+  "goety_nouveau.glyph_name.glyph_fire_blast": "Fire Blast",
+  "goety_nouveau.glyph_desc.glyph_fire_blast": "A fiery blast at the trigger point damages, knocks back and ignites nearby enemies.",
+  "goety_nouveau.glyph_name.glyph_sonic_boom": "Sonic Boom",
+  "goety_nouveau.glyph_desc.glyph_sonic_boom": "Sends a sonic boom toward the selected target, bypassing armor and knocking it back.",
+  "goety_nouveau.glyph_name.glyph_flame_strike": "Flame Strike",
+  "goety_nouveau.glyph_desc.glyph_flame_strike": "Summons native fire pillars at the trigger point, surrounding a selected entity.",
+  "goety_nouveau.glyph_name.glyph_void_rift": "Void Rift",
+  "goety_nouveau.glyph_desc.glyph_void_rift": "Opens a native void rift at the trigger point, pulling nearby enemies and harming those at its center."
 }
