@@ -73,9 +73,15 @@ public final class GlyphCatalog {
     public static final GoetyEffectGlyph CHARGE = new GoetyEffectGlyph(EffectFocus.CHARGE);
     public static final GoetyEffectGlyph SPIKES = new GoetyEffectGlyph(EffectFocus.SPIKES);
     public static final GoetyEffectGlyph LEAPING = new GoetyEffectGlyph(EffectFocus.LEAPING);
+    public static final GoetyEffectGlyph BARRICADE = new GoetyEffectGlyph(EffectFocus.BARRICADE);
+    public static final GoetyEffectGlyph HUNTING = new GoetyEffectGlyph(EffectFocus.HUNTING);
+    public static final GoetyEffectGlyph MAULING = new GoetyEffectGlyph(EffectFocus.MAULING);
+    public static final GoetyEffectGlyph REAPER = new GoetyEffectGlyph(EffectFocus.REAPER);
+    public static final GoetyEffectGlyph WRAITH = new GoetyEffectGlyph(EffectFocus.WRAITH);
+    public static final GoetyEffectGlyph PHANTOM = new GoetyEffectGlyph(EffectFocus.PHANTOM);
     public static final List<AbstractSpellPart> ALL = List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
-            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, SENSING, ROTATION, TREMBLING, CHARGE, SPIKES, LEAPING, GLOW_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
+            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, SENSING, ROTATION, TREMBLING, CHARGE, SPIKES, LEAPING, BARRICADE, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, GLOW_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
             dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER);
     private GlyphCatalog() {}

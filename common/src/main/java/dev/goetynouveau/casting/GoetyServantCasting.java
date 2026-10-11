@@ -1,15 +1,11 @@
 package dev.goetynouveau.casting;
 
 import com.Polarice3.Goety.api.entities.IOwned;
-import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.entities.ModEntityType;
 import com.Polarice3.Goety.common.entities.ally.illager.raider.*;
 import com.Polarice3.Goety.common.entities.ally.undead.skeleton.AbstractSkeletonServant;
-import com.Polarice3.Goety.common.entities.ally.undead.zombie.ZombieServant;
 import com.Polarice3.Goety.common.entities.neutral.*;
-import com.Polarice3.Goety.common.items.ModItems;
 import com.Polarice3.Goety.common.magic.SummonSpell;
-import com.Polarice3.Goety.common.magic.spells.necromancy.*;
 import com.Polarice3.Goety.utils.*;
 import com.hollingsworth.arsnouveau.api.spell.SpellStats;
 import dev.arsconflux.api.context.CastContext;
@@ -19,8 +15,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.EntityHitResult;
 import java.util.ArrayList;
 
@@ -49,69 +43,72 @@ public final class GoetyServantCasting {
         var center=hit instanceof EntityHitResult e ? e.getEntity().position() : hit.getLocation();
         if(!Double.isFinite(center.lengthSqr()) || !world.hasChunkAt(BlockPos.containing(center))) return false;
         var staff=GoetyResources.staff(caster);
-        int amount=Math.min(remaining,count(focus,spell,caster,staff));
+        int amount=Math.min(remaining,GoetyServantProfiles.count(focus,spell,caster,staff));
         LivingEntity target=hit instanceof EntityHitResult e && e.getEntity() instanceof LivingEntity l
                 && l.isAlive() && l.level()==world && l!=caster && !MobUtil.areAllies(caster,l)
                 && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(l) ? l : null;
         boolean added=false;
+        SpawnGroupData group=null;
         for(int i=0;i<amount;i++) {
-            var servant=create(focus,world,spell,staff);
+            var servant=GoetyServantProfiles.seed(focus,world);
             if(servant==null) continue;
-            var pos=focus==EffectFocus.VEX ? BlockPos.containing(center).offset(-2+world.random.nextInt(5),1,-2+world.random.nextInt(5))
-                    : BlockFinder.SummonRadius(BlockPos.containing(center),servant,world);
-            if(!world.hasChunkAt(pos) || pos.getY()<world.getMinBuildHeight() || pos.getY()>=world.getMaxBuildHeight()) { servant.discard(); continue; }
-            if((focus==EffectFocus.ZOMBIE || focus==EffectFocus.SKELETON) && !special(spell,staff)) {
-                var variant=servant.getVariant(caster instanceof Player p?p:null,world,pos);
-                if(variant!=null && variant.create(world) instanceof Owned alternative && spell.summonPredicate().test(alternative)) {
-                    servant.discard(); servant=alternative;
-                }
+            var anchor=BlockPos.containing(center);
+            // Native candidate searches must not pull additional chunks into an Ars hit.
+            int search=focus==EffectFocus.PHANTOM?15:5;
+            boolean loaded=true;
+            for(int x:new int[]{-search,search}) for(int z:new int[]{-search,search})
+                loaded &= world.hasChunkAt(anchor.offset(x,0,z));
+            if(!loaded) { servant.discard(); continue; }
+            BlockPos pos;
+            if(focus==EffectFocus.VEX) pos=anchor.offset(-2+world.random.nextInt(5),1,-2+world.random.nextInt(5));
+            else if(focus==EffectFocus.PHANTOM) {
+                pos=BlockFinder.SummonFlyingRadius(anchor,servant,world,15);
+                int top=Math.min(world.getMaxBuildHeight()-2,anchor.getY()+20+caster.getRandom().nextInt(15));
+                while(pos.getY()<top && !world.getBlockState(pos.above()).blocksMotion()) pos=pos.above();
+            } else if((focus==EffectFocus.HUNTING || focus==EffectFocus.MAULING) && caster.isUnderWater()) {
+                pos=waterPosition(anchor,world);
             }
+            else pos=BlockFinder.SummonRadius(anchor,servant,world);
+            if(!world.hasChunkAt(pos) || pos.getY()<world.getMinBuildHeight() || pos.getY()>=world.getMaxBuildHeight()) { servant.discard(); continue; }
+            servant=GoetyServantProfiles.variant(focus,servant,world,pos,spell,caster,staff);
             servant.setTrueOwner(owner); servant.moveTo(pos,0,0);
-            if(focus!=EffectFocus.VEX && servant.getType()!=ModEntityType.DROWNED_SERVANT.get() && servant.getType()!=ModEntityType.SUNKEN_SKELETON_SERVANT.get()) MobUtil.moveDownToGround(servant);
+            if(GoetyServantProfiles.grounded(focus,servant,caster)) MobUtil.moveDownToGround(servant);
             if(world.getBlockCollisions(servant,servant.getBoundingBox()).iterator().hasNext()) { servant.discard(); continue; }
+            if(focus==EffectFocus.PHANTOM) group=NativeSummonHooks.finalizeGroup(world,servant,servant.blockPosition(),group);
             servant.setLimitedLife(MobUtil.getSummonLifespan(world)*duration);
-            if(focus!=EffectFocus.VEX) servant.setPersistenceRequired();
+            if(focus!=EffectFocus.VEX && focus!=EffectFocus.PHANTOM) servant.setPersistenceRequired();
             if(servant instanceof AbstractSkeletonServant skeleton) skeleton.setArrowPower(potency);
-            NativeSummonHooks.finalizeSpawn(world,servant,servant.blockPosition());
+            if(focus!=EffectFocus.PHANTOM) NativeSummonHooks.finalizeSpawn(world,servant,servant.blockPosition());
+            if(focus==EffectFocus.HUNTING) NativeSummonHooks.huntingArmor(servant);
+            if(servant instanceof com.Polarice3.Goety.common.entities.ally.undead.PhantomServant phantom && potency>0) {
+                phantom.setPhantomSize(potency);
+                if(phantom.getBoundingBox().maxY>world.getMaxBuildHeight() || world.getBlockCollisions(phantom,phantom.getBoundingBox()).iterator().hasNext()) { phantom.discard(); continue; }
+            }
             if(servant instanceof AllyVex vex) { vex.setBoundOrigin(pos); if(potency>0) NativeSummonHooks.sharpen(vex,potency); }
-            spell.buffSummon(caster,servant,potency); spell.SummonSap(caster,servant);
+            if(focus!=EffectFocus.PHANTOM || NativeSummonHooks.buffPhantom()) spell.buffSummon(caster,servant,potency); spell.SummonSap(caster,servant);
             if(target!=null) servant.setTarget(target); else spell.setTarget(caster,servant);
-            if(world.addFreshEntity(servant)) {
-                added=true; if(focus!=EffectFocus.VEX) spell.uponSummon(world,caster,staff,servant);
+            if(focus==EffectFocus.PHANTOM?world.tryAddFreshEntityWithPassengers(servant):world.addFreshEntity(servant)) {
+                added=true; if(focus!=EffectFocus.VEX && focus!=EffectFocus.PHANTOM) spell.uponSummon(world,caster,staff,servant);
                 spell.summonAdvancement(caster,servant);
             } else servant.discard();
         }
         if(added) {
             spell.SummonDown(caster);
             if(focus==EffectFocus.VEX) spell.playSound(world,caster,SoundEvents.EVOKER_CAST_SPELL);
-            else if(focus==EffectFocus.LEAPING) spell.playSound(world,caster,com.Polarice3.Goety.init.ModSounds.SUMMON_SPELL.get());
+            else if(focus==EffectFocus.LEAPING || focus==EffectFocus.HUNTING || focus==EffectFocus.MAULING) spell.playSound(world,caster,com.Polarice3.Goety.init.ModSounds.SUMMON_SPELL.get());
             else SoundUtil.playNecromancerSummon(caster);
         }
         return added;
     }
-    private static int count(EffectFocus focus,SummonSpell spell,LivingEntity caster,ItemStack staff) {
-        if(focus==EffectFocus.LEAPING) return spell.rightStaff(staff) && caster.getRandom().nextBoolean()?2:1;
-        if(focus==EffectFocus.VEX) return spell.rightStaff(staff)?3+caster.getRandom().nextInt(3):3;
-        if(staff.is(ModItems.NAMELESS_STAFF.get())) return 7;
-        return spell.rightStaff(staff)?2+caster.getRandom().nextInt(4):special(spell,staff)?2:1;
-    }
-    private static boolean special(SummonSpell spell,ItemStack staff) {
-        return spell instanceof ZombieSpell z ? z.specialStaffs(staff) : spell instanceof SkeletonSpell s && s.specialStaffs(staff);
-    }
-    private static Owned create(EffectFocus focus,ServerLevel world,SummonSpell spell,ItemStack staff) {
-        if(focus==EffectFocus.VEX) return ModEntityType.VEX_SERVANT.get().create(world);
-        if(focus==EffectFocus.LEAPING) return ModEntityType.LEAPLEAF.get().create(world);
-        boolean zombie=focus==EffectFocus.ZOMBIE;
-        EntityType<? extends Owned> type=zombie?ModEntityType.ZOMBIE_SERVANT.get():ModEntityType.SKELETON_SERVANT.get();
-        if(special(spell,staff)) {
-            if(spell.typeStaff(staff,SpellType.FROST)) type=zombie?ModEntityType.FROZEN_ZOMBIE_SERVANT.get():ModEntityType.STRAY_SERVANT.get();
-            else if(spell.typeStaff(staff,SpellType.STORM)) type=zombie?ModEntityType.FRAYED_SERVANT.get():ModEntityType.RATTLED_SERVANT.get();
-            else if(spell.typeStaff(staff,SpellType.WILD)) type=zombie?ModEntityType.JUNGLE_ZOMBIE_SERVANT.get():ModEntityType.MOSSY_SKELETON_SERVANT.get();
-            else if(spell.typeStaff(staff,SpellType.NETHER)) type=zombie?ModEntityType.ZPIGLIN_SERVANT.get():ModEntityType.WITHER_SKELETON_SERVANT.get();
-            else if(spell.typeStaff(staff,SpellType.ABYSS)) type=zombie?ModEntityType.DROWNED_SERVANT.get():ModEntityType.SUNKEN_SKELETON_SERVANT.get();
-            else if(staff.is(ModItems.OMINOUS_STAFF.get())) type=zombie?ModEntityType.ZOMBIE_VINDICATOR_SERVANT.get():ModEntityType.SKELETON_PILLAGER_SERVANT.get();
+    /** Native water candidate walk, with per-candidate loading/height guards instead of probing unloaded chunks. */
+    private static BlockPos waterPosition(BlockPos anchor,ServerLevel world) {
+        var candidate=anchor.mutable();
+        for(int i=0;i<16;i++) {
+            candidate.move(world.random.nextIntBetweenInclusive(-5,5),world.random.nextIntBetweenInclusive(-2,2),world.random.nextIntBetweenInclusive(-5,5));
+            if(candidate.getY()<world.getMinBuildHeight() || candidate.getY()>=world.getMaxBuildHeight() || !world.hasChunkAt(candidate)) continue;
+            if(BlockFinder.isEmptyBlock(world,candidate,world.getBlockState(candidate),world.getFluidState(candidate),ModEntityType.ZOMBIE_SERVANT.get(),true)) return candidate.immutable();
         }
-        return type.create(world);
+        return anchor;
     }
     private static boolean recall(EffectFocus focus,ServerLevel world,LivingEntity caster,SummonSpell spell,ArrayList<LivingEntity> owned) {
         // Native Vex crouch-casting kills its servants; undead crouch-casting recalls them.
@@ -124,7 +121,7 @@ public final class GoetyServantCasting {
             if(focus==EffectFocus.ZOMBIE) for(var entity:world.getAllEntities())
                 if(entity instanceof DrownedNecromancer necromancer && necromancer.getTrueOwner()==caster && necromancer.isAlive()) owned.add(necromancer);
             boolean eligible=false;
-            for(var servant:owned) if(!(focus==EffectFocus.SKELETON && servant instanceof DrownedNecromancer) && ((IOwned)servant).getTrueOwner()==caster && !SEHelper.isGrounded(caster,servant)) { spell.teleportServants(caster,servant); eligible=true; }
+            for(var servant:owned) if(!(focus==EffectFocus.SKELETON && servant instanceof DrownedNecromancer) && ((IOwned)servant).getTrueOwner()==caster && GoetyServantProfiles.recallable(focus,servant,caster) && !SEHelper.isGrounded(caster,servant)) { spell.teleportServants(caster,servant); eligible=true; }
             if(!eligible) return false;
         }
         spell.commonResultHit(world,caster); return true;

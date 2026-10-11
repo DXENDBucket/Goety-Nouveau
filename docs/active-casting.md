@@ -8,7 +8,7 @@
 
 普通聚晶调用 `ISpell.castDuration(caster, staff)`，使用已有法杖查找和原生装备／属性修正。`IChargingSpell` 只调用 `castUp`；其常见 72000 tick 默认值是占用物品的上限，不是吟唱时间。
 
-冷却读取 `SEHelper.isOnCooldown`，通过 `SEHelper.addCooldown` 写入原生聚晶记录并同步。不同 Ars 编排与 Goety 原生法杖共享对应聚晶冷却。有效主动发射后每种聚晶只增加一次 `spellCooldown(caster)`，重复魔符／散射不会重复登记；一次编排中有聚晶冷却未结束会拒绝整次主动施法。生物／假玩家不获得新的玩家冷却记录。
+冷却读取 `SEHelper.isOnCooldown`，通过 `SEHelper.addCooldown` 写入原生聚晶记录并同步。不同 Ars 编排与 Goety 原生法杖共享对应聚晶冷却。有效主动发射后每种聚晶只登记一次基础 `spellCooldown(caster)`，不会缩短已有的更长剩余冷却，重复魔符／散射不会重复登记；一次编排中有聚晶冷却未结束会拒绝整次主动施法。生物／假玩家不获得新的玩家冷却记录。
 
 创造模式默认忽略已有聚晶冷却，也不写入新的冷却，资源仍免费。把 `creativeCooldown` 设为 true 可恢复 Goety 原生的创造冷却规则；切回生存后已有冷却仍生效。取消准备和失败发射不产生冷却。发射后即使未命中仍进入冷却；在途与持续触发继续执行、按次支付原有资源。
 
@@ -31,7 +31,7 @@
 1. `IChargingSpell / ChargingSpell`：起手用 `castUp`；不能用 `defaultCastDuration`。松手释放、蓄力倍率和中断成本需逐法术设计。
 2. `EverChargeSpell`：起手、射击间隔、弹匣／shots、按秒扣费与停止后的冷却分别处理。当前蒸汽魔符仍按现有一次投射逻辑，不引入原生连发控制。
 3. `useSpell / stopSpell`：不要仅调用 `SpellResult` 就宣称持续行为完整。需要列出必须保留的粒子、伤害与清理；也可以选择适合 Ars 的固定时长表示。
-4. `hasCustomCooldown`：可能由法术内部按目标、召唤、停止或结果登记，不能当成只读的数值查询调用。当前桥接统一用有效基础 `spellCooldown` 登记聚晶冷却，不复刻原生按受击数变化等特殊冷却；以后若保留原生内部登记，须避免再次登记。
+4. `hasCustomCooldown`：可能由法术内部按目标、召唤、停止或结果登记，不能当成只读的数值查询调用。桥接默认用有效基础 `spellCooldown` 登记聚晶冷却；dev.24 的障碍另按实际结果登记单炸弹 +40 tick／四炸弹 +60 tick，并保留原生冷却缩减。两个入口只延长已有冷却，基础释放回调不会覆盖结果冷却。其他原生按受击数变化的特殊冷却尚未复刻。
 5. 法杖物品 NBT 中的 `Cool / Cooldown / Shots / Seconds`：属于原生连续使用，不修改副手法杖来模拟 Ars 连发。
 6. 聚晶专用 NBT／specific cooldown：没有对应具体带数据的聚晶实例时，不伪造其绑定身份。当前普通登记聚晶足够；未来回魂等要另外审查。
 7. 召唤的数量限制、SummonDown 和维护消耗不是普通冷却，必须保持各自规则。

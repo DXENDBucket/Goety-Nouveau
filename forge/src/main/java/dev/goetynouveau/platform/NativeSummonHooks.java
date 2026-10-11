@@ -26,4 +26,23 @@ public final class NativeSummonHooks {
     public static void finalizeSpawn(ServerLevel world, net.minecraft.world.entity.Mob skull, BlockPos position) {
         skull.finalizeSpawn(world, world.getCurrentDifficultyAt(position), MobSpawnType.MOB_SUMMONED, null, null);
     }
+    public static net.minecraft.world.entity.SpawnGroupData finalizeGroup(ServerLevel world, net.minecraft.world.entity.Mob mob,
+            BlockPos pos, net.minecraft.world.entity.SpawnGroupData group) {
+        return mob.finalizeSpawn(world, world.getCurrentDifficultyAt(pos), MobSpawnType.MOB_SUMMONED, group, null);
+    }
+    public static boolean buffPhantom() { return false; }
+    public static boolean mountain(ServerLevel world, BlockPos pos) { return world.getBiome(pos).is(net.minecraftforge.common.Tags.Biomes.IS_MOUNTAIN); }
+    public static boolean cold(ServerLevel world, BlockPos pos) { return world.getBiome(pos).is(net.minecraftforge.common.Tags.Biomes.IS_COLD_OVERWORLD); }
+    public static boolean snow(ServerLevel world, BlockPos pos) { return world.getBiome(pos).value().coldEnoughToSnow(pos); }
+    public static void huntingArmor(com.Polarice3.Goety.common.entities.neutral.Owned servant) {
+        // This version has no ring-granted armor hook.
+    }
+    public static int necromancyCount(dev.goetynouveau.api.EffectFocus focus, com.Polarice3.Goety.common.magic.SummonSpell spell,
+                                      LivingEntity caster, ItemStack staff) {
+        if(staff.is(ModItems.NAMELESS_STAFF.get())) return 4+caster.getRandom().nextInt(4);
+        if(focus==dev.goetynouveau.api.EffectFocus.PHANTOM) return spell.rightStaff(staff)?1+caster.getRandom().nextInt(4):1;
+        if(spell.rightStaff(staff)) return 2+caster.getRandom().nextInt(4);
+        if(focus==dev.goetynouveau.api.EffectFocus.WRAITH && spell.typeStaff(staff,com.Polarice3.Goety.api.magic.SpellType.FROST)) return 2;
+        return 1;
+    }
 }

@@ -46,7 +46,13 @@ public enum EffectFocus {
     TREMBLING("trembling", "trembling_focus", "Trembling", true, true, true),
     CHARGE("charge", "charge_focus", "Charge", false, false, false),
     SPIKES("spikes", "shredding_focus", "Spikes", true, false, false),
-    LEAPING("leaping", "leaping_focus", "Summon Leapleaf", true, true, false);
+    LEAPING("leaping", "leaping_focus", "Summon Leapleaf", true, true, false),
+    BARRICADE("barricade", "barricade_focus", "Barricade", true, true, false),
+    HUNTING("hunting", "hunting_focus", "Hunting", true, true, false),
+    MAULING("mauling", "mauling_focus", "Mauling", true, true, false),
+    REAPER("reaper", "reaping_focus", "Reaper", true, true, false),
+    WRAITH("wraith", "spooky_focus", "Wraith", true, true, false),
+    PHANTOM("phantom", "phantasm_focus", "Phantom", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

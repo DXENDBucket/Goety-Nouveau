@@ -24,4 +24,23 @@ public final class NativeSummonHooks {
     public static void finalizeSpawn(ServerLevel world, net.minecraft.world.entity.Mob skull, BlockPos position) {
         skull.finalizeSpawn(world, world.getCurrentDifficultyAt(position), MobSpawnType.MOB_SUMMONED, null);
     }
+    public static net.minecraft.world.entity.SpawnGroupData finalizeGroup(ServerLevel world, net.minecraft.world.entity.Mob mob,
+            BlockPos pos, net.minecraft.world.entity.SpawnGroupData group) {
+        return mob.finalizeSpawn(world, world.getCurrentDifficultyAt(pos), MobSpawnType.MOB_SUMMONED, group);
+    }
+    public static boolean buffPhantom() { return true; }
+    public static boolean mountain(ServerLevel world, BlockPos pos) { return world.getBiome(pos).is(net.neoforged.neoforge.common.Tags.Biomes.IS_MOUNTAIN); }
+    public static boolean cold(ServerLevel world, BlockPos pos) { return world.getBiome(pos).is(net.neoforged.neoforge.common.Tags.Biomes.IS_COLD_OVERWORLD); }
+    public static boolean snow(ServerLevel world, BlockPos pos) { return world.getBiome(pos).value().coldEnoughToSnow(pos); }
+    public static void huntingArmor(com.Polarice3.Goety.common.entities.neutral.Owned servant) {
+        if(servant instanceof com.Polarice3.Goety.common.entities.ally.Summoned summoned) com.Vivideru.Goety.common.items.VivideruWolfArmorUtil.equipRingGrantedArmor(summoned);
+    }
+    public static int necromancyCount(dev.goetynouveau.api.EffectFocus focus, com.Polarice3.Goety.common.magic.SummonSpell spell,
+                                      LivingEntity caster, ItemStack staff) {
+
+        if(focus==dev.goetynouveau.api.EffectFocus.PHANTOM) return spell.rightStaff(staff)?1+caster.getRandom().nextInt(4):1;
+        if(spell.rightStaff(staff)) return 2+caster.getRandom().nextInt(4);
+
+        return 1;
+    }
 }

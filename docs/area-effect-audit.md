@@ -27,6 +27,6 @@
 
 ## 本批之外
 
-Arrow Rain、Void Shock、Quaking、Warding 有持续 `useSpell`／蓄力／弹匣或逐次消耗，不能通过只生成首发来宣称接入完成。Barricade 有随机结构／炸弹及按结果变化的冷却，Glow Light／Illuminate 有持久方块、权限和主人记录；保留到专门核对。Elder Curse 在锁定 JAR 中没有对应已注册聚晶，Ice Bouquet 已作为 Ghost Fire 接入，不重复注册。
+Arrow Rain、Void Shock、Quaking、Warding 有持续 `useSpell`／蓄力／弹匣或逐次消耗，不能通过只生成首发来宣称接入完成。Barricade 的随机结构／炸弹及按结果变化的冷却已于 dev.24 接入，见 summon-wall-audit.md。Glow Light 已作为原生弹射物接入；Illuminate 的持久方块、权限和主人记录仍待专门核对。Elder Curse 在锁定 JAR 中没有对应已注册聚晶，Ice Bouquet 已作为 Ghost Fire 接入，不重复注册。
 
 验证记录见 [构建文档](building.md)。真实客户端外观、声音表现与多人插值仍需人工观察，服务端测试不会被描述为视觉验收。

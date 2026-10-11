@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.23`). Eighteen projectile replacements, forty-two target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.24`). Eighteen projectile replacements, forty-eight target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -20,7 +20,7 @@ The glyphs are available in the creative tab; survival acquisition and ritual re
 
 ## Target and location effects
 
-These forty-two glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+These forty-eight glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
@@ -64,6 +64,12 @@ These forty-two glyphs are **effects**, placed after an Ars cast method. They us
 | Wind Blast | A directional native gust from the Ars-selected point; knockback, elemental staff effects, wind-powered blocks and enemy cyclone removal. | Amplify / Dampen, AOE |
 | Overgrowth | Native vine traps around the selected entity/location; sneaking creates native poison-quill turrets. Wild staff retains its two-turret branch. | Amplify / Dampen, Extend Time / Duration Down |
 | Summon Zombie / Skeleton / Vex | Native owned servants at the Ars-selected point, sharing their owner's native configured quota with ordinary Goety summons. Staff variants, equipment, lifetime and summon decay remain native. | Amplify / Dampen, Extend Time / Duration Down |
+| Barricade | Native wall/trap formations at the selected entity or block. Frost staff retains glacial walls; sneaking creates single/quad explosive totems. Native explosion and result-dependent cooldown remain active. | Amplify / Dampen, Extend Time / Duration Down (walls) |
+| Hunting | Native hunting beasts with staff/environmental variants, shared owner quota and lifetime. Wild staff summons three; special staffs summon two. Sneak to recall; aquatic servants require the caster underwater. | Amplify / Dampen, Extend Time / Duration Down |
+| Mauling | Native bears/Gnasher/Hoglin servants with original variant priority, owner quota and lifetime. Wild staff summons two. Sneak to recall; Gnasher recall requires the caster underwater. | Amplify / Dampen, Extend Time / Duration Down |
+| Reaper / Wraith | Native undead servants, retaining matching-staff batches, Wraith variants, native decay and limited life. Forge retains its original Nameless/Frost batch rules. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
+| Phantom | Native flying servants above the selected point, retaining size, native quota, shared spawn-group data and lifetime. Forge retains its Nameless batch and native buff difference. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
+
 
 
 **Magic Bolt** is the second projectile replacement: **Projectile → Magic Bolt → Ignite**. It shares only the native `SpellHurtingProjectile` flight adapter with Soul Bolt. Its own native curse and lingering `MagicGround` run on impact before the remaining Ars effects, including block impacts. Amplify/Dampen modify potency; Extend Time/Duration Down modify its extra curse/ground duration. Native flight, initial model turn, trails and impact entities are preserved. Magic Bolt keeps its native five-second expiry; it does not inherit Soul Bolt's staff variants or velocity enchantment.
@@ -143,12 +149,12 @@ Each Goety trigger uses its own native payment account without replacing the sou
 
 | Target | Ars Nouveau | Goety | Ars Conflux |
 | --- | --- | --- | --- |
-| 1.21.1 NeoForge | 5.13.1 | 3.2.0 | 0.1.8 |
-| 1.20.1 Forge | 4.12.7 | 2.5.58.4 | 0.1.8 |
+| 1.21.1 NeoForge | 5.13.1 | 3.2.0 | 0.1.10 |
+| 1.20.1 Forge | 4.12.7 | 2.5.58.4 | 0.1.10 |
 
 These are the pinned build dependencies. Transitive mod dependencies are included in the download manifest, but upstream mod JARs are not committed or bundled in this addon.
 
-See [building instructions](docs/building.md), the [integration plan and API audit](docs/integration-plan.md), the [per-spell behavior audit](docs/simple-spell-audit.md), and [third-party notices](THIRD_PARTY_NOTICES.md). The shared [adapter checklist](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/spell-adapter-checklist.md) covers full native behavior, logical sides and both loaders.
+See [building instructions](docs/building.md), the [integration plan and API audit](docs/integration-plan.md), the [per-spell behavior audit](docs/simple-spell-audit.md), the [servants and barricade audit](docs/summon-wall-audit.md), and [third-party notices](THIRD_PARTY_NOTICES.md). The shared [adapter checklist](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/spell-adapter-checklist.md) covers full native behavior, logical sides and both loaders.
 
 ## License
 

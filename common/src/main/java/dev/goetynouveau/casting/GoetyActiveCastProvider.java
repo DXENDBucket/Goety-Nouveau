@@ -67,7 +67,7 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         for (var recipe : recipes) distinct.addAll(focuses(recipe));
         for (var id : distinct) FocusSpells.read(id).ifPresent(spell -> {
             int ticks = Math.max(0, spell.spellCooldown(player));
-            if (ticks > 0) SEHelper.addCooldown(player, BuiltInRegistries.ITEM.get(id), ticks);
+            GoetyFocusCooldowns.atLeast(player, BuiltInRegistries.ITEM.get(id), ticks);
         });
     }
     @Override public void chantProgress(ActiveCastRequest request, UUID token, int duration, int remaining) {
