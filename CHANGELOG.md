@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-dev.33
+
+- Add Corrupted Beam on both loaders: 99 shared glyphs, 100 on NeoForge.
+- Use the actual native beam entity, trace, blocking, damage and renderer. An allied executor supplies spatial ownership while the original caster supplies potency/payment and explicit damage ownership is retained. Both host and original-caster allies are excluded.
+- Bound the native infinite held channel to a configurable 200-tick fallback; positive native duration remains native. Pay upkeep per 20 pulses and resolve the first paid damage immediately, including when the first fee empties the account.
+- Remove the beam on expiry, resource failure, lost alliance or either role's removal. Sync Ars provenance, retain native client host interpolation without held-wand aim packets, and prevent orphaned saved beams from surviving without a transient execution session.
+- Extend the shared channel driver with failure, liveness and close callbacks; ordinary rains and breaths retain their existing lifecycle. Native Goety beams keep their wand requirement.
+- Four focused server cases passed on each loader, including the previous meteor regression. Release/source artifacts verified; client appearance and audio remain manual checks.
+
+
 ## 0.1.0-dev.32
 
 - Add Bombardment, Thunderstorm and Trident Storm effects on both loaders: 98 shared glyphs, 99 on NeoForge.

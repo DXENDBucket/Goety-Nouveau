@@ -80,7 +80,8 @@ public enum EffectFocus {
     METEOR_SHOWER("meteor_shower", "meteor_shower_focus", "Meteor Shower", true, true, true),
     BOMBARDMENT("bombardment", "bombardment_focus", "Bombardment", true, true, false),
     THUNDERSTORM("thunderstorm", "thunderstorm_focus", "Thunderstorm", true, true, true),
-    TRIDENT_STORM("trident_storm", "trident_storm_focus", "Trident Storm", true, false, false);
+    TRIDENT_STORM("trident_storm", "trident_storm_focus", "Trident Storm", true, false, false),
+    CORRUPTED_BEAM("corrupted_beam", "corruption_focus", "Corrupted Beam", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;
@@ -90,6 +91,6 @@ public enum EffectFocus {
     }
     public boolean breathing() { return this == FIRE_BREATH || this == FROST_BREATH || this == SWARM; }
     public boolean rain() { return this == ARROW_RAIN || this == BLIZZARD || this == METEOR_SHOWER || this == BOMBARDMENT; }
-    public boolean channel() { return breathing() || rain() || this == THUNDERSTORM; }
+    public boolean channel() { return breathing() || rain() || this == THUNDERSTORM || this == CORRUPTED_BEAM; }
     public ISpell spell() { return FocusSpells.read(CarrierRegistry.id("goety:" + focus)).orElseThrow(); }
 }

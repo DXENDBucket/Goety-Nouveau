@@ -203,5 +203,7 @@
   "goety_nouveau.glyph_name.glyph_thunderstorm": "雷暴",
   "goety_nouveau.glyph_desc.glyph_thunderstorm": "选中自身或友方生物，持续降下雷暴。",
   "goety_nouveau.glyph_name.glyph_trident_storm": "三叉戟风暴",
-  "goety_nouveau.glyph_desc.glyph_trident_storm": "在选中位置周围唤出雷击三叉戟。"
+  "goety_nouveau.glyph_desc.glyph_trident_storm": "在选中位置周围唤出雷击三叉戟。",
+  "goety_nouveau.glyph_name.glyph_corrupted_beam": "腐蚀光束",
+  "goety_nouveau.glyph_desc.glyph_corrupted_beam": "令自己或友军持续发出腐蚀光束。"
 }

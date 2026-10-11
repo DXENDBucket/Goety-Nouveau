@@ -9,13 +9,26 @@ import dev.goetynouveau.api.EffectFocus;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.sounds.SoundEvent;
+import java.util.function.BooleanSupplier;
 
 /** Shared bounded channel lifecycle. Native callbacks, geometry and cadence belong to adapters. */
 public final class GoetyChannelCasting {
-    public record Program(int shots,int interval,Runnable pulse,Runnable visual,SoundEvent initial,SoundEvent loop) {}
+    public record Program(int shots,int interval,BooleanSupplier pulse,Runnable visual,
+                          SoundEvent initial,SoundEvent loop,BooleanSupplier running,Runnable close) {
+        public Program(int shots,int interval,Runnable pulse,Runnable visual,SoundEvent initial,SoundEvent loop) {
+            this(shots,interval,()->{pulse.run();return true;},visual,initial,loop,()->true,()->{});
+        }
+    }
     private GoetyChannelCasting() {}
+    /** An infinite native held cast needs a finite duration when activated by one Ars hit. */
+    public static int boundedTicks(int nativeTicks,double durationModifier) {
+        double base=nativeTicks>0?nativeTicks:dev.goetynouveau.platform.GoetyConfig.unboundedChannelTicks();
+        double ticks=base*Math.max(0,1+durationModifier);
+        return !Double.isFinite(ticks) || ticks<=0?0:(int)Math.min(Integer.MAX_VALUE,Math.ceil(ticks));
+    }
     public static boolean eligible(ServerLevel world,LivingEntity caster,LivingEntity host) {
-        return host.isAlive() && !host.isRemoved() && !host.isSpectator() && host.level()==world
+        return caster!=null && caster.isAlive() && !caster.isRemoved() && !caster.isSpectator() && caster.level()==world
+                && host.isAlive() && !host.isRemoved() && !host.isSpectator() && host.level()==world
                 && world.hasChunkAt(host.blockPosition()) && GoetyBreathGeometry.allied(caster,host);
     }
     public static boolean start(EffectFocus focus,ServerLevel world,CastContext frame,LivingEntity host,
@@ -38,28 +51,31 @@ public final class GoetyChannelCasting {
             }
             public boolean occupiesCaster() { return true; }
             public boolean start(ExecutionSession<SpellStat> session) {
-                program.pulse().run(); emitted=1; program.visual().run();
+                if(!program.pulse().getAsBoolean()) return false;
+                emitted=1; program.visual().run();
                 lastTick=world.getGameTime();nextEmission=lastTick+program.interval();nextSound=lastTick+20;
                 sound(program.initial());movement(session,session.remainingTicks());
                 return true; // The enclosing glyph transaction pays the first native emission.
             }
             public boolean tick(ExecutionSession<SpellStat> session) {
-                if(!eligible(world,frame.caster(),host)
+                if(!eligible(world,frame.caster(),host) || !program.running().getAsBoolean()
                         || charge.amount()>0 && !charge.account().free() && !charge.account().canSpend(1)) return true;
                 long now=world.getGameTime();if(now==lastTick) return false;
                 if(now>=nextEmission && emitted<program.shots()) {
                     // Native everCharge bills in groups of 20 results, not 20 world ticks.
                     // Prepay the next group at its first emission so an empty account cannot cast.
                     if(emitted%20==0) {
-                        if(!session.activate(()->{program.pulse().run();return true;})) return true;
-                    } else program.pulse().run();
+                        if(!session.activate(program.pulse())) return true;
+                    } else if(!program.pulse().getAsBoolean()) return true;
                     ++emitted;nextEmission=now+program.interval();
                 }
                 if(now>=nextSound) {sound(program.loop());nextSound=now+20;}
                 if(now%20==0) movement(session,session.remainingTicks());
                 program.visual().run();lastTick=now;return false;
             }
-            public void close(ExecutionSession<SpellStat> session,ExecutionSession.EndReason reason) {movement(session,0);}
+            public void close(ExecutionSession<SpellStat> session,ExecutionSession.EndReason reason) {
+                try {program.close().run();} finally {movement(session,0);}
+            }
         };
         var session=new ExecutionSession<>(world,selected,stats,ticks,driver,ignored->{},
                 ()->eligible(world,frame.caster(),host) && dev.goetynouveau.GlyphCatalog.ALL.stream()

@@ -18,5 +18,8 @@ public abstract class ManagedEntityMixin {
     @Inject(method = "shouldBeSaved", at = @At("HEAD"), cancellable = true)
     private void goetyNouveau$transient(CallbackInfoReturnable<Boolean> ci) {
         if ((Object)this instanceof ManagedBolt state && state.goetyNouveau$managed()) ci.setReturnValue(false);
+        if ((Object)this instanceof dev.goetynouveau.casting.ManagedBeam
+                && (Object)this instanceof dev.goetynouveau.casting.ArsTriggeredEntity beam && beam.goetyNouveau$arsTriggered())
+            ci.setReturnValue(false);
     }
 }

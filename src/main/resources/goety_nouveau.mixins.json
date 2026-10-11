@@ -48,7 +48,10 @@
     "NativeThunderstormGeometryMixin",
     "NativeTridentGeometryMixin",
     "NativeTridentLifetimeMixin",
-    "NativeSpellEntityStateMixin"
+    "NativeSpellEntityStateMixin",
+    "NativeBeamExecutionMixin",
+    "NativeCorruptedBeamDamageMixin",
+    "NativeBeamStateMixin"
   ],
   "injectors": {
     "defaultRequire": 1

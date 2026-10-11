@@ -196,3 +196,12 @@ The first implementation of the shared particle redirect addressed inherited `us
 No broad historical catalogue rerun or client launch. Server tests verify actual native callbacks and damage but do not prove client rendering/audio quality. See `docs/storm-channel-audit.md` for continuous billing and remaining renderer work.
 
 Both dev.32 release/source artifacts were verified: 99 NeoForge / 98 Forge glyph models and bilingual entries, native model resources, version/Core metadata, current MIT and third-party notices, Java 21/17 bytecode, Forge refmap for new lifecycle/geometry hooks, and no bundled dependencies or test classes. NeoForge retains its existing native SpellTypeDamage API reference; Forge contains no Vivideru class references or Breeze resources.
+
+
+## Native corrupted beam channel (dev.33)
+
+Four focused shared `goety_nouveau_beams` cases passed on both loaders. NeoForge includes current Iron/NEG; Forge uses standalone dependencies. Final release/test logs are `build/beam-release-final.log` and `forge/build/beam-release-final.log`. They verify actual native damage, selected spatial owner metadata, explicit damage attribution, living-target aim changes and wall obstruction, ally rejection, native wand cancellation outside the adapter, upkeep, exactly one fee producing actual damage, empty/unfunded stopping, finite creative expiry, both caster/executor removal, orphan cleanup, and the previous meteor cadence/resource regression. No broad historical catalogue rerun or client launch.
+
+The first run exposed the native default CorruptionDuration=0 (infinite held casting), which the bounded adapter had rejected. The final integration gives native infinite channels a configurable finite Ars lifetime, default 200 ticks, without changing ordinary Goety wands. Subsequent checks include damage before committing the first fee so an exact-cost cast is effective, and immediate role/lifetime validation before the native entity damage tick. No native damage, wall collision or rendering method was replaced just to satisfy a fixture.
+
+Both release/source artifacts verified: 100 NeoForge / 99 Forge models and bilingual entries, native parent resources, version/Core metadata, current MIT/third-party notices, Java 21/17 bytecode, new beam hooks and Forge refmap, no bundled dependencies/test classes, and no Vivideru/Breeze references in Forge. Actual native beam render/audio and multiplayer interpolation remain manual checks; see `beam-channel-audit.md`.

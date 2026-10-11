@@ -9,4 +9,7 @@ public final class NativeBreathHooks {
     public static void result(com.Polarice3.Goety.common.magic.Spell spell, ServerLevel world, LivingEntity caster, ItemStack staff, SpellStat stats) {
         spell.SpellResult(world, caster, staff, stats);
     }
+    public static void run(com.Polarice3.Goety.common.magic.Spell spell, Runnable action) {
+        action.run();
+    }
 }

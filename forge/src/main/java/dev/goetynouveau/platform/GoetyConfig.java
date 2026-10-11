@@ -6,7 +6,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public final class GoetyConfig {
     public static final ForgeConfigSpec SPEC;
     public static final ForgeConfigSpec.EnumValue<ResourceSource> RESOURCE_SOURCE;
-    public static final ForgeConfigSpec.IntValue BURNING_COST, EXTENSION_COST, LIFE_ABSORB_COST, SOUL_EATER_COST;
+    public static final ForgeConfigSpec.IntValue BURNING_COST, EXTENSION_COST, LIFE_ABSORB_COST, SOUL_EATER_COST, UNBOUNDED_CHANNEL_TICKS;
     public static final ForgeConfigSpec.BooleanValue CHANTING_ENABLED, MOVEMENT_ENABLED, COOLDOWNS_ENABLED, CREATIVE_COOLDOWN;
     static {
         var builder = new ForgeConfigSpec.Builder();
@@ -44,10 +44,17 @@ public final class GoetyConfig {
                 "True restores the original Goety creative cooldown behavior.")
                 .define("creativeCooldown", false);
         builder.pop();
+        builder.push("channels");
+        UNBOUNDED_CHANNEL_TICKS = builder.comment("Finite base lifetime in ticks for supported held-channel spells whose native duration is infinite (zero).",
+                "Currently used by Corrupted Beam. Positive native durations retain their own value. Ars duration augments scale this base.",
+                "This does not change native Goety wand casting.")
+                .defineInRange("unboundedDurationTicks", 200, 1, 72000);
+        builder.pop();
         SPEC = builder.build();
     }
     private GoetyConfig() {}
     private static <T> T read(ForgeConfigSpec.ConfigValue<T> value) { return SPEC.isLoaded() ? value.get() : value.getDefault(); }
+    public static int unboundedChannelTicks() { return read(UNBOUNDED_CHANNEL_TICKS); }
     public static boolean chantingEnabled() { return read(CHANTING_ENABLED); }
     public static boolean movementEnabled() { return read(MOVEMENT_ENABLED); }
     public static boolean creativeCooldown() { return read(CREATIVE_COOLDOWN); }
