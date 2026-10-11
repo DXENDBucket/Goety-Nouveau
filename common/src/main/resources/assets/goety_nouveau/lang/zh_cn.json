@@ -247,5 +247,7 @@
   "goety_nouveau.glyph_name.glyph_soul_light": "灵魂光源",
   "goety_nouveau.glyph_desc.glyph_soul_light": "将弹射物化为灵魂光，照亮落点并使命中的生物发光。",
   "goety_nouveau.glyph_name.glyph_banish": "放逐",
-  "goety_nouveau.glyph_desc.glyph_banish": "将选中的敌人放逐到周围的随机落点。"
+  "goety_nouveau.glyph_desc.glyph_banish": "将选中的敌人放逐到周围的随机落点。",
+  "goety_nouveau.glyph_name.glyph_blink": "闪烁",
+  "goety_nouveau.glyph_desc.glyph_blink": "让自己或友军沿其朝向闪烁。潜行时随机传送。"
 }

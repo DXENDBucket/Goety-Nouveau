@@ -50,6 +50,7 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
+            case BLINK -> GoetyBlinkCasting.apply(world, frame);
             case BANISH -> GoetyBanishCasting.apply(world, frame);
             case END_WALK -> GoetyEndWalkCasting.apply(world, frame, ars);
             case GRAPPLE -> GoetyGrappleCasting.apply(world, frame, ars, frame.ars());

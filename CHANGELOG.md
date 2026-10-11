@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-dev.47
+
+- Add Blink on both loaders: 121 shared glyphs, 122 on NeoForge. Execute the complete native BlinkSpell from yourself or an allied living executor, retaining native sight-target approach, forward ledge/landing search, source-sneak random teleport, native teleport events, fall reset, particles and sounds. Ordinary Goety wand behavior is unchanged.
+- Original source supplies range enchantments, staff and soul account; host supplies position, aim and random generator. Fold the original source range once, preserve native search loops and random candidate functions, and reject overflow/nonpositive ranges. Observe successful native teleports to commit payment; cancellation/failure is free and creative is free. Enemy/block recipients are rejected.
+- Four focused runtime cases passed on both loaders. The Neo entity-approach fixture explicitly synchronizes the test cow head direction to its intended view; production native aiming was unchanged. Server checks cover native search results, real random teleports/events, source/host separation, restrictions, resources and unscoped native behavior. Actual client presentation remains manual.
+- Registered Neo focus coverage is now 116/118; Crafting and Ender Chest remain menu behaviors. A separate concrete-class inventory finds unregistered Elder Curse, War Stomp / Forge Temblor Clap and servant command helpers, requiring further behavior review rather than treating registered focus coverage as complete.
+
 ## 0.1.0-dev.46
 
 - Add Banish on both loaders: 120 shared glyphs, 121 on NeoForge. Execute the native BanishSpell conditions and random-teleport callback against the actual Ars-selected enemy, retaining native max-health limits, immunity tags, blacklist, teleport events, candidate generation, safe landing, dismounting and sounds. Ordinary Goety wand casts remain unchanged.

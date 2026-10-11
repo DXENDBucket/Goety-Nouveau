@@ -85,7 +85,9 @@
     "NativeGrappleStateMixin",
     "NativeGrappleEnchantMixin",
     "NativeEndWalkMixin",
-    "NativeBanishMixin"
+    "NativeBanishMixin",
+    "NativeBlinkMixin",
+    "NativeBlinkTeleportMixin"
   ],
   "injectors": {
     "defaultRequire": 1

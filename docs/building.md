@@ -295,3 +295,9 @@ Release/source checks cover 120 NeoForge / 119 Forge glyph resources, native mod
 Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_banish` from each loader project. Four focused cases cover actual native teleport and caster/sight-decoy isolation, native candidate sequence/range/staff and failed search, selected-target health/blacklist/test-only immunity/event cancellation/Ender Ground, and recipient/resource/creative gates. No historical catalogue rerun.
 
 Release/source checks cover 121 NeoForge / 120 Forge glyph resources, bilingual/native parents, Java 21/17 bytecode, native Banish mixin and Forge teleport refmap, Core/version/license metadata and no bundled dependencies/tests/test tags. See banish-audit.md; actual client teleport presentation and sound remain manual checks.
+
+## Native allied Blink (dev.47)
+
+Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_blink` from each loader project. Four focused cases passed per loader: forward landing/fall reset/native isolation, source enchanted range/staff and allied body separation, actual entity-approach/random teleports with identical native seeds, and event/Ender Ground/recipient/resource/creative gates. FakePlayer teleportTo is observed using a test-only position probe; allied cows use actual native teleports. No historical catalogue rerun.
+
+Release/source checks cover 122 NeoForge / 121 Forge glyph resources, bilingual/native parents, Java 21/17 bytecode, native Blink mixins and Forge teleport refmap, Core/version/license metadata and dependency/test isolation. See blink-audit.md for native branch rules and client verification limits.
