@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.18`). Seventeen projectile replacements, twenty-seven target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.19`). Seventeen projectile replacements, twenty-seven target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -133,3 +133,5 @@ See [building instructions](docs/building.md), the [integration plan and API aud
 MIT © 2026 EndXiom. See [LICENSE](LICENSE).
 
 Active preparation, native cooldowns and charging boundaries: [implementation notes](docs/active-casting.md).
+
+Player preparation movement follows native Goety rules (20% walking speed, or full stop with native `fullStopCast`), with an independent `chanting.movementRestrictions` switch. Bridge cooldowns bypass creative by default; opt in with `cooldowns.creativeCooldown`.

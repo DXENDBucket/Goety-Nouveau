@@ -7,7 +7,7 @@ public final class GoetyConfig {
     public static final ForgeConfigSpec SPEC;
     public static final ForgeConfigSpec.EnumValue<ResourceSource> RESOURCE_SOURCE;
     public static final ForgeConfigSpec.IntValue BURNING_COST, EXTENSION_COST, LIFE_ABSORB_COST, SOUL_EATER_COST;
-    public static final ForgeConfigSpec.BooleanValue CHANTING_ENABLED, COOLDOWNS_ENABLED;
+    public static final ForgeConfigSpec.BooleanValue CHANTING_ENABLED, MOVEMENT_ENABLED, COOLDOWNS_ENABLED, CREATIVE_COOLDOWN;
     static {
         var builder = new ForgeConfigSpec.Builder();
         builder.push("resources");
@@ -28,19 +28,28 @@ public final class GoetyConfig {
                 "Does not reproduce hold-to-charge, magazine cadence or charge-dependent strength.",
                 "False restores immediate casting. Hits, Orbit/Echo and passive triggers never re-chant.")
                 .define("enabled", true);
+        MOVEMENT_ENABLED = builder.comment("Apply native-style player movement limits during Conflux preparations containing Goety glyphs.",
+                "Uses Goety fullStopCast: stop movement/jumping when enabled, otherwise 20% walking speed.",
+                "Does not affect pure Ars recipes, passengers or native Goety casting.")
+                .define("movementRestrictions", true);
         builder.pop();
         builder.push("cooldowns");
         COOLDOWNS_ENABLED = builder.comment("Native focus cooldowns shared with Goety wands and other Ars recipes. Includes native cooldown reduction.",
                 "Check before preparation and again on release. An acknowledged release starts each distinct focus cooldown once.",
-                "Creative retains native Goety cooldowns; resource costs remain free.",
+                "Creative bypasses existing cooldowns and adds none unless creativeCooldown is enabled; resources remain free.",
                 "Existing projectiles and repeated triggers continue; custom charge/stop-based cooldown lifecycles are not reproduced.",
                 "Automatic devices, passive effects and third-party direct resolvers are unaffected unless explicitly integrated.")
                 .define("enabled", true);
+        CREATIVE_COOLDOWN = builder.comment("Apply bridge focus cooldowns in creative mode. False bypasses both checks and writes.",
+                "True restores the original Goety creative cooldown behavior.")
+                .define("creativeCooldown", false);
         builder.pop();
         SPEC = builder.build();
     }
     private GoetyConfig() {}
     private static <T> T read(ForgeConfigSpec.ConfigValue<T> value) { return SPEC.isLoaded() ? value.get() : value.getDefault(); }
     public static boolean chantingEnabled() { return read(CHANTING_ENABLED); }
+    public static boolean movementEnabled() { return read(MOVEMENT_ENABLED); }
+    public static boolean creativeCooldown() { return read(CREATIVE_COOLDOWN); }
     public static boolean cooldownsEnabled() { return read(COOLDOWNS_ENABLED); }
 }

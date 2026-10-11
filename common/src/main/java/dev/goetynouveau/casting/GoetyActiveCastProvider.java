@@ -45,7 +45,8 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         return List.copyOf(result);
     }
     private boolean cooldowns(ActiveCastRequest request) {
-        return GoetyConfig.cooldownsEnabled() && dev.goetynouveau.platform.ActiveCastingPlatform.realPlayer(request.caster());
+        return GoetyConfig.cooldownsEnabled() && dev.goetynouveau.platform.ActiveCastingPlatform.realPlayer(request.caster())
+                && (!((ServerPlayer)request.caster()).isCreative() || GoetyConfig.creativeCooldown());
     }
     @Override public boolean allowed(ActiveCastRequest request) {
         if (!cooldowns(request)) return true;

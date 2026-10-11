@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-dev.19
+
+- Apply native-style preparation movement with an independent switch, including Goety fullStopCast and no duplicate held-item slowdown.
+- Creative bypasses native focus cooldown checks and writes by default; add an explicit opt-in.
+- Keep pure Ars and native Goety casting unchanged; reuse preparation packets for HUD-independent movement state.
+
 ## 0.1.0-dev.18
 
 - Register native preparation and focus cooldowns with Conflux 0.1.10. Mixed recipes prepare and release once.

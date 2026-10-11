@@ -18,13 +18,16 @@ public final class ChantHudState {
         world = new WeakReference<>(client.level);
         if (client.level != null) TIMER.update(data.token(), data.duration(), data.remaining(), client.level.getGameTime());
     }
-    public static boolean visible() {
+    public static boolean chanting() {
         var client = Minecraft.getInstance();
         var level = world.get();
         if (level == null || level != client.level || client.player == null || !client.player.isAlive() || client.player.isSpectator()) {
             TIMER.clear(); world.clear(); return false;
         }
-        return !MobUtil.isSpellCasting(client.player) && TIMER.active(level.getGameTime());
+        return TIMER.active(level.getGameTime());
+    }
+    public static boolean visible() {
+        return chanting() && !MobUtil.isSpellCasting(Minecraft.getInstance().player);
     }
     public static float progress() { return TIMER.progress(Minecraft.getInstance().level.getGameTime()); }
 }

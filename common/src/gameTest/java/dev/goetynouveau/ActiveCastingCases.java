@@ -77,16 +77,30 @@ public final class ActiveCastingCases {
     public static void nativeGoetyCooldownAndChargeBoundary(GameTestHelper h,ServerPlayer p) {
         p.setGameMode(GameType.CREATIVE); p.setItemInHand(HAND,new ItemStack(Items.STICK)); p.setXRot(-90);
         SEHelper.setSEActive(p,true); SEHelper.setSESouls(p,10000);
-        var oldChant=GoetyConfig.CHANTING_ENABLED.get(); var oldCooldown=GoetyConfig.COOLDOWNS_ENABLED.get();
+        var oldChant=GoetyConfig.CHANTING_ENABLED.get(); var oldCooldown=GoetyConfig.COOLDOWNS_ENABLED.get(); var oldCreative=GoetyConfig.CREATIVE_COOLDOWN.get();
         try {
-            GoetyConfig.CHANTING_ENABLED.set(false); GoetyConfig.COOLDOWNS_ENABLED.set(true);
+            GoetyConfig.CHANTING_ENABLED.set(false); GoetyConfig.COOLDOWNS_ENABLED.set(true); GoetyConfig.CREATIVE_COOLDOWN.set(false);
             var recipe=new Spell(MethodProjectile.INSTANCE,GlyphCatalog.SOUL_BOLT,GlyphCatalog.SOUL_BOLT);
             // Use one payload occurrence in the actual resolver; duplicates below only test cooldown-key deduplication.
             var actual=new Spell(MethodProjectile.INSTANCE,GlyphCatalog.SOUL_BOLT);
             var resolver=new SpellResolver(SpellContext.fromEntity(actual,p,p.getMainHandItem()));
             h.assertTrue(ActiveCasts.execute(recipe,p,ActiveCastSource.CASTER_TOOL,()->resolver.onCast(p.getMainHandItem(),h.getLevel()),false),"Active native projectile dispatch succeeds");
             var focus=new ItemStack(com.Polarice3.Goety.common.items.ModItems.SOUL_BOLT_FOCUS.get());
-            h.assertTrue(SEHelper.isOnCooldown(p,focus) && !ActiveCasts.allowed(actual,p,ActiveCastSource.CASTER_TOOL),"Creative follows native Goety focus cooldown, shared across recipes");
+            h.assertTrue(!GoetyConfig.CREATIVE_COOLDOWN.getDefault() && !SEHelper.isOnCooldown(p,focus), "Creative bypass is the default and a real release adds no cooldown");
+            SEHelper.addCooldown(p,focus.getItem(),777);
+            var existing=SEHelper.getCooldownInstance(p,focus.getItem());
+            h.assertTrue(ActiveCasts.allowed(actual,p,ActiveCastSource.CASTER_TOOL),"Creative ignores an existing native cooldown");
+            var second=new SpellResolver(SpellContext.fromEntity(actual,p,p.getMainHandItem()));
+            h.assertTrue(ActiveCasts.execute(actual,p,ActiveCastSource.CASTER_TOOL,()->second.onCast(p.getMainHandItem(),h.getLevel()),false)
+                    && SEHelper.getCooldownInstance(p,focus.getItem())==existing,"Creative release leaves the existing cooldown untouched");
+            p.setGameMode(GameType.SURVIVAL);
+            h.assertTrue(!ActiveCasts.allowed(actual,p,ActiveCastSource.CASTER_TOOL),"Switching to survival respects the existing native cooldown");
+            p.setGameMode(GameType.CREATIVE); GoetyConfig.CREATIVE_COOLDOWN.set(true);
+            h.assertTrue(!ActiveCasts.allowed(actual,p,ActiveCastSource.CASTER_TOOL),"Creative cooldown opt-in restores native eligibility");
+            SEHelper.getCooldowns(p).remove(focus.getItem());
+            var third=new SpellResolver(SpellContext.fromEntity(actual,p,p.getMainHandItem()));
+            h.assertTrue(ActiveCasts.execute(recipe,p,ActiveCastSource.CASTER_TOOL,()->third.onCast(p.getMainHandItem(),h.getLevel()),false)
+                    && SEHelper.isOnCooldown(p,focus),"Opt-in release writes one native focus cooldown across duplicate occurrences");
             GoetyConfig.COOLDOWNS_ENABLED.set(false);
             h.assertTrue(ActiveCasts.allowed(actual,p,ActiveCastSource.CASTER_TOOL),"Independent cooldown switch restores immediate eligibility");
             var spell=GlyphCatalog.STEAM.focus().spell();
@@ -98,12 +112,12 @@ public final class ActiveCastingCases {
                     "Mixed maximum and sum count written occurrences; split branches are absent from this quote");
             h.assertTrue(ChantDurations.combine(List.of(Integer.MAX_VALUE,40),true)==Integer.MAX_VALUE,"Large timing sums saturate safely");
             h.succeed();
-        } finally { GoetyConfig.CHANTING_ENABLED.set(oldChant); GoetyConfig.COOLDOWNS_ENABLED.set(oldCooldown); p.discard(); }
+        } finally { GoetyConfig.CHANTING_ENABLED.set(oldChant); GoetyConfig.COOLDOWNS_ENABLED.set(oldCooldown); GoetyConfig.CREATIVE_COOLDOWN.set(oldCreative); p.discard(); }
     }
     public static void nativeGoetyPreparationRelease(GameTestHelper h,ServerPlayer p,java.util.function.Consumer<Spell> cast) {
         p.setGameMode(GameType.CREATIVE); p.setItemInHand(HAND,new ItemStack(Items.STICK)); p.setHealth(1);
-        var oldChant=GoetyConfig.CHANTING_ENABLED.get(); var oldCooldown=GoetyConfig.COOLDOWNS_ENABLED.get();
-        GoetyConfig.CHANTING_ENABLED.set(true); GoetyConfig.COOLDOWNS_ENABLED.set(true);
+        var oldChant=GoetyConfig.CHANTING_ENABLED.get(); var oldCooldown=GoetyConfig.COOLDOWNS_ENABLED.get(); var oldCreative=GoetyConfig.CREATIVE_COOLDOWN.get();
+        GoetyConfig.CHANTING_ENABLED.set(true); GoetyConfig.COOLDOWNS_ENABLED.set(true); GoetyConfig.CREATIVE_COOLDOWN.set(true);
         var recipe=new Spell(MethodSelf.INSTANCE,GlyphCatalog.IRON_HIDE);
         int ticks=GoetyActiveCastProvider.preparationTicks(GlyphCatalog.IRON_HIDE.focus().spell(),p,ItemStack.EMPTY);
         h.assertTrue(ticks>0 && ticks<200,"Native Iron Hide has a practical preparation");
@@ -115,7 +129,7 @@ public final class ActiveCastingCases {
                 h.assertTrue(SEHelper.isOnCooldown(p,new ItemStack(com.Polarice3.Goety.common.items.ModItems.IRON_HIDE_FOCUS.get())),
                         "Native Goety cooldown begins on actual release");
                 h.succeed();
-            } finally { GoetyConfig.CHANTING_ENABLED.set(oldChant); GoetyConfig.COOLDOWNS_ENABLED.set(oldCooldown); p.discard(); }
+            } finally { GoetyConfig.CHANTING_ENABLED.set(oldChant); GoetyConfig.COOLDOWNS_ENABLED.set(oldCooldown); GoetyConfig.CREATIVE_COOLDOWN.set(oldCreative); p.discard(); }
         });
     }
 

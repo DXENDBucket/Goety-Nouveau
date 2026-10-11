@@ -4,19 +4,25 @@
 
 ## 配置与普通规则
 
-`goety_nouveau-server.toml`：`[chanting].enabled=true`、`[cooldowns].enabled=true`，两者可以独立关闭。关闭吟唱恢复即时释放；关闭冷却不清除原生已有记录，只让此桥接不检查／新增。聚合规则由 Core `[active_casting].chant_mode` 控制，默认最长，可选累加。
+`goety_nouveau-server.toml`：`[chanting].enabled=true`、`[cooldowns].enabled=true`，两者可以独立关闭。`[chanting].movementRestrictions=true` 独立控制准备期间的移动限制；`[cooldowns].creativeCooldown=false` 默认让创造绕过冷却。关闭吟唱恢复即时释放；关闭冷却不清除原生已有记录，只让此桥接不检查／新增。聚合规则由 Core `[active_casting].chant_mode` 控制，默认最长，可选累加。
 
 普通聚晶调用 `ISpell.castDuration(caster, staff)`，使用已有法杖查找和原生装备／属性修正。`IChargingSpell` 只调用 `castUp`；其常见 72000 tick 默认值是占用物品的上限，不是吟唱时间。
 
 冷却读取 `SEHelper.isOnCooldown`，通过 `SEHelper.addCooldown` 写入原生聚晶记录并同步。不同 Ars 编排与 Goety 原生法杖共享对应聚晶冷却。有效主动发射后每种聚晶只增加一次 `spellCooldown(caster)`，重复魔符／散射不会重复登记；一次编排中有聚晶冷却未结束会拒绝整次主动施法。生物／假玩家不获得新的玩家冷却记录。
 
-创造模式沿用原生 Goety 的冷却行为，资源仍免费。取消准备和失败发射不产生冷却。发射后即使未命中仍进入冷却；在途与持续触发继续执行、按次支付原有资源。
+创造模式默认忽略已有聚晶冷却，也不写入新的冷却，资源仍免费。把 `creativeCooldown` 设为 true 可恢复 Goety 原生的创造冷却规则；切回生存后已有冷却仍生效。取消准备和失败发射不产生冷却。发射后即使未命中仍进入冷却；在途与持续触发继续执行、按次支付原有资源。
 
 ## 原生显示
 
 在 Goety 原生 `SoulEnergyGui` 内使用相同的 `goety:textures/gui/soul_energy.png` 进度区域与原生位置／显示配置，读取 Core 通知的独立计时。没有灵魂容器但使用 Ars Mana 时也可以显示同样样式的吟唱条。Goety 自己正在施法时优先显示原生状态，不改写玩家正在使用的聚晶、法杖 NBT 或原生施法能力。
 
 混合编排会向开启吟唱的相关提供者发送同一进度：Iron 使用自己的吟唱条，Goety 使用自己的条。两边不读取对方的类或假造对方的状态。
+
+## 吟唱移动（dev.19）
+
+复用 Goety 客户端输入更新入口和原生 `SpellConfig.FullStopCast` 配置。默认准备期间按使用物品的 0.2 移动系数处理，并停止疾跑；若已实际使用物品，不重复施加减速。原生 `fullStopCast=true` 时停止水平输入并禁止跳跃。乘客沿用原生豁免。
+
+移动状态读取现有准备包的独立计时，不依赖进度条是否显示；不伪造使用物品、原生施法能力或魔杖 NBT。准备结束／取消、换维度、死亡和离线使用已有状态清理。纯 Ars 不产生这个状态，独立关闭移动开关可保留吟唱条。此适配和 Goety 原生一样作用于玩家输入，不额外限制怪物或清零击退／外力速度。
 
 ## 后续特别审查清单
 

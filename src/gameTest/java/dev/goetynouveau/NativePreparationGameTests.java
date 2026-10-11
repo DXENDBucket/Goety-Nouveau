@@ -34,6 +34,8 @@ public final class NativePreparationGameTests {
         var cd=Class.forName("io.redspace.ironsspellbooks.config.ServerConfigs").getField("CREATIVE_COOLDOWN").get(null);
         var get=cd.getClass().getMethod("get"); var set=cd.getClass().getMethod("set",Object.class);
         Object previous=get.invoke(cd); set.invoke(cd,true);
+        var oldGoetyCreative=dev.goetynouveau.platform.GoetyConfig.CREATIVE_COOLDOWN.get();
+        dev.goetynouveau.platform.GoetyConfig.CREATIVE_COOLDOWN.set(true);
         var iron=com.hollingsworth.arsnouveau.api.registry.GlyphRegistry.getSpellPart(dev.arsconflux.api.projectile.CarrierRegistry.id("irons_nouveau:glyph_heal"));
         h.assertTrue(iron!=null,"Optional Iron glyph is registered independently");
         var recipe=new com.hollingsworth.arsnouveau.api.spell.Spell(com.hollingsworth.arsnouveau.common.spell.method.MethodSelf.INSTANCE,GlyphCatalog.IRON_HIDE,iron);
@@ -47,7 +49,7 @@ public final class NativePreparationGameTests {
                 h.assertTrue(!dev.arsconflux.api.casting.ActiveCasts.allowed(new com.hollingsworth.arsnouveau.api.spell.Spell(com.hollingsworth.arsnouveau.common.spell.method.MethodSelf.INSTANCE,iron),player,dev.arsconflux.api.casting.ActiveCastSource.CASTER_TOOL),"Iron-only follow-up sees its native cooldown");
                 h.assertTrue(!dev.arsconflux.api.casting.ActiveCasts.allowed(new com.hollingsworth.arsnouveau.api.spell.Spell(com.hollingsworth.arsnouveau.common.spell.method.MethodSelf.INSTANCE,GlyphCatalog.IRON_HIDE),player,dev.arsconflux.api.casting.ActiveCastSource.CASTER_TOOL),"Goety-only follow-up sees its native cooldown");
                 h.succeed();
-            } finally { try { set.invoke(cd,previous); } catch (Exception e) { throw new RuntimeException(e); } player.discard(); }
+            } finally { dev.goetynouveau.platform.GoetyConfig.CREATIVE_COOLDOWN.set(oldGoetyCreative); try { set.invoke(cd,previous); } catch (Exception e) { throw new RuntimeException(e); } player.discard(); }
         });
     }
 
