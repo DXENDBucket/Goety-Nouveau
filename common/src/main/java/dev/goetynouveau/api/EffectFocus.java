@@ -91,7 +91,9 @@ public enum EffectFocus {
     WHIRLWIND("whirlwind", "whirlwind_focus", "Whirlwind", true, true, true),
     SHOCKING("shocking", "shocking_focus", "Shocking", true, true, false),
     TELEKINESIS("telekinesis", "telekinesis_focus", "Telekinesis", true, true, false),
-    BURROWING("burrowing", "burrowing_focus", "Burrowing", true, true, false);
+    BURROWING("burrowing", "burrowing_focus", "Burrowing", true, true, false),
+    CYCLONE("cyclone", "cyclone_focus", "Cyclone", true, true, true),
+    TIDAL("tidal", "tidal_focus", "Tidal", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

@@ -64,7 +64,11 @@
     "NativeShockingDamageMixin",
     "NativeTelekinesisMixin",
     "NativeBurrowingRecipientMixin",
-    "NativeBurrowingEnchantMixin"
+    "NativeBurrowingEnchantMixin",
+    "NativeCycloneAreaMixin",
+    "NativeCycloneCopyMixin",
+    "NativeFireCycloneGearMixin",
+    "NativeTidalAreaMixin"
   ],
   "injectors": {
     "defaultRequire": 1

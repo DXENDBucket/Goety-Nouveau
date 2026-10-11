@@ -225,5 +225,9 @@
   "goety_nouveau.glyph_name.glyph_telekinesis": "念力",
   "goety_nouveau.glyph_desc.glyph_telekinesis": "让自己或友军抓取目标，随其目光牵引。",
   "goety_nouveau.glyph_name.glyph_burrowing": "钻掘",
-  "goety_nouveau.glyph_desc.glyph_burrowing": "让自己或友方玩家沿其视线持续挖掘。"
+  "goety_nouveau.glyph_desc.glyph_burrowing": "让自己或友方玩家沿其视线持续挖掘。",
+  "goety_nouveau.glyph_name.glyph_cyclone": "龙卷风",
+  "goety_nouveau.glyph_desc.glyph_cyclone": "在选中位置释放一团移动的龙卷风。",
+  "goety_nouveau.glyph_name.glyph_tidal": "潮汐",
+  "goety_nouveau.glyph_desc.glyph_tidal": "从选中位置涌出向前推进的水浪。"
 }

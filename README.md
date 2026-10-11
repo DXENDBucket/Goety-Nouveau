@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.37`). Nineteen projectile replacements, eighty-six shared target/location effects, one additional NeoForge Breeze effect and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.38`). Nineteen projectile replacements, eighty-eight shared target/location effects, one additional NeoForge Breeze effect and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -92,6 +92,8 @@ These glyphs are **effects**, placed after an Ars cast method. They use the actu
 | Shocking | Yourself or an allied executor aims native sustained lightning, including native packets, rod diversion, Storm-staff chains and equipment/weather branches. Original caster pays; explicit damage owner is retained. | Amplify / Dampen, Extend Time / Duration Down, Burning |
 | Telekinesis | Yourself or an allied executor grabs a native eligible target and moves it with their gaze. Independent native grab state, original ring/potency, collision/choke damage, hurt/range interruption and release cooldown. | Amplify / Dampen, Extend Time / Duration Down |
 | Burrowing | Yourself or an allied player excavates using native progress, permissions, drops, enchantments, Geomancy-staff area and Burning smelting. Exclusive progress ownership and native-wand handoff. | Amplify / Dampen, Extend Time / Duration Down, Burning |
+| Cyclone | A native moving cyclone starts at the selected point and tracks the selected enemy. Native pull/damage/expiry, Wind staff bonuses and Unholy fire tornado remain; source alliance/gear survive native retarget replacements. | Amplify / Dampen, AOE, Extend Time / Duration Down |
+| Tidal | A native wave advances from the selected point along the incoming direction. Native drench damage, slam/shrink animation and expiry; Abyss staff retains three symmetric waves. At an Ars impact, base life is the native ten aftermath ticks. | Amplify / Dampen, Extend Time / Duration Down |
 | Water Jet | Yourself or an allied executor emits native water damage, extinguishing, Burning and Abyss-staff Sapped from its live aim. A tracked display reuses Goety water textures and draw routines. Original caster pays upkeep. | Amplify / Dampen, Extend Time / Duration Down, Burning |
 | Prisma Beam | Yourself or an allied executor charges against its native enemy target, then resolves the original magic/attack result. Charge visuals are tracked for players and mobs; payment occurs once at the final result. Invalid/friendly targets and interruptions cancel the charge. | Amplify / Dampen, Extend Time / Duration Down |
 | Corrupted Beam | Grant yourself or an ally a real native beam, following that executor's position and facing with native block collision, damage and renderer. The original caster pays ongoing upkeep and supplies potency. Empty accounts, expired duration, lost alliance or removal stop and remove it. | Amplify / Dampen, Extend Time / Duration Down |

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.38
+
+- Add Cyclone and Tidal on both loaders: 111 shared glyphs, 112 on NeoForge. Both are one-charge native moving area entities, rather than artificial held channels.
+- Cyclone retains native motion/pull/damage/expiry, Wind staff/focus stats and Unholy fire variant. The Ars-selected target stays independent of explicit damage-owner AI; native retarget replacements retain original-caster provenance and velocity. Original gear determines hellfire even with a different damage owner.
+- Tidal starts at the Ars-selected point along the incoming direction, retaining original wave motion, drench damage, slam/shrink lifecycle and native Abyss-staff triple spread. Its impact-origin lifetime retains ten native aftermath ticks plus native duration bonuses, scaled by Ars time.
+- Supplement native damage-owner ally checks with original-caster ally checks. Native wand entities are unchanged. Zero duration, invalid targets and failed resource charges create no areas; creative bypasses payment.
+- Four focused server cases passed on each loader, including real native replacement/save-load, explicit ownership, original fire gear, wave damage/movement/expiry, staff spread and resource gates. Actual client appearance/audio remain manual checks. The native focus audit now has twelve pending registered keys.
+
 ## 0.1.0-dev.37
 
 - Add Telekinesis and Burrowing on both loaders: 109 shared glyphs, 110 on NeoForge.

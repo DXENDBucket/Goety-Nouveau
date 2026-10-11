@@ -225,5 +225,9 @@
   "goety_nouveau.glyph_name.glyph_telekinesis": "Telekinesis",
   "goety_nouveau.glyph_desc.glyph_telekinesis": "Let yourself or an ally grasp a target and move it with their gaze.",
   "goety_nouveau.glyph_name.glyph_burrowing": "Burrowing",
-  "goety_nouveau.glyph_desc.glyph_burrowing": "Let yourself or an allied player steadily excavate along their gaze."
+  "goety_nouveau.glyph_desc.glyph_burrowing": "Let yourself or an allied player steadily excavate along their gaze.",
+  "goety_nouveau.glyph_name.glyph_cyclone": "Cyclone",
+  "goety_nouveau.glyph_desc.glyph_cyclone": "Release a moving cyclone at the selected point.",
+  "goety_nouveau.glyph_name.glyph_tidal": "Tidal",
+  "goety_nouveau.glyph_desc.glyph_tidal": "Unleash a surging wave from the selected point."
 }

@@ -50,6 +50,7 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
+            case CYCLONE, TIDAL -> GoetyMovingAreaCasting.apply(focus, world, frame, ars);
             case TELEKINESIS -> GoetyTelekinesisCasting.apply(world, frame, ars, charge);
             case BURROWING -> GoetyBurrowingCasting.apply(world, frame, ars, charge);
             case FLYING, WHIRLWIND, SHOCKING -> GoetyWindStormCasting.apply(focus, world, frame, ars, charge);

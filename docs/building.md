@@ -235,3 +235,9 @@ Telekinesis uses a separate native stateful instance per channel. Burrowing reus
 Six `goety_nouveau_utility_channels` cases passed per loader, followed by the separate `goety_nouveau_mining_handoff` case for the ownership cleanup refinement. This checks native grab concurrency, real collision/source, hurt/range/alliance rejection, real mining/drop/permission/staff/Burning, resources/creative and native mining state handoff. Use fully qualified `:runGameTestServer`; do not rerun the historical catalogue without a new concern.
 
 Release/source checks cover 110 NeoForge / 109 Forge glyph models, bilingual entries/native parents, version/Core/licenses, Java 21/17 classes, scoped mixins/Forge refmap and no bundled dependencies/tests. Actual client appearance/audio remain manual checks. Registered focus coverage is tracked in native-focus-coverage.md.
+
+## Native moving areas (dev.38)
+
+Cyclone and Tidal use actual native mobile area entities at Ars impact points. Four focused `goety_nouveau_moving_areas` cases passed per loader: native retarget replacement and NBT provenance, explicit damage owner, source gear/fire variant, source ally protection, actual wave motion/damage/slam/expiry, Abyss staff spread and failed-charge/creative gates. No historical catalogue rerun. Native client visuals/audio remain manual checks.
+
+Release/source checks cover 112 NeoForge / 111 Forge glyph models, bilingual entries/native parents, Core/version/licenses, Java 21/17 classes, scoped mixins/Forge refmap and no bundled dependencies/tests. See moving-area-audit.md for impact-origin timing and remaining water-whip work.
