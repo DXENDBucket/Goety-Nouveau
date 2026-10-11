@@ -65,7 +65,10 @@ public enum EffectFocus {
     ILLUSION("illusion", "illusion_focus", "Illusion", false, false, false),
     BLAZING("blazing", "blazing_focus", "Blazing", true, true, false),
     GHASTLY("ghastly", "ghastly_focus", "Ghastly", true, true, false),
-    GUARDIAN("guardian", "guardian_focus", "Guardian", true, true, false);
+    GUARDIAN("guardian", "guardian_focus", "Guardian", true, true, false),
+    WATCHING("watching", "watching_focus", "Watching", true, true, false),
+    SNARING("snaring", "snaring_focus", "Snaring", true, true, false),
+    BLASTING("blasting", "blasting_focus", "Blasting", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.27`). Eighteen projectile replacements, sixty-one target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.28`). Eighteen projectile replacements, sixty-four target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -81,6 +81,7 @@ These fifty-eight glyphs are **effects**, placed after an Ars cast method. They 
 | Blazing | Native blaze servants; Unholy set selects Infernos, Nether staff retains its larger batch. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
 | Ghastly | Native mini-ghasts; Nether robe selects large ghasts and the full Unholy set selects Malghasts. Native fireball/explosion potency and weakness remain active. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
 | Guardian | Native guardian servants around the selected point, with water placement and an Abyss-staff pair. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
+| Watching / Snaring / Blasting | Native Watchling, Snareling and Blastling servants at the selected point. Void staff retains 2?5 batches; teleport/hiding, web shots and alternating goo attacks remain native. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
 
 
 

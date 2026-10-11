@@ -78,7 +78,7 @@ public final class GoetyEffectCasting {
             case SPIKES -> GoetySpikeCasting.apply(world, frame, spell, defaults, ars);
             case KILLING, BOLTING, ILLUSION -> GoetyPersonalEffects.apply(focus, world, frame, spell, defaults, ars);
             case BARRICADE -> GoetyBarricadeCasting.apply(world, frame, spell, defaults, ars);
-            case BLAZING, GHASTLY, GUARDIAN, ZOMBIE, SKELETON, VEX, LEAPING, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, VANGUARD, BLACKGUARD -> GoetyServantCasting.apply(focus, world, frame, (com.Polarice3.Goety.common.magic.SummonSpell)spell, defaults, ars);
+            case WATCHING, SNARING, BLASTING, BLAZING, GHASTLY, GUARDIAN, ZOMBIE, SKELETON, VEX, LEAPING, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, VANGUARD, BLACKGUARD -> GoetyServantCasting.apply(focus, world, frame, (com.Polarice3.Goety.common.magic.SummonSpell)spell, defaults, ars);
             case EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH -> GoetyLocationEffects.apply(focus, world, frame, spell, defaults, ars);
         };
     }

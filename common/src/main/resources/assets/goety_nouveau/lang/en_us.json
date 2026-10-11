@@ -171,5 +171,11 @@
   "goety_nouveau.glyph_name.glyph_ghastly": "Ghastly",
   "goety_nouveau.glyph_desc.glyph_ghastly": "Summon native ghasts at the selected point. Sneak to recall.",
   "goety_nouveau.glyph_name.glyph_guardian": "Guardian",
-  "goety_nouveau.glyph_desc.glyph_guardian": "Summon native guardian servants at the selected point. Sneak to recall."
+  "goety_nouveau.glyph_desc.glyph_guardian": "Summon native guardian servants at the selected point. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_watching": "Watching",
+  "goety_nouveau.glyph_desc.glyph_watching": "Summon native watchlings at the selected point. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_snaring": "Snaring",
+  "goety_nouveau.glyph_desc.glyph_snaring": "Summon native snarelings at the selected point. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_blasting": "Blasting",
+  "goety_nouveau.glyph_desc.glyph_blasting": "Summon native blastlings at the selected point. Sneak to recall."
 }

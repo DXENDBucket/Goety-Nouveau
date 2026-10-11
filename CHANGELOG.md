@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-dev.28
+
+- Add Watching, Snaring and Blasting summon effect glyphs on both loaders: 86 glyphs covering 82 native focuses.
+- Reuse native ender servants, Void-staff batches, per-focus owner quotas, recall, lifetime, hiding, teleport behavior, particles and sounds.
+- Preserve Snareling's native shot and Blastling's dedicated attack goal, including windup, alternating arms and post-attack state; no replacement combat AI is introduced.
+- Three focused shared server cases passed on each loader, including a blaze summon regression. Client appearance and full combat navigation remain manual checks.
+
 ## 0.1.0-dev.27
 
 - Add Blazing, Ghastly and Guardian effect glyphs on both loaders: 83 glyphs covering 79 native focuses.

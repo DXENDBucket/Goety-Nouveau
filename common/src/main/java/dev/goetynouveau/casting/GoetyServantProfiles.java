@@ -35,6 +35,7 @@ final class GoetyServantProfiles {
             case BLAZING -> spell.rightStaff(staff) ? 2 + caster.getRandom().nextInt(4) : 1;
             case GHASTLY -> (spell.rightStaff(staff) ? 3 + caster.getRandom().nextInt(3) : 3) - (spell.NetherPower(caster) ? 2 : 0);
             case GUARDIAN -> spell.rightStaff(staff) ? 2 : 1;
+            case WATCHING, SNARING, BLASTING -> spell.rightStaff(staff) ? caster.getRandom().nextIntBetweenInclusive(2,5) : 1;
             case VANGUARD, BLACKGUARD -> NativeSummonHooks.guardCount(focus, spell, caster, staff);
             case LEAPING -> spell.rightStaff(staff) && caster.getRandom().nextBoolean() ? 2 : 1;
             case VEX -> spell.rightStaff(staff) ? 3 + caster.getRandom().nextInt(3) : 3;
@@ -69,6 +70,9 @@ final class GoetyServantProfiles {
                     : com.Polarice3.Goety.utils.CuriosFinder.hasUnholySet(caster)
                     ? ModEntityType.MALGHAST.get().create(world) : ModEntityType.GHAST_SERVANT.get().create(world);
             case GUARDIAN -> ModEntityType.GUARDIAN_SERVANT.get().create(world);
+            case WATCHING -> ModEntityType.WATCHLING_SERVANT.get().create(world);
+            case SNARING -> ModEntityType.SNARELING_SERVANT.get().create(world);
+            case BLASTING -> ModEntityType.BLASTLING_SERVANT.get().create(world);
             case VANGUARD -> ModEntityType.VANGUARD_SERVANT.get().create(world);
             case BLACKGUARD -> ModEntityType.BLACKGUARD_SERVANT.get().create(world);
             case ZOMBIE -> ModEntityType.ZOMBIE_SERVANT.get().create(world);
@@ -137,7 +141,7 @@ final class GoetyServantProfiles {
     static boolean uponSummon(EffectFocus focus) { return focus != EffectFocus.VEX && focus != EffectFocus.PHANTOM && focus != EffectFocus.SPRITE; }
     static boolean wildSound(EffectFocus focus) {
         return switch (focus) {
-            case LEAPING, HUNTING, MAULING, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, GHASTLY -> true;
+            case LEAPING, HUNTING, MAULING, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, GHASTLY, WATCHING, SNARING, BLASTING -> true;
             default -> false;
         };
     }
