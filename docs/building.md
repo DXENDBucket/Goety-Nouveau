@@ -265,3 +265,9 @@ Run the four focused checks with `:runGameTestServer -PgameTestNamespaces=goety_
 The cases cover native recipes/item drops, native rectangle orientation at the real Ars hit, mine persistence/roles/real damage/expiry/native isolation, complete staff cadence and grouped payment, and resource/creative/loaded-boundary/alliance rejection. Neo Ars capability lookup occurs before addon callbacks; the unloaded-chunk test therefore checks the addon entry boundary directly.
 
 Release/source checks cover 116 NeoForge / 115 Forge glyph resources, bilingual/native parents, Java 21/17 bytecode, scoped mixins/Forge refmap, version/Core/license metadata and no bundled dependencies/tests. See geomancy-audit.md for native timing, ownership and client verification limits.
+
+## Native temporary tunnel (dev.42)
+
+Run the four focused cases with `:runGameTestServer -PgameTestNamespaces=goety_nouveau_tunnel` from each loader project. Use `goety_nouveau_tunnel_edge` for the one additional int-depth/native-isolation check. The actual native save/load/update-tag entrypoints are exercised through the loader-specific test wrappers.
+
+Both sets passed on both loaders. Release/source checks cover 117 NeoForge / 116 Forge glyph resources, native parents and bilingual text, Java 21/17 bytecode, tunnel mixins and loader-specific Neo save bridge, Forge refmap, Core/version/license metadata and dependency/test isolation. See tunnel-audit.md for native expansion/restore and serialization boundaries; client rendering remains manual.

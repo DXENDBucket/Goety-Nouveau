@@ -97,7 +97,8 @@ public enum EffectFocus {
     WATER_WHIP("water_whip", "water_whip_focus", "Water Whip", true, false, false),
     ILLUMINATE("illuminate", "illuminate_focus", "Illuminate", false, true, true),
     PULVERIZE("pulverize", "pulverize_focus", "Pulverize", false, false, true),
-    SCATTER("scatter", "scatter_focus", "Scatter Mines", true, true, true);
+    SCATTER("scatter", "scatter_focus", "Scatter Mines", true, true, true),
+    TUNNEL("tunnel", "tunnel_focus", "Tunnel", false, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

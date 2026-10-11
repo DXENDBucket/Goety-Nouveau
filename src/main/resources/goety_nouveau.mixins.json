@@ -76,7 +76,10 @@
     "NativeSelectedBlockFaceMixin",
     "NativeScatterSpellMixin",
     "NativeScatterMineMixin",
-    "NativeScatterEnchantMixin"
+    "NativeScatterEnchantMixin",
+    "NativeTunnelSpellMixin",
+    "NativeTunnelHoleMixin",
+    "NativeTunnelSaveMixin"
   ],
   "injectors": {
     "defaultRequire": 1

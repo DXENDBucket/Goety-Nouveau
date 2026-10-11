@@ -50,6 +50,7 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
+            case TUNNEL -> GoetyTunnelCasting.apply(world, frame, ars);
             case PULVERIZE, SCATTER -> GoetyGeomancyCasting.apply(focus, world, frame, ars, charge);
             case ILLUMINATE -> GoetyIlluminateCasting.start(world, frame, ars, charge);
             case WATER_WHIP -> GoetyWaterWhipCasting.apply(world, frame, ars);

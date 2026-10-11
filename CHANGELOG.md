@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.42
+
+- Add Tunnel on both loaders: 116 shared glyphs, 117 on NeoForge. Execute the complete native block callback at the actual Ars block/face, preserving native depth propagation, Void-staff width, block-entity/blacklist/fluid/unbreakable exclusions, particles and original block-state restoration.
+- Pay only after successful native initial-hole creation. Rejected entity targets, invalid lifetime and insufficient resources produce no holes; creative is free. Ars time modifies the native hole lifetime additively by twenty ticks per unit.
+- Mark addon-created native holes and propagate that marker through native asynchronous expansion. Reject unloaded/out-of-build-boundary creation and reads at the addon boundary without changing ordinary native holes.
+- Preserve int depth within addon casting rather than the upstream callback's accidental byte narrowing. Preserve DOWN-facing propagation after save/load. For addon holes only, repair NeoForge's registry-aware save/update-tag path so native life/count/face data is actually persisted and synchronized.
+- Four focused runtime cases and one large-range/native-isolation edge case passed per loader. Native client visuals remain manual checks. Seven registered NeoForge focus keys remain without glyph entry points; menu, two-interaction and teleport behavior require separate designs.
+
 ## 0.1.0-dev.41
 
 - Add Pulverize and Scatter on both loaders: 115 shared glyphs, 116 on NeoForge. Pulverize uses actual native recipes/block processing/drop counts; native staff/AOE geometry uses the Ars-selected face rather than another caster ray trace.

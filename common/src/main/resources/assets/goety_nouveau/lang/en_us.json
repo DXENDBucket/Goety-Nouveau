@@ -237,5 +237,7 @@
   "goety_nouveau.glyph_name.glyph_pulverize": "Pulverize",
   "goety_nouveau.glyph_desc.glyph_pulverize": "Process the selected block using native Goety pulverizing recipes.",
   "goety_nouveau.glyph_name.glyph_scatter": "Scatter Mines",
-  "goety_nouveau.glyph_desc.glyph_scatter": "Deploy native mines around the selected point. A Geomancy staff sustains deployment around yourself or an ally."
+  "goety_nouveau.glyph_desc.glyph_scatter": "Deploy native mines around the selected point. A Geomancy staff sustains deployment around yourself or an ally.",
+  "goety_nouveau.glyph_name.glyph_tunnel": "Tunnel",
+  "goety_nouveau.glyph_desc.glyph_tunnel": "Temporarily open a native tunnel through the selected block."
 }
