@@ -24,8 +24,7 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
     public static void register() { ActiveCasts.register(CarrierRegistry.id("goety_nouveau:active_casting"), new GoetyActiveCastProvider()); }
     private static ResourceLocation focus(com.hollingsworth.arsnouveau.api.spell.AbstractSpellPart part) {
         if(part instanceof GoetyEffectGlyph effect)return effect.focus().focusId();
-        String id = part instanceof GoetyBoltGlyph glyph ? glyph.focus().focus : null;
-        return id == null ? null : CarrierRegistry.id("goety:" + id);
+        return part instanceof GoetyBoltGlyph glyph ? glyph.focus().focusId() : null;
     }
     private static List<ResourceLocation> focuses(Spell recipe) {
         var result = new ArrayList<ResourceLocation>();

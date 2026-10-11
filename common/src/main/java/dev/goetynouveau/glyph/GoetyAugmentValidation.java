@@ -17,7 +17,8 @@ public final class GoetyAugmentValidation {
     }
     public static boolean supportsBurning(BoltFocus focus) {
         return focus == BoltFocus.FIREBALL || focus == BoltFocus.WITHER_SKULL
-                || focus == BoltFocus.LAVABALL || focus == BoltFocus.SMACK_STONE;
+                || focus == BoltFocus.LAVABALL || focus == BoltFocus.SMACK_STONE
+                || focus == BoltFocus.SNAP_FUNGUS || focus == BoltFocus.BLAST_FUNGUS;
     }
     public static boolean validBolt(BoltFocus focus, List<AbstractAugment> augments) {
         return (!augments.contains(AugmentBurning.INSTANCE) || supportsBurning(focus))

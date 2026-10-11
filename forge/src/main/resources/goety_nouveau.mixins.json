@@ -89,7 +89,10 @@
     "NativeBlinkMixin",
     "NativeBlinkTeleportMixin",
     "NativeTemblorGeometryMixin",
-    "NativeTemblorAlliesMixin"
+    "NativeTemblorAlliesMixin",
+    "GoetyThrowableFungusStateMixin",
+    "GoetySnarelingShotStateMixin",
+    "ManagedBaseThrowableMovementMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -39,6 +39,19 @@ public final class GoetyProjectileFactory {
         var origin=carrierOrigin.add(direction.x/2,-.1,direction.z/2);
         var result=new ArrayList<Projectile>();
         switch(focus) {
+            case SNARELING_SHOT, SNAP_FUNGUS, BLAST_FUNGUS, BERSERK_FUNGUS -> {
+                Projectile projectile=switch(focus) {
+                    case SNARELING_SHOT -> new SnarelingShot(caster,world);
+                    case SNAP_FUNGUS -> new SnapFungus(caster,world);
+                    case BLAST_FUNGUS -> new BlastFungus(caster,world);
+                    default -> new BerserkFungus(caster,world);
+                };
+                projectile.setPos(carrierOrigin);
+                // Native item speed for fungi, mob launch speed for Snareling. Ars supplies aim.
+                projectile.shoot(direction.x,direction.y,direction.z,(focus==BoltFocus.SNARELING_SHOT?.95F:.75F)*speed,0);
+                if(burning>0 && (focus==BoltFocus.SNAP_FUNGUS || focus==BoltFocus.BLAST_FUNGUS)) projectile.setRemainingFireTicks(200);
+                result.add(projectile);
+            }
             case GLOW_LIGHT, SOUL_LIGHT -> {
                 LightProjectile light=focus==BoltFocus.SOUL_LIGHT?new SoulLight(world,caster):new GlowLight(world,caster); light.setPos(carrierOrigin);
                 // Native shootFromRotation adds one facing unit to its nominal 1.5 speed.
@@ -192,6 +205,8 @@ public final class GoetyProjectileFactory {
     public static void sound(BoltFocus focus, ServerLevel world, LivingEntity caster) {
         var spell=(Spell)focus.spell();
         switch(focus) {
+            case SNARELING_SHOT -> spell.playSound(world,caster,ModSounds.SNARELING_SHOOT.get());
+            case SNAP_FUNGUS, BLAST_FUNGUS, BERSERK_FUNGUS -> spell.playSound(world,caster,ModSounds.BLAST_FUNGUS_THROW.get(),.5F,.75F);
             case ICE_STORM -> spell.playSound(world,caster,ModSounds.WIND_BLAST.get(),1,.75F);
             case ICE_SPIKE -> spell.playSound(world,caster,ModSounds.ICE_SPIKE_CAST.get(),1,spell.projPitch(world.random));
             case LAVABALL -> spell.playSound(world,caster,SoundEvents.GHAST_SHOOT,2,spell.projPitch(world.random));

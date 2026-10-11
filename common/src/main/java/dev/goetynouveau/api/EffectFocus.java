@@ -105,7 +105,14 @@ public enum EffectFocus {
     END_WALK("end_walk", "end_walk_focus", "End Walk", true, true, false),
     TEMBLOR_CLAP("temblor_clap", "temblor_clap_focus", "Temblor Clap", true, false, true),
     BLINK("blink", "blink_focus", "Blink", false, false, false),
-    BANISH("banish", "banish_focus", "Banish", false, false, false);
+    BANISH("banish", "banish_focus", "Banish", false, false, false),
+    SNARELING_TRAP("snareling_trap", "glyph_snareling_trap", "Snareling Trap", false, true, false),
+    BERSERK_CLOUD("berserk_cloud", "glyph_berserk_cloud", "Berserk Cloud", false, false, false),
+    BONE_PULL("bone_pull", "glyph_bone_pull", "Bone Pull", false, false, true),
+    LEAF_SHELL("leaf_shell", "glyph_leaf_shell", "Leaf Shell", false, false, true),
+    THORN_TRAP("thorn_trap", "glyph_thorn_trap", "Thorn Trap", true, false, false),
+    TRANSPOSE("transpose", "glyph_transpose", "Transpose", false, false, true),
+    CORROSION("corrosion", "glyph_corrosion", "Corrosion", true, false, true);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;
@@ -116,6 +123,9 @@ public enum EffectFocus {
     public boolean breathing() { return this == FIRE_BREATH || this == FROST_BREATH || this == SWARM; }
     public boolean rain() { return this == ARROW_RAIN || this == BLIZZARD || this == METEOR_SHOWER || this == BOMBARDMENT; }
     public boolean channel() { return breathing() || rain() || this == THUNDERSTORM || this == CORRUPTED_BEAM || this == WATER_JET || this == VOID_SHOCK || this == QUAKING || this == WARDING || this == PRISMA_BEAM || this == FLYING || this == WHIRLWIND || this == SHOCKING || this == TELEKINESIS || this == BURROWING || this == ILLUMINATE; }
-    public net.minecraft.resources.ResourceLocation focusId() {return CarrierRegistry.id(this==WARDING?"goety_nouveau:glyph_warding":"goety:"+focus);}
+    public net.minecraft.resources.ResourceLocation focusId() {
+        if (this == WARDING) return CarrierRegistry.id("goety_nouveau:glyph_warding");
+        return CarrierRegistry.id((AbilitySpells.ability(glyph).isPresent()?"goety_nouveau:":"goety:")+focus);
+    }
     public ISpell spell() { return FocusSpells.read(focusId()).orElseThrow(()->new IllegalStateException("Missing native spell binding: "+focusId())); }
 }

@@ -21,6 +21,21 @@ import java.util.function.*;
 public final class GlyphRecipeCases {
     private static Item item(String id) { return BuiltInRegistries.ITEM.get(CarrierRegistry.id(id)); }
     private static Item material(AbstractSpellPart part) {
+        String glyph=part.getRegistryName().getPath().substring(6);
+        switch(glyph) {
+            case "snareling_shot" -> { return item("goety:snaring_focus"); }
+            case "snareling_trap" -> { return item("goety:snaring_focus"); }
+            case "snap_fungus" -> { return item("goety:snap_fungus"); }
+            case "blast_fungus" -> { return item("goety:blast_fungus"); }
+            case "berserk_fungus" -> { return item("goety:berserk_fungus"); }
+            case "berserk_cloud" -> { return item("goety:berserk_fungus"); }
+            case "bone_pull" -> { return item("goety:bonehead_hammer"); }
+            case "leaf_shell" -> { return item("minecraft:peony"); }
+            case "thorn_trap" -> { return item("minecraft:rose_bush"); }
+            case "transpose" -> { return item("minecraft:popped_chorus_fruit"); }
+            case "corrosion" -> { return item("minecraft:lily_of_the_valley"); }
+            default -> {}
+        }
         if (part instanceof GoetyBoltGlyph bolt) return item("goety:" + bolt.focus().focus);
         if (part == GlyphCatalog.WARDING) return item("goety:cursed_ingot");
         if (part instanceof GoetyEffectGlyph effect) return item("goety:" + effect.focus().focus);
@@ -36,7 +51,7 @@ public final class GlyphRecipeCases {
         p.setGameMode(GameType.SURVIVAL); p.giveExperiencePoints(100);
         p.setPos(h.absoluteVec(new net.minecraft.world.phys.Vec3(10, 2, 10)));
         try {
-            h.assertTrue(GlyphCatalog.ALL.size() == 124, "All current registered glyphs are audited");
+            h.assertTrue(GlyphCatalog.ALL.size() == 135, "All current registered glyphs are audited");
             for (var part : GlyphCatalog.ALL) {
                 String id = BuiltInRegistries.ITEM.getKey(part.getGlyph()).toString();
                 var recipe = lookup.apply(id);

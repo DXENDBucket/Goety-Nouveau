@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Enter before each native override, so both its virtual entity hit and secondary effects run once. */
-@Mixin(value={Lavaball.class,HellBlast.class,ElectroOrb.class,BlossomBall.class,MagmaBomb.class,VoidShockBomb.class,SmackStone.class},remap=false)
+@Mixin(value={Lavaball.class,HellBlast.class,ElectroOrb.class,BlossomBall.class,MagmaBomb.class,VoidShockBomb.class,SmackStone.class,SnarelingShot.class,SnapFungus.class,BlastFungus.class,BerserkFungus.class},remap=false)
 public abstract class ManagedAdditionalHitMixin {
     @Inject(method="onHit",remap=true,at=@At("HEAD"),cancellable=true)
     private void goetyNouveau$impact(HitResult hit,CallbackInfo ci) {

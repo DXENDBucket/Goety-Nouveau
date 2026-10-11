@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.52
+
+- Add eleven non-focus abilities: native Snareling Shot / Trap, Snap / Blast / Berserk fungus replacements, Berserk Cloud, Bone Pull and four native brews (Leaf Shell, Thorn Trap, Transpose, Corrosion). Native entities and complete impacts retain traps, splash, secondary effects, particles and owner rules.
+- Use native brew soul costs and comparable focus costs, with per-ability preparation/cooldown settings and existing creative/resource behavior. Cooldown keys are the actual glyph items.
+- Add native Scribe recipes, icons and Chinese/English descriptions for every new glyph; 135 glyphs and recipes per loader. No per-cast item ingredients.
+- Place the new item/creature/brew abilities after focus-backed glyphs within each Goety category, retaining projectile replacements after other augments. The creative tab also lists this batch last.
+- Validation: three focused native ability/projectile/crafting tests passed on each loader; NeoForge loaded Iron alongside Goety. Client visuals remain a manual check.
+
 ## 0.1.0-dev.51
 
 - Add native Ars Scribe recipes for all 124 registered glyphs per loader. Focus-backed glyphs consume their corresponding Goety focus (Warding has no native focus and consumes a Cursed Ingot) plus one Source Gem. The four dedicated augments use thematic materials plus one Source Gem. Native 27 XP cost, table animations/ingredient handling, glyph learning and JEI display are retained.

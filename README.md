@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.51`). Twenty projectile replacements, ninety-nine shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.52`). Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -16,7 +16,7 @@ Find **Soul Bolt** in the Goety & Nouveau creative tab and learn it by using the
 
 Amplify adds one native potency point; Dampen removes one, with a minimum of zero. Ordinary projectiles retain Goety's native launch offset, gradual acceleration, yaw/pitch rotation, collision loop and velocity enchantments. Ars selects the aim and scatter, and its acceleration statistic scales native travel. Special carriers such as Orbit keep their Ars trajectory. The native Goety entity supplies its renderer, animation, trail, impact particles, damage and staff-dependent Soul/Poison/Wither/Necro variants. Projectiles retain a maximum lifetime of ten seconds.
 
-The glyphs are available in the creative tab; survival acquisition and ritual recipes remain undecided. Active preparation and native focus cooldowns are enabled by default, with independent switches. Native unlimited-fire projectile payloads such as Surging Orb skip both preparation and cooldown in Ars recipes, while each actual shot still pays its resource cost. Other glyphs in the same recipe keep their own preparation/cooldown. Preparation uses the native Goety soul HUD progress style. Held-charge animations and native continuous-use behavior are not fully reproduced.
+The glyphs are available in the creative tab and through native Ars Scribe recipes (see below). Active preparation and native focus cooldowns are enabled by default, with independent switches. Native unlimited-fire projectile payloads such as Surging Orb skip both preparation and cooldown in Ars recipes, while each actual shot still pays its resource cost. Other glyphs in the same recipe keep their own preparation/cooldown. Preparation uses the native Goety soul HUD progress style. Held-charge animations and native continuous-use behavior are not fully reproduced.
 
 Soul Light is also a projectile replacement: **Projectile → Soul Light** uses the native soul-coloured source particles and bullet trail. It places the native Soul Light block on a replaceable neighboring face or applies ten seconds of Glowing on an entity hit, then resolves the remaining Ars effects. Ordinary flight pays once; repeating carriers pay at each successful hit.
 
@@ -216,6 +216,12 @@ Native infinite held channels need a finite lifespan when triggered by an Ars hi
 
 ## Survival glyph crafting
 
-All 124 registered glyphs on each supported version now have ordinary Ars Scribe's Table recipes. Focus-backed recipes consume one corresponding native Goety focus and one Ars Source Gem. Warding has no registered focus and uses a Cursed Ingot instead. Every recipe costs 27 experience points. Craft the native focus first, select the glyph through a spell book at the Scribe's Table, then supply the two ingredients. Learn the resulting glyph by right-clicking it as with other Ars glyphs. These native glyph recipes appear in Ars' existing JEI category when JEI is installed.
+All 135 registered glyphs on each supported version now have ordinary Ars Scribe's Table recipes. Focus-backed recipes consume one corresponding native Goety focus and one Ars Source Gem. Warding has no registered focus and uses a Cursed Ingot instead. Every recipe costs 27 experience points. Craft the native focus first, select the glyph through a spell book at the Scribe's Table, then supply the two ingredients. Learn the resulting glyph by right-clicking it as with other Ars glyphs. These native glyph recipes appear in Ars' existing JEI category when JEI is installed.
 
 The four bridge-only augments use one Source Gem and one thematic material: Burning uses Blaze Powder; Extension uses Savage Tooth; Life Absorb uses Ectoplasm; Soul Eater uses Soul Emerald. Recipes can be replaced by a datapack. Shared definitions and platform IDs are described in [glyph-crafting.md](docs/glyph-crafting.md).
+
+## Item, creature and brewing abilities
+
+Eleven additional glyphs expose native abilities without adding custom survival progression. Snareling Shot and the Snap / Blast / Berserk fungi are projectile replacement augments. Snareling Trap, Berserk Cloud, Bone Pull and four brews (Leaf Shell, Thorn Trap, Transpose, Corrosion) are effects. The full native entity impacts and brew implementations retain their particles, ownership, secondary effects and exclusions. Transpose gathers entities/items at a location; it is not a two-entity swap. Corrosion can destroy terrain and damage equipment, including nearby allies.
+
+These glyphs need no per-cast item ingredients. Their one-time Scribe recipes consume the corresponding material plus one Source Gem, with the usual 27 XP cost. Brew triggers read Goety's original brew energy costs; other abilities reference comparable native focuses. Each glyph has independent `abilities.<glyph>.preparationTicks` and `cooldownTicks` server settings; global chanting/cooldown switches and creative defaults still apply. [Behavior, timing and recipe details](docs/non-focus-ability-audit.md).

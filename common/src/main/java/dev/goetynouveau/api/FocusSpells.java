@@ -18,6 +18,10 @@ public final class FocusSpells {
                 ? Optional.ofNullable(focus.getSpell()) : Optional.empty();
     }
     public static Optional<ISpell> read(ResourceLocation focusItem) {
+        if (focusItem.getNamespace().equals("goety_nouveau") && focusItem.getPath().startsWith("glyph_")) {
+            var ability=AbilitySpells.read(focusItem.getPath().substring(6));
+            if(ability.isPresent()) return ability.map(spell->spell);
+        }
         if (!BuiltInRegistries.ITEM.containsKey(focusItem)) return Optional.empty();
         if(focusItem.equals(dev.arsconflux.api.projectile.CarrierRegistry.id("goety_nouveau:glyph_warding")))return Optional.of(WARDING);
         return read(new ItemStack(BuiltInRegistries.ITEM.get(focusItem)));

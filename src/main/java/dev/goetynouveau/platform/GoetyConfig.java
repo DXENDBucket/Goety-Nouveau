@@ -8,6 +8,7 @@ public final class GoetyConfig {
     public static final ModConfigSpec.EnumValue<ResourceSource> RESOURCE_SOURCE;
     public static final ModConfigSpec.IntValue BURNING_COST, EXTENSION_COST, LIFE_ABSORB_COST, SOUL_EATER_COST, UNBOUNDED_CHANNEL_TICKS;
     public static final ModConfigSpec.BooleanValue CHANTING_ENABLED, MOVEMENT_ENABLED, COOLDOWNS_ENABLED, CREATIVE_COOLDOWN;
+    private static final java.util.Map<String,ModConfigSpec.IntValue> ABILITY_PREPARATION=new java.util.HashMap<>(), ABILITY_COOLDOWN=new java.util.HashMap<>();
     static {
         var builder = new ModConfigSpec.Builder();
         builder.push("resources");
@@ -50,8 +51,20 @@ public final class GoetyConfig {
                 "This does not change native Goety wand casting.")
                 .defineInRange("unboundedDurationTicks", 200, 1, 72000);
         builder.pop();
+        builder.push("abilities");
+        for(var ability:dev.goetynouveau.api.AbilitySpells.Ability.values()) {
+            builder.push(ability.glyph);
+            ABILITY_PREPARATION.put(ability.glyph,builder.comment("Base preparation in ticks; Goety casting-speed reductions apply.")
+                    .defineInRange("preparationTicks",ability.preparation,0,72000));
+            ABILITY_COOLDOWN.put(ability.glyph,builder.comment("Base cooldown in ticks; Goety cooldown reductions apply. This ability has no native focus.")
+                    .defineInRange("cooldownTicks",ability.cooldown,0,72000));
+            builder.pop();
+        }
+        builder.pop();
         SPEC = builder.build();
     }
+    public static int abilityPreparation(String id,int fallback) {var value=ABILITY_PREPARATION.get(id);return value==null?fallback:read(value);}
+    public static int abilityCooldown(String id,int fallback) {var value=ABILITY_COOLDOWN.get(id);return value==null?fallback:read(value);}
     private GoetyConfig() {}
     private static <T> T read(ModConfigSpec.ConfigValue<T> value) { return SPEC.isLoaded() ? value.get() : value.getDefault(); }
     public static int unboundedChannelTicks() { return read(UNBOUNDED_CHANNEL_TICKS); }

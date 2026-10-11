@@ -2004,5 +2004,181 @@
       "id": "goety_nouveau:glyph_soul_eater",
       "count": 1
     }
+  },
+  "glyph_snareling_shot": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:snaring_focus"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_snareling_shot",
+      "count": 1
+    }
+  },
+  "glyph_snareling_trap": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:snaring_focus"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_snareling_trap",
+      "count": 1
+    }
+  },
+  "glyph_snap_fungus": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:snap_fungus"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_snap_fungus",
+      "count": 1
+    }
+  },
+  "glyph_blast_fungus": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:blast_fungus"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_blast_fungus",
+      "count": 1
+    }
+  },
+  "glyph_berserk_fungus": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:berserk_fungus"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_berserk_fungus",
+      "count": 1
+    }
+  },
+  "glyph_berserk_cloud": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:berserk_fungus"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_berserk_cloud",
+      "count": 1
+    }
+  },
+  "glyph_bone_pull": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:bonehead_hammer"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_bone_pull",
+      "count": 1
+    }
+  },
+  "glyph_leaf_shell": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "minecraft:peony"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_leaf_shell",
+      "count": 1
+    }
+  },
+  "glyph_thorn_trap": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "minecraft:rose_bush"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_thorn_trap",
+      "count": 1
+    }
+  },
+  "glyph_transpose": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "minecraft:popped_chorus_fruit"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_transpose",
+      "count": 1
+    }
+  },
+  "glyph_corrosion": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "minecraft:lily_of_the_valley"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_corrosion",
+      "count": 1
+    }
   }
 }

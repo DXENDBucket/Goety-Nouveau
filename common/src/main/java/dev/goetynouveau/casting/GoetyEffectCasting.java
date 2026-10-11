@@ -36,6 +36,8 @@ public final class GoetyEffectCasting {
     public static boolean apply(EffectFocus focus, ServerLevel world, CastContext frame, SpellStats ars, dev.arsconflux.api.resource.ResourceCharge charge) {
         if (frame.target() == null || frame.target().getType() == HitResult.Type.MISS) return false;
         var caster = frame.caster();
+        if(dev.goetynouveau.api.AbilitySpells.ability(focus.glyph).isPresent())
+            return GoetyAbilityEffects.apply(focus,world,frame,ars);
         var spell = (Spell)focus.spell();
         var defaults = NativeSpellStats.defaults(spell);
         int potency = Math.max(0, defaults.potency() + (int)ars.getAmpMultiplier());
@@ -50,6 +52,7 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
+            case SNARELING_TRAP, BERSERK_CLOUD, BONE_PULL, LEAF_SHELL, THORN_TRAP, TRANSPOSE, CORROSION -> throw new IllegalStateException("Ability dispatch bypassed");
             case CRAFTING, ENDER_CHEST -> GoetyMenuCasting.apply(focus, world, frame);
             case TEMBLOR_CLAP -> dev.goetynouveau.platform.NativeAreaHooks.temblor(world,frame,ars);
             case BLINK -> GoetyBlinkCasting.apply(world, frame);

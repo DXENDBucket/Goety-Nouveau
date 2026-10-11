@@ -87,7 +87,10 @@
     "NativeEndWalkMixin",
     "NativeBanishMixin",
     "NativeBlinkMixin",
-    "NativeBlinkTeleportMixin"
+    "NativeBlinkTeleportMixin",
+    "GoetyThrowableFungusStateMixin",
+    "GoetySnarelingShotStateMixin",
+    "ManagedBaseThrowableMovementMixin"
   ],
   "injectors": {
     "defaultRequire": 1
