@@ -34,7 +34,15 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
     }
     @Override public boolean supports(Spell spell) { return !focuses(spell).isEmpty(); }
     @Override public boolean chantingEnabled(ActiveCastRequest request) { return GoetyConfig.chantingEnabled(); }
+    /** Only native unlimited-fire projectile payloads skip preparation/cooldown.
+     * EverCharge is also used by beams, rain and utility channels; those keep their own timing. */
+    public static boolean rapidFire(ISpell spell) {
+        if (!(spell instanceof IChargingSpell charging) || !charging.everCharge()) return false;
+        return Arrays.stream(dev.goetynouveau.api.BoltFocus.values())
+                .anyMatch(focus -> focus.spell().getClass() == spell.getClass());
+    }
     public static int preparationTicks(ISpell spell, net.minecraft.world.entity.LivingEntity caster, ItemStack staff) {
+        if (rapidFire(spell)) return 0;
         // Its real target-dependent charge is displayed and completed after the Ars hit.
         if(spell instanceof com.Polarice3.Goety.common.magic.spells.abyss.PrismaBeamSpell)return 0;
         if(spell instanceof com.Polarice3.Goety.common.magic.spells.void_spells.VoidShockSpell)return 10;
@@ -59,6 +67,8 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         if (!cooldowns(request)) return true;
         var player = (ServerPlayer)request.caster();
         for (var id : new LinkedHashSet<>(focuses(request.spell()))) {
+            // Ignore old/native-wand cooldowns for Ars rapid fire without erasing native records.
+            if (FocusSpells.read(id).map(GoetyActiveCastProvider::rapidFire).orElse(false)) continue;
             var focus = new ItemStack(BuiltInRegistries.ITEM.get(id));
             if (!focus.isEmpty() && SEHelper.isOnCooldown(player, focus)) {
                 player.displayClientMessage(Component.translatable("goety_nouveau.cast.cooldown", focus.getHoverName()).withStyle(ChatFormatting.RED), true);
@@ -73,6 +83,7 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         var distinct = new LinkedHashSet<ResourceLocation>();
         for (var recipe : recipes) distinct.addAll(focuses(recipe));
         for (var id : distinct) FocusSpells.read(id).ifPresent(spell -> {
+            if (rapidFire(spell)) return;
             // Native grapples cool down on retrieval/end, not on initial launch.
             if(spell instanceof com.Polarice3.Goety.common.magic.spells.wild.GrappleSpell)return;
             int ticks = Math.max(0, spell.spellCooldown(player));

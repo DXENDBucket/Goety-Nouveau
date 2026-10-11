@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-dev.50
+
+- Restore corrupted Chinese names/descriptions for Pulverize, Scatter Mines and End Walk. They had been saved as literal question marks, not missing translations.
+- Native unlimited-fire projectile payloads (currently Surging Orb) contribute zero Ars preparation time, ignore existing native focus cooldowns, and write no new cooldown on release. Actual projectile resource payments remain unchanged. Existing ordinary-wand cooldown records are left intact.
+- The exemption requires both native everCharge behavior and a registered projectile payload; it does not disable preparation/cooldowns for held beams, rain, utilities or limited charged bursts such as Steam. Mixed recipes retain other providers/focuses and their timing.
+
+- Add a shared build-time Chinese localization check that rejects question-mark runs/replacement characters before resources and source artifacts are packaged.
+- Both focused rapid-fire cases passed on each loader; Neo also included Iron and NEG. Verify actual release text, native resource payments, mixed-focus preparations and cooldown isolation.
+
 ## 0.1.0-dev.49
 
 - Add Crafting and Ender Chest effect glyphs on both loaders, reusing Goety's actual menus, inventory handling and ender-chest opening sound. Crafting accepts block/entity hits; Ender Chest uses entity triggers like Ars' native Access Ender Inventory. Both always open the original player caster's own inventory, never a hit player's or substituted executor's.

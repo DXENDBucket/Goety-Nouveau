@@ -1,0 +1,19 @@
+import groovy.json.JsonSlurper
+
+// Missing keys alone do not catch Chinese text already replaced by ASCII question marks.
+def verifyGlyphLocalization = tasks.register('verifyGlyphLocalization') {
+    group = 'verification'
+    description = 'Reject corrupt Chinese glyph names/descriptions before packaging.'
+    inputs.dir glyphLocalizationRoot
+    doLast {
+        def file = new File(glyphLocalizationRoot, 'zh_cn.json')
+        def entries = new JsonSlurper().parse(file, 'UTF-8')
+        entries.each { key, value ->
+            if (value instanceof String && (value.contains('??') || value.contains('\uFFFD'))) {
+                throw new GradleException("Corrupt Chinese translation: ${key}")
+            }
+        }
+    }
+}
+tasks.named('processResources') { dependsOn verifyGlyphLocalization }
+tasks.named('sourcesJar') { dependsOn verifyGlyphLocalization }

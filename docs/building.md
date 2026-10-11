@@ -311,3 +311,7 @@ Release checks cover 122 models on each loader, appropriate native parent assets
 ## Personal utility menus (dev.49)
 
 Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_menus` from each loader project. Neo can add `-PwithIron=true` for Iron/NEG coexistence. Three focused cases use real ServerPlayer menus and capture native open-screen packets, including crafting input return, private persistent ender inventory, source/executor isolation, native callback isolation and resource/creative/fake-player/denied-open boundaries. No historical catalogue rerun. Both loaders now contain 124 glyph resources; see menu-audit.md for native UI reuse and client verification limits.
+
+## Unlimited-fire payload timing (dev.50)
+
+Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_rapid_fire` on each loader; Neo can include `-PwithIron=true`. Two focused cases verify consecutive actual native SurgingOrb emission/payment/old-cooldown isolation and mixed recipe timing/cooldowns with ordinary charged/channel exclusions. No historical suite rerun. See rapid-fire-audit.md.
