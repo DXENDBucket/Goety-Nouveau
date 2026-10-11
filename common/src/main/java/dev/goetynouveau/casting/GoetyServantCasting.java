@@ -25,10 +25,7 @@ public final class GoetyServantCasting {
     public static boolean apply(EffectFocus focus,ServerLevel world,CastContext frame,SummonSpell spell,
                                 NativeSpellStats defaults,SpellStats ars) {
         var caster=frame.caster(); var owner=NativeSummonHooks.owner(caster);
-        var owned=new ArrayList<LivingEntity>();
-        for(var entity:world.getAllEntities())
-            if(entity instanceof LivingEntity living && living.isAlive() && entity instanceof IOwned ownedEntity
-                    && owner.getUUID().equals(ownedEntity.getOwnerId()) && spell.summonPredicate().test(living)) owned.add(living);
+        var owned=owned(world, owner, spell);
         if(GoetyResources.sneaking(caster)) return recall(focus,world,caster,spell,owned);
         int remaining=Math.max(0,spell.summonLimit()-owned.size());
         if(remaining==0) return false;
@@ -129,6 +126,13 @@ public final class GoetyServantCasting {
             else SoundUtil.playNecromancerSummon(caster);
         }
         return added;
+    }
+    static ArrayList<LivingEntity> owned(ServerLevel world, LivingEntity owner, SummonSpell spell) {
+        var owned=new ArrayList<LivingEntity>();
+        for(var entity:world.getAllEntities())
+            if(entity instanceof LivingEntity living && living.isAlive() && entity instanceof IOwned ownedEntity
+                    && owner.getUUID().equals(ownedEntity.getOwnerId()) && spell.summonPredicate().test(living)) owned.add(living);
+        return owned;
     }
     /** Native water candidate walk, with per-candidate loading/height guards instead of probing unloaded chunks. */
     private static BlockPos waterPosition(BlockPos anchor,ServerLevel world) {

@@ -27,6 +27,8 @@ final class GoetyServantProfiles {
     private GoetyServantProfiles() {}
     static int count(EffectFocus focus, SummonSpell spell, LivingEntity caster, ItemStack staff) {
         return switch (focus) {
+            case MINISTROUS -> spell.rightStaff(staff) ? 2 + caster.getRandom().nextInt(2) : 1;
+            case BREEZE -> spell.rightStaff(staff) ? 2 : 1;
             case SLIMY -> spell.rightStaff(staff) ? 2 + caster.getRandom().nextInt(2) : ((SlimySpell)spell).specialStaffs(staff) ? 2 : 1;
             case CARRION -> spell.rightStaff(staff) ? 3 + caster.getRandom().nextInt(4) : 3;
             case WHISPER -> spell.rightStaff(staff) ? 2 : 1;
@@ -52,6 +54,9 @@ final class GoetyServantProfiles {
     }
     static Owned seed(EffectFocus focus, ServerLevel world, SummonSpell spell, LivingEntity caster) {
         return switch (focus) {
+            case MINISTROUS -> spell.GeoPower(caster) ? ModEntityType.REDSTONE_MINISTROSITY.get().create(world)
+                    : ModEntityType.STONE_MINISTROSITY.get().create(world);
+            case BREEZE -> NativeSummonHooks.breeze(world);
             case VEX -> ModEntityType.VEX_SERVANT.get().create(world);
             case LEAPING -> ModEntityType.LEAPLEAF.get().create(world);
             case HUNTING -> ModEntityType.BLACK_WOLF.get().create(world);
@@ -133,7 +138,7 @@ final class GoetyServantProfiles {
     }
     static boolean waterSearch(EffectFocus focus) {
         return focus == EffectFocus.HUNTING || focus == EffectFocus.MAULING || focus == EffectFocus.SLIMY || focus == EffectFocus.WHISPER
-                || focus == EffectFocus.BLAZING || focus == EffectFocus.GUARDIAN;
+                || focus == EffectFocus.BLAZING || focus == EffectFocus.GUARDIAN || focus == EffectFocus.BREEZE;
     }
     static boolean guard(EffectFocus focus) { return focus == EffectFocus.VANGUARD || focus == EffectFocus.BLACKGUARD; }
     static boolean formation(EffectFocus focus, ItemStack staff) { return guard(focus) && staff.is(ModItems.NAMELESS_STAFF.get()); }
@@ -141,7 +146,7 @@ final class GoetyServantProfiles {
     static boolean uponSummon(EffectFocus focus) { return focus != EffectFocus.VEX && focus != EffectFocus.PHANTOM && focus != EffectFocus.SPRITE; }
     static boolean wildSound(EffectFocus focus) {
         return switch (focus) {
-            case LEAPING, HUNTING, MAULING, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, GHASTLY, WATCHING, SNARING, BLASTING -> true;
+            case LEAPING, HUNTING, MAULING, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, GHASTLY, WATCHING, SNARING, BLASTING, MINISTROUS, BREEZE -> true;
             default -> false;
         };
     }

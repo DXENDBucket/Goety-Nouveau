@@ -50,6 +50,9 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
+            case HOGGING -> GoetyHoggingCasting.apply(world, frame, (com.Polarice3.Goety.common.magic.SummonSpell)spell, defaults, ars);
+            case MINISTROUS, BREEZE -> GoetyServantCasting.apply(focus, world, frame,
+                    (com.Polarice3.Goety.common.magic.SummonSpell)spell, defaults, ars);
             case FIRE_BREATH, FROST_BREATH, SWARM -> GoetyBreathingCasting.apply(focus, world, frame, ars, charge);
             case ICE_CHUNK -> iceChunk(world, frame, spell, parameters);
             case ENTANGLING -> entangling(world, frame, spell, parameters);

@@ -13,6 +13,8 @@ import net.minecraft.world.item.ItemStack;
 /** Retain the loader's actual native spell differences. */
 public final class NativeSummonHooks {
     private NativeSummonHooks() {}
+    public static boolean breezeSupported() { return false; }
+    public static com.Polarice3.Goety.common.entities.neutral.Owned breeze(ServerLevel world) { return null; }
     public static LivingEntity owner(LivingEntity caster) { return caster; }
     public static int count(HauntedSkullSpell spell, ItemStack staff) {
         return staff.is(ModItems.NAMELESS_STAFF.get()) ? 5 : spell.rightStaff(staff) ? 3 : 1;

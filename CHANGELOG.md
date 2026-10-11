@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-dev.30
+
+- Add Ministrous and Hogging summon effects on both loaders, and native Breeze on NeoForge: 91 shared glyphs, 92 on NeoForge.
+- Retain actual GeoPower equipment variants, matching-staff batches, native owner quotas, recall and servant life. Breeze uses the existing native entity API and is not registered on Forge.
+- Preserve Burning Hoglin flank placement, short life, staff windup, radius scaling, actual contact/expiry explosions and native summon debuff. Sneaking retains its original summon behavior rather than introducing recall.
+
+
+- Four focused server cases passed on NeoForge, three on Forge, including a native-breath regression. Release/source artifacts and platform-specific resources verified; client visuals remain manual checks.
+
 ## 0.1.0-dev.29
 
 - Add Fire Breath, Frost Breath and Swarm as sustained effect glyphs: 89 glyphs covering 85 native focuses.

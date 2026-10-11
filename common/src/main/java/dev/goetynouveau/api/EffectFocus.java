@@ -71,7 +71,10 @@ public enum EffectFocus {
     BLASTING("blasting", "blasting_focus", "Blasting", true, true, false),
     FIRE_BREATH("fire_breath", "fire_breath_focus", "Fire Breath", true, true, false),
     FROST_BREATH("frost_breath", "frost_breath_focus", "Frost Breath", true, true, false),
-    SWARM("swarm", "swarm_focus", "Swarm", true, true, false);
+    SWARM("swarm", "swarm_focus", "Swarm", true, true, false),
+    MINISTROUS("ministrous", "ministrous_focus", "Ministrous", true, true, false),
+    HOGGING("hogging", "hogging_focus", "Hogging", false, true, true),
+    BREEZE("breeze", "breeze_focus", "Summon Breeze", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

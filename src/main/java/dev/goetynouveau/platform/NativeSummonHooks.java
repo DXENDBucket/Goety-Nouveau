@@ -13,6 +13,10 @@ import net.minecraft.world.item.ItemStack;
 /** Retain the loader's actual native spell differences. */
 public final class NativeSummonHooks {
     private NativeSummonHooks() {}
+    public static boolean breezeSupported() { return true; }
+    public static com.Polarice3.Goety.common.entities.neutral.Owned breeze(ServerLevel world) {
+        return com.Vivideru.Goety.common.entities.VivideruEntityTypes.BREEZE_SERVANT.get().create(world);
+    }
     public static LivingEntity owner(LivingEntity caster) { return MobUtil.getSummonOwner(caster); }
     public static int count(HauntedSkullSpell spell, ItemStack staff) { return spell.rightStaff(staff) ? 3 : 1; }
     public static int burning(LivingEntity caster) { return WandUtil.getLevels(ModEnchantments.BURNING, caster); }

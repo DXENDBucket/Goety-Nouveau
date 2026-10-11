@@ -183,5 +183,11 @@
   "goety_nouveau.glyph_name.glyph_frost_breath": "冰霜吐息",
   "goety_nouveau.glyph_desc.glyph_frost_breath": "让自身或友军持续喷吐，期间持续消耗能量。",
   "goety_nouveau.glyph_name.glyph_swarm": "虫群吐息",
-  "goety_nouveau.glyph_desc.glyph_swarm": "让自身或友军持续喷吐，期间持续消耗能量。"
+  "goety_nouveau.glyph_desc.glyph_swarm": "让自身或友军持续喷吐，期间持续消耗能量。",
+  "goety_nouveau.glyph_name.glyph_ministrous": "小傀儡",
+  "goety_nouveau.glyph_desc.glyph_ministrous": "在选定位置附近召唤石质小傀儡。地卜装备可能改变它们的形态。",
+  "goety_nouveau.glyph_name.glyph_hogging": "燃烧疣猪兽",
+  "goety_nouveau.glyph_desc.glyph_hogging": "在选定位置两侧召唤短暂存在的燃烧疣猪兽。它们会冲锋并爆炸。",
+  "goety_nouveau.glyph_name.glyph_breeze": "召唤旋风仆从",
+  "goety_nouveau.glyph_desc.glyph_breeze": "在选定位置附近召唤旋风仆从。"
 }

@@ -98,11 +98,22 @@ public final class GlyphCatalog {
     public static final GoetyEffectGlyph FIRE_BREATH = new GoetyEffectGlyph(EffectFocus.FIRE_BREATH);
     public static final GoetyEffectGlyph FROST_BREATH = new GoetyEffectGlyph(EffectFocus.FROST_BREATH);
     public static final GoetyEffectGlyph SWARM = new GoetyEffectGlyph(EffectFocus.SWARM);
-    public static final List<AbstractSpellPart> ALL = List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
+    public static final GoetyEffectGlyph MINISTROUS = new GoetyEffectGlyph(EffectFocus.MINISTROUS);
+    public static final GoetyEffectGlyph HOGGING = new GoetyEffectGlyph(EffectFocus.HOGGING);
+    public static final GoetyEffectGlyph BREEZE = dev.goetynouveau.platform.NativeSummonHooks.breezeSupported()
+            ? new GoetyEffectGlyph(EffectFocus.BREEZE) : null;
+    public static final List<AbstractSpellPart> ALL = withNativeExtras(List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
-            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, SENSING, ROTATION, TREMBLING, CHARGE, SPIKES, LEAPING, BARRICADE, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, VANGUARD, BLACKGUARD, KILLING, BOLTING, ILLUSION, BLAZING, GHASTLY, GUARDIAN, WATCHING, SNARING, BLASTING, FIRE_BREATH, FROST_BREATH, SWARM, GLOW_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
+            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, SENSING, ROTATION, TREMBLING, CHARGE, SPIKES, LEAPING, BARRICADE, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, VANGUARD, BLACKGUARD, KILLING, BOLTING, ILLUSION, BLAZING, GHASTLY, GUARDIAN, WATCHING, SNARING, BLASTING, FIRE_BREATH, FROST_BREATH, SWARM, MINISTROUS, HOGGING, GLOW_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
-            dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER);
+            dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER));
+    private static List<AbstractSpellPart> withNativeExtras(List<AbstractSpellPart> shared) {
+        // Do not construct an unavailable glyph: even construction registers its spell school.
+        if (BREEZE == null) return shared;
+        var parts = new java.util.ArrayList<>(shared);
+        parts.add(parts.indexOf(HOGGING) + 1, BREEZE);
+        return List.copyOf(parts);
+    }
     private GlyphCatalog() {}
     public static void register() {
         // Secondary ordering runs within the provider group, never across providers.

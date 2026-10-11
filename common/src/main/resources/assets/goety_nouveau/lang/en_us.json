@@ -183,5 +183,11 @@
   "goety_nouveau.glyph_name.glyph_frost_breath": "Frost Breath",
   "goety_nouveau.glyph_desc.glyph_frost_breath": "Grants yourself or an ally a sustained breath, consuming resources while active.",
   "goety_nouveau.glyph_name.glyph_swarm": "Swarm",
-  "goety_nouveau.glyph_desc.glyph_swarm": "Grants yourself or an ally a sustained breath, consuming resources while active."
+  "goety_nouveau.glyph_desc.glyph_swarm": "Grants yourself or an ally a sustained breath, consuming resources while active.",
+  "goety_nouveau.glyph_name.glyph_ministrous": "Ministrous",
+  "goety_nouveau.glyph_desc.glyph_ministrous": "Summons native stone ministrosities near the selected location. Geomancy gear may change their form.",
+  "goety_nouveau.glyph_name.glyph_hogging": "Hogging",
+  "goety_nouveau.glyph_desc.glyph_hogging": "Summons short-lived burning hoglins beside the selected location. They charge and explode.",
+  "goety_nouveau.glyph_name.glyph_breeze": "Summon Breeze",
+  "goety_nouveau.glyph_desc.glyph_breeze": "Summons native breeze servants near the selected location."
 }
