@@ -5,6 +5,8 @@ import dev.arsconflux.api.projectile.CarrierRegistry;
 
 /** Native focus identity and targeting semantics belong to this provider, not Conflux. */
 public enum EffectFocus {
+    CRAFTING("crafting", "crafting_focus", "Crafting", false, false, false),
+    ENDER_CHEST("ender_chest", "ender_chest_focus", "Ender Chest", false, false, false),
     ICE_CHUNK("ice_chunk", "iceology_focus", "Ice Chunk", true, false, false),
     FROST_NOVA("frost_nova", "frost_nova_focus", "Frost Nova", true, true, true),
     ENTANGLING("entangling", "entangling_focus", "Entangling", false, true, true),

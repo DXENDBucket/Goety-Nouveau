@@ -251,5 +251,9 @@
   "goety_nouveau.glyph_name.glyph_blink": "闪烁",
   "goety_nouveau.glyph_desc.glyph_blink": "让自己或友军沿其朝向闪烁。潜行时随机传送。",
   "goety_nouveau.glyph_name.glyph_temblor_clap": "震击",
-  "goety_nouveau.glyph_desc.glyph_temblor_clap": "以地脉震波冲击选中的区域，使附近敌人眩晕。"
+  "goety_nouveau.glyph_desc.glyph_temblor_clap": "以地脉震波冲击选中的区域，使附近敌人眩晕。",
+  "goety_nouveau.glyph_name.glyph_crafting": "随身工作台",
+  "goety_nouveau.glyph_desc.glyph_crafting": "打开自己的工作台。",
+  "goety_nouveau.glyph_name.glyph_ender_chest": "随身末影箱",
+  "goety_nouveau.glyph_desc.glyph_ender_chest": "打开自己的末影箱，需要实体触发。"
 }

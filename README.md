@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.48`). Twenty projectile replacements, ninety-seven shared target/location effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.49`). Twenty projectile replacements, ninety-nine shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -22,7 +22,7 @@ Soul Light is also a projectile replacement: **Projectile → Soul Light** uses 
 
 ## Target and location effects
 
-These glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+These glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again. Personal Crafting / Ender Chest utilities always open the original player caster's own inventory, regardless of the selected entity.
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
@@ -34,6 +34,8 @@ These glyphs are **effects**, placed after an Ars cast method. They use the actu
 | Tunnel | Temporarily open the native Goety tunnel at the Ars-selected block and face. Native depth propagation, 3-wide / Void-staff 5-wide footprint, protected-block exclusions, particles and original-state restoration are retained. One successful initial hole pays once. | Extend Time / Duration Down |
 | Pulverize | Apply native Goety pulverize recipes to the Ars-selected block. Native block replacement, item drops, break event and staff rectangle are retained; the actual Ars hit face controls the rectangle. One valid native batch pays once. | AOE |
 | Scatter | Deploy three native mines around the selected entity/location, oriented by incoming travel when present. Geomancy staff instead lays native mines over its original cast window around yourself or an allied living executor. Native arming, blast animation and ordinary/staff expiry behavior remain unchanged. | Amplify / Dampen, AOE, Extend Time / Duration Down |
+| Crafting | Opens Goety's native portable crafting table for the real player caster. Accepts block or entity triggers; closing returns crafting inputs normally. | None |
+| Ender Chest | An entity trigger opens the real player caster's own native ender chest. Self works; targeting someone else never exposes their inventory. | None |
 | Ice Chunk | A native Goety chunk appears four blocks above the entity/location, then gathers frost, tracks and falls using native collision and damage. Frost staffs retain their shorter hover time. | Amplify / Dampen |
 | Frost Nova | A freezing shockwave centered on the selected entity/location, with native Goety explosion, ally filtering, damage, freezing and particle types. Frost staffs retain their radius/freezing bonus. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Entangling | Native vines bind the selected enemy or form a trap at the selected location. AOE selects nearby enemies; Wild staffs retain their larger group selection and target limit, and Wild robes retain vine damage. | AOE, Extend Time / Duration Down |

@@ -13,6 +13,8 @@ import java.util.List;
 
 /** Spell semantics belong here; carrier integrations are supplied by Conflux. */
 public final class GlyphCatalog {
+    public static final GoetyEffectGlyph CRAFTING = new GoetyEffectGlyph(EffectFocus.CRAFTING);
+    public static final GoetyEffectGlyph ENDER_CHEST = new GoetyEffectGlyph(EffectFocus.ENDER_CHEST);
     public static final GoetyBoltGlyph SOUL_BOLT = new GoetyBoltGlyph(BoltFocus.SOUL_BOLT);
     public static final GoetyBoltGlyph MAGIC_BOLT = new GoetyBoltGlyph(BoltFocus.MAGIC_BOLT);
     public static final GoetyBoltGlyph FIREBALL = new GoetyBoltGlyph(BoltFocus.FIREBALL);
@@ -134,7 +136,7 @@ public final class GlyphCatalog {
             ? new GoetyEffectGlyph(EffectFocus.BREEZE) : null;
     public static final GoetyEffectGlyph TEMBLOR_CLAP = dev.goetynouveau.platform.NativeAreaHooks.temblorSupported()
             ? new GoetyEffectGlyph(EffectFocus.TEMBLOR_CLAP) : null;
-    public static final List<AbstractSpellPart> ALL = withNativeExtras(List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
+    public static final List<AbstractSpellPart> ALL = withNativeExtras(List.of(CRAFTING, ENDER_CHEST, SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
             SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, SENSING, ROTATION, TREMBLING, CHARGE, SPIKES, LEAPING, BARRICADE, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, VANGUARD, BLACKGUARD, KILLING, BOLTING, ILLUSION, BLAZING, GHASTLY, GUARDIAN, WATCHING, SNARING, BLASTING, FIRE_BREATH, FROST_BREATH, SWARM, MINISTROUS, HOGGING, ARROW_RAIN, BLIZZARD, METEOR_SHOWER, BOMBARDMENT, THUNDERSTORM, TRIDENT_STORM, CORRUPTED_BEAM, WATER_JET, PRISMA_BEAM, VOID_SHOCK, QUAKING, WARDING, FLYING, WHIRLWIND, SHOCKING, TELEKINESIS, BURROWING, CYCLONE, TIDAL, WATER_WHIP, ILLUMINATE, PULVERIZE, SCATTER, TUNNEL, GRAPPLE, END_WALK, BANISH, BLINK, ICE_STORM, GLOW_LIGHT, SOUL_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,

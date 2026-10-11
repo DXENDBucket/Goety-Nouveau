@@ -1,24 +1,24 @@
-# 原生聚晶与法术覆盖核对（dev.48）
+# 原生聚晶与法术覆盖核对（dev.49）
 
 ## 运行时清点
 
 固定 NeoForge Goety 3.2.0／Forge Goety 2.5.58.4。分别在真实加载器 GameTest 中遍历 BuiltInRegistries.ITEM 的 goety 物品，按实际 IFocus.getSpell 获取法术类，再对照已构造的 GlyphCatalog.ALL。此方法包含自定义聚晶自己的 getSpell 实现，不再只依赖 ModItems 的 lambda／BootstrapMethods。
 
-两端各 124 个有效原生 IFocus 物品；各 117 个有魔符入口。剩余七项完全一致：
+两端各 124 个有效原生 IFocus 物品；各 119 个有魔符入口。剩余五项完全一致：
 
 | 聚晶 | 实际法术 | 接入边界 |
 | --- | --- | --- |
-| crafting_focus | CraftingSpell | 玩家物品操作界面 |
-| ender_chest_focus | EnderChestSpell | 玩家末影箱界面 |
 | command_focus | CommandSpell | 聚晶物品自身的指挥交互；此 Spell 类没有实际 SpellResult |
 | order_focus | CommandSpell | 另一种原生指挥交互，同上 |
 | call_focus | CallSpell | 依赖聚晶中已绑定的仆从数据，调用 CallFocus.call |
 | recall_focus | RecallSpell | 依赖聚晶绑定的目的地，含原生有效性与物品专属冷却 |
 | troop_focus | TroopSpell | 依赖聚晶绑定的仆从类型，调用 TroopFocus.call |
 
+Crafting／Ender Chest 已在 dev.49 复用实际原生菜单接入。它们像 Ars 的个人界面效果一样只打开真实玩家施法者自己的容器；选中另一名玩家不会读取其背包。只有实际打开才支付资源，末影箱需实体触发。
+
 以上不是尚未实现的普通“生成一批召唤物／创建区域／持续攻击”回调；不能把不含聚晶数据的 Ars 效果硬当成绑定聚晶实例。它们属于后续物品界面、绑定与仆从指挥设计。现有各类生成召唤物保留原生召唤限制、有限生命与维护机制。
 
-旧文档的 118 项是 ModItems 静态绑定的局部提取，遗漏了动态聚晶和跨版本差异；不能作为全量分母。dev.48 的运行时清点修正此结论。魔符数与原生聚晶数也不同：当前两端各 122 魔符，其中 121 共享，另有 Neo Breeze 或 Forge Temblor Clap；辅助魔符和部分共用聚晶入口不能用物品总数直接推算覆盖率。
+旧文档的 118 项是 ModItems 静态绑定的局部提取，遗漏了动态聚晶和跨版本差异；不能作为全量分母。dev.48 的运行时清点修正此结论；dev.49 新增两个实际原生菜单入口。魔符数与原生聚晶数也不同：当前两端各 124 魔符，其中 123 共享，另有 Neo Breeze 或 Forge Temblor Clap；辅助魔符和部分共用聚晶入口不能用物品总数直接推算覆盖率。
 
 ## 非注册类核对
 

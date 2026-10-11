@@ -251,5 +251,9 @@
   "goety_nouveau.glyph_name.glyph_blink": "Blink",
   "goety_nouveau.glyph_desc.glyph_blink": "Blink yourself or an ally using their aim. Sneak to teleport randomly.",
   "goety_nouveau.glyph_name.glyph_temblor_clap": "Temblor Clap",
-  "goety_nouveau.glyph_desc.glyph_temblor_clap": "Strike the selected area with a stunning geomantic shockwave."
+  "goety_nouveau.glyph_desc.glyph_temblor_clap": "Strike the selected area with a stunning geomantic shockwave.",
+  "goety_nouveau.glyph_name.glyph_crafting": "Crafting",
+  "goety_nouveau.glyph_desc.glyph_crafting": "Opens your crafting table.",
+  "goety_nouveau.glyph_name.glyph_ender_chest": "Ender Chest",
+  "goety_nouveau.glyph_desc.glyph_ender_chest": "Opens your own ender chest. Requires an entity trigger."
 }

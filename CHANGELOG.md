@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.49
+
+- Add Crafting and Ender Chest effect glyphs on both loaders, reusing Goety's actual menus, inventory handling and ender-chest opening sound. Crafting accepts block/entity hits; Ender Chest uses entity triggers like Ars' native Access Ender Inventory. Both always open the original player caster's own inventory, never a hit player's or substituted executor's.
+- Charge only when the native menu actually opens. Insufficient resources, denied opening, fake/non-player and spectator casters do not open menus or pay; creative remains free. No new container or client screen is introduced.
+- Both loaders contain 124 glyphs (123 shared plus their native platform extra); 119 of 124 native focus items have glyph entries. The five remaining focuses are bound-data command/order/call/recall/troop controls.
+
+- Three focused real-menu/server-packet cases passed on each loader; Neo ran with Iron and NEG present. Both builds and sources are verified. No broad historical test rerun. Client visual acceptance remains manual.
+
 ## 0.1.0-dev.48
 
 - Add the Forge-native Temblor Clap focus as an area effect. Both loaders now contain 122 glyphs: 121 shared, plus NeoForge Breeze or Forge Temblor Clap. Neo does not register a glyph or model for its missing focus.
