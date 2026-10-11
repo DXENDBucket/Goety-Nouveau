@@ -221,3 +221,9 @@ Void Shock binds to `stellar_focus` (the item class name/asset name is not `void
 Six targeted `goety_nouveau_ground_channels` cases passed on both loaders: native real damage and owner, ordinary/void-staff emission cadence and hover, upkeep/creative/interruption, native Quaking forward/staff/ring debris, true build-bottom ground search, native player ward data and invalid/unsupported/unfunded recipients. No broad historical catalogue rerun. Actual client appearance/audio remain manual checks.
 
 Release/source checks: 105 NeoForge / 104 Forge glyph models and bilingual entries, native model resources, MIT/notices, version/Core metadata, Java 21/17 bytecode, new mixins/Forge refmap, no bundled dependencies/tests, no Vivideru/Breeze in Forge. Remaining scope is tracked in `ground-channel-audit.md`.
+
+## Native wind/lightning channels (dev.36)
+
+Flying, Whirlwind and Shocking execute actual native callbacks with an allied executor, original-caster equipment/resources and explicit damage ownership. Shocking sends native lightning packets instead of cloned effects. Five focused `goety_nouveau_wind_storm` server cases passed on each loader: actual motion/damage, real-time facing, original Wind staff power/reflection/extinguishing, falling lift, creative/upkeep/empty resources, lost alliance, enemy-executor rejection and native lightning-rod diversion. Client visuals/audio remain manual checks.
+
+Use the fully qualified root task `:runGameTestServer` to avoid also launching the included Core project's unrelated test server with the addon namespace. Release/source checks target 108 NeoForge / 107 Forge glyph models and bilingual entries, native parents, metadata/licenses, Java 21/17 bytecode, scoped mixins/Forge refmap and no bundled dependencies/test classes. Remaining continuous work is tracked in `wind-storm-audit.md`.

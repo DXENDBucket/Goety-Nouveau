@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.36
+
+- Add Flying, Whirlwind and Shocking on both loaders: 107 shared glyphs, 108 on NeoForge.
+- Use original wind movement/cloud particles and wind rings/push/extinguishing/arrow reflection. Actual allied executor provides live facing and position; original caster supplies gear, potency and resources. Flying retains each loader's native base power; falling Whirlwind retains its native lift override.
+- Shocking keeps native lightning packets, actual damage, rod diversion, status/Burning and staff/weather branches. Spatial targeting/sounds follow the allied executor; explicit damage ownership remains separate from original-caster equipment/alliance.
+- Sustained callbacks pay first on activation and then per twenty results. Creative is free; empty accounts, lost alliance, removal and finite expiry stop new results. Native unlimited flight uses the existing configurable bounded fallback. Ordinary Goety wand casting remains unchanged.
+- Five focused server cases passed on each loader, covering real movement/damage, live facing, original staff variants, upkeep, interruption and native rod diversion. Client visuals/audio and native wand-only arm poses remain manual checks/boundaries.
+
 ## 0.1.0-dev.35
 
 - Add Void Shock, Quaking and Warding on both loaders: 104 shared glyphs, 105 on NeoForge.

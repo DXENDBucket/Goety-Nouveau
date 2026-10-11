@@ -215,5 +215,11 @@
   "goety_nouveau.glyph_name.glyph_quaking": "Quaking",
   "goety_nouveau.glyph_desc.glyph_quaking": "Choose yourself or an ally to send native tremors forward. Sneaking expands them in rings.",
   "goety_nouveau.glyph_name.glyph_warding": "Warding",
-  "goety_nouveau.glyph_desc.glyph_warding": "Sustain native soul-energy warding for yourself or an allied player."
+  "goety_nouveau.glyph_desc.glyph_warding": "Sustain native soul-energy warding for yourself or an allied player.",
+  "goety_nouveau.glyph_name.glyph_flying": "Flying",
+  "goety_nouveau.glyph_desc.glyph_flying": "Grant yourself or an ally sustained flight following their own facing.",
+  "goety_nouveau.glyph_name.glyph_whirlwind": "Whirlwind",
+  "goety_nouveau.glyph_desc.glyph_whirlwind": "Surround yourself or an ally with lifting wind that pushes nearby creatures and arrows.",
+  "goety_nouveau.glyph_name.glyph_shocking": "Shocking",
+  "goety_nouveau.glyph_desc.glyph_shocking": "Let yourself or an ally sustain electrical attacks along their aim."
 }

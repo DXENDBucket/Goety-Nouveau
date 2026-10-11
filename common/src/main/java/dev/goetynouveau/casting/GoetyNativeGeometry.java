@@ -7,9 +7,14 @@ import java.util.function.Supplier;
 /** A synchronous native callback scope; equipment and ownership continue to use the caster. */
 public final class GoetyNativeGeometry {
     public record View(CastContext context, LivingEntity host, com.Polarice3.Goety.common.magic.Spell spell,
-                       java.util.function.Consumer<net.minecraft.world.phys.HitResult> observer) {
+                       java.util.function.Consumer<net.minecraft.world.phys.HitResult> observer,
+                       com.Polarice3.Goety.common.magic.SpellStat stats) {
         public View(CastContext context,LivingEntity host,com.Polarice3.Goety.common.magic.Spell spell) {
-            this(context,host,spell,null);
+            this(context,host,spell,null,null);
+        }
+        public View(CastContext context,LivingEntity host,com.Polarice3.Goety.common.magic.Spell spell,
+                    java.util.function.Consumer<net.minecraft.world.phys.HitResult> observer) {
+            this(context,host,spell,observer,null);
         }
     }
     public static void observe(Object spell,LivingEntity caster,net.minecraft.world.phys.HitResult hit) {

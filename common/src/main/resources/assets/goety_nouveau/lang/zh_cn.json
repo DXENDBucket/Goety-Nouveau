@@ -215,5 +215,11 @@
   "goety_nouveau.glyph_name.glyph_quaking": "震地",
   "goety_nouveau.glyph_desc.glyph_quaking": "选择自己或友军向前激起震波；潜行时震波向周围扩散。",
   "goety_nouveau.glyph_name.glyph_warding": "守护",
-  "goety_nouveau.glyph_desc.glyph_warding": "为自己或友方玩家持续补充灵魂能量护盾。"
+  "goety_nouveau.glyph_desc.glyph_warding": "为自己或友方玩家持续补充灵魂能量护盾。",
+  "goety_nouveau.glyph_name.glyph_flying": "飞行",
+  "goety_nouveau.glyph_desc.glyph_flying": "让自己或友军沿其朝向持续飞行。",
+  "goety_nouveau.glyph_name.glyph_whirlwind": "旋风",
+  "goety_nouveau.glyph_desc.glyph_whirlwind": "让自己或友军卷起旋风，托举自身并推开周围生物与箭矢。",
+  "goety_nouveau.glyph_name.glyph_shocking": "电击",
+  "goety_nouveau.glyph_desc.glyph_shocking": "让自己或友军沿其朝向持续释放电击。"
 }

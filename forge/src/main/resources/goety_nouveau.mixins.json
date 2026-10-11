@@ -58,7 +58,11 @@
     "NativePrismaGeometryMixin",
     "NativeVoidShockGeometryMixin",
     "NativeWardingRecipientMixin",
-    "NativeQuakingMixin"
+    "NativeQuakingMixin",
+    "NativeWindRecipientMixin",
+    "NativeWhirlwindLiftMixin",
+    "NativeShockingGeometryMixin",
+    "NativeShockingDamageMixin"
   ],
   "injectors": {
     "defaultRequire": 1
