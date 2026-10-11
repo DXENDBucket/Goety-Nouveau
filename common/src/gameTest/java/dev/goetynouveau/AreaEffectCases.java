@@ -2,6 +2,7 @@ package dev.goetynouveau;
 
 import com.Polarice3.Goety.common.entities.util.FirePillar;
 import com.Polarice3.Goety.common.entities.util.VoidRift;
+import com.Polarice3.Goety.common.entities.projectiles.EarthFist;
 import com.Polarice3.Goety.common.items.ModItems;
 import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.SEHelper;
@@ -15,6 +16,9 @@ import dev.arsconflux.api.context.CastContext;
 import dev.arsconflux.api.context.CastContexts;
 import dev.goetynouveau.api.ResourceSource;
 import dev.goetynouveau.casting.GoetyResources;
+import dev.goetynouveau.casting.RiftVisualState;
+import dev.goetynouveau.casting.NativeVisualTracking;
+import dev.goetynouveau.mixin.FistVisualAccess;
 import dev.goetynouveau.glyph.AugmentBurning;
 import dev.goetynouveau.glyph.GoetyEffectGlyph;
 import dev.goetynouveau.platform.GoetyConfig;
@@ -22,6 +26,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -173,6 +178,77 @@ public final class AreaEffectCases {
         } finally {
             clear(h); enemy.discard(); distant.discard(); ally.discard(); p.discard(); board.removePlayerTeam(team);
             GoetyConfig.RESOURCE_SOURCE.set(old); h.getLevel().getGameRules().getRule(GameRules.RULE_MOBGRIEFING).set(grief,h.getLevel().getServer());
+        }
+    }
+    public static void riftVisuals(GameTestHelper h,ServerPlayer p) {
+        var old=GoetyConfig.RESOURCE_SOURCE.get(); GoetyConfig.RESOURCE_SOURCE.set(ResourceSource.SOUL_ENERGY); prepare(h,p);
+        var replicas=new ArrayList<VoidRift>();
+        try {
+            resolve(h,p,GlyphCatalog.VOID_RIFT,block(scene(h)),true); // No AOE: the previously missing default case.
+            var rift=entities(h,VoidRift.class).get(0);
+            h.assertTrue(rift.getSize()==0,"Keep native zero bonus size rather than buffing the spell to fix rendering");
+            rift.refreshDimensions(); // Native pose/size refresh may collapse the physical bounds at zero bonus.
+            h.assertTrue(rift.getBoundingBox().getSize()==0,"Native zero-size physical bounds remain unchanged");
+            h.assertTrue(rift.shouldRenderAtSqrDistance(64*64) && rift.getBoundingBoxForCulling().getSize()>0,
+                    "Default Ars rift uses visible billboard bounds for distance and frustum culling");
+            h.assertTrue(rift.isActivated() && rift.getAnimation()==3 && ((RiftVisualState)rift).goetyNouveau$visualPhase()==RiftVisualState.ACTIVE,
+                    "Default rift publishes its active visual phase before the first native tick");
+            var replica=new VoidRift(h.getLevel(),scene(h).x,scene(h).y,scene(h).z); replicas.add(replica);
+            // Use native spawn/tracking metadata, deliberately without delivering entity event 100.
+            replica.getEntityData().assignValues(rift.getEntityData().getNonDefaultValues());
+            h.assertTrue(replica.isActivated() && replica.getAnimation()==3
+                    && replica.getResourceLocation().toString().endsWith("rift_1.png")
+                    && replica.shouldRenderAtSqrDistance(64*64),
+                    "An initial or late tracker restores the native active texture without a one-shot activation event");
+            rift.tickCount=rift.getDuration()-1; tick(rift,1);
+            h.assertTrue(rift.isClosing && ((RiftVisualState)rift).goetyNouveau$visualPhase()==RiftVisualState.CLOSING,
+                    "Native closing phase is also durable tracking metadata");
+            replica=new VoidRift(h.getLevel(),scene(h).x,scene(h).y,scene(h).z); replicas.add(replica);
+            replica.getEntityData().assignValues(rift.getEntityData().getNonDefaultValues());
+            h.assertTrue(replica.isActivated() && replica.isClosing && replica.getAnimation()==2,
+                    "A tracker entering during closure gets the native closing texture without event 101");
+            var saved=new CompoundTag(); rift.addAdditionalSaveData(saved);
+            var restored=new VoidRift(h.getLevel(),scene(h).x,scene(h).y,scene(h).z); replicas.add(restored);
+            restored.readAdditionalSaveData(saved);
+            h.assertTrue(restored.isClosing && ((RiftVisualState)restored).goetyNouveau$visualPhase()==RiftVisualState.CLOSING,
+                    "Saved rifts restore durable closing state instead of reverting to invisible or opening visuals");
+            var original=new VoidRift(h.getLevel(),scene(h).x,scene(h).y,scene(h).z); replicas.add(original);
+            original.setOwner(p);
+            h.assertTrue(((RiftVisualState)original).goetyNouveau$visualPhase()==RiftVisualState.NATIVE
+                    && original.getBoundingBoxForCulling().equals(original.getBoundingBox()) && !original.isActivated(),
+                    "Unmarked native rifts retain original rendering and activation behavior");
+            tick(original,1); h.assertTrue(original.isRemoved(),"Original native wand cancellation still applies");
+            h.succeed();
+        } finally { clear(h); replicas.forEach(Entity::discard); p.discard(); GoetyConfig.RESOURCE_SOURCE.set(old); }
+    }
+    public static void fistTracking(GameTestHelper h,ServerPlayer p) {
+        var old=GoetyConfig.RESOURCE_SOURCE.get(); GoetyConfig.RESOURCE_SOURCE.set(ResourceSource.SOUL_ENERGY); prepare(h,p);
+        var replicas=new ArrayList<EarthFist>();
+        try {
+            resolve(h,p,GlyphCatalog.EARTH_FIST,block(scene(h)),true);
+            var fist=entities(h,EarthFist.class).get(0);
+            h.assertTrue(NativeVisualTracking.events(fist).isEmpty(),"Native fist warmup is not prematurely displayed to new observers");
+            for(int i=0;i<40&&!fist.isSentSpikeEvent();i++) tick(fist,1);
+            h.assertTrue(fist.isSentSpikeEvent() && NativeVisualTracking.events(fist).equals(List.of((byte)4)),
+                    "A late observer receives the original native emergence event after the fist has emerged");
+            var replica=new EarthFist(h.getLevel(),scene(h),p); replicas.add(replica);
+            for(byte event:NativeVisualTracking.events(fist)) replica.handleEntityEvent(event);
+            h.assertTrue(replica.isSentSpikeEvent() && replica.attackAnimationState.isStarted() && replica.getBoundingBox().getSize()>0,
+                    "Replayed native event restores the actual renderer gate, growth animation and visible dimensions");
+            for(int i=0;i<40&&((FistVisualAccess)fist).goetyNouveau$remainingLife()>0;i++) tick(fist,1);
+            h.assertTrue(!fist.isRemoved() && NativeVisualTracking.events(fist).equals(List.of((byte)4,(byte)5)),
+                    "Observers entering during native retreat receive emergence and retreat in order");
+            replica=new EarthFist(h.getLevel(),scene(h),p); replicas.add(replica);
+            for(byte event:NativeVisualTracking.events(fist)) replica.handleEntityEvent(event);
+            h.assertTrue(replica.isSentSpikeEvent() && !replica.attackAnimationState.isStarted() && replica.retreatAnimationState.isStarted(),
+                    "Late observer restores native retreat animation rather than leaving an invisible fist");
+            var original=new EarthFist(h.getLevel(),scene(h),p); replicas.add(original);
+            for(int i=0;i<40&&!original.isSentSpikeEvent();i++) tick(original,1);
+            h.assertTrue(NativeVisualTracking.events(original).isEmpty(),"Unmarked native casts do not receive bridge animation replays");
+            tick(fist,10); h.assertTrue(fist.isRemoved() && NativeVisualTracking.events(fist).isEmpty(),"Removed fists never get replayed");
+            h.succeed();
+        } finally {
+            entities(h,EarthFist.class).forEach(Entity::discard); replicas.forEach(Entity::discard); p.discard(); GoetyConfig.RESOURCE_SOURCE.set(old);
         }
     }
 }

@@ -13,4 +13,8 @@ public final class AreaEffectGameTests {
     public static void pillarFormationDamageStaffAndExpiry(GameTestHelper h) { AreaEffectCases.pillars(h,player(h)); }
     @GameTest(template="empty",timeoutTicks=40)
     public static void riftPullDamageClosingStaffAndExpiry(GameTestHelper h) { AreaEffectCases.rift(h,player(h)); }
+    @GameTest(template="empty",timeoutTicks=40)
+    public static void defaultRiftCullingTrackingAndSaveState(GameTestHelper h) { AreaEffectCases.riftVisuals(h,player(h)); }
+    @GameTest(template="empty",timeoutTicks=40)
+    public static void earthFistLateObserverAnimation(GameTestHelper h) { AreaEffectCases.fistTracking(h,player(h)); }
 }

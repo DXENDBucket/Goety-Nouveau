@@ -186,10 +186,10 @@ public final class GoetyAreaEffects {
         double radius = defaults.radius() + ars.getAoeMultiplier() + NativeEffectHooks.radius(frame.caster());
         if (duration <= 0 || !Double.isFinite(radius) || radius < 0) return false;
         var entity = new VoidRift(world, point.x, point.y, point.z);
-        entity.getPersistentData().putBoolean("goety_nouveau:ars_activation", true);
         entity.setOwner(owner(frame)); entity.setDuration(duration); entity.setWarmUp(0);
         entity.setSize((float)radius); entity.setExtraDamage(potency(defaults, ars, frame.caster()));
         entity.setStaff(spell.rightStaff(GoetyResources.staff(frame.caster())));
+        ((RiftVisualState)entity).goetyNouveau$visualPhase(RiftVisualState.ACTIVE);
         return world.addFreshEntity(entity);
     }
 }

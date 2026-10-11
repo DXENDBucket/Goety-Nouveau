@@ -79,6 +79,7 @@ public final class GoetyLocationEffects {
     }
     private static boolean fist(ServerLevel world, CastContext frame, Spell spell, Vec3 point, float potency) {
         var fist = new EarthFist(world, point, owner(frame));
+        fist.getPersistentData().putBoolean("goety_nouveau:ars_fist",true);
         fist.setExtraDamage(potency); fist.setWarmupDelayTicks(10);
         var direction = point.subtract(frame.caster().position());
         if (direction.horizontalDistanceSqr() < 1.0e-10) direction = frame.incomingDirection();

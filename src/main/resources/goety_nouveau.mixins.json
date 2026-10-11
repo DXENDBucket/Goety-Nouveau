@@ -4,7 +4,9 @@
   "package": "dev.goetynouveau.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ArsRiftActivationMixin",
+    "ArsRiftDataMixin",
+    "ArsRiftVisualMixin",
+    "FistVisualAccess",
     "ProjectileHitAccess",
     "ManagedEntityMixin",
     "GoetyMovementMixin",
