@@ -61,7 +61,10 @@
     "NativeWindRecipientMixin",
     "NativeWhirlwindLiftMixin",
     "NativeShockingGeometryMixin",
-    "NativeShockingDamageMixin"
+    "NativeShockingDamageMixin",
+    "NativeTelekinesisMixin",
+    "NativeBurrowingRecipientMixin",
+    "NativeBurrowingEnchantMixin"
   ],
   "injectors": {
     "defaultRequire": 1

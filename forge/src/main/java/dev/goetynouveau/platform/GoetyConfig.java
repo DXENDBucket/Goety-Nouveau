@@ -46,7 +46,7 @@ public final class GoetyConfig {
         builder.pop();
         builder.push("channels");
         UNBOUNDED_CHANNEL_TICKS = builder.comment("Finite base lifetime in ticks for supported held-channel spells whose native duration is infinite (zero).",
-                "Used by Corrupted Beam, Water Jet, Warding and Flying when their native duration is zero. Positive native durations retain their own value. Ars duration augments scale this base.",
+                "Used by Corrupted Beam, Water Jet, Warding, Flying, Telekinesis and Burrowing when their native duration is zero. Positive native durations retain their own value. Ars duration augments scale this base.",
                 "This does not change native Goety wand casting.")
                 .defineInRange("unboundedDurationTicks", 200, 1, 72000);
         builder.pop();

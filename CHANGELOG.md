@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-dev.37
+
+- Add Telekinesis and Burrowing on both loaders: 109 shared glyphs, 110 on NeoForge.
+- Each Telekinesis channel owns a fresh native spell instance. Preserve native grabbing/force, immunity and health checks, hurt/range cancellation, collision/choke damage and portal particles; original caster supplies gear/payment and allied executor supplies geometry. Explicit damage ownership and configurable release cooldown remain intact.
+- Burrowing accepts allied players and executes complete native mining, including permissions/events, cracks, drops/XP, native enchantments and staff/Burning branches. Exclusive ownership protects native mining state; cleanup distinguishes switching to another wand spell from native Burrowing taking over.
+- Both use the existing bounded duration for native unlimited held casts and grouped upkeep/creative bypass. No target, rejected executors, permissions or resource failure do not activate paid mining/grabs.
+- Six focused runtime cases plus one native-wand handoff case passed per loader. Add an actual ModItems binding audit: fourteen registered NeoForge focus keys remain without glyph entry points; this is not a full-catalogue completion claim.
+
 ## 0.1.0-dev.36
 
 - Add Flying, Whirlwind and Shocking on both loaders: 107 shared glyphs, 108 on NeoForge.

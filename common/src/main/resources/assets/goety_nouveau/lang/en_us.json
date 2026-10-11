@@ -221,5 +221,9 @@
   "goety_nouveau.glyph_name.glyph_whirlwind": "Whirlwind",
   "goety_nouveau.glyph_desc.glyph_whirlwind": "Surround yourself or an ally with lifting wind that pushes nearby creatures and arrows.",
   "goety_nouveau.glyph_name.glyph_shocking": "Shocking",
-  "goety_nouveau.glyph_desc.glyph_shocking": "Let yourself or an ally sustain electrical attacks along their aim."
+  "goety_nouveau.glyph_desc.glyph_shocking": "Let yourself or an ally sustain electrical attacks along their aim.",
+  "goety_nouveau.glyph_name.glyph_telekinesis": "Telekinesis",
+  "goety_nouveau.glyph_desc.glyph_telekinesis": "Let yourself or an ally grasp a target and move it with their gaze.",
+  "goety_nouveau.glyph_name.glyph_burrowing": "Burrowing",
+  "goety_nouveau.glyph_desc.glyph_burrowing": "Let yourself or an allied player steadily excavate along their gaze."
 }

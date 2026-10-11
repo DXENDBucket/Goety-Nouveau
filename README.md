@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.36`). Nineteen projectile replacements, eighty-four shared target/location effects, one additional NeoForge Breeze effect and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.37`). Nineteen projectile replacements, eighty-six shared target/location effects, one additional NeoForge Breeze effect and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -90,6 +90,8 @@ These glyphs are **effects**, placed after an Ars cast method. They use the actu
 | Flying | Yourself or an allied executor flies along their live facing, using original native motion/cloud particles and original-caster Wind staff/potency. Finite Ars duration for the native unlimited held cast; paid upkeep. | Amplify / Dampen, Extend Time / Duration Down |
 | Whirlwind | Native wind rings, radial push, upward lift, extinguishing and Wind-staff arrow reflection run around yourself or an allied executor. Falling lift retains its native override. | Amplify / Dampen, AOE, Extend Time / Duration Down |
 | Shocking | Yourself or an allied executor aims native sustained lightning, including native packets, rod diversion, Storm-staff chains and equipment/weather branches. Original caster pays; explicit damage owner is retained. | Amplify / Dampen, Extend Time / Duration Down, Burning |
+| Telekinesis | Yourself or an allied executor grabs a native eligible target and moves it with their gaze. Independent native grab state, original ring/potency, collision/choke damage, hurt/range interruption and release cooldown. | Amplify / Dampen, Extend Time / Duration Down |
+| Burrowing | Yourself or an allied player excavates using native progress, permissions, drops, enchantments, Geomancy-staff area and Burning smelting. Exclusive progress ownership and native-wand handoff. | Amplify / Dampen, Extend Time / Duration Down, Burning |
 | Water Jet | Yourself or an allied executor emits native water damage, extinguishing, Burning and Abyss-staff Sapped from its live aim. A tracked display reuses Goety water textures and draw routines. Original caster pays upkeep. | Amplify / Dampen, Extend Time / Duration Down, Burning |
 | Prisma Beam | Yourself or an allied executor charges against its native enemy target, then resolves the original magic/attack result. Charge visuals are tracked for players and mobs; payment occurs once at the final result. Invalid/friendly targets and interruptions cancel the charge. | Amplify / Dampen, Extend Time / Duration Down |
 | Corrupted Beam | Grant yourself or an ally a real native beam, following that executor's position and facing with native block collision, damage and renderer. The original caster pays ongoing upkeep and supplies potency. Empty accounts, expired duration, lost alliance or removal stop and remove it. | Amplify / Dampen, Extend Time / Duration Down |
@@ -194,4 +196,4 @@ Active preparation, native cooldowns and charging boundaries: [implementation no
 
 Player preparation movement follows native Goety rules (20% walking speed, or full stop with native `fullStopCast`), with an independent `chanting.movementRestrictions` switch. Bridge cooldowns bypass creative by default; opt in with `cooldowns.creativeCooldown`.
 
-Native infinite held channels need a finite lifespan when triggered by an Ars hit. `channels.unboundedDurationTicks` defaults to 200 ticks (10 seconds); Corrupted Beam and Water Jet use this fallback when Goety's native corruption duration is zero. Positive native durations are retained, and Ars duration augments scale the base. Warding and Flying also use this fallback because their native held channels are unbounded. The native Goety wand is unchanged.
+Native infinite held channels need a finite lifespan when triggered by an Ars hit. `channels.unboundedDurationTicks` defaults to 200 ticks (10 seconds); Corrupted Beam and Water Jet use this fallback when Goety's native corruption duration is zero. Positive native durations are retained, and Ars duration augments scale the base. Warding, Flying, Telekinesis and Burrowing also use this fallback because their native held channels are unbounded. The native Goety wand is unchanged.

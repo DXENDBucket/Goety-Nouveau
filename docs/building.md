@@ -227,3 +227,11 @@ Release/source checks: 105 NeoForge / 104 Forge glyph models and bilingual entri
 Flying, Whirlwind and Shocking execute actual native callbacks with an allied executor, original-caster equipment/resources and explicit damage ownership. Shocking sends native lightning packets instead of cloned effects. Five focused `goety_nouveau_wind_storm` server cases passed on each loader: actual motion/damage, real-time facing, original Wind staff power/reflection/extinguishing, falling lift, creative/upkeep/empty resources, lost alliance, enemy-executor rejection and native lightning-rod diversion. Client visuals/audio remain manual checks.
 
 Use the fully qualified root task `:runGameTestServer` to avoid also launching the included Core project's unrelated test server with the addon namespace. Release/source checks target 108 NeoForge / 107 Forge glyph models and bilingual entries, native parents, metadata/licenses, Java 21/17 bytecode, scoped mixins/Forge refmap and no bundled dependencies/test classes. Remaining continuous work is tracked in `wind-storm-audit.md`.
+
+## Native grab/mining channels (dev.37)
+
+Telekinesis uses a separate native stateful instance per channel. Burrowing reuses each loader's complete native mining callback with exclusive ownership of its player mining fields and native-wand handoff. No duplicated mining system or synthetic player is introduced.
+
+Six `goety_nouveau_utility_channels` cases passed per loader, followed by the separate `goety_nouveau_mining_handoff` case for the ownership cleanup refinement. This checks native grab concurrency, real collision/source, hurt/range/alliance rejection, real mining/drop/permission/staff/Burning, resources/creative and native mining state handoff. Use fully qualified `:runGameTestServer`; do not rerun the historical catalogue without a new concern.
+
+Release/source checks cover 110 NeoForge / 109 Forge glyph models, bilingual entries/native parents, version/Core/licenses, Java 21/17 classes, scoped mixins/Forge refmap and no bundled dependencies/tests. Actual client appearance/audio remain manual checks. Registered focus coverage is tracked in native-focus-coverage.md.

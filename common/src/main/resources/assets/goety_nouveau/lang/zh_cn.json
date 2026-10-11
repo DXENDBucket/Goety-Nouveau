@@ -221,5 +221,9 @@
   "goety_nouveau.glyph_name.glyph_whirlwind": "旋风",
   "goety_nouveau.glyph_desc.glyph_whirlwind": "让自己或友军卷起旋风，托举自身并推开周围生物与箭矢。",
   "goety_nouveau.glyph_name.glyph_shocking": "电击",
-  "goety_nouveau.glyph_desc.glyph_shocking": "让自己或友军沿其朝向持续释放电击。"
+  "goety_nouveau.glyph_desc.glyph_shocking": "让自己或友军沿其朝向持续释放电击。",
+  "goety_nouveau.glyph_name.glyph_telekinesis": "念力",
+  "goety_nouveau.glyph_desc.glyph_telekinesis": "让自己或友军抓取目标，随其目光牵引。",
+  "goety_nouveau.glyph_name.glyph_burrowing": "钻掘",
+  "goety_nouveau.glyph_desc.glyph_burrowing": "让自己或友方玩家沿其视线持续挖掘。"
 }
