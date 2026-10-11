@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.24`). Eighteen projectile replacements, forty-eight target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.25`). Eighteen projectile replacements, fifty-five target/location effects and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -20,7 +20,7 @@ The glyphs are available in the creative tab; survival acquisition and ritual re
 
 ## Target and location effects
 
-These forty-eight glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
+These fifty-five glyphs are **effects**, placed after an Ars cast method. They use the actual Ars-selected entity or hit location rather than tracing the caster's view again.
 
 | Glyph | Target and behavior | Ars augments |
 | --- | --- | --- |
@@ -69,6 +69,12 @@ These forty-eight glyphs are **effects**, placed after an Ars cast method. They 
 | Mauling | Native bears/Gnasher/Hoglin servants with original variant priority, owner quota and lifetime. Wild staff summons two. Sneak to recall; Gnasher recall requires the caster underwater. | Amplify / Dampen, Extend Time / Duration Down |
 | Reaper / Wraith | Native undead servants, retaining matching-staff batches, Wraith variants, native decay and limited life. Forge retains its original Nameless/Frost batch rules. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
 | Phantom | Native flying servants above the selected point, retaining size, native quota, shared spawn-group data and lifetime. Forge retains its Nameless batch and native buff difference. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
+| Slimy | Native size-two slimes, matching staff/environmental variants and death splitting. Children share owner quota and recall. | Amplify / Dampen, Extend Time / Duration Down |
+| Carrion | Native airborne flies and kill-produced maggots; both share owner quota and recall. Wild staff retains its larger batch. | Amplify / Dampen, Extend Time / Duration Down |
+| Whispering | Native Whisperer / water or Abyss-staff Wavewhisperer, Wild-staff batch and ordinary recall. | Amplify / Dampen, Extend Time / Duration Down |
+| Frostborn | Native Ice Golem, Frost-staff batch and shared owner quota. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
+| Sprite | Native airborne lightning sprites, Storm-staff batch and native lifetime. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
+| Vanguard / Blackguard | Native guard servants, Necromancy-staff batches and Nameless-staff row formations. Forge retains its Ominous royal Blackguards. Sneak to recall. | Amplify / Dampen, Extend Time / Duration Down |
 
 
 
@@ -154,7 +160,7 @@ Each Goety trigger uses its own native payment account without replacing the sou
 
 These are the pinned build dependencies. Transitive mod dependencies are included in the download manifest, but upstream mod JARs are not committed or bundled in this addon.
 
-See [building instructions](docs/building.md), the [integration plan and API audit](docs/integration-plan.md), the [per-spell behavior audit](docs/simple-spell-audit.md), the [servants and barricade audit](docs/summon-wall-audit.md), and [third-party notices](THIRD_PARTY_NOTICES.md). The shared [adapter checklist](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/spell-adapter-checklist.md) covers full native behavior, logical sides and both loaders.
+See [building instructions](docs/building.md), the [integration plan and API audit](docs/integration-plan.md), the [per-spell behavior audit](docs/simple-spell-audit.md), the [servants and barricade audit](docs/summon-wall-audit.md), the [creature summon audit](docs/creature-summon-audit.md), and [third-party notices](THIRD_PARTY_NOTICES.md). The shared [adapter checklist](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/spell-adapter-checklist.md) covers full native behavior, logical sides and both loaders.
 
 ## License
 

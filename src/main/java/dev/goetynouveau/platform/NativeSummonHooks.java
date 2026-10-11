@@ -43,4 +43,22 @@ public final class NativeSummonHooks {
 
         return 1;
     }
+    public static int guardCount(dev.goetynouveau.api.EffectFocus focus, com.Polarice3.Goety.common.magic.SummonSpell spell,
+                                 LivingEntity caster, ItemStack staff) {
+        if(staff.is(com.Polarice3.Goety.common.items.ModItems.NAMELESS_STAFF.get())) return 7;
+        if(spell.rightStaff(staff)) return 2+caster.getRandom().nextInt(6);
+
+        return 1;
+    }
+    public static net.minecraft.world.entity.EntityType<? extends com.Polarice3.Goety.common.entities.neutral.Owned> blackguardType(ItemStack staff) {
+
+        return com.Polarice3.Goety.common.entities.ModEntityType.BLACKGUARD_SERVANT.get();
+    }
+    public static void guardParticles(com.Polarice3.Goety.common.magic.SummonSpell spell, ServerLevel world,
+                                     LivingEntity caster, ItemStack staff, LivingEntity servant) {
+        world.sendParticles(com.Polarice3.Goety.client.particles.ModParticleTypes.LICH.get(),servant.getX(),servant.getY(),servant.getZ(),1,0,0,0,0);
+        com.Polarice3.Goety.utils.ServerParticleUtil.summonPowerfulUndeadParticles(world,servant);
+        spell.playSound(world,servant,com.Polarice3.Goety.init.ModSounds.SOUL_EXPLODE.get(),0.25F+world.random.nextFloat()/2,1);
+        spell.playSound(world,servant,net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT,0.25F+world.random.nextFloat()/2,1);
+    }
 }

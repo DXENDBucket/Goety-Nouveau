@@ -145,5 +145,19 @@
   "goety_nouveau.glyph_name.glyph_wraith": "Wraith",
   "goety_nouveau.glyph_desc.glyph_wraith": "Summon native wraiths near the selected point, retaining environmental and staff variants. Sneak to recall.",
   "goety_nouveau.glyph_name.glyph_phantom": "Phantom",
-  "goety_nouveau.glyph_desc.glyph_phantom": "Summon native phantoms above the selected point. Sneak to recall."
+  "goety_nouveau.glyph_desc.glyph_phantom": "Summon native phantoms above the selected point. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_slimy": "Slimy",
+  "goety_nouveau.glyph_desc.glyph_slimy": "Summon native slimy servants near the selected point, retaining their staff rules and lifecycle. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_carrion": "Carrion",
+  "goety_nouveau.glyph_desc.glyph_carrion": "Summon native carrion servants near the selected point, retaining their staff rules and lifecycle. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_whisper": "Whispering",
+  "goety_nouveau.glyph_desc.glyph_whisper": "Summon native whispering servants near the selected point, retaining their staff rules and lifecycle. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_frostborn": "Frostborn",
+  "goety_nouveau.glyph_desc.glyph_frostborn": "Summon native frostborn servants near the selected point, retaining their staff rules and lifecycle. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_sprite": "Sprite",
+  "goety_nouveau.glyph_desc.glyph_sprite": "Summon native sprite servants near the selected point, retaining their staff rules and lifecycle. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_vanguard": "Vanguard",
+  "goety_nouveau.glyph_desc.glyph_vanguard": "Summon native vanguard servants near the selected point, retaining their staff rules and lifecycle. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_blackguard": "Blackguard",
+  "goety_nouveau.glyph_desc.glyph_blackguard": "Summon native blackguard servants near the selected point, retaining their staff rules and lifecycle. Sneak to recall."
 }

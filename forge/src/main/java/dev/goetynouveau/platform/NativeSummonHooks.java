@@ -45,4 +45,19 @@ public final class NativeSummonHooks {
         if(focus==dev.goetynouveau.api.EffectFocus.WRAITH && spell.typeStaff(staff,com.Polarice3.Goety.api.magic.SpellType.FROST)) return 2;
         return 1;
     }
+    public static int guardCount(dev.goetynouveau.api.EffectFocus focus, com.Polarice3.Goety.common.magic.SummonSpell spell,
+                                 LivingEntity caster, ItemStack staff) {
+        if(staff.is(com.Polarice3.Goety.common.items.ModItems.NAMELESS_STAFF.get())) return 7;
+        if(spell.rightStaff(staff)) return 2+caster.getRandom().nextInt(6);
+        if(focus==dev.goetynouveau.api.EffectFocus.BLACKGUARD && staff.is(ModItems.OMINOUS_STAFF.get())) return 2;
+        return 1;
+    }
+    public static net.minecraft.world.entity.EntityType<? extends com.Polarice3.Goety.common.entities.neutral.Owned> blackguardType(ItemStack staff) {
+        if(staff.is(ModItems.OMINOUS_STAFF.get())) return com.Polarice3.Goety.common.entities.ModEntityType.BLACKGUARD_VARIANT_SERVANT.get();
+        return com.Polarice3.Goety.common.entities.ModEntityType.BLACKGUARD_SERVANT.get();
+    }
+    public static void guardParticles(com.Polarice3.Goety.common.magic.SummonSpell spell, ServerLevel world,
+                                     LivingEntity caster, ItemStack staff, LivingEntity servant) {
+        spell.namelessSummon(world,caster,staff,servant);
+    }
 }

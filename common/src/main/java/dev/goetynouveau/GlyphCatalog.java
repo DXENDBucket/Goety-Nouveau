@@ -79,9 +79,16 @@ public final class GlyphCatalog {
     public static final GoetyEffectGlyph REAPER = new GoetyEffectGlyph(EffectFocus.REAPER);
     public static final GoetyEffectGlyph WRAITH = new GoetyEffectGlyph(EffectFocus.WRAITH);
     public static final GoetyEffectGlyph PHANTOM = new GoetyEffectGlyph(EffectFocus.PHANTOM);
+    public static final GoetyEffectGlyph SLIMY = new GoetyEffectGlyph(EffectFocus.SLIMY);
+    public static final GoetyEffectGlyph CARRION = new GoetyEffectGlyph(EffectFocus.CARRION);
+    public static final GoetyEffectGlyph WHISPER = new GoetyEffectGlyph(EffectFocus.WHISPER);
+    public static final GoetyEffectGlyph FROSTBORN = new GoetyEffectGlyph(EffectFocus.FROSTBORN);
+    public static final GoetyEffectGlyph SPRITE = new GoetyEffectGlyph(EffectFocus.SPRITE);
+    public static final GoetyEffectGlyph VANGUARD = new GoetyEffectGlyph(EffectFocus.VANGUARD);
+    public static final GoetyEffectGlyph BLACKGUARD = new GoetyEffectGlyph(EffectFocus.BLACKGUARD);
     public static final List<AbstractSpellPart> ALL = List.of(SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
-            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, SENSING, ROTATION, TREMBLING, CHARGE, SPIKES, LEAPING, BARRICADE, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, GLOW_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
+            SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, SENSING, ROTATION, TREMBLING, CHARGE, SPIKES, LEAPING, BARRICADE, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, VANGUARD, BLACKGUARD, GLOW_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
             dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER);
     private GlyphCatalog() {}

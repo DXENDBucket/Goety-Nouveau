@@ -52,7 +52,14 @@ public enum EffectFocus {
     MAULING("mauling", "mauling_focus", "Mauling", true, true, false),
     REAPER("reaper", "reaping_focus", "Reaper", true, true, false),
     WRAITH("wraith", "spooky_focus", "Wraith", true, true, false),
-    PHANTOM("phantom", "phantasm_focus", "Phantom", true, true, false);
+    PHANTOM("phantom", "phantasm_focus", "Phantom", true, true, false),
+    SLIMY("slimy", "slimy_focus", "Slimy", true, true, false),
+    CARRION("carrion", "carrion_focus", "Carrion", true, true, false),
+    WHISPER("whisper", "whispering_focus", "Whispering", true, true, false),
+    FROSTBORN("frostborn", "frostborn_focus", "Frostborn", true, true, false),
+    SPRITE("sprite", "sprightly_focus", "Sprite", true, true, false),
+    VANGUARD("vanguard", "vanguard_focus", "Vanguard", true, true, false),
+    BLACKGUARD("blackguard", "blackguard_focus", "Blackguard", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

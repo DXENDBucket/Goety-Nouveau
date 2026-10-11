@@ -60,42 +60,62 @@ public final class GoetyServantCasting {
                 loaded &= world.hasChunkAt(anchor.offset(x,0,z));
             if(!loaded) { servant.discard(); continue; }
             BlockPos pos;
-            if(focus==EffectFocus.VEX) pos=anchor.offset(-2+world.random.nextInt(5),1,-2+world.random.nextInt(5));
+            net.minecraft.world.phys.Vec3 exact=null;
+            if(GoetyServantProfiles.formation(focus,staff)) {
+                var direction=caster.getDirection();
+                int column=i-3;
+                var row=center.add(2*direction.getStepX()+column*direction.getStepZ(),0,2*direction.getStepZ()+column*direction.getStepX());
+                pos=BlockPos.containing(row);
+                if(world.noCollision(servant,servant.getBoundingBox().move(row))) exact=row;
+                else pos=BlockFinder.SummonRadius(anchor,servant,world);
+            } else if(GoetyServantProfiles.nearbyFlying(focus)) pos=anchor.offset(-2+world.random.nextInt(5),1,-2+world.random.nextInt(5));
             else if(focus==EffectFocus.PHANTOM) {
                 pos=BlockFinder.SummonFlyingRadius(anchor,servant,world,15);
                 int top=Math.min(world.getMaxBuildHeight()-2,anchor.getY()+20+caster.getRandom().nextInt(15));
                 while(pos.getY()<top && !world.getBlockState(pos.above()).blocksMotion()) pos=pos.above();
-            } else if((focus==EffectFocus.HUNTING || focus==EffectFocus.MAULING) && caster.isUnderWater()) {
+            } else if(GoetyServantProfiles.waterSearch(focus) && caster.isUnderWater()) {
                 pos=waterPosition(anchor,world);
             }
             else pos=BlockFinder.SummonRadius(anchor,servant,world);
             if(!world.hasChunkAt(pos) || pos.getY()<world.getMinBuildHeight() || pos.getY()>=world.getMaxBuildHeight()) { servant.discard(); continue; }
             servant=GoetyServantProfiles.variant(focus,servant,world,pos,spell,caster,staff);
-            servant.setTrueOwner(owner); servant.moveTo(pos,0,0);
+            servant.setTrueOwner(owner); servant.moveTo(pos,focus==EffectFocus.SPRITE?caster.getYRot():0,0);
+            if(exact!=null) servant.setPos(exact);
+            if(GoetyServantProfiles.formation(focus,staff)) { servant.setYHeadRot(caster.getYHeadRot()); servant.setYRot(caster.getYRot()); }
             if(GoetyServantProfiles.grounded(focus,servant,caster)) MobUtil.moveDownToGround(servant);
             if(world.getBlockCollisions(servant,servant.getBoundingBox()).iterator().hasNext()) { servant.discard(); continue; }
             if(focus==EffectFocus.PHANTOM) group=NativeSummonHooks.finalizeGroup(world,servant,servant.blockPosition(),group);
             servant.setLimitedLife(MobUtil.getSummonLifespan(world)*duration);
-            if(focus!=EffectFocus.VEX && focus!=EffectFocus.PHANTOM) servant.setPersistenceRequired();
-            if(servant instanceof AbstractSkeletonServant skeleton) skeleton.setArrowPower(potency);
+            if(GoetyServantProfiles.persistent(focus)) servant.setPersistenceRequired();
+            if(focus==EffectFocus.SKELETON && servant instanceof AbstractSkeletonServant skeleton) skeleton.setArrowPower(potency);
+            if(GoetyServantProfiles.guard(focus)) spell.buffSummon(caster,servant,potency);
             if(focus!=EffectFocus.PHANTOM) NativeSummonHooks.finalizeSpawn(world,servant,servant.blockPosition());
             if(focus==EffectFocus.HUNTING) NativeSummonHooks.huntingArmor(servant);
+            if(focus==EffectFocus.SLIMY && servant instanceof com.Polarice3.Goety.common.entities.ally.SlimeServant slime) {
+                slime.setSize(2,true);
+                if(world.getBlockCollisions(slime,slime.getBoundingBox()).iterator().hasNext()) { slime.discard(); continue; }
+            }
             if(servant instanceof com.Polarice3.Goety.common.entities.ally.undead.PhantomServant phantom && potency>0) {
                 phantom.setPhantomSize(potency);
                 if(phantom.getBoundingBox().maxY>world.getMaxBuildHeight() || world.getBlockCollisions(phantom,phantom.getBoundingBox()).iterator().hasNext()) { phantom.discard(); continue; }
             }
+            if(servant.getBoundingBox().minY<world.getMinBuildHeight() || servant.getBoundingBox().maxY>world.getMaxBuildHeight()) { servant.discard(); continue; }
             if(servant instanceof AllyVex vex) { vex.setBoundOrigin(pos); if(potency>0) NativeSummonHooks.sharpen(vex,potency); }
-            if(focus!=EffectFocus.PHANTOM || NativeSummonHooks.buffPhantom()) spell.buffSummon(caster,servant,potency); spell.SummonSap(caster,servant);
+            if(!GoetyServantProfiles.guard(focus) && (focus!=EffectFocus.PHANTOM || NativeSummonHooks.buffPhantom())) spell.buffSummon(caster,servant,potency);
+            spell.SummonSap(caster,servant);
             if(target!=null) servant.setTarget(target); else spell.setTarget(caster,servant);
             if(focus==EffectFocus.PHANTOM?world.tryAddFreshEntityWithPassengers(servant):world.addFreshEntity(servant)) {
-                added=true; if(focus!=EffectFocus.VEX && focus!=EffectFocus.PHANTOM) spell.uponSummon(world,caster,staff,servant);
+                added=true;
+                if(GoetyServantProfiles.formation(focus,staff)) NativeSummonHooks.guardParticles(spell,world,caster,staff,servant);
+                else if(GoetyServantProfiles.uponSummon(focus)) spell.uponSummon(world,caster,staff,servant);
                 spell.summonAdvancement(caster,servant);
             } else servant.discard();
         }
         if(added) {
             spell.SummonDown(caster);
             if(focus==EffectFocus.VEX) spell.playSound(world,caster,SoundEvents.EVOKER_CAST_SPELL);
-            else if(focus==EffectFocus.LEAPING || focus==EffectFocus.HUNTING || focus==EffectFocus.MAULING) spell.playSound(world,caster,com.Polarice3.Goety.init.ModSounds.SUMMON_SPELL.get());
+            else if(GoetyServantProfiles.guard(focus)) spell.playSound(world,caster,com.Polarice3.Goety.init.ModSounds.VANGUARD_SUMMON.get());
+            else if(GoetyServantProfiles.wildSound(focus)) spell.playSound(world,caster,com.Polarice3.Goety.init.ModSounds.SUMMON_SPELL.get());
             else SoundUtil.playNecromancerSummon(caster);
         }
         return added;

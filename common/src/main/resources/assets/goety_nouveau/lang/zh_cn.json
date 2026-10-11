@@ -145,5 +145,19 @@
   "goety_nouveau.glyph_name.glyph_wraith": "骇人",
   "goety_nouveau.glyph_desc.glyph_wraith": "在选定位置附近召唤幽灵，保留环境与法杖变体。潜行施法召回。",
   "goety_nouveau.glyph_name.glyph_phantom": "幻散",
-  "goety_nouveau.glyph_desc.glyph_phantom": "在选定位置上空召唤幻翼。潜行施法召回。"
+  "goety_nouveau.glyph_desc.glyph_phantom": "在选定位置上空召唤幻翼。潜行施法召回。",
+  "goety_nouveau.glyph_name.glyph_slimy": "黏液",
+  "goety_nouveau.glyph_desc.glyph_slimy": "在选定位置附近召唤黏液仆从，保留环境和法杖变体。潜行施法召回。",
+  "goety_nouveau.glyph_name.glyph_carrion": "腐食",
+  "goety_nouveau.glyph_desc.glyph_carrion": "在选定位置附近召唤腐食蝇。潜行施法召回。",
+  "goety_nouveau.glyph_name.glyph_whisper": "低语",
+  "goety_nouveau.glyph_desc.glyph_whisper": "在选定位置附近召唤低语者，保留水生变体。潜行施法召回。",
+  "goety_nouveau.glyph_name.glyph_frostborn": "霜生",
+  "goety_nouveau.glyph_desc.glyph_frostborn": "在选定位置附近召唤冰霜傀儡。潜行施法召回。",
+  "goety_nouveau.glyph_name.glyph_sprite": "雷电精灵",
+  "goety_nouveau.glyph_desc.glyph_sprite": "在选定位置附近召唤雷电精灵。潜行施法召回。",
+  "goety_nouveau.glyph_name.glyph_vanguard": "先锋",
+  "goety_nouveau.glyph_desc.glyph_vanguard": "在选定位置附近召唤先锋。无名法杖保留列阵效果，潜行施法召回。",
+  "goety_nouveau.glyph_name.glyph_blackguard": "黑卫",
+  "goety_nouveau.glyph_desc.glyph_blackguard": "在选定位置附近召唤黑卫。无名法杖保留列阵效果，潜行施法召回。"
 }
