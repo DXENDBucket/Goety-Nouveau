@@ -31,6 +31,7 @@ public final class NativeSummonHooks {
         return mob.finalizeSpawn(world, world.getCurrentDifficultyAt(pos), MobSpawnType.MOB_SUMMONED, group, null);
     }
     public static boolean buffPhantom() { return false; }
+    public static boolean buffGhast() { return false; }
     public static boolean mountain(ServerLevel world, BlockPos pos) { return world.getBiome(pos).is(net.minecraftforge.common.Tags.Biomes.IS_MOUNTAIN); }
     public static boolean cold(ServerLevel world, BlockPos pos) { return world.getBiome(pos).is(net.minecraftforge.common.Tags.Biomes.IS_COLD_OVERWORLD); }
     public static boolean snow(ServerLevel world, BlockPos pos) { return world.getBiome(pos).value().coldEnoughToSnow(pos); }

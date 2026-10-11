@@ -165,5 +165,11 @@
   "goety_nouveau.glyph_name.glyph_bolting": "Bolting",
   "goety_nouveau.glyph_desc.glyph_bolting": "Dash toward the selected target or point, shocking nearby enemies. Self casts follow your facing.",
   "goety_nouveau.glyph_name.glyph_illusion": "Illusion",
-  "goety_nouveau.glyph_desc.glyph_illusion": "Create your doubles near the selected point. Sneak-casting dismisses established doubles."
+  "goety_nouveau.glyph_desc.glyph_illusion": "Create your doubles near the selected point. Sneak-casting dismisses established doubles.",
+  "goety_nouveau.glyph_name.glyph_blazing": "Blazing",
+  "goety_nouveau.glyph_desc.glyph_blazing": "Summon native blaze servants at the selected point. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_ghastly": "Ghastly",
+  "goety_nouveau.glyph_desc.glyph_ghastly": "Summon native ghasts at the selected point. Sneak to recall.",
+  "goety_nouveau.glyph_name.glyph_guardian": "Guardian",
+  "goety_nouveau.glyph_desc.glyph_guardian": "Summon native guardian servants at the selected point. Sneak to recall."
 }

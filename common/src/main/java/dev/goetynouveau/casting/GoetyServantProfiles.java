@@ -32,6 +32,9 @@ final class GoetyServantProfiles {
             case WHISPER -> spell.rightStaff(staff) ? 2 : 1;
             case FROSTBORN -> spell.rightStaff(staff) && caster.getRandom().nextBoolean() ? 2 : 1;
             case SPRITE -> spell.rightStaff(staff) ? 2 + caster.getRandom().nextInt(4) : 1;
+            case BLAZING -> spell.rightStaff(staff) ? 2 + caster.getRandom().nextInt(4) : 1;
+            case GHASTLY -> (spell.rightStaff(staff) ? 3 + caster.getRandom().nextInt(3) : 3) - (spell.NetherPower(caster) ? 2 : 0);
+            case GUARDIAN -> spell.rightStaff(staff) ? 2 : 1;
             case VANGUARD, BLACKGUARD -> NativeSummonHooks.guardCount(focus, spell, caster, staff);
             case LEAPING -> spell.rightStaff(staff) && caster.getRandom().nextBoolean() ? 2 : 1;
             case VEX -> spell.rightStaff(staff) ? 3 + caster.getRandom().nextInt(3) : 3;
@@ -46,7 +49,7 @@ final class GoetyServantProfiles {
         return spell instanceof ZombieSpell z ? z.specialStaffs(staff)
                 : spell instanceof SkeletonSpell s && s.specialStaffs(staff);
     }
-    static Owned seed(EffectFocus focus, ServerLevel world) {
+    static Owned seed(EffectFocus focus, ServerLevel world, SummonSpell spell, LivingEntity caster) {
         return switch (focus) {
             case VEX -> ModEntityType.VEX_SERVANT.get().create(world);
             case LEAPING -> ModEntityType.LEAPLEAF.get().create(world);
@@ -60,6 +63,12 @@ final class GoetyServantProfiles {
             case WHISPER -> ModEntityType.WHISPERER.get().create(world);
             case FROSTBORN -> ModEntityType.ICE_GOLEM.get().create(world);
             case SPRITE -> ModEntityType.SPRITE.get().create(world);
+            case BLAZING -> com.Polarice3.Goety.utils.CuriosFinder.hasUnholySet(caster)
+                    ? ModEntityType.INFERNO.get().create(world) : ModEntityType.BLAZE_SERVANT.get().create(world);
+            case GHASTLY -> !spell.NetherPower(caster) ? ModEntityType.MINI_GHAST.get().create(world)
+                    : com.Polarice3.Goety.utils.CuriosFinder.hasUnholySet(caster)
+                    ? ModEntityType.MALGHAST.get().create(world) : ModEntityType.GHAST_SERVANT.get().create(world);
+            case GUARDIAN -> ModEntityType.GUARDIAN_SERVANT.get().create(world);
             case VANGUARD -> ModEntityType.VANGUARD_SERVANT.get().create(world);
             case BLACKGUARD -> ModEntityType.BLACKGUARD_SERVANT.get().create(world);
             case ZOMBIE -> ModEntityType.ZOMBIE_SERVANT.get().create(world);
@@ -116,23 +125,24 @@ final class GoetyServantProfiles {
         return seed;
     }
     static boolean nearbyFlying(EffectFocus focus) {
-        return focus == EffectFocus.VEX || focus == EffectFocus.CARRION || focus == EffectFocus.SPRITE;
+        return focus == EffectFocus.VEX || focus == EffectFocus.CARRION || focus == EffectFocus.SPRITE || focus == EffectFocus.GHASTLY;
     }
     static boolean waterSearch(EffectFocus focus) {
-        return focus == EffectFocus.HUNTING || focus == EffectFocus.MAULING || focus == EffectFocus.SLIMY || focus == EffectFocus.WHISPER;
+        return focus == EffectFocus.HUNTING || focus == EffectFocus.MAULING || focus == EffectFocus.SLIMY || focus == EffectFocus.WHISPER
+                || focus == EffectFocus.BLAZING || focus == EffectFocus.GUARDIAN;
     }
     static boolean guard(EffectFocus focus) { return focus == EffectFocus.VANGUARD || focus == EffectFocus.BLACKGUARD; }
     static boolean formation(EffectFocus focus, ItemStack staff) { return guard(focus) && staff.is(ModItems.NAMELESS_STAFF.get()); }
-    static boolean persistent(EffectFocus focus) { return focus != EffectFocus.VEX && focus != EffectFocus.PHANTOM && focus != EffectFocus.SPRITE; }
+    static boolean persistent(EffectFocus focus) { return focus != EffectFocus.VEX && focus != EffectFocus.PHANTOM && focus != EffectFocus.SPRITE && focus != EffectFocus.GHASTLY; }
     static boolean uponSummon(EffectFocus focus) { return focus != EffectFocus.VEX && focus != EffectFocus.PHANTOM && focus != EffectFocus.SPRITE; }
     static boolean wildSound(EffectFocus focus) {
         return switch (focus) {
-            case LEAPING, HUNTING, MAULING, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE -> true;
+            case LEAPING, HUNTING, MAULING, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, GHASTLY -> true;
             default -> false;
         };
     }
     static boolean grounded(EffectFocus focus, Owned servant, LivingEntity caster) {
-        if (nearbyFlying(focus) || focus == EffectFocus.PHANTOM) return false;
+        if (nearbyFlying(focus) || focus == EffectFocus.PHANTOM || focus == EffectFocus.GUARDIAN) return false;
         if (focus == EffectFocus.MAULING) return !caster.isUnderWater();
         return servant.getType() != ModEntityType.TROPICAL_SLIME_SERVANT.get()
                 && servant.getType() != ModEntityType.WAVEWHISPERER.get()

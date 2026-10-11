@@ -50,11 +50,12 @@ public final class GoetyServantCasting {
         boolean added=false;
         SpawnGroupData group=null;
         for(int i=0;i<amount;i++) {
-            var servant=GoetyServantProfiles.seed(focus,world);
+            var servant=GoetyServantProfiles.seed(focus,world,spell,caster);
             if(servant==null) continue;
             var anchor=BlockPos.containing(center);
             // Native candidate searches must not pull additional chunks into an Ars hit.
-            int search=focus==EffectFocus.PHANTOM?15:5;
+            boolean largeGhast=focus==EffectFocus.GHASTLY && spell.NetherPower(caster);
+            int search=focus==EffectFocus.PHANTOM?15:largeGhast?12:5;
             boolean loaded=true;
             for(int x:new int[]{-search,search}) for(int z:new int[]{-search,search})
                 loaded &= world.hasChunkAt(anchor.offset(x,0,z));
@@ -68,7 +69,8 @@ public final class GoetyServantCasting {
                 pos=BlockPos.containing(row);
                 if(world.noCollision(servant,servant.getBoundingBox().move(row))) exact=row;
                 else pos=BlockFinder.SummonRadius(anchor,servant,world);
-            } else if(GoetyServantProfiles.nearbyFlying(focus)) pos=anchor.offset(-2+world.random.nextInt(5),1,-2+world.random.nextInt(5));
+            } else if(largeGhast) pos=BlockFinder.SummonFlyingRadius(anchor.above(2),servant,world,12);
+            else if(GoetyServantProfiles.nearbyFlying(focus)) pos=anchor.offset(-2+world.random.nextInt(5),1,-2+world.random.nextInt(5));
             else if(focus==EffectFocus.PHANTOM) {
                 pos=BlockFinder.SummonFlyingRadius(anchor,servant,world,15);
                 int top=Math.min(world.getMaxBuildHeight()-2,anchor.getY()+20+caster.getRandom().nextInt(15));
@@ -79,7 +81,7 @@ public final class GoetyServantCasting {
             else pos=BlockFinder.SummonRadius(anchor,servant,world);
             if(!world.hasChunkAt(pos) || pos.getY()<world.getMinBuildHeight() || pos.getY()>=world.getMaxBuildHeight()) { servant.discard(); continue; }
             servant=GoetyServantProfiles.variant(focus,servant,world,pos,spell,caster,staff);
-            servant.setTrueOwner(owner); servant.moveTo(pos,focus==EffectFocus.SPRITE?caster.getYRot():0,0);
+            servant.setTrueOwner(owner); servant.moveTo(pos,focus==EffectFocus.SPRITE || focus==EffectFocus.GHASTLY?caster.getYRot():0,0);
             if(exact!=null) servant.setPos(exact);
             if(GoetyServantProfiles.formation(focus,staff)) { servant.setYHeadRot(caster.getYHeadRot()); servant.setYRot(caster.getYRot()); }
             if(GoetyServantProfiles.grounded(focus,servant,caster)) MobUtil.moveDownToGround(servant);
@@ -101,7 +103,13 @@ public final class GoetyServantCasting {
             }
             if(servant.getBoundingBox().minY<world.getMinBuildHeight() || servant.getBoundingBox().maxY>world.getMaxBuildHeight()) { servant.discard(); continue; }
             if(servant instanceof AllyVex vex) { vex.setBoundOrigin(pos); if(potency>0) NativeSummonHooks.sharpen(vex,potency); }
-            if(!GoetyServantProfiles.guard(focus) && (focus!=EffectFocus.PHANTOM || NativeSummonHooks.buffPhantom())) spell.buffSummon(caster,servant,potency);
+            if(focus==EffectFocus.GHASTLY && servant instanceof com.Polarice3.Goety.common.entities.hostile.servants.Malghast ghast) {
+                var weakness=caster.getEffect(net.minecraft.world.effect.MobEffects.WEAKNESS);
+                ghast.setFireBallDamage(net.minecraft.util.Mth.clamp(potency,0,10)-(weakness==null?0:weakness.getAmplifier()+1));
+                ghast.setExplosionPower(ghast.getExplosionPower()+net.minecraft.util.Mth.clamp(potency,0,com.Polarice3.Goety.config.SpellConfig.MaxRadiusLevel.get())/2.5F);
+            }
+            if(!GoetyServantProfiles.guard(focus) && (focus!=EffectFocus.PHANTOM || NativeSummonHooks.buffPhantom())
+                    && (focus!=EffectFocus.GHASTLY || NativeSummonHooks.buffGhast())) spell.buffSummon(caster,servant,potency);
             spell.SummonSap(caster,servant);
             if(target!=null) servant.setTarget(target); else spell.setTarget(caster,servant);
             if(focus==EffectFocus.PHANTOM?world.tryAddFreshEntityWithPassengers(servant):world.addFreshEntity(servant)) {
@@ -115,6 +123,8 @@ public final class GoetyServantCasting {
             spell.SummonDown(caster);
             if(focus==EffectFocus.VEX) spell.playSound(world,caster,SoundEvents.EVOKER_CAST_SPELL);
             else if(GoetyServantProfiles.guard(focus)) spell.playSound(world,caster,com.Polarice3.Goety.init.ModSounds.VANGUARD_SUMMON.get());
+            else if(focus==EffectFocus.BLAZING) spell.playSound(world,caster,com.Polarice3.Goety.init.ModSounds.SUMMON_SPELL_FIERY.get());
+            else if(focus==EffectFocus.GUARDIAN) spell.playSound(world,caster,com.Polarice3.Goety.init.ModSounds.DROWNED_NECROMANCER_SUMMON.get());
             else if(GoetyServantProfiles.wildSound(focus)) spell.playSound(world,caster,com.Polarice3.Goety.init.ModSounds.SUMMON_SPELL.get());
             else SoundUtil.playNecromancerSummon(caster);
         }

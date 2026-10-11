@@ -165,5 +165,11 @@
   "goety_nouveau.glyph_name.glyph_bolting": "冲刺",
   "goety_nouveau.glyph_desc.glyph_bolting": "朝选中的目标或位置电光冲刺，攻击沿途敌人。自身触发时沿自身朝向。",
   "goety_nouveau.glyph_name.glyph_illusion": "幻象",
-  "goety_nouveau.glyph_desc.glyph_illusion": "在选定位置附近制造自己的幻象。潜行施法遣散成熟的幻象。"
+  "goety_nouveau.glyph_desc.glyph_illusion": "在选定位置附近制造自己的幻象。潜行施法遣散成熟的幻象。",
+  "goety_nouveau.glyph_name.glyph_blazing": "烈焰召唤",
+  "goety_nouveau.glyph_desc.glyph_blazing": "在选中位置召唤烈焰仆从。潜行施法可召回。",
+  "goety_nouveau.glyph_name.glyph_ghastly": "阴森召唤",
+  "goety_nouveau.glyph_desc.glyph_ghastly": "在选中位置召唤恶魂仆从。潜行施法可召回。",
+  "goety_nouveau.glyph_name.glyph_guardian": "守卫召唤",
+  "goety_nouveau.glyph_desc.glyph_guardian": "在选中位置召唤守卫者仆从。潜行施法可召回。"
 }

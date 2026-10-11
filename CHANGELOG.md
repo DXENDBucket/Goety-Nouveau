@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-dev.27
+
+- Add Blazing, Ghastly and Guardian effect glyphs on both loaders: 83 glyphs covering 79 native focuses.
+- Retain Inferno and all three ghast equipment branches, native batch sizes, water/flying placement, fireball/explosion potency, owner quota, recall, expiry, particles and sounds.
+- Preserve the native loader difference in additional ghast buffs; resources still commit only on successful summon and creative casts remain free.
+- Four focused shared server cases passed on each loader, including an existing water-variant regression. Client visuals remain manual checks.
+
 ## 0.1.0-dev.19
 
 - Apply native-style preparation movement with an independent switch, including Goety fullStopCast and no duplicate held-item slowdown.
