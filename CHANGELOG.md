@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-dev.44
+
+- Add End Walk on both loaders: 118 shared glyphs, 119 on NeoForge. Execute native EndWalkSpell to apply native Shadow Walk, initialize the real recipient’s native return position/dimension, and send native particles/sound packets. Native potion and interaction handlers own expiry, removal, concealment, attack/projectile interruption and return.
+- Restrict the effect to yourself or an allied player, with source equipment/resources separate from the recipient. Fold native Potency and Duration enchantment rules once, then apply Ars potency and twenty-tick duration units. Reject invalid/nonpositive/overflow duration.
+- Preserve existing return anchors/effects rather than replacing them on repeated casts. Successful application pays once; creative is free. If the actual effect is rejected, remove the native callback’s otherwise orphaned anchor and leave payment uncommitted.
+- Four focused runtime cases passed per loader, including native effect/target concealment, actual return callbacks/removal/expiry/projectile interruption, source enchantments/allied anchors, resource/recipient/creative/denied-effect gates and unscoped native behavior. Fake-player teleport probes verify callback destinations; real client movement/visuals remain manual checks. Five registered NeoForge focus keys remain without glyph entry points.
+
 ## 0.1.0-dev.43
 
 - Add Grapple on both loaders: 117 shared glyphs, 118 on NeoForge. Execute the actual native GrappleSpell/VineHook and player-state pulling, preserving hook collision, attachment, rope renderer, sounds and original-caster staff/Velocity behavior.

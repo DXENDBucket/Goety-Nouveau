@@ -50,6 +50,7 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
+            case END_WALK -> GoetyEndWalkCasting.apply(world, frame, ars);
             case GRAPPLE -> GoetyGrappleCasting.apply(world, frame, ars, frame.ars());
             case TUNNEL -> GoetyTunnelCasting.apply(world, frame, ars);
             case PULVERIZE, SCATTER -> GoetyGeomancyCasting.apply(focus, world, frame, ars, charge);

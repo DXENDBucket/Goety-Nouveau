@@ -277,3 +277,9 @@ Both sets passed on both loaders. Release/source checks cover 117 NeoForge / 116
 Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_grapple` from each loader project. Four focused cases passed on both loaders: actual native attachment/player pulling/free recall, independent source and allied-player state/fee/synchronized hand, replacement ownership/native-wand isolation, and invalid recipients/resources/creative/bounded expiry. No historical catalogue rerun.
 
 Release/source checks cover 118 NeoForge / 117 Forge glyph resources, bilingual/native parents, Java 21/17 bytecode, grapple mixins and Forge refmap, Core/version/license metadata and no bundled dependencies/tests. See grapple-audit.md for player-only scope, resource/lease contracts and manual client checks.
+
+## Native shadow walk (dev.44)
+
+Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_endwalk` from both loader projects. Four focused runtime cases passed per loader. FakePlayer connections suppress teleports, so test probes observe native teleport callback coordinates while actual effect events and expiry remain native. Fixtures explicitly remove reused player names from prior scoreboard alliances before enemy rejection checks.
+
+Release/source checks cover 119 NeoForge / 118 Forge glyph resources and bilingual/native parents, Java 21/17 bytecode, native End Walk mixin, Core/version/license metadata and no bundled dependencies/tests. See endwalk-audit.md for native lifecycle and client verification limits.

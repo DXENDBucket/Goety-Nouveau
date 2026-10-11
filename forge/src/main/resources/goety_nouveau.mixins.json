@@ -83,7 +83,8 @@
     "NativeGrappleSpellMixin",
     "NativeGrappleLeaseMixin",
     "NativeGrappleStateMixin",
-    "NativeGrappleEnchantMixin"
+    "NativeGrappleEnchantMixin",
+    "NativeEndWalkMixin"
   ],
   "injectors": {
     "defaultRequire": 1

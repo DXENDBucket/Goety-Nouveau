@@ -8,6 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 
 public final class NativeEffectHooks {
     private NativeEffectHooks() {}
+    public static MobEffectInstance shadowWalk(LivingEntity entity) { return entity.getEffect(GoetyEffects.SHADOW_WALK); }
+    public static boolean removeShadowWalk(LivingEntity entity) { return entity.removeEffect(GoetyEffects.SHADOW_WALK); }
     public static MobEffectInstance tentacleBuff(int amplifier){return new MobEffectInstance(GoetyEffects.BUFF,com.Polarice3.Goety.utils.EffectsUtil.infiniteEffect(),amplifier,false,false); }
     public static void windStaff(com.Polarice3.Goety.common.magic.Spell spell, LivingEntity caster, net.minecraft.world.item.ItemStack staff, LivingEntity target) {
         if(spell.typeStaff(staff,com.Polarice3.Goety.api.magic.SpellType.FROST)) target.addEffect(freezing(100,0));
