@@ -39,8 +39,8 @@ public final class GoetyProjectileFactory {
         var origin=carrierOrigin.add(direction.x/2,-.1,direction.z/2);
         var result=new ArrayList<Projectile>();
         switch(focus) {
-            case GLOW_LIGHT -> {
-                var light=new GlowLight(world,caster); light.setPos(carrierOrigin);
+            case GLOW_LIGHT, SOUL_LIGHT -> {
+                LightProjectile light=focus==BoltFocus.SOUL_LIGHT?new SoulLight(world,caster):new GlowLight(world,caster); light.setPos(carrierOrigin);
                 // Native shootFromRotation adds one facing unit to its nominal 1.5 speed.
                 light.shoot(direction.x,direction.y,direction.z,2.5F*speed,0); result.add(light);
             }
@@ -195,7 +195,7 @@ public final class GoetyProjectileFactory {
             case ICE_STORM -> spell.playSound(world,caster,ModSounds.WIND_BLAST.get(),1,.75F);
             case ICE_SPIKE -> spell.playSound(world,caster,ModSounds.ICE_SPIKE_CAST.get(),1,spell.projPitch(world.random));
             case LAVABALL -> spell.playSound(world,caster,SoundEvents.GHAST_SHOOT,2,spell.projPitch(world.random));
-            case GLOW_LIGHT -> spell.playSound(world,caster,1,1);
+            case GLOW_LIGHT, SOUL_LIGHT -> spell.playSound(world,caster,1,1);
             case STEAM, BOUNCY_BUBBLE -> {} // Native result has no launch sound.
             case ELECTRO_ORB -> spell.playSound(world,caster,ModSounds.SHOCK_CAST.get());
             case SURGING -> spell.playSound(world,caster,ModSounds.SHOCK_CAST.get(),1,spell.projPitch(world.random));

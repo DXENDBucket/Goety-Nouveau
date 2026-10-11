@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.44`). Nineteen projectile replacements, ninety-five shared target/location effects, one additional NeoForge Breeze effect and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.45`). Twenty projectile replacements, ninety-five shared target/location effects, one additional NeoForge Breeze effect and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -17,6 +17,8 @@ Find **Soul Bolt** in the Goety & Nouveau creative tab and learn it by using the
 Amplify adds one native potency point; Dampen removes one, with a minimum of zero. Ordinary projectiles retain Goety's native launch offset, gradual acceleration, yaw/pitch rotation, collision loop and velocity enchantments. Ars selects the aim and scatter, and its acceleration statistic scales native travel. Special carriers such as Orbit keep their Ars trajectory. The native Goety entity supplies its renderer, animation, trail, impact particles, damage and staff-dependent Soul/Poison/Wither/Necro variants. Projectiles retain a maximum lifetime of ten seconds.
 
 The glyphs are available in the creative tab; survival acquisition and ritual recipes remain undecided. Active preparation and native focus cooldowns are enabled by default, with independent switches. Preparation uses the native Goety soul HUD progress style. Held-charge animations and native continuous-use behavior are not fully reproduced.
+
+Soul Light is also a projectile replacement: **Projectile → Soul Light** uses the native soul-coloured source particles and bullet trail. It places the native Soul Light block on a replaceable neighboring face or applies ten seconds of Glowing on an entity hit, then resolves the remaining Ars effects. Ordinary flight pays once; repeating carriers pay at each successful hit.
 
 ## Target and location effects
 

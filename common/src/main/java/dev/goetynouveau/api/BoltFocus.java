@@ -23,11 +23,13 @@ public enum BoltFocus {
     SWORD("sword", "sword_focus", "Magic Sword"),
     RAZOR_WIND("razor_wind", "razor_wind_focus", "Razor Wind"),
     GLOW_LIGHT("glow_light", "glow_light_focus", "Glow Light"),
+    SOUL_LIGHT("soul_light", "soul_light_focus", "Soul Light"),
     ICE_STORM("ice_storm", "ice_storm_focus", "Ice Storm");
 
     public final String glyph, focus, name;
     BoltFocus(String glyph, String name) { this(glyph, glyph + "_focus", name); }
     BoltFocus(String glyph, String focus, String name) { this.glyph = glyph; this.focus = focus; this.name = name; }
+    public boolean lighting() { return this==GLOW_LIGHT || this==SOUL_LIGHT; }
     public boolean additional() { return switch (this) {
         case SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL -> false;
         default -> true;

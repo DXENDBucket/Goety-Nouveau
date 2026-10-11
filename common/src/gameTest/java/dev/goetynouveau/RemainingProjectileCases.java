@@ -69,7 +69,7 @@ public final class RemainingProjectileCases {
             prepare(h,p);
             // Ice Storm is an autonomous area cloud, not a direct-impact damage projectile.
             // Its native damage/growth/flight/expiry are covered by RainStormCases.
-            for(var focus:BoltFocus.values()) if(focus.additional() && focus!=BoltFocus.GLOW_LIGHT && focus!=BoltFocus.ICE_STORM) {
+            for(var focus:BoltFocus.values()) if(focus.additional() && !focus.lighting() && focus!=BoltFocus.ICE_STORM) {
                 clear(h,p); p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(Items.IRON_SWORD));
                 focus.spell().SpellResult(h.getLevel(),p,ItemStack.EMPTY,focus.spell().defaultStats());
                 var reference=shots(h,p).get(0); var origin=reference.position(); var family=reference.getClass();
@@ -114,7 +114,7 @@ public final class RemainingProjectileCases {
         var old=GoetyConfig.RESOURCE_SOURCE.get(); GoetyConfig.RESOURCE_SOURCE.set(ResourceSource.SOUL_ENERGY);
         try {
             prepare(h,p);
-            for(var focus:BoltFocus.values()) if(focus.additional() && focus!=BoltFocus.GLOW_LIGHT) {
+            for(var focus:BoltFocus.values()) if(focus.additional() && !focus.lighting()) {
                 clear(h,p); p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(Items.IRON_SWORD));
                 int fee=price(h,p,focus); SEHelper.setSESouls(p,fee*2); var marker=new Marker();
                 var carrier=launch(h,p,focus,marker,true); h.assertTrue(!shots(h,p).isEmpty(),"Repeated payload spawns for "+focus); var shot=shots(h,p).get(0); var start=shot.position();
@@ -155,7 +155,7 @@ public final class RemainingProjectileCases {
             GoetyNativeProjectileCasting.nativeImpact(shots(h,p).get(0),new EntityHitResult(cow));
             h.assertTrue(marker.hits==1 && cow.getHealth()<cow.getMaxHealth(),"Already-launched sword remains valid after the held weapon breaks");
             clear(h,p); p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(Items.IRON_SWORD)); SEHelper.setSESouls(p,0); p.setGameMode(GameType.CREATIVE);
-            for(var focus:BoltFocus.values()) if(focus.additional() && focus!=BoltFocus.GLOW_LIGHT) {
+            for(var focus:BoltFocus.values()) if(focus.additional() && !focus.lighting()) {
                 clear(h,p); launch(h,p,focus,new Marker(),false);
                 h.assertTrue(!shots(h,p).isEmpty() && SEHelper.getSESouls(p)==0,"Creative launch is free for "+focus);
             }
@@ -166,7 +166,7 @@ public final class RemainingProjectileCases {
         var old=GoetyConfig.RESOURCE_SOURCE.get(); GoetyConfig.RESOURCE_SOURCE.set(ResourceSource.SOUL_ENERGY);
         try {
             prepare(h,p);
-            for(var focus:BoltFocus.values()) if(focus.additional() && focus!=BoltFocus.GLOW_LIGHT) {
+            for(var focus:BoltFocus.values()) if(focus.additional() && !focus.lighting()) {
                 clear(h,p); p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(Items.IRON_SWORD));
                 var marker=new Marker(); int before=SEHelper.getSESouls(p),fee=price(h,p,focus);
                 launch(h,p,focus,marker,false); var shot=shots(h,p).get(0);

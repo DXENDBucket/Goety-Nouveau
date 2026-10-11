@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-dev.45
+
+- Add Soul Light as the twentieth native projectile replacement on both loaders: 119 shared glyphs, 120 on NeoForge. Reuse the existing native LightProjectile integration; retain actual SoulLight entity/type, eye-origin launch, native no-gravity 2.5 speed, soul source particles, bullet trail, native launch sound and native Soul Light placement/ten-second Glowing results.
+- Keep ordinary flight as native movement and special Ars carriers as Ars movement with native particle layers. Resolve remaining Ars effects after the full native impact; ordinary launch pays once and repeated successful impacts pay per trigger. Creative remains free and unsupported Burning is rejected.
+- Group harmless light projectiles explicitly, sharing the existing light lifetime boundary and avoiding damage-only assertions in broad projectile fixtures. No new renderer, physics, block placement system or optional-addon compatibility is introduced.
+- Four focused runtime cases passed per loader: actual world-ticked flight/resources/native assets, complete native entity/block/blocked-neighbor hits and continuation, orbit movement/repeated payment/exhaustion, and creative/unfunded/unsupported/acceleration rules. Actual client particle appearance remains a manual check. Four registered NeoForge focus keys remain without glyph entry points.
+
 ## 0.1.0-dev.44
 
 - Add End Walk on both loaders: 118 shared glyphs, 119 on NeoForge. Execute native EndWalkSpell to apply native Shadow Walk, initialize the real recipient’s native return position/dimension, and send native particles/sound packets. Native potion and interaction handlers own expiry, removal, concealment, attack/projectile interruption and return.

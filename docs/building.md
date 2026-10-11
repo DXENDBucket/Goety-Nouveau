@@ -283,3 +283,9 @@ Release/source checks cover 118 NeoForge / 117 Forge glyph resources, bilingual/
 Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_endwalk` from both loader projects. Four focused runtime cases passed per loader. FakePlayer connections suppress teleports, so test probes observe native teleport callback coordinates while actual effect events and expiry remain native. Fixtures explicitly remove reused player names from prior scoreboard alliances before enemy rejection checks.
 
 Release/source checks cover 119 NeoForge / 118 Forge glyph resources and bilingual/native parents, Java 21/17 bytecode, native End Walk mixin, Core/version/license metadata and no bundled dependencies/tests. See endwalk-audit.md for native lifecycle and client verification limits.
+
+## Native soul light projectile (dev.45)
+
+Run `:runGameTestServer -PgameTestNamespaces=goety_nouveau_soul_light` from each loader project. Four focused runtime cases passed per loader: real world native flight, native source/trail/block identity, full native glow/block impacts and continuation, orbit and per-trigger resource exhaustion, native Burning exclusion, creative and acceleration. No historical catalogue rerun.
+
+Release/source checks cover 120 NeoForge / 119 Forge glyph resources, native model parents and bilingual text, Java 21/17 bytecode, existing complete light-projectile state/impact mixins and Forge refmap, Core/version/license metadata and no bundled dependencies/tests. See soul-light-audit.md; actual client particle appearance/audio remain manual checks.

@@ -243,5 +243,7 @@
   "goety_nouveau.glyph_name.glyph_grapple": "Grapple",
   "goety_nouveau.glyph_desc.glyph_grapple": "Yourself or an allied player launches a native vine hook. Trigger again to retract.",
   "goety_nouveau.glyph_name.glyph_end_walk": "End Walk",
-  "goety_nouveau.glyph_desc.glyph_end_walk": "Hide yourself or an allied player in shadow; return to the starting point when the effect ends."
+  "goety_nouveau.glyph_desc.glyph_end_walk": "Hide yourself or an allied player in shadow; return to the starting point when the effect ends.",
+  "goety_nouveau.glyph_name.glyph_soul_light": "Soul Light",
+  "goety_nouveau.glyph_desc.glyph_soul_light": "Replace the projectile with a soul light that illuminates surfaces and marks creatures."
 }
