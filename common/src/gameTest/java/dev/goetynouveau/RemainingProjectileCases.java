@@ -199,6 +199,26 @@ public final class RemainingProjectileCases {
             h.succeed();
         } finally { clear(h,p); p.discard(); GoetyConfig.RESOURCE_SOURCE.set(old); }
     }
+    public static void invulnerableContactsDoNotContinueButBlocksDo(GameTestHelper h,ServerPlayer p) {
+        var old=GoetyConfig.RESOURCE_SOURCE.get(); GoetyConfig.RESOURCE_SOURCE.set(ResourceSource.SOUL_ENERGY);
+        try {
+            prepare(h,p);
+            for(var focus:List.of(BoltFocus.SOUL_BOLT,BoltFocus.ICE_SPIKE)) {
+                clear(h,p);var marker=new Marker();var carrier=launch(h,p,focus,marker,true);
+                var target=EntityType.COW.create(h.getLevel());target.setPos(scene(h).add(0,0,12));target.setNoAi(true);target.setNoGravity(true);
+                target.getAttribute(Attributes.MAX_HEALTH).setBaseValue(1000);target.setHealth(1000);h.getLevel().addFreshEntity(target);
+                var callback=dev.arsconflux.api.glyph.ArsSpellAccess.resolver(carrier);var hit=new EntityHitResult(target);
+                callback.onResolveEffect(h.getLevel(),hit);h.assertTrue(marker.hits==1,"Accepted native damage continues: "+focus);
+                target.setInvulnerable(true);callback.onResolveEffect(h.getLevel(),hit);h.assertTrue(marker.hits==1,"Rejected native hurt cannot continue: "+focus);
+                target.setInvulnerable(false);target.invulnerableTime=0;callback.onResolveEffect(h.getLevel(),hit);h.assertTrue(marker.hits==2,"Later accepted hurt continues again: "+focus);
+                var point=scene(h).add(0,0,14);var block=BlockPos.containing(point);h.getLevel().setBlockAndUpdate(block,Blocks.STONE.defaultBlockState());
+                callback.onResolveEffect(h.getLevel(),new BlockHitResult(point,Direction.NORTH,block,false));
+                h.assertTrue(marker.hits==3,"Block contact still continues without a damage target: "+focus);
+                h.getLevel().setBlockAndUpdate(block,Blocks.AIR.defaultBlockState());
+            }
+            h.succeed();
+        } finally {clear(h,p);p.discard();GoetyConfig.RESOURCE_SOURCE.set(old);}
+    }
     private static final class Marker extends AbstractEffect {
         int hits;
         Marker() { super(CarrierRegistry.id("goety_nouveau:glyph_projectile_test_marker"),"Marker"); }

@@ -172,14 +172,17 @@ public final class GoetyNativeProjectileCasting {
         var batch = (Batch)session.parameters();
         if (repeated && batch.focus == BoltFocus.SWORD && GoetyProjectileFactory.sword(session.caster()).isEmpty()) return false;
         state.goetyNouveau$handlingHit(true); state.goetyNouveau$impacting(repeated);
+        boolean continued;
         try {
             if (repeated) {
                 projectile.setPos(hit.getLocation());
                 resetPiercing(projectile);
                 if (projectile instanceof VoidShockBomb) ((dev.goetynouveau.mixin.NativeVoidBombAccess)projectile).goetyNouveau$growTick(0);
             }
-            if (projectile instanceof SlashProjectile slash && hit instanceof EntityHitResult entity) slash.damageEntity(entity.getEntity());
-            else ((ProjectileHitAccess)projectile).goetyNouveau$hit(hit);
+            continued = dev.arsconflux.api.projectile.ImpactTriggers.resolve(hit, batch.focus.impactPolicy(), () -> {
+                if (projectile instanceof SlashProjectile slash && hit instanceof EntityHitResult entity) slash.damageEntity(entity.getEntity());
+                else ((ProjectileHitAccess)projectile).goetyNouveau$hit(hit);
+            });
             if (!repeated && projectile instanceof VoidShockBomb) batch.settled.add(projectile);
             if (repeated && projectile instanceof VoidShockBomb) ((dev.goetynouveau.mixin.NativeVoidBombAccess)projectile).goetyNouveau$growTick(0);
             if (repeated && projectile instanceof BouncyBubble bubble && ((dev.goetynouveau.mixin.NativeBubbleAccess)bubble).goetyNouveau$exploding()) {
@@ -191,7 +194,7 @@ public final class GoetyNativeProjectileCasting {
                 projectile.setDeltaMovement(velocity);
             }
         } finally { state.goetyNouveau$impacting(false); state.goetyNouveau$handlingHit(false); }
-        session.impact(hit);
+        if (continued) session.impact(hit);
         if (repeated && batch.focus == BoltFocus.SWORD) GoetyProjectileFactory.wearSword(session.caster());
         return true;
     }

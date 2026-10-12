@@ -121,9 +121,12 @@ public final class GoetyBoltCasting {
             // The native collision loop keeps its own impact position. Special carriers supply theirs.
             if (deferRemoval) bolt.setPos(hit.getLocation());
             state.goetyNouveau$impacting(deferRemoval);
-            try { ((ProjectileHitAccess)bolt).goetyNouveau$hit(hit); }
+            boolean continued;
+            try { continued = dev.arsconflux.api.projectile.ImpactTriggers.resolve(hit,
+                    dev.arsconflux.api.projectile.ImpactTriggers.Policy.ENTITY_DAMAGE,
+                    () -> ((ProjectileHitAccess)bolt).goetyNouveau$hit(hit)); }
             finally { state.goetyNouveau$impacting(false); }
-            session.impact(hit);
+            if (continued) session.impact(hit);
             return true;
         })) session.finish(ExecutionSession.EndReason.DENIED);
         else if (!deferRemoval && bolt.isRemoved()) session.finish(ExecutionSession.EndReason.COMPLETED);

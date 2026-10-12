@@ -34,6 +34,14 @@ public enum BoltFocus {
     BoltFocus(String glyph, String name) { this(glyph, glyph + "_focus", name); }
     BoltFocus(String glyph, String focus, String name) { this.glyph = glyph; this.focus = focus; this.name = name; }
     public boolean lighting() { return this==GLOW_LIGHT || this==SOUL_LIGHT; }
+    /** These native callbacks create light/status/continuous fields rather than immediate impact damage. */
+    public dev.arsconflux.api.projectile.ImpactTriggers.Policy impactPolicy() {
+        return switch(this) {
+            case GLOW_LIGHT, SOUL_LIGHT, ICE_STORM, SNARELING_SHOT, SNAP_FUNGUS, BERSERK_FUNGUS ->
+                    dev.arsconflux.api.projectile.ImpactTriggers.Policy.ACTIVATION;
+            default -> dev.arsconflux.api.projectile.ImpactTriggers.Policy.ENTITY_DAMAGE;
+        };
+    }
     public boolean additional() { return switch (this) {
         case SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL -> false;
         default -> true;

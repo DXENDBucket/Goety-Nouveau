@@ -90,7 +90,8 @@
     "NativeBlinkTeleportMixin",
     "GoetyThrowableFungusStateMixin",
     "GoetySnarelingShotStateMixin",
-    "ManagedBaseThrowableMovementMixin"
+    "ManagedBaseThrowableMovementMixin",
+    "NativeImpactDamageMixin"
   ],
   "injectors": {
     "defaultRequire": 1

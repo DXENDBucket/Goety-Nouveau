@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.54`). Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.55`). Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -229,3 +229,7 @@ These glyphs need no per-cast item ingredients. Their one-time Scribe recipes co
 ## 横向审计修复（0.1.0-dev.54）
 
 需要 Ars Conflux **0.1.22 或更新的 0.1.x**。执行授权、保护和范围选目标共用 Core 友军查询，并登记 Goety 原生关系；混合吟唱不再重复减速；冷却共用 Core 提示。详见 [修复与验证交接](docs/cross-addon-audit-fixes.md)。
+
+## 弹射物后续触发（0.1.0-dev.55）
+
+当前版本需要 Ars Conflux **0.1.24**。直接伤害弹体命中实体时，只有原生伤害成功才续接剩余编排；方块命中、纯状态或区域成功建立仍可续接。原生特效、生命周期及现有费用规则保留。详见 [接入记录](docs/projectile-impact-triggers.md)。

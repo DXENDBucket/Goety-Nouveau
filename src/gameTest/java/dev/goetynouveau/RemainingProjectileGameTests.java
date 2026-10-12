@@ -9,6 +9,7 @@ public final class RemainingProjectileGameTests {
         mana.setMaxMana(10000); mana.setMana(10000);
         return player;
     }
+    @GameTest(template="empty",timeoutTicks=80) public static void invulnerableContactsDoNotContinueButBlocksDo(GameTestHelper h) { RemainingProjectileCases.invulnerableContactsDoNotContinueButBlocksDo(h,player(h)); }
     @GameTest(template="empty",timeoutTicks=80) public static void nativeLaunchesAndFullHits(GameTestHelper h) { RemainingProjectileCases.nativeLaunchesAndFullHits(h,player(h)); }
     @GameTest(template="empty",timeoutTicks=80) public static void repeatingCarriersAndDeniedBilling(GameTestHelper h) { RemainingProjectileCases.repeatingCarriersAndDeniedBilling(h,player(h)); }
     @GameTest(template="empty",timeoutTicks=80) public static void salvosPiercingSwordAndCreative(GameTestHelper h) { RemainingProjectileCases.salvosPiercingSwordAndCreative(h,player(h)); }
