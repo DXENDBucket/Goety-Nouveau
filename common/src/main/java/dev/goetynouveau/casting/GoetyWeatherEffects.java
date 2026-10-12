@@ -70,7 +70,7 @@ public final class GoetyWeatherEffects {
             var pos = rod.get(); point = new Vec3(pos.getX(),pos.getY(),pos.getZ());
             if (!loaded(world,point)) return false;
         } else if (target != null) {
-            if (target == caster || MobUtil.areAllies(caster,target)
+            if (target == caster || dev.arsconflux.api.targeting.Allies.areAllies(caster,target)
                     || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target)) return false;
             if (!target.hurt(ModDamageSource.directShock(owner(frame)),damage)) return false;
             point = target.position().add(0,target.getBbHeight()/2.0,0);

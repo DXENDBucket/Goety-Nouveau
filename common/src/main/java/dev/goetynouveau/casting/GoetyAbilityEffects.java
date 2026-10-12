@@ -43,7 +43,7 @@ public final class GoetyAbilityEffects {
             double radius=Math.max(.1,3.5+stats.getAoeMultiplier());
             boolean applied=false;
             for(var target:world.getEntitiesOfClass(LivingEntity.class,new AABB(point,point).inflate(radius,1,radius))) {
-                if(target==frame.caster() || !target.isAlive() || MobUtil.areAllies(frame.caster(),target)) continue;
+                if(target==frame.caster() || !target.isAlive() || dev.arsconflux.api.targeting.Allies.areAllies(frame.caster(),target)) continue;
                 var direction=target.position().subtract(point).normalize();
                 MobUtil.pull(target,direction.x,direction.y,direction.z);
                 target.playSound(com.Polarice3.Goety.init.ModSounds.GRAVITY.get());

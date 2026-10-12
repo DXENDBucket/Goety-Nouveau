@@ -62,19 +62,20 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         return GoetyConfig.cooldownsEnabled() && dev.goetynouveau.platform.ActiveCastingPlatform.realPlayer(request.caster())
                 && (!((ServerPlayer)request.caster()).isCreative() || GoetyConfig.creativeCooldown());
     }
-    @Override public boolean allowed(ActiveCastRequest request) {
-        if (!cooldowns(request)) return true;
-        var player = (ServerPlayer)request.caster();
-        for (var id : new LinkedHashSet<>(focuses(request.spell()))) {
-            // Ignore old/native-wand cooldowns for Ars rapid fire without erasing native records.
-            if (FocusSpells.read(id).map(GoetyActiveCastProvider::rapidFire).orElse(false)) continue;
-            var focus = new ItemStack(BuiltInRegistries.ITEM.get(id));
-            if (!focus.isEmpty() && SEHelper.isOnCooldown(player, focus)) {
-                player.displayClientMessage(Component.translatable("goety_nouveau.cast.cooldown", focus.getHoverName()).withStyle(ChatFormatting.RED), true);
-                return false;
+    @Override public boolean allowed(ActiveCastRequest request) { return rejection(request)==null; }
+    @Override public dev.arsconflux.api.casting.CastRejection rejection(ActiveCastRequest request) {
+        if(!cooldowns(request)) return null;
+        var player=(ServerPlayer)request.caster();
+        dev.arsconflux.api.casting.CastRejection selected=null;
+        for(var id:new LinkedHashSet<>(focuses(request.spell()))) {
+            if(FocusSpells.read(id).map(GoetyActiveCastProvider::rapidFire).orElse(false)) continue;
+            var focus=new ItemStack(BuiltInRegistries.ITEM.get(id));
+            if(!focus.isEmpty() && SEHelper.isOnCooldown(player,focus)) {
+                long ticks=GoetyFocusCooldowns.remaining(player,focus.getItem());
+                if(selected==null || ticks>selected.remainingTicks()) selected=dev.arsconflux.api.casting.CastRejection.cooldown(focus.getHoverName(),ticks);
             }
         }
-        return true;
+        return selected;
     }
     @Override public void released(ActiveCastRequest request, List<Spell> recipes) {
         if (!cooldowns(request)) return;

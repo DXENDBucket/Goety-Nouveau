@@ -12,6 +12,6 @@ public abstract class NativeChantMovementMixin {
     @Inject(method = "updateInputEvent", at = @At("RETURN"))
     private static void goetyNouveau$movement(net.minecraftforge.client.event.MovementInputUpdateEvent event, CallbackInfo ci) {
         if (event.getEntity() instanceof net.minecraft.client.player.LocalPlayer player)
-            dev.goetynouveau.client.CastingMovement.apply(player, event.getInput());
+            dev.goetynouveau.client.CastingMovement.apply(player, event.getInput(), event);
     }
 }

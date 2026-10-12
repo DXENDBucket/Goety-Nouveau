@@ -18,7 +18,7 @@ public final class GoetyAreaProvenance {
                 && world.getEntity(entity.getPersistentData().getUUID(SOURCE)) instanceof LivingEntity caster?caster:fallback;
     }
     public static boolean friendly(Entity area,Entity candidate){
-        var caster=source(area,null);return caster!=null && (candidate==caster || com.Polarice3.Goety.utils.MobUtil.areAllies(caster,candidate));
+        var caster=source(area,null);return caster!=null && (candidate==caster || dev.arsconflux.api.targeting.Allies.areAllies(caster,candidate));
     }
     public static LivingEntity damageOwner(Entity area,LivingEntity fallback){
         return area.getPersistentData().hasUUID(OWNER) && area.level() instanceof ServerLevel world

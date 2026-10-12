@@ -24,7 +24,7 @@ public final class GoetyBreathGeometry {
         return view != null && caster == view.context().caster() ? view.host() : caster;
     }
     public static boolean allied(LivingEntity caster, LivingEntity host) {
-        return caster == host || com.Polarice3.Goety.utils.MobUtil.areAllies(caster, host);
+        return dev.arsconflux.api.targeting.Allies.areAllies(caster, host);
     }
     public static <T> T scoped(View view, Supplier<T> action) {
         var previous = CURRENT.get(); CURRENT.set(view);

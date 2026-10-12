@@ -42,7 +42,7 @@ public final class GoetyServantCasting {
         var staff=GoetyResources.staff(caster);
         int amount=Math.min(remaining,GoetyServantProfiles.count(focus,spell,caster,staff));
         LivingEntity target=hit instanceof EntityHitResult e && e.getEntity() instanceof LivingEntity l
-                && l.isAlive() && l.level()==world && l!=caster && !MobUtil.areAllies(caster,l)
+                && l.isAlive() && l.level()==world && l!=caster && !dev.arsconflux.api.targeting.Allies.areAllies(caster,l)
                 && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(l) ? l : null;
         boolean added=false;
         SpawnGroupData group=null;

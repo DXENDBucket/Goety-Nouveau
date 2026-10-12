@@ -189,7 +189,7 @@ public final class GoetyProjectileFactory {
         var block=world.clip(new net.minecraft.world.level.ClipContext(origin,end,net.minecraft.world.level.ClipContext.Block.COLLIDER,net.minecraft.world.level.ClipContext.Fluid.NONE,caster));
         if(block.getType()!=HitResult.Type.MISS) end=block.getLocation();
         var hit=ProjectileUtil.getEntityHitResult(world,caster,origin,end,new AABB(origin,end).inflate(1),
-                e->e instanceof LivingEntity living && living.isAlive() && !living.isSpectator() && !MobUtil.areAllies(caster,living));
+                e->e instanceof LivingEntity living && living.isAlive() && !living.isSpectator() && !dev.arsconflux.api.targeting.Allies.areAllies(caster,living));
         return hit!=null && hit.getEntity() instanceof LivingEntity living?living:null;
     }
     public static ItemStack sword(LivingEntity caster) {

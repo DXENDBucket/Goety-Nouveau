@@ -56,7 +56,7 @@ public final class GoetyLocationEffects {
     }
     private static boolean enemy(CastContext frame, LivingEntity target) {
         return target != null && target != frame.caster() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target)
-                && !MobUtil.areAllies(frame.caster(), target);
+                && !dev.arsconflux.api.targeting.Allies.areAllies(frame.caster(), target);
     }
     private static boolean earthFist(ServerLevel world, CastContext frame, Spell spell, NativeSpellStats defaults,
                                       SpellStats ars, Vec3 point) {
@@ -158,7 +158,7 @@ public final class GoetyLocationEffects {
     private static boolean launch(ServerLevel world, CastContext frame, Spell spell, NativeSpellStats defaults,
                                   SpellStats ars, LivingEntity target) {
         var caster = frame.caster();
-        if (target == null || (target != caster && !MobUtil.areAllies(caster,target) && MobUtil.getOwner(target) != caster)) return false;
+        if (target == null || (target != caster && !dev.arsconflux.api.targeting.Allies.areAllies(caster,target) && MobUtil.getOwner(target) != caster)) return false;
         boolean staff = spell.rightStaff(GoetyResources.staff(caster));
         double potency = defaults.potency() + ars.getAmpMultiplier();
         if (WandUtil.enchantedFocus(caster)) potency += NativeLocationHooks.launchPotency(caster,staff);

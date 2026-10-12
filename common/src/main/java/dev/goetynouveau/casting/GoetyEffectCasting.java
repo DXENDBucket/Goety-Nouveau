@@ -152,7 +152,7 @@ public final class GoetyEffectCasting {
         return addVines(world, frame, p, target, center);
     }
     private static boolean entangleable(LivingEntity caster, LivingEntity target) {
-        return target.isAlive() && target != caster && !MobUtil.areAllies(caster, target)
+        return target.isAlive() && target != caster && !dev.arsconflux.api.targeting.Allies.areAllies(caster, target)
                 && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target)
                 && !target.getType().is(ModTags.EntityTypes.UNTANGLEABLE);
     }
@@ -166,13 +166,13 @@ public final class GoetyEffectCasting {
     }
     private static boolean soulHeal(ServerLevel world, CastContext frame, SoulHealSpell spell, Parameters p) {
         var target = target(frame);
-        if (target == null || (target != frame.caster() && !MobUtil.areAllies(frame.caster(), target)
+        if (target == null || (target != frame.caster() && !dev.arsconflux.api.targeting.Allies.areAllies(frame.caster(), target)
                 && MobUtil.getOwner(target) != frame.caster())) return false;
         var recipients = new java.util.LinkedHashSet<LivingEntity>();
         recipients.add(target);
         if (p.radius() > 0) {
             for (var nearby : world.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(8 * p.radius()))) {
-                if (MobUtil.areAllies(frame.caster(), nearby) || MobUtil.getOwner(nearby) == frame.caster())
+                if (dev.arsconflux.api.targeting.Allies.areAllies(frame.caster(), nearby) || MobUtil.getOwner(nearby) == frame.caster())
                     recipients.add(nearby);
             }
         }
@@ -203,7 +203,7 @@ public final class GoetyEffectCasting {
         new SpellExplosion(world, damageOwner, ModDamageSource.directFreeze(damageOwner),
                 center.x, center.y, center.z, radius, actual) {
             @Override public void explodeHurt(Entity target, DamageSource source, double x, double y, double z, double seen, float amount) {
-                if (target instanceof LivingEntity living && !MobUtil.areAllies(caster, living)
+                if (target instanceof LivingEntity living && !dev.arsconflux.api.targeting.Allies.areAllies(caster, living)
                         && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(living)) {
                     super.explodeHurt(target, source, x, y, z, seen, amount);
                     living.addEffect(NativeEffectHooks.freezing(MathHelper.secondsToTicks(5) * p.duration(), staff ? 1 : 0));

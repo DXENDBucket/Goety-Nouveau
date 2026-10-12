@@ -71,7 +71,7 @@ public final class GoetyNatureEffects {
         if((frame.target() instanceof BlockHitResult || clip.getType()!=HitResult.Type.MISS) && world.hasChunkAt(block) && world.getBlockEntity(block) instanceof IWindPowered powered) powered.activate(300);
         var area=(self ? caster.getBoundingBox() : new AABB(origin,origin)).inflate(1).expandTowards(direction.scale(range));
         for(var entity:world.getEntities(caster,area)) {
-            if(MobUtil.areAllies(caster,entity) || entity.getType().is(ModTags.EntityTypes.UNBLOWABLE_ENTITIES)
+            if(dev.arsconflux.api.targeting.Allies.areAllies(caster,entity) || entity.getType().is(ModTags.EntityTypes.UNBLOWABLE_ENTITIES)
                     || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)) continue;
             var los=world.clip(new ClipContext(origin,entity.getBoundingBox().getCenter(),ClipContext.Block.COLLIDER,ClipContext.Fluid.NONE,caster));
             if(los.getType()!=HitResult.Type.MISS) continue;
@@ -83,7 +83,7 @@ public final class GoetyNatureEffects {
             entity.hasImpulse=true;
             if(entity instanceof Player player) { player.hurtMarked=true; player.setOnGround(false); }
             if(entity instanceof LivingEntity living) NativeEffectHooks.windStaff(spell,caster,staff,living);
-            if(entity instanceof AbstractCyclone cyclone && (cyclone.getTrueOwner()==null || !MobUtil.areAllies(caster,cyclone.getTrueOwner()))) cyclone.trueRemove();
+            if(entity instanceof AbstractCyclone cyclone && (cyclone.getTrueOwner()==null || !dev.arsconflux.api.targeting.Allies.areAllies(caster,cyclone.getTrueOwner()))) cyclone.trueRemove();
         }
         world.playSound(null,origin.x,origin.y,origin.z,ModSounds.WIND_BLAST.get(),spell.getSoundSource(),.3F,1.3F);
         return true;
@@ -92,7 +92,7 @@ public final class GoetyNatureEffects {
                                        SpellStats ars, Vec3 point) {
         var caster=frame.caster(); var staff=GoetyResources.staff(caster);
         LivingEntity target=frame.target() instanceof EntityHitResult e && e.getEntity() instanceof LivingEntity l ? l : null;
-        if(target!=null && (target==caster || MobUtil.areAllies(caster,target) || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target))) return false;
+        if(target!=null && (target==caster || dev.arsconflux.api.targeting.Allies.areAllies(caster,target) || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target))) return false;
         var pos=frame.target() instanceof BlockHitResult b ? b.getBlockPos() : BlockPos.containing(point);
         if(pos.getY()<world.getMinBuildHeight() || pos.getY()+8>=world.getMaxBuildHeight()) return false;
         // Native structures extend a few blocks from the selected point. Do not force remote chunks.

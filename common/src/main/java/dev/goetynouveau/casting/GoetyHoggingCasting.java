@@ -38,7 +38,7 @@ public final class GoetyHoggingCasting {
         var staff=GoetyResources.staff(caster); boolean paired=spell.rightStaff(staff);
         int count=Math.min(remaining,paired?2:1); boolean added=false;
         LivingEntity target=frame.target() instanceof EntityHitResult e && e.getEntity() instanceof LivingEntity l
-                && l.isAlive() && l.level()==world && l!=caster && !MobUtil.areAllies(caster,l)
+                && l.isAlive() && l.level()==world && l!=caster && !dev.arsconflux.api.targeting.Allies.areAllies(caster,l)
                 && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(l) ? l : null;
         for(int i=0;i<count;i++) {
             var anchor=BlockPos.containing(center.add(side.scale(i==0?1:-1)));

@@ -13,7 +13,7 @@ public final class GoetyBanishCasting {
     public static boolean apply(ServerLevel world,CastContext frame) {
         if(!(frame.target() instanceof EntityHitResult hit) || !(hit.getEntity() instanceof LivingEntity target)
                 || !target.isAlive() || target.isRemoved() || target.isSpectator() || target.level()!=world
-                || target==frame.caster() || MobUtil.areAllies(frame.caster(),target)
+                || target==frame.caster() || dev.arsconflux.api.targeting.Allies.areAllies(frame.caster(),target)
                 || !world.isInWorldBounds(target.blockPosition()) || !world.hasChunkAt(target.blockPosition()))return false;
         if(target instanceof net.minecraft.world.entity.player.Player player && player.isCreative())return false;
         var source=frame.caster();var spell=new BanishSpell();var staff=GoetyResources.staff(source).copy();

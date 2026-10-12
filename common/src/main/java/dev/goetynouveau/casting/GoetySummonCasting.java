@@ -46,7 +46,7 @@ public final class GoetySummonCasting {
         if (duration == 0) return false;
         var hit = frame.target();
         LivingEntity target = hit instanceof EntityHitResult selected && selected.getEntity() instanceof LivingEntity living
-                && living.isAlive() && living != caster && !MobUtil.areAllies(caster, living)
+                && living.isAlive() && living != caster && !dev.arsconflux.api.targeting.Allies.areAllies(caster, living)
                 && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(living) ? living : null;
         var center = hit instanceof EntityHitResult selected ? selected.getEntity().position() : hit.getLocation();
         boolean added = false;

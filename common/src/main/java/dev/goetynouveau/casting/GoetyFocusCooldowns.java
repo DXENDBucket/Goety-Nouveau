@@ -12,7 +12,7 @@ import net.minecraft.world.item.Item;
 public final class GoetyFocusCooldowns {
     private GoetyFocusCooldowns() {}
     public static boolean enabled(LivingEntity caster) {
-        return GoetyConfig.cooldownsEnabled() && ActiveCastingPlatform.realPlayer(caster)
+        return GoetyConfig.cooldownsEnabled() && dev.arsconflux.api.casting.ActiveCasts.cooldownsEnabled(caster) && ActiveCastingPlatform.realPlayer(caster)
                 && (!((ServerPlayer)caster).isCreative() || GoetyConfig.creativeCooldown());
     }
     public static int remaining(ServerPlayer player, Item focus) {

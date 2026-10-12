@@ -87,7 +87,7 @@ public final class GoetyFangCasting {
         boolean staff = spell.rightStaff(GoetyResources.staff(caster));
         boolean added = false;
         for (var enemy : world.getEntitiesOfClass(LivingEntity.class, area)) {
-            if (!enemy.isAlive() || enemy == caster || com.Polarice3.Goety.utils.MobUtil.areAllies(enemy, caster)) continue;
+            if (!enemy.isAlive() || enemy == caster || dev.arsconflux.api.targeting.Allies.areAllies(enemy, caster)) continue;
             var point = enemy.position();
             float angle = (float)Math.atan2(point.z - caster.getZ(), point.x - caster.getX());
             boolean targeted = spawn(world, frame, point, angle, 1, p);

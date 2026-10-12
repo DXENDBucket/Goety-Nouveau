@@ -45,7 +45,7 @@ public final class GoetySimpleEffects {
         return frame.damageOwner() != null ? frame.damageOwner() : frame.caster();
     }
     private static boolean ally(CastContext frame, LivingEntity entity) {
-        return entity == frame.caster() || MobUtil.areAllies(frame.caster(), entity)
+        return entity == frame.caster() || dev.arsconflux.api.targeting.Allies.areAllies(frame.caster(), entity)
                 || MobUtil.getOwner(entity) == frame.caster();
     }
     public static boolean hide(EffectFocus focus, ServerLevel world, CastContext frame, Spell spell, int potency, int duration) {

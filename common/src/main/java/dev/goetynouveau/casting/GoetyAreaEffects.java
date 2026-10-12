@@ -58,7 +58,7 @@ public final class GoetyAreaEffects {
     }
     private static boolean hostile(CastContext frame, LivingEntity target) {
         return target != frame.caster() && target != owner(frame) && target.isAlive()
-                && !MobUtil.areAllies(frame.caster(), target) && !MobUtil.areAllies(owner(frame), target)
+                && !dev.arsconflux.api.targeting.Allies.areAllies(frame.caster(), target) && !dev.arsconflux.api.targeting.Allies.areAllies(owner(frame), target)
                 && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target);
     }
     private static boolean fireBlast(ServerLevel world, CastContext frame, Spell spell,

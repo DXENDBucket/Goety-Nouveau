@@ -38,7 +38,7 @@ public final class GoetyMovingAreaCasting {
             }
             int lifetime=duration(life,ars.getDurationMultiplier());if(lifetime<=0 || !Double.isFinite(radius) || radius<=0)return false;
             var area=CuriosFinder.hasUnholySet(caster)?new FireTornado(world,owner,direction.x,direction.y,direction.z):new Cyclone(world,owner,direction.x,direction.y,direction.z);
-            area.setOwner(owner);if(selected!=null && selected!=owner && !MobUtil.areAllies(caster,selected) && !MobUtil.areAllies(owner,selected))area.setTarget(selected);
+            area.setOwner(owner);if(selected!=null && selected!=owner && !dev.arsconflux.api.targeting.Allies.areAllies(caster,selected) && !dev.arsconflux.api.targeting.Allies.areAllies(owner,selected))area.setTarget(selected);
             area.setDamage(potency);area.setTotalLife(lifetime);area.setBoltSpeed((int)velocity);area.setSize((float)radius);
             var origin=selected!=null?selected.getEyePosition().add(0,-.2,0):point.add(0,.1,0);
             area.setPos(origin.add(direction.scale(.5)));GoetyAreaProvenance.mark(area,frame);

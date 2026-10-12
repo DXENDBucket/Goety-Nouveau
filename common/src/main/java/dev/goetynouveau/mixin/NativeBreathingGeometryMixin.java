@@ -24,7 +24,7 @@ public abstract class NativeBreathingGeometryMixin implements IBreathingSpell {
         var host = GoetyBreathGeometry.spatial(caster);
         return MobUtil.getTargets(host.level(), host, range, 3, entity -> entity != caster && entity != host
                 && net.minecraft.world.entity.EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)
-                && MobUtil.LIVING_OR_PART.test(entity) && !MobUtil.areAllies(caster, entity) && filter.test(entity));
+                && MobUtil.LIVING_OR_PART.test(entity) && !dev.arsconflux.api.targeting.Allies.areAllies(caster, entity) && filter.test(entity));
     }
     @Override public void breathAttack(ParticleOptions particle, LivingEntity caster, boolean spreadOut,
                                         int count, double velocity, double spread) {

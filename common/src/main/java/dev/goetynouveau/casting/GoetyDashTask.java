@@ -26,7 +26,7 @@ public final class GoetyDashTask extends BoltingSpell.BoltingDashTask {
                 (2 * Math.random() - 1) * .2, (2 * Math.random() - 1) * .2, (2 * Math.random() - 1) * .2, .5);
         ServerParticleUtil.addParticlesAroundMiddleSelf(level, ModParticleTypes.ELECTRIC.get(), caster);
         for (var entity : level.getEntities(caster, caster.getBoundingBox().inflate(staff ? 1.25 : 1))) {
-            if (!(entity instanceof LivingEntity target) || MobUtil.areAllies(caster, target)
+            if (!(entity instanceof LivingEntity target) || dev.arsconflux.api.targeting.Allies.areAllies(caster, target)
                     || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target) || !target.isAttackable()) continue;
             float base = SpellConfig.BoltingDamage.get().floatValue() * WandUtil.damageMultiply();
             if (!target.hurt(ModDamageSource.directShock(source), base + damage)) continue;

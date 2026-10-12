@@ -8,7 +8,7 @@ import net.minecraft.client.player.LocalPlayer;
 /** Mirrors native preparation movement without fake item use or native spell-casting state. */
 public final class CastingMovement {
     private CastingMovement() {}
-    public static void apply(LocalPlayer player, Input input) {
+    public static void apply(LocalPlayer player, Input input, Object event) {
         if (!GoetyConfig.movementEnabled() || !(ChantHudState.chanting() || ChantHudState.channeling()) || player.isPassenger()) return;
         if (SpellConfig.FullStopCast.get()) {
             input.leftImpulse = 0;
@@ -16,8 +16,9 @@ public final class CastingMovement {
             input.jumping = false;
         } else if (!player.isUsingItem()) {
             // Actual held-item use already gets Minecraft's 0.2 factor. Never apply that twice.
-            input.leftImpulse *= 0.2f;
-            input.forwardImpulse *= 0.2f;
+            float ratio=dev.arsconflux.api.casting.MovementLimits.multiplier(event, .2f);
+            input.leftImpulse *= ratio;
+            input.forwardImpulse *= ratio;
         }
         player.setSprinting(false);
     }

@@ -41,7 +41,7 @@ public final class GoetyUtilityEffects {
         }
         return switch(focus) {
             case SENSING -> {
-                if(target==null || duration<=0 || (target!=caster && !MobUtil.areAllies(caster,target))) yield false;
+                if(target==null || duration<=0 || (target!=caster && !dev.arsconflux.api.targeting.Allies.areAllies(caster,target))) yield false;
                 boolean changed=target.addEffect(NativeEffectHooks.sensing(MathHelper.secondsToTicks(duration),potency));
                 if(changed) spell.playSound(world,target,ModSounds.DIRT_DEBRIS.get());
                 yield changed;
@@ -83,7 +83,7 @@ public final class GoetyUtilityEffects {
         world.sendParticles(new SmashParticleOption(color,radius,10),point.x,point.y+1,point.z,1,0,0,0,0);
         var bounds=frame.target() instanceof EntityHitResult e ? e.getEntity().getBoundingBox() : new AABB(point,point);
         for(var enemy:world.getEntitiesOfClass(LivingEntity.class,bounds.inflate(radius))) {
-            if(enemy==caster || MobUtil.areAllies(caster,enemy) || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(enemy)) continue;
+            if(enemy==caster || dev.arsconflux.api.targeting.Allies.areAllies(caster,enemy) || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(enemy)) continue;
             double dx=enemy.getX()-point.x,dz=enemy.getZ()-point.z,divisor=Math.max(dx*dx+dz*dz,.001);
             MobUtil.push(enemy,dx/divisor*(4+potency),.2,dz/divisor*(4+potency));
             enemy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,MathHelper.secondsToTicks(duration),potency));

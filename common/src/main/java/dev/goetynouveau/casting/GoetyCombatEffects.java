@@ -30,7 +30,7 @@ public final class GoetyCombatEffects {
                 || !target.isAlive() || target.isRemoved() || target.level() != world
                 || !world.hasChunkAt(target.blockPosition())) return false;
         var caster = frame.caster();
-        if (target != caster && !MobUtil.areAllies(caster, target) && MobUtil.getOwner(target) != caster) return false;
+        if (target != caster && !dev.arsconflux.api.targeting.Allies.areAllies(caster, target) && MobUtil.getOwner(target) != caster) return false;
         // Ars chooses the recipient: the native "no existing shields" condition belongs to it.
         if (MiscCapHelper.getShields(target) > 0) return false;
         long amount = SpellConfig.BulwarkShieldAmount.get() + (long)defaults.potency() + (int)ars.getAmpMultiplier();
@@ -84,7 +84,7 @@ public final class GoetyCombatEffects {
         }
         new SpellExplosion(world, owner, ModDamageSource.directShock(owner), point.x, point.y, point.z, radius, damage) {
             @Override public void explodeHurt(Entity target, DamageSource source, double x, double y, double z, double seen, float actual) {
-                if (!(target instanceof LivingEntity living) || living == caster || MobUtil.areAllies(caster, living)) return;
+                if (!(target instanceof LivingEntity living) || living == caster || dev.arsconflux.api.targeting.Allies.areAllies(caster, living)) return;
                 super.explodeHurt(target, source, x, y, z, seen, actual);
                 float chance = chaining ? .25F : .05F;
                 float chainDamage = actual / 2;

@@ -50,7 +50,7 @@ public final class GoetyPersonalEffects {
     private static LivingEntity owner(CastContext frame) { return frame.damageOwner() != null ? frame.damageOwner() : frame.caster(); }
     private static boolean enemy(LivingEntity caster, LivingEntity target) {
         return target != null && target != caster && target.isAttackable()
-                && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target) && !MobUtil.areAllies(caster, target);
+                && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target) && !dev.arsconflux.api.targeting.Allies.areAllies(caster, target);
     }
     private static boolean killing(ServerLevel world, CastContext frame, Spell spell, LivingEntity target) {
         var caster = frame.caster();

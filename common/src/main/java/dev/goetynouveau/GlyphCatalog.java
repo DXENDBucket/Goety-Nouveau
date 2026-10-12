@@ -168,6 +168,8 @@ public final class GlyphCatalog {
         return ability ? "1" : "0";
     }
     public static void register() {
+        dev.arsconflux.api.targeting.Allies.register(CarrierRegistry.id("goety_nouveau:native_allies"),
+                com.Polarice3.Goety.utils.MobUtil::areAllies);
         // Secondary ordering runs within the provider group, never across providers.
         dev.arsconflux.api.glyph.GlyphPresentation.register("goety_nouveau",
                 GlyphCatalog::presentationKey);
