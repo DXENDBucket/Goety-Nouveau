@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.55`). Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.56`). Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -197,8 +197,8 @@ Each Goety trigger uses its own native payment account without replacing the sou
 
 | Target | Ars Nouveau | Goety | Ars Conflux |
 | --- | --- | --- | --- |
-| 1.21.1 NeoForge | 5.13.1 | 3.2.0 | 0.1.10 |
-| 1.20.1 Forge | 4.12.7 | 2.5.58.4 | 0.1.10 |
+| 1.21.1 NeoForge | 5.13.1 | 3.2.1 | 0.1.24+ |
+| 1.20.1 Forge | 4.12.7 | 2.5.59.2 | 0.1.24+ |
 
 These are the pinned build dependencies. Transitive mod dependencies are included in the download manifest, but upstream mod JARs are not committed or bundled in this addon.
 
@@ -233,3 +233,7 @@ These glyphs need no per-cast item ingredients. Their one-time Scribe recipes co
 ## 弹射物后续触发（0.1.0-dev.55）
 
 当前版本需要 Ars Conflux **0.1.24**。直接伤害弹体命中实体时，只有原生伤害成功才续接剩余编排；方块命中、纯状态或区域成功建立仍可续接。原生特效、生命周期及现有费用规则保留。详见 [接入记录](docs/projectile-impact-triggers.md)。
+
+## Goety version compatibility (0.1.0-dev.56)
+
+Builds now use Goety 3.2.1 / 2.5.59.2. Poison Dart and Frost-staff Ice Spear no longer invoke a private piercing-reset method whose name changes in Forge release JARs. Repeated carriers retain native piercing and per-trigger charging. Launch follows the updated native parameters, including NeoForge Goety's configurable base/potency power. See the [compatibility audit](docs/goety-version-compatibility.md).

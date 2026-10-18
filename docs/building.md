@@ -4,7 +4,7 @@
 
 ```text
 MinecraftDev/
-  Ars-Conflux/              # compatible Core checkout, at least 0.1.10
+  Ars-Conflux/              # compatible Core checkout, at least 0.1.24
   Goety-Nouveau/
     VERSION                 # single version for both targets
     common/src/main/        # shared integration source and resources
@@ -20,7 +20,7 @@ The root wrapper uses Gradle 9.2.1; the Forge wrapper uses Gradle 8.8. Do not re
 
 ## Prepare dependencies
 
-Prepare an Ars Conflux 0.1.10 source checkout beside this project, then run:
+Prepare an Ars Conflux 0.1.24 or newer 0.1.x source checkout beside this project, then run:
 
 ```powershell
 python tools/fetch_dependencies.py
@@ -70,6 +70,16 @@ Forge development runs explicitly register `ars_conflux.mixins.json`: an include
 Use a dedicated Ars integration instance. Its local path can be recorded in the ignored `test-environment.local.json`; personal instance paths are not part of the public source. Build tasks do not automatically install into a game instance. Compilation alone does not verify mod loading, rendering or playable spell behavior.
 
 ## Focused runtime validation
+
+For the dev.56 Goety upgrade and piercing regression cases, use the quoted property on
+either loader (PowerShell otherwise treats the commas as argument separators):
+
+```powershell
+./gradlew.bat :runGameTestServer --offline --console=plain '-PgameTestNamespaces=goety_nouveau_projectiles,goety_nouveau_variants,goety_nouveau_locations'
+```
+
+Also run `tools/check_piercing_runtime.py` against the packaged addon and the original,
+unmapped Goety release JAR. See [the compatibility audit](goety-version-compatibility.md).
 
 Each platform exposes `:runGameTestServer`, containing shared Soul Bolt and target/location-effect scenarios with platform-specific test discovery and fake-player setup. These run with Ars, Goety and Core, without Iron:
 

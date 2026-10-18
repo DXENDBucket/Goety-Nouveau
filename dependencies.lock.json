@@ -43,15 +43,15 @@
   },
   {
     "path": "libs/goety.jar",
-    "version": "3.2.0",
-    "url": "https://cdn.modrinth.com/data/4ZVIxU8x/versions/8jB68vz3/goety-3.2.0.jar",
-    "sha512": "bc2277f9dd22114d1aa8900a1ad145bd5cff4b935977a50d5bd8e6a38dc2ea9b2572f5ce535a1ee7e48240389c181743ecde4186d6dbd555ae12b34da8f0ce7f"
+    "version": "3.2.1",
+    "url": "https://cdn.modrinth.com/data/4ZVIxU8x/versions/bbO9Fg71/goety-3.2.1.jar",
+    "sha512": "92a078f26b0f05159bb35e24b7e163c42aa16048228e2801ddb9b20b5c6e34784ecd98d91d665328d66fe05f0bc9a9cff830cedfc1bdcf526a8af3e7eb121b53"
   },
   {
-    "path": "forge/libs/goety-forge1201.jar",
-    "version": "2.5.58.4",
-    "url": "https://cdn.modrinth.com/data/4ZVIxU8x/versions/9X8ch5p4/goety-2.5.58.4.jar",
-    "sha512": "9dce9769b9d8c7b32e2d299994f3890b772e50c7cd617925d3593e0bb6fda6e43b0ada3a4e6e5d867ab871003ab91257488e80be21734c7ed857554731cb2370"
+    "path": "forge/libs/goety-2.5.59.2-forge1201.jar",
+    "version": "2.5.59.2",
+    "url": "https://cdn.modrinth.com/data/4ZVIxU8x/versions/jVPGt2qM/goety-2.5.59.2.jar",
+    "sha512": "acdf56ae628ccbd926cbee5a5284180e4f38e671f4096c85ceed3620019662f52d83b62889c7a479dd5c4face63025c16ff89ec32436a74dc7f06d67dadf2cde"
   },
   {
     "path": "libs/patchouli.jar",

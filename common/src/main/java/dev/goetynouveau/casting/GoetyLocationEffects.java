@@ -162,7 +162,7 @@ public final class GoetyLocationEffects {
         boolean staff = spell.rightStaff(GoetyResources.staff(caster));
         double potency = defaults.potency() + ars.getAmpMultiplier();
         if (WandUtil.enchantedFocus(caster)) potency += NativeLocationHooks.launchPotency(caster,staff);
-        double power = NativeLocationHooks.launchPower(staff) + potency/2;
+        double power = NativeLocationHooks.launchPower(staff) + potency * NativeLocationHooks.launchPotencyPower();
         if (!Double.isFinite(power) || power <= 0) return false;
         target.hurtMarked = true; target.setOnGround(false);
         target.setDeltaMovement(target.getLookAngle().scale(power)); target.hasImpulse = true; target.fallDistance = 0;

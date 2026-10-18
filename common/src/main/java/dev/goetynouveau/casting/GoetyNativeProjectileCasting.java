@@ -199,8 +199,7 @@ public final class GoetyNativeProjectileCasting {
         return true;
     }
     private static void resetPiercing(Projectile projectile) {
-        if (projectile instanceof PoisonQuill) ((QuillPiercingAccess)projectile).goetyNouveau$resetPiercing();
-        if (projectile instanceof IceSpear) ((dev.goetynouveau.mixin.IceSpearPiercingAccess)projectile).goetyNouveau$resetPiercing();
+        if (projectile instanceof NativePiercingHistory history) history.goetyNouveau$resetPiercing();
     }
     private static final class Batch {
         final BoltFocus focus;

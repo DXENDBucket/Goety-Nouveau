@@ -63,6 +63,35 @@ public final class RemainingProjectileCases {
         for(var e:h.getLevel().getEntities(p,new AABB(scene(h),scene(h)).inflate(40))) e.discard();
         ExecutionSessions.tick();
     }
+    public static void repeatedPiercingArrows(GameTestHelper h,ServerPlayer p) {
+        var old=GoetyConfig.RESOURCE_SOURCE.get(); GoetyConfig.RESOURCE_SOURCE.set(ResourceSource.SOUL_ENERGY);
+        try {
+            prepare(h,p);
+            for(var focus:List.of(BoltFocus.POISON_DART,BoltFocus.ICE_SPIKE)) {
+                clear(h,p);
+                p.setItemInHand(InteractionHand.OFF_HAND,new ItemStack(
+                        focus==BoltFocus.POISON_DART?ModItems.WILD_STAFF.get():ModItems.FROST_STAFF.get()));
+                int fee=price(h,p,focus),before=SEHelper.getSESouls(p);
+                var marker=new Marker(); var carrier=launch(h,p,focus,marker,true);
+                var arrow=shots(h,p).get(0);
+                h.assertTrue(focus==BoltFocus.POISON_DART?arrow instanceof PoisonQuill:arrow instanceof IceSpear,
+                        "The equipped staff supplies a native piercing arrow");
+                var target=EntityType.COW.create(h.getLevel()); target.setNoAi(true); target.setNoGravity(true);
+                target.setPos(scene(h).add(0,0,12));
+                target.getAttribute(Attributes.MAX_HEALTH).setBaseValue(1000); target.setHealth(1000);
+                h.getLevel().addFreshEntity(target);
+                for(int i=0;i<2;i++) {
+                    target.invulnerableTime=0; float health=target.getHealth();
+                    dev.arsconflux.api.glyph.ArsSpellAccess.resolver(carrier)
+                            .onResolveEffect(h.getLevel(),new EntityHitResult(target));
+                    h.assertTrue(target.getHealth()<health && marker.hits==i+1,
+                            "A later paid carrier hit resets native piercing history for "+focus);
+                    h.assertTrue(SEHelper.getSESouls(p)==before-fee*(i+1),"Each repeated hit pays once");
+                }
+            }
+            h.succeed();
+        } finally { clear(h,p); p.discard(); GoetyConfig.RESOURCE_SOURCE.set(old); }
+    }
     public static void nativeLaunchesAndFullHits(GameTestHelper h,ServerPlayer p) {
         var old=GoetyConfig.RESOURCE_SOURCE.get(); GoetyConfig.RESOURCE_SOURCE.set(ResourceSource.SOUL_ENERGY);
         try {

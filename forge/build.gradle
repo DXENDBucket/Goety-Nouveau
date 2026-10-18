@@ -56,9 +56,11 @@ dependencies {
     annotationProcessor 'io.github.llamalad7:mixinextras-common:0.4.1'
     implementation project(':ars-conflux')
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.0'
-    for (name in ['ars-nouveau', 'geckolib', 'curios', 'patchouli', 'goety']) {
+    for (name in ['ars-nouveau', 'geckolib', 'curios', 'patchouli']) {
         implementation fg.deobf("local:${name}:forge1201")
     }
+    // A distinct coordinate prevents ForgeGradle reusing the older Goety deobfuscation cache.
+    implementation fg.deobf('local:goety:2.5.59.2-forge1201')
 }
 mixin { add sourceSets.main, 'goety_nouveau.refmap.json'; config 'goety_nouveau.mixins.json' }
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
