@@ -21,8 +21,8 @@ public final class EndWalkCases {
  private static void cast(GameTestHelper h,ServerPlayer source,HitResult hit,boolean paid,AbstractAugment... a){
   var recipe=new Spell(MethodTouch.INSTANCE,GlyphCatalog.END_WALK);for(var augment:a)recipe=recipe.add(augment);
   var context=new SpellContext(h.getLevel(),recipe,source,LivingCaster.from(source),ItemStack.EMPTY);var resolver=new SpellResolver(context);context.nextPart();
-  int before=SEHelper.getSESouls(source),fee=GlyphCatalog.END_WALK.focus().spell().soulCost(source,dev.goetynouveau.casting.GoetyResources.staff(source));
-  fee=(int)(fee*SEHelper.soulDiscount(source));resolver.onResolveEffect(h.getLevel(),hit);
+  int before=SEHelper.getSESouls(source),fee=dev.goetynouveau.casting.GoetyResources.quote(context,GlyphCatalog.END_WALK.focus().spell(),java.util.List.of(a)).amount();
+  resolver.onResolveEffect(h.getLevel(),hit);
   h.assertTrue(SEHelper.getSESouls(source)==before-(paid&&!source.isCreative()?fee:0),"Real source payment: before="+before+", after="+SEHelper.getSESouls(source)+", native fee="+fee);
  }
  private static void ally(GameTestHelper h,ServerPlayer p,ServerPlayer q){

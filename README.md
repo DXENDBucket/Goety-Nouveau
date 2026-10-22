@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-**Status: playable development build (`0.1.0-dev.56`). Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Status: playable development build (`0.1.0-dev.57`). Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
@@ -13,6 +13,8 @@ Burning and other native parameter augments retain their actual compatibility re
 ## Try Soul Bolt
 
 Find **Soul Bolt** in the Goety & Nouveau creative tab and learn it by using the glyph item. In an Ars spellbook, compose **Projectile → Soul Bolt**. Soul Bolt is a projectile replacement augment; effects placed after it resolve on impact. For example, **Projectile → Soul Bolt → Ignite** uses the native Goety bolt, then applies Ars Ignite.
+
+Native Goety spell attributes now apply to the older projectile/effect adapters as well as native callback spells. Focus enchantments remain a separate, per-spell step; this avoids doubling them or replacing native special rules. An actually equipped enchanted focus also applies Goety's configured doubled focus cost. Ars augments alone do not count as an enchanted focus. The native cost multiplier applies in both resource modes; the existing Soul-only armor discount/event and flat addon augment charges retain their order. See [native stats and billing](docs/native-stats-and-billing.md) for version boundaries and accounting details.
 
 Amplify adds one native potency point; Dampen removes one, with a minimum of zero. Ordinary projectiles retain Goety's native launch offset, gradual acceleration, yaw/pitch rotation, collision loop and velocity enchantments. Ars selects the aim and scatter, and its acceleration statistic scales native travel. Special carriers such as Orbit keep their Ars trajectory. The native Goety entity supplies its renderer, animation, trail, impact particles, damage and staff-dependent Soul/Poison/Wither/Necro variants. Projectiles retain a maximum lifetime of ten seconds.
 
@@ -234,6 +236,6 @@ These glyphs need no per-cast item ingredients. Their one-time Scribe recipes co
 
 当前版本需要 Ars Conflux **0.1.24**。直接伤害弹体命中实体时，只有原生伤害成功才续接剩余编排；方块命中、纯状态或区域成功建立仍可续接。原生特效、生命周期及现有费用规则保留。详见 [接入记录](docs/projectile-impact-triggers.md)。
 
-## Goety version compatibility (0.1.0-dev.56)
+## Goety version compatibility (0.1.0-dev.57)
 
 Builds now use Goety 3.2.1 / 2.5.59.2. Poison Dart and Frost-staff Ice Spear no longer invoke a private piercing-reset method whose name changes in Forge release JARs. Repeated carriers retain native piercing and per-trigger charging. Launch follows the updated native parameters, including NeoForge Goety's configurable base/potency power. See the [compatibility audit](docs/goety-version-compatibility.md).

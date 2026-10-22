@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-dev.57
+
+- Apply Goety native spell attributes to legacy Soul/Magic Bolt, other native projectile adapters, and manually adapted effect/summon baselines. Keep focus enchantments and Ars augments as separate, single additions; native callbacks keep their existing stats.
+- Restore the native enchanted-focus cost multiplier when `enchantMultiCost` is enabled. Only an actual equipped enchanted focus qualifies; Ars Amplify or an enchanted empty staff does not. Multiply the native focus fee before fixed addon augment charges and the existing Soul armor discount/event. ARS_MANA retains its separate-account semantics.
+- Match Flying potency to the loaded Goety version: current releases add focus potency to attributes, while supported older releases retain native replacement behavior. Native Spike replacement rules are unchanged.
+- Add focused shared regression tests for actual projectile/effect growth, native callback non-duplication, focus/config billing, armor rounding, failed actions, resource modes and creative bypass.
+
 ## 0.1.0-dev.53
 
 - Require a real Goety brew containing the matching native effect for Leaf Shell, Thorn Trap, Transpose and Corrosion glyphs, plus one Source Gem at the Scribe's Table. Raw flowers / chorus are no longer sufficient.

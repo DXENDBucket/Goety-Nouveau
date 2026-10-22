@@ -44,7 +44,8 @@ public final class GoetyBoltCasting {
         if (!dev.goetynouveau.glyph.GoetyAugmentValidation.validBolt(focus, augments)) return true;
         if (focus.additional() || focus == BoltFocus.FIREBALL || focus == BoltFocus.POISON_DART || focus == BoltFocus.WITHER_SKULL)
             return GoetyNativeProjectileCasting.replace(focus, carrier, profile);
-        int potency = spell.defaultStats().getPotency();
+        var nativeStats = WandUtil.getStats(caster, spell);
+        int potency = nativeStats.getPotency();
         potency += augments.stream().filter(a -> a == AugmentAmplify.INSTANCE).count();
         potency -= augments.stream().filter(a -> a == AugmentDampen.INSTANCE).count();
         if (WandUtil.enchantedFocus(caster)) potency += WandUtil.getPotencyLevel(caster);
@@ -55,13 +56,13 @@ public final class GoetyBoltCasting {
         var projectile = create(focus, world, caster, origin, direction);
         projectile.setExtraDamage(Math.max(0, potency));
         if (projectile instanceof MagicBolt magic) {
-            int duration = spell.defaultStats().getDuration();
+            int duration = nativeStats.getDuration();
             duration += augments.stream().filter(a -> a == AugmentExtendTime.INSTANCE).count();
             duration -= augments.stream().filter(a -> a == AugmentDurationDown.INSTANCE).count();
             if (WandUtil.enchantedFocus(caster)) duration += NativeEffectHooks.duration(caster);
             magic.setExtraDuration(Math.max(0, duration));
         } else {
-            float velocity = spell.defaultStats().getVelocity();
+            float velocity = nativeStats.getVelocity();
             if (WandUtil.enchantedFocus(caster)) velocity += NativeBoltHooks.velocityLevel(caster);
             projectile.setBoltSpeed((int)velocity);
         }

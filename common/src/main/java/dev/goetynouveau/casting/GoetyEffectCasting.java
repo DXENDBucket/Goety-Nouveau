@@ -39,7 +39,7 @@ public final class GoetyEffectCasting {
         if(dev.goetynouveau.api.AbilitySpells.ability(focus.glyph).isPresent())
             return GoetyAbilityEffects.apply(focus,world,frame,ars);
         var spell = (Spell)focus.spell();
-        var defaults = NativeSpellStats.defaults(spell);
+        var defaults = NativeSpellStats.forCaster(caster, spell);
         int potency = Math.max(0, defaults.potency() + (int)ars.getAmpMultiplier());
         int duration = Math.max(0, defaults.duration() + (int)ars.getDurationMultiplier());
         double radius = Math.max(0, defaults.radius() + ars.getAoeMultiplier());

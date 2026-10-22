@@ -3,6 +3,7 @@ package dev.goetynouveau.casting;
 import com.Polarice3.Goety.api.items.magic.ITotem;
 import com.Polarice3.Goety.api.magic.ISpell;
 import com.Polarice3.Goety.common.events.spell.GoetyEventFactory;
+import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.SEHelper;
 import com.Polarice3.Goety.utils.TotemFinder;
 import com.Polarice3.Goety.utils.WandUtil;
@@ -40,6 +41,10 @@ public final class GoetyResources {
         var caster = CastContext.of(context, null, null).caster();
         int cost = caster == null ? spell.defaultSoulCost() : spell.soulCost(caster, staff(caster));
         long total = Math.max(0, cost);
+        // Native DarkWand doubles its already calculated focus cost before armor discounts.
+        // This is a property of an enchanted equipped focus, not of Ars Amplify or the book.
+        // Addon augment surcharges remain their configured flat amounts in either account mode.
+        if (caster != null && SpellConfig.EnchantMultiCost.get() && WandUtil.enchantedFocus(caster)) total *= 2L;
         for (var augment : augments) {
             if (augment == dev.goetynouveau.glyph.AugmentBurning.INSTANCE) total += GoetyConfig.BURNING_COST.get();
             else if (augment instanceof dev.goetynouveau.glyph.AugmentGoety goety) total += goety.additionalCost();

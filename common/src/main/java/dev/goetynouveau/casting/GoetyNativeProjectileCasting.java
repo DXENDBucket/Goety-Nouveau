@@ -46,7 +46,7 @@ public final class GoetyNativeProjectileCasting {
         var augments = resolver.spell.getAugments(0, caster);
         if (!dev.goetynouveau.glyph.GoetyAugmentValidation.validBolt(focus, augments)) return true;
         var ars = resolver.getCastStats();
-        var defaults = spell.defaultStats();
+        var defaults = WandUtil.getStats(caster, spell);
         int potency = defaults.getPotency() + (int)ars.getAmpMultiplier();
         int duration = defaults.getDuration() + (int)ars.getDurationMultiplier();
         int burning = defaults.getBurning() + (int)augments.stream().filter(a -> a == AugmentBurning.INSTANCE).count();

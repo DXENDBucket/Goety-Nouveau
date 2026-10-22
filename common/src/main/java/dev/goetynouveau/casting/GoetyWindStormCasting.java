@@ -14,6 +14,9 @@ import net.minecraft.world.phys.EntityHitResult;
 /** Native wind movement/area callbacks and native lightning packets, scoped to an allied executor. */
 public final class GoetyWindStormCasting {
     private GoetyWindStormCasting() {}
+    public static int flyingPotency(int baseline, boolean enchanted, int enchantment, boolean additive) {
+        return enchanted ? (additive ? baseline + enchantment : enchantment) : baseline;
+    }
     public static boolean apply(EffectFocus focus,ServerLevel world,CastContext frame,SpellStats ars,ResourceCharge charge) {
         if(!(frame.target() instanceof EntityHitResult hit) || !(hit.getEntity() instanceof LivingEntity host)
                 || !GoetyChannelCasting.eligible(world,frame.caster(),host))return false;
@@ -22,8 +25,10 @@ public final class GoetyWindStormCasting {
         if(ticks<=0)return false;
         var stats=WandUtil.getStats(caster,spell);
         if(focus==EffectFocus.FLYING) {
-            // The native flying spell replaces (rather than adds to) potency when enchanted.
-            int base=WandUtil.enchantedFocus(caster)?WandUtil.getPotencyLevel(caster):stats.getPotency();
+            // Old Goety replaced potency; current Goety adds focus potency to native attributes.
+            // NativeWindRecipientMixin suppresses that gear branch after we prepare it once.
+            int base=flyingPotency(stats.getPotency(),WandUtil.enchantedFocus(caster),
+                    WandUtil.getPotencyLevel(caster),dev.goetynouveau.platform.NativeStatHooks.ADDITIVE_FLYING);
             stats.setPotency(Math.max(0,base+(int)ars.getAmpMultiplier()));
         } else if(focus==EffectFocus.WHIRLWIND) {
             // Native lift uses only focus potency, not ordinary SpellStat potency.

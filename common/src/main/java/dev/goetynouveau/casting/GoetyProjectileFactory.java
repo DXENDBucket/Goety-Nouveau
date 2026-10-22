@@ -28,7 +28,7 @@ public final class GoetyProjectileFactory {
     private GoetyProjectileFactory() {}
     public static List<Projectile> create(BoltFocus focus, ServerLevel world, CastContext frame,
                                           Vec3 carrierOrigin, Vec3 direction, SpellStats ars, float speed) {
-        var caster=frame.caster(); var spell=(Spell)focus.spell(); var defaults=spell.defaultStats();
+        var caster=frame.caster(); var spell=(Spell)focus.spell(); var defaults=WandUtil.getStats(caster,spell);
         var staff=GoetyResources.staff(caster); boolean right=spell.rightStaff(staff), enchanted=WandUtil.enchantedFocus(caster);
         int potency=defaults.getPotency()+(int)ars.getAmpMultiplier();
         int duration=defaults.getDuration()+(int)ars.getDurationMultiplier();
