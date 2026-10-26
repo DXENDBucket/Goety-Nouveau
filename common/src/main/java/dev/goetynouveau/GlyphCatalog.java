@@ -147,12 +147,12 @@ public final class GlyphCatalog {
     public static final GoetyBoltGlyph SNAP_FUNGUS=new GoetyBoltGlyph(BoltFocus.SNAP_FUNGUS);
     public static final GoetyBoltGlyph BLAST_FUNGUS=new GoetyBoltGlyph(BoltFocus.BLAST_FUNGUS);
     public static final GoetyBoltGlyph BERSERK_FUNGUS=new GoetyBoltGlyph(BoltFocus.BERSERK_FUNGUS);
-    public static final List<AbstractSpellPart> ALL = withNativeExtras(List.of(CRAFTING, ENDER_CHEST, SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
+    public static final List<AbstractSpellPart> ALL = new java.util.concurrent.CopyOnWriteArrayList<>(withNativeExtras(List.of(CRAFTING, ENDER_CHEST, SOUL_BOLT, MAGIC_BOLT, FIREBALL, POISON_DART, WITHER_SKULL, ICE_CHUNK, FROST_NOVA,
             ENTANGLING, SOUL_HEAL, HAUNTED_SKULL, IRON_HIDE, CHILL_HIDE, WEAKENING, LIGHTNING, UPDRAFT,
             SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, SENSING, ROTATION, TREMBLING, CHARGE, SPIKES, LEAPING, BARRICADE, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, VANGUARD, BLACKGUARD, KILLING, BOLTING, ILLUSION, BLAZING, GHASTLY, GUARDIAN, WATCHING, SNARING, BLASTING, FIRE_BREATH, FROST_BREATH, SWARM, MINISTROUS, HOGGING, ARROW_RAIN, BLIZZARD, METEOR_SHOWER, BOMBARDMENT, THUNDERSTORM, TRIDENT_STORM, CORRUPTED_BEAM, WATER_JET, PRISMA_BEAM, VOID_SHOCK, QUAKING, WARDING, FLYING, WHIRLWIND, SHOCKING, TELEKINESIS, BURROWING, CYCLONE, TIDAL, WATER_WHIP, ILLUMINATE, PULVERIZE, SCATTER, TUNNEL, GRAPPLE, END_WALK, BANISH, BLINK, ICE_STORM, GLOW_LIGHT, SOUL_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
             dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER,
-            SNARELING_TRAP, BERSERK_CLOUD, BONE_PULL, LEAF_SHELL, THORN_TRAP, TRANSPOSE, CORROSION, SNARELING_SHOT, SNAP_FUNGUS, BLAST_FUNGUS, BERSERK_FUNGUS));
+            SNARELING_TRAP, BERSERK_CLOUD, BONE_PULL, LEAF_SHELL, THORN_TRAP, TRANSPOSE, CORROSION, SNARELING_SHOT, SNAP_FUNGUS, BLAST_FUNGUS, BERSERK_FUNGUS)));
     private static List<AbstractSpellPart> withNativeExtras(List<AbstractSpellPart> shared) {
         // Do not construct an unavailable glyph: even construction registers its spell school.
         if (BREEZE == null && TEMBLOR_CLAP == null) return shared;
@@ -168,6 +168,8 @@ public final class GlyphCatalog {
         return ability ? "1" : "0";
     }
     public static void register() {
+        dev.arsconflux.api.glyph.GlyphVisuals.register("goety_nouveau",part->part instanceof dev.goetynouveau.glyph.NativeFocusGlyph nativeFocus
+                ?dev.arsconflux.api.glyph.GlyphIcon.item(nativeFocus.source()):null);
         dev.arsconflux.api.targeting.Allies.register(CarrierRegistry.id("goety_nouveau:native_allies"),
                 com.Polarice3.Goety.utils.MobUtil::areAllies);
         // Secondary ordering runs within the provider group, never across providers.

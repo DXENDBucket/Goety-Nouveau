@@ -19,6 +19,8 @@ public final class GoetyNouveau {
         bus.addListener(dev.goetynouveau.network.ChantStatePayload::register);
         dev.goetynouveau.entity.GoetyEntities.register(bus);
         dev.goetynouveau.platform.BrewIngredient.register(bus);
+        dev.goetynouveau.platform.NativeFocusPlatform.init(container);
+        if(Boolean.getBoolean("goetynouveau.native_self_test"))try{Class.forName("dev.goetynouveau.NativeFocusFixture").getMethod("register",net.neoforged.bus.api.IEventBus.class).invoke(null,bus);}catch(ReflectiveOperationException error){throw new IllegalStateException(error);}
         GlyphCatalog.register();
         dev.goetynouveau.casting.GoetyActiveCastProvider.register();
         bus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(GlyphCatalog::configureCarriers));

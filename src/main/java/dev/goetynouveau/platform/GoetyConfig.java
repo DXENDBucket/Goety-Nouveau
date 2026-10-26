@@ -9,6 +9,8 @@ public final class GoetyConfig {
     public static final ModConfigSpec.IntValue BURNING_COST, EXTENSION_COST, LIFE_ABSORB_COST, SOUL_EATER_COST, UNBOUNDED_CHANNEL_TICKS;
     public static final ModConfigSpec.BooleanValue CHANTING_ENABLED, MOVEMENT_ENABLED, COOLDOWNS_ENABLED, CREATIVE_COOLDOWN;
     private static final java.util.Map<String,ModConfigSpec.IntValue> ABILITY_PREPARATION=new java.util.HashMap<>(), ABILITY_COOLDOWN=new java.util.HashMap<>();
+    private static final net.neoforged.neoforge.common.ModConfigSpec.BooleanValue NATIVE_ENABLED;
+    private static final net.neoforged.neoforge.common.ModConfigSpec.ConfigValue<java.util.List<? extends String>> NATIVE_DISABLED;
     static {
         var builder = new ModConfigSpec.Builder();
         builder.push("resources");
@@ -61,10 +63,16 @@ public final class GoetyConfig {
             builder.pop();
         }
         builder.pop();
+        builder.push("native_self");
+        NATIVE_ENABLED=builder.comment("Generate self-casting glyphs for addon IFocus items. Native callbacks execute on the real player.").define("enabled",true);
+        NATIVE_DISABLED=builder.comment("Focus item IDs excluded from native self casting.").defineList("disabledFocuses",java.util.List.of(),value->value instanceof String);
+        builder.pop();
         SPEC = builder.build();
     }
     public static int abilityPreparation(String id,int fallback) {var value=ABILITY_PREPARATION.get(id);return value==null?fallback:read(value);}
     public static int abilityCooldown(String id,int fallback) {var value=ABILITY_COOLDOWN.get(id);return value==null?fallback:read(value);}
+    public static boolean nativeSelfEnabled(net.minecraft.resources.ResourceLocation focus){return read(NATIVE_ENABLED)&&!read(NATIVE_DISABLED).contains(focus.toString());}
+    public static int nativeChannelTicks(){return unboundedChannelTicks();}
     private GoetyConfig() {}
     private static <T> T read(ModConfigSpec.ConfigValue<T> value) { return SPEC.isLoaded() ? value.get() : value.getDefault(); }
     public static int unboundedChannelTicks() { return read(UNBOUNDED_CHANNEL_TICKS); }

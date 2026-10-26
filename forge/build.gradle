@@ -35,7 +35,13 @@ minecraft {
         }
         client {
             workingDirectory project.file('run/client')
-            mods { ars_conflux { source confluxMain }; goety_nouveau { source sourceSets.main } }
+            if(providers.gradleProperty('nativeSelfPreview').getOrElse('false').toBoolean()) {
+                property 'goetynouveau.native_self_test','true'
+                property 'goetynouveau.native_self_preview','true'
+                workingDirectory project.file('run/native-focus-preview')
+                jvmArgs '-Xmx900m'
+            }
+            mods { ars_conflux { source confluxMain }; goety_nouveau { source sourceSets.main; if(providers.gradleProperty('nativeSelfPreview').getOrElse('false').toBoolean()) source sourceSets.gameTest } }
         }
         server {
             workingDirectory project.file('run/server'); args '--nogui'
@@ -43,8 +49,9 @@ minecraft {
         }
         gameTestServer {
             workingDirectory project.file('run/gametest')
+            if(providers.gradleProperty('nativeSelfTests').getOrElse('false').toBoolean())property 'goetynouveau.native_self_test','true'
             property 'forge.enabledGameTestNamespaces', providers.gradleProperty('gameTestNamespaces').getOrElse('goety_nouveau')
-            jvmArgs '-Xmx2G'
+            jvmArgs '-Xmx'+providers.gradleProperty('gameTestHeap').getOrElse('2G')
             mods { ars_conflux { source confluxMain }; goety_nouveau { source sourceSets.main; source sourceSets.gameTest } }
         }
     }

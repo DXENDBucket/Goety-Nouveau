@@ -23,6 +23,7 @@ import java.util.*;
 public final class GoetyActiveCastProvider implements ActiveCastProvider {
     public static void register() { ActiveCasts.register(CarrierRegistry.id("goety_nouveau:active_casting"), new GoetyActiveCastProvider()); }
     private static ResourceLocation focus(com.hollingsworth.arsnouveau.api.spell.AbstractSpellPart part) {
+        if(part instanceof dev.goetynouveau.glyph.NativeFocusGlyph nativeFocus)return nativeFocus.focusId();
         if(part instanceof GoetyEffectGlyph effect)return effect.focus().focusId();
         return part instanceof GoetyBoltGlyph glyph ? glyph.focus().focusId() : null;
     }
@@ -55,7 +56,10 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
     @Override public List<Integer> chantTicks(ActiveCastRequest request) {
         var result = new ArrayList<Integer>();
         var staff = GoetyResources.staff(request.caster());
-        for (var id : focuses(request.spell())) FocusSpells.read(id).ifPresent(spell -> result.add(preparationTicks(spell, request.caster(), staff)));
+        for (var part : ArsSpellAccess.parts(request.spell())) {
+            var id=focus(part);
+            if(id!=null && !(part instanceof dev.goetynouveau.glyph.NativeFocusGlyph)) FocusSpells.read(id).ifPresent(spell -> result.add(preparationTicks(spell, request.caster(), staff)));
+        }
         return List.copyOf(result);
     }
     private boolean cooldowns(ActiveCastRequest request) {
@@ -83,6 +87,7 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         var distinct = new LinkedHashSet<ResourceLocation>();
         for (var recipe : recipes) distinct.addAll(focuses(recipe));
         for (var id : distinct) FocusSpells.read(id).ifPresent(spell -> {
+            if(dev.goetynouveau.compat.NativeFocusIndex.all().stream().anyMatch(g->g.focusId().equals(id)))return;
             if (rapidFire(spell)) return;
             // Native grapples cool down on retrieval/end, not on initial launch.
             if(spell instanceof com.Polarice3.Goety.common.magic.spells.wild.GrappleSpell)return;

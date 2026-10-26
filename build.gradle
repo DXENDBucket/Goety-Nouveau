@@ -27,14 +27,23 @@ neoForge {
     version = '21.1.250'
     addModdingDependenciesTo sourceSets.gameTest
     runs {
-        client { client() }
+        client {
+            client()
+            if(providers.gradleProperty('nativeSelfPreview').getOrElse('false').toBoolean()) {
+                systemProperty 'goetynouveau.native_self_test','true'
+                systemProperty 'goetynouveau.native_self_preview','true'
+                jvmArgument '-Xmx900m'
+                gameDirectory=file('run/native-focus-preview')
+            }
+        }
         server { server(); programArgument '--nogui' }
         gameTestServer {
             type = 'gameTestServer'
+            if(providers.gradleProperty('nativeSelfTests').getOrElse('false').toBoolean())systemProperty 'goetynouveau.native_self_test','true'
             gameDirectory = file('run/gametest')
             systemProperty 'neoforge.enabledGameTestNamespaces', providers.gradleProperty('gameTestNamespaces')
                     .getOrElse(coexistWithIron ? 'goety_nouveau_coexistence' : 'goety_nouveau')
-            jvmArgument '-Xmx2G'
+            jvmArgument '-Xmx'+providers.gradleProperty('gameTestHeap').getOrElse('2G')
         }
     }
     mods {

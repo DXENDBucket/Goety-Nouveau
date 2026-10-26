@@ -277,5 +277,7 @@
   "goety_nouveau.glyph_name.glyph_transpose": "移形换影",
   "goety_nouveau.glyph_desc.glyph_transpose": "将附近生物和掉落物传送至触发位置。",
   "goety_nouveau.glyph_name.glyph_corrosion": "腐蚀",
-  "goety_nouveau.glyph_desc.glyph_corrosion": "腐蚀触发位置周围的方块和装备。"
+  "goety_nouveau.glyph_desc.glyph_corrosion": "腐蚀触发位置周围的方块和装备。",
+  "goety_nouveau.native_self.tooltip": "仅支持玩家自身触发，目标与方向由原聚晶决定。",
+  "goety_nouveau.native_self.description": "在玩家自身运行此聚晶的原生施法。保留原生目标选择、法杖与聚晶修饰，消耗所选资源并沿用原生吟唱和冷却。持续施法自动结束；不支持远程释放位置或弹射物替换。强化与抑制调整原生威力。"
 }

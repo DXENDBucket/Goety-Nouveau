@@ -90,7 +90,10 @@
     "GoetyThrowableFungusStateMixin",
     "GoetySnarelingShotStateMixin",
     "ManagedBaseThrowableMovementMixin",
-    "NativeImpactDamageMixin"
+    "NativeImpactDamageMixin",
+    "NativeFocusRegistrationMixin",
+    "NativeFocusRecipeMixin",
+    "NativeFocusWandMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -100,6 +103,7 @@
     "NativeChantMovementMixin",
     "client.NativeWaterRenderAccess",
     "client.NativePrismaRenderAccess",
-    "client.NativeGrappleHandMixin"
+    "client.NativeGrappleHandMixin",
+    "NativeFocusModelMixin"
   ]
 }

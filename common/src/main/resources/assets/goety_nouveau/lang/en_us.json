@@ -277,5 +277,7 @@
   "goety_nouveau.glyph_name.glyph_transpose": "Transpose",
   "goety_nouveau.glyph_desc.glyph_transpose": "Teleports nearby living entities and dropped items to the hit location.",
   "goety_nouveau.glyph_name.glyph_corrosion": "Corrosion",
-  "goety_nouveau.glyph_desc.glyph_corrosion": "Corrodes nearby blocks and equipment."
+  "goety_nouveau.glyph_desc.glyph_corrosion": "Corrodes nearby blocks and equipment.",
+  "goety_nouveau.native_self.tooltip": "Player self-casting only; native focus targeting and direction apply.",
+  "goety_nouveau.native_self.description": "Runs this focus through its native lifecycle on the player. Preserves native targeting, staff and focus modifiers, with configured resources, native preparation and cooldowns. Channels end automatically. Remote origins and projectile replacement are not supported. Amplify and Dampen adjust native potency."
 }
