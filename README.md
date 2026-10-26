@@ -2,9 +2,9 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-`0.1.0-dev.58` requires Ars Conflux 0.1.25 or newer in the 0.1.x series and adds automatic, player-self-casting glyphs for addon `IFocus` items. Native staff identity, matching-focus enchantments and spell callbacks are retained in a per-cast scope, with native preparation, resource billing, charging cadence and shared focus cooldowns. These glyphs do not replace Ars projectiles or support remote origins. See [native focus self-casting](docs/native-focus-self-casting.md) for configuration and boundaries.
+`0.1.0` requires Ars Conflux 0.1.25 or newer in the 0.1.x series and adds automatic, player-self-casting glyphs for addon `IFocus` items. Native staff identity, matching-focus enchantments and spell callbacks are retained in a per-cast scope, with native preparation, resource billing, charging cadence and shared focus cooldowns. These glyphs do not replace Ars projectiles or support remote origins. See [native focus self-casting](docs/native-focus-self-casting.md) for configuration and boundaries.
 
-**Status: playable development build (`0.1.0-dev.58`). Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Current release: `0.1.0`. Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 
