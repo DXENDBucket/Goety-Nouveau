@@ -32,7 +32,7 @@ public final class GoetyAugmentValidation {
             if (count > 0 && (!augment.supports(focus) || count > augment.limit())) return false;
         }
         return !augments.contains(AugmentGoety.LIFE_ABSORB)
-                || !augments.contains(com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify.INSTANCE);
+                || !hasAmplify(augments);
     }
     public static List<SpellValidationError> validate(List<AbstractSpellPart> recipe) {
         var errors = new ArrayList<SpellValidationError>();
@@ -51,16 +51,22 @@ public final class GoetyAugmentValidation {
                 String key = focus == null || !augment.supports(focus) ? "native_parameter"
                         : count > augment.limit() ? "augment_limit"
                         : augment == AugmentGoety.LIFE_ABSORB
-                            && augments.contains(com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify.INSTANCE)
+                            && hasAmplify(augments)
                                 ? "absorb_potency" : null;
                 if (key != null) {
                     addErrors(errors, recipe, phrase, augment, key);
-                    if (key.equals("absorb_potency")) addErrors(errors, recipe, phrase,
-                            com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify.INSTANCE, key);
+                    if (key.equals("absorb_potency")) for (var candidate : augments)
+                        if (dev.arsconflux.api.glyph.AugmentEquivalence.matches(candidate,
+                                com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify.INSTANCE))
+                            addErrors(errors, recipe, phrase, candidate, key);
                 }
             }
         }
         return errors;
+    }
+    private static boolean hasAmplify(List<AbstractAugment> augments) {
+        return augments.stream().anyMatch(a -> dev.arsconflux.api.glyph.AugmentEquivalence.matches(a,
+                com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify.INSTANCE));
     }
     private static void addErrors(List<SpellValidationError> errors, List<AbstractSpellPart> recipe,
                                   SpellPhraseValidator.SpellPhrase phrase, AbstractAugment augment, String key) {

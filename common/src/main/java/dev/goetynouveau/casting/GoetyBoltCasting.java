@@ -46,8 +46,8 @@ public final class GoetyBoltCasting {
             return GoetyNativeProjectileCasting.replace(focus, carrier, profile);
         var nativeStats = WandUtil.getStats(caster, spell);
         int potency = nativeStats.getPotency();
-        potency += augments.stream().filter(a -> a == AugmentAmplify.INSTANCE).count();
-        potency -= augments.stream().filter(a -> a == AugmentDampen.INSTANCE).count();
+        potency += (int)Math.round(dev.arsconflux.api.glyph.AugmentEquivalence.sum(augments, AugmentAmplify.INSTANCE)
+                - dev.arsconflux.api.glyph.AugmentEquivalence.sum(augments, AugmentDampen.INSTANCE));
         if (WandUtil.enchantedFocus(caster)) potency += WandUtil.getPotencyLevel(caster);
         var direction = TriggerGeometry.direction(carrier);
         var origin = profile.arsDriven() ? carrier.position()
@@ -57,8 +57,8 @@ public final class GoetyBoltCasting {
         projectile.setExtraDamage(Math.max(0, potency));
         if (projectile instanceof MagicBolt magic) {
             int duration = nativeStats.getDuration();
-            duration += augments.stream().filter(a -> a == AugmentExtendTime.INSTANCE).count();
-            duration -= augments.stream().filter(a -> a == AugmentDurationDown.INSTANCE).count();
+            duration += (int)Math.round(dev.arsconflux.api.glyph.AugmentEquivalence.sum(augments, AugmentExtendTime.INSTANCE)
+                    - dev.arsconflux.api.glyph.AugmentEquivalence.sum(augments, AugmentDurationDown.INSTANCE));
             if (WandUtil.enchantedFocus(caster)) duration += NativeEffectHooks.duration(caster);
             magic.setExtraDuration(Math.max(0, duration));
         } else {
