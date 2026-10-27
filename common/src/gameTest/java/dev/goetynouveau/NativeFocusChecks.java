@@ -33,6 +33,10 @@ public final class NativeFocusChecks {
             h.assertTrue(NativeFocusResources.model(CarrierRegistry.id("goety_nouveau:item/"+g.getRegistryName().getPath())).contains("native_focus_fixture:item/"+name),"Source focus item model is reused");
             h.assertTrue(h.getLevel().getRecipeManager().byKey(g.getRegistryName()).isPresent(),"Native Scribe recipe loaded");
         }
+        h.assertTrue(glyph("catalogue_alias")==null,"An Item-valued custom registry is not another item registration");
+        var before=NativeFocusIndex.all().size();
+        NativeFocusIndex.registered(CarrierRegistry.id("native_focus_fixture:warmup"),BuiltInRegistries.ITEM.get(CarrierRegistry.id("native_focus_fixture:warmup")));
+        h.assertTrue(NativeFocusIndex.all().size()==before,"Repeated observations do not duplicate items, configs or catalogue entries");
         h.assertTrue(NativeFocusIndex.all().stream().noneMatch(g->g.focusId().getNamespace().equals("goety")),"Existing native catalogue isn't duplicated");p.discard();h.succeed();
     }
     public static void warmupStaffAndScope(GameTestHelper h,ServerPlayer p){

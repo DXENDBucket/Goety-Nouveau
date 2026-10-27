@@ -1,0 +1,141 @@
+{
+  "date": "2026-10-28",
+  "version": "0.1.3",
+  "state": "verified-not-deployed",
+  "related_report": "https://mclo.gs/48gxbGQ",
+  "addon_start": "b11d53f0cae57e13868d8ff3ac85682ffb125d9e",
+  "fixed_core": "b626e92705c9c7d4ff607c7b0a782e1766558f7d",
+  "core_tracked_files_unchanged": true,
+  "projects": [
+    {
+      "project": "Ars-Conflux",
+      "version": "0.1.36",
+      "commit": "b626e92705c9c7d4ff607c7b0a782e1766558f7d",
+      "tracked_dirty": false
+    },
+    {
+      "project": "Irons-Nouveau",
+      "version": "0.17.28",
+      "commit": "6bb78d0b6c0c847089fe169726a7d83a2afe7295",
+      "tracked_dirty": false
+    },
+    {
+      "project": "Goety-Nouveau",
+      "version": "0.1.2",
+      "commit": "b11d53f0cae57e13868d8ff3ac85682ffb125d9e",
+      "tracked_dirty": false
+    },
+    {
+      "project": "BOMD-Nouveau",
+      "version": "0.1.1",
+      "commit": "3618cedbd8fc29681e9cffa3589686a960ed01f2",
+      "tracked_dirty": false
+    },
+    {
+      "project": "Cataclysm-Nouveau",
+      "version": "0.1.2",
+      "commit": "2b1f803817977b9108714889eb8511f78f10b653",
+      "tracked_dirty": false,
+      "ability_literal_ids_checked": 102,
+      "duplicate_ability_literal_ids": []
+    },
+    {
+      "project": "Aquamirae-Nouveau",
+      "version": "0.1.1",
+      "commit": "c8572eb75bb61e8821caaf766c1c7f7e81b60bfa",
+      "tracked_dirty": false,
+      "ability_literal_ids_checked": 13,
+      "duplicate_ability_literal_ids": []
+    },
+    {
+      "project": "Mowzies-Nouveau",
+      "version": "0.1.1",
+      "commit": "74e0e47120365e659dd1aa81661a4d462aa7b9a4",
+      "tracked_dirty": false,
+      "ability_literal_ids_checked": 17,
+      "duplicate_ability_literal_ids": []
+    },
+    {
+      "project": "Legendary-Monsters-Nouveau",
+      "version": "0.1.0-dev.12",
+      "commit": "9dc545d85dc569d2e871d90b19dccb4a1dad0949",
+      "tracked_dirty": false,
+      "ability_literal_ids_checked": 30,
+      "duplicate_ability_literal_ids": []
+    }
+  ],
+  "static_audit_only_except_goety": true,
+  "finding": "Goety registry observer treated Item-valued custom registry aliases as new item registrations",
+  "reproduction": {
+    "log": "build-registry-boundary-before-fix.log",
+    "failed": 1,
+    "extra_glyph": true,
+    "invalid_scribe_recipe": true
+  },
+  "test_namespace": "goety_nouveau_registration",
+  "tests": [
+    {
+      "loader": "NeoForge 21.1.250",
+      "mc": "1.21.1",
+      "ars": "5.13.3",
+      "goety": "3.2.2",
+      "geckolib": "4.9.3",
+      "passed": 1,
+      "failed": 0,
+      "log": "build-registry-boundary-fixed-neoforge.log"
+    },
+    {
+      "loader": "Forge 47.4.0",
+      "mc": "1.20.1",
+      "ars": "4.12.7",
+      "goety": "2.5.59.2",
+      "passed": 1,
+      "failed": 0,
+      "log": "forge/build-registry-boundary-fixed-forge.log"
+    }
+  ],
+  "coverage": [
+    "early item registration",
+    "late item registration",
+    "foreign Item-valued registry excluded",
+    "repeated observation idempotence",
+    "source model reference",
+    "loaded Scribe recipe",
+    "base Goety excluded"
+  ],
+  "client_started": false,
+  "native_addon_jars_loaded": false,
+  "exact_full_report_environment_tested": false,
+  "gameplay_config_changed": false,
+  "distribution_checks": true,
+  "forge_reobfuscated": true,
+  "artifacts": [
+    {
+      "loader": "neoforge",
+      "file": "build/libs/goety-nouveau-0.1.3-mc1.21.1-neoforge.jar",
+      "size": 606031,
+      "sha256": "1ca05d649734434402725fa1910b16fc53c1f0a5428543ffed6d850c303f3f3c"
+    },
+    {
+      "loader": "neoforge",
+      "file": "build/libs/goety-nouveau-0.1.3-sources.jar",
+      "size": 331922,
+      "sha256": "31e37b53dd030b3395a1dc1c52deec33abeef5619f704c66686405ab3b9c5479"
+    },
+    {
+      "loader": "forge",
+      "file": "forge/build/libs/goety-nouveau-0.1.3-mc1.20.1-forge.jar",
+      "size": 621113,
+      "sha256": "862242f31c8c0b2b5f5b74266800babac101b476afc35bbb2105eae9fc3406a0"
+    },
+    {
+      "loader": "forge",
+      "file": "forge/build/libs/goety-nouveau-0.1.3-sources.jar",
+      "size": 334507,
+      "sha256": "b9fab3060dbc7dbc796bca981fca60d962947df8fb63fb494c29e19c77f93f47"
+    }
+  ],
+  "shared_instance_deployed": false,
+  "git_pushed": false,
+  "curseforge_uploaded": false
+}

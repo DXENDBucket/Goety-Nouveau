@@ -2,13 +2,15 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
+`0.1.3` limits automatic focus discovery to the actual Minecraft item registry, preventing custom catalogues from generating invalid extra glyphs and recipes. A registration audit of Conflux and seven addons found no equivalent duplicate-registration path in the other projects. See [the audit and regression results](docs/registration-audit-2026-10-28.md).
+
 `0.1.2` fixes duplicate generated-glyph item registration when a Goety addon registers focuses before Ars Nouveau. Both early and late registration orders remain supported; existing glyph IDs, recipes and self-casting behavior are unchanged. See [the registration fix](docs/native-focus-registration-order.md).
 
 `0.1.1` requires Conflux 0.1.31 and uses its optional Adam's Ars Plus integration. Higher-tier augments contribute their native 2/4-unit values to legacy projectile potency/duration as well as existing stat-based effects. Native life absorption remains incompatible with all equivalent Amplify glyphs. No Iron dependency is added; resource-source configuration and soul-energy costs are unchanged. See [the shared integration contract](https://github.com/DXENDBucket/Ars-Conflux/blob/main/docs/adams-ars-plus.md).
 
 `0.1.0` requires Ars Conflux 0.1.25 or newer in the 0.1.x series and adds automatic, player-self-casting glyphs for addon `IFocus` items. Native staff identity, matching-focus enchantments and spell callbacks are retained in a per-cast scope, with native preparation, resource billing, charging cadence and shared focus cooldowns. These glyphs do not replace Ars projectiles or support remote origins. See [native focus self-casting](docs/native-focus-self-casting.md) for configuration and boundaries.
 
-**Current release: `0.1.2`. Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Current release: `0.1.3`. Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 

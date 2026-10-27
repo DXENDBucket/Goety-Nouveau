@@ -10,5 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(MappedRegistry.class)
 public abstract class NativeFocusRegistrationMixin {
     @Inject(method="register",at=@At("RETURN"))
-    private void goetyNouveau$focus(ResourceKey<?> key,Object value,RegistrationInfo info,CallbackInfoReturnable<Holder.Reference<?>> cir){NativeFocusIndex.registered(key.location(),value);}
+    private void goetyNouveau$focus(ResourceKey<?> key,Object value,RegistrationInfo info,CallbackInfoReturnable<Holder.Reference<?>> cir){
+        if(key.registry().equals(net.minecraft.core.registries.Registries.ITEM.location()))NativeFocusIndex.registered(key.location(),value);
+    }
 }
