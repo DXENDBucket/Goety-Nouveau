@@ -2,7 +2,7 @@
   "date": "2026-10-28",
   "version": "0.1.2",
   "report": "https://mclo.gs/48gxbGQ",
-  "state": "verified-ready-for-deployment",
+  "state": "verified-merged-and-deployed",
   "addon_start": "77b6f0fe15c5e72c4549e54206aebceb38acdcc3",
   "fixed_core": "b626e92705c9c7d4ff607c7b0a782e1766558f7d",
   "core_tracked_files_unchanged": true,
@@ -51,7 +51,7 @@
   "gameplay_config_changed": false,
   "distribution_checks": true,
   "forge_reobfuscated": true,
-  "shared_instance_deployed": false,
+  "shared_instance_deployed": true,
   "git_pushed": false,
   "curseforge_uploaded": false,
   "artifacts": [
@@ -75,5 +75,11 @@
       "size": 334452,
       "sha256": "65bb7923a5d62bf60336715e67d4e17e082a1ef1144b84ed035ab70d6e5edf7d"
     }
-  ]
+  ],
+  "implementation_commit": "0fa5e222a792882da68d9ee618dc8139d3d46494",
+  "main_branch_merged": true,
+  "deployed_modid_unique": true,
+  "other_mods_unchanged": true,
+  "deployment_backup": "C:\\Users\\57991\\Desktop\\.minecraft\\versions\\1.21.1-万法归一\\codex-backups\\goety-registration-order-20261028-030758\\mods\\goety-nouveau-0.1.1-mc1.21.1-neoforge.jar",
+  "deployment_receipt": "C:\\Users\\57991\\Documents\\MinecraftDev\\releases\\goety-registration-order-20261028\\deployment.json"
 }

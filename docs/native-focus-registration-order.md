@@ -31,3 +31,9 @@ NativeFocusIndex在外部IFocus真正注册时生成魔符，写入Ars魔符表�
 报告还包含Mana Sub-Zero的缺失Mixin插件和Goety Mastery of Magic的GeckoLib类兼容错误。这些不是Goety & Nouveau的注入点；修复本次重复注册后仍需报告者重启复测，不承诺整包的全部问题已解决。没有处理这些第三方模组。
 
 未做客户端外观测试，本次不修改渲染；不上传完整用户日志或个人环境信息到仓库。未推送或上传CurseForge。
+
+## 本地交付
+
+实现提交 `0fa5e222a792882da68d9ee618dc8139d3d46494` 已合并主分支。0.1.2 NeoForge包已替换万法归一的0.1.1，唯一modid与哈希核对通过；旧包备份 `C:\Users\57991\Desktop\.minecraft\versions\1.21.1-万法归一\codex-backups\goety-registration-order-20261028-030758\mods\goety-nouveau-0.1.1-mc1.21.1-neoforge.jar`。其他189个模组JAR的名称和哈希未改，Core与玩法配置未动。Forge发行包已完成重混淆，未替换Forge人工测试实例。
+
+两端二进制、源码包、复现与定向测试日志及部署收据位于 `C:\Users\57991\Documents\MinecraftDev\releases\goety-registration-order-20261028`。未推送或上传CF。
