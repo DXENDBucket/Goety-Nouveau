@@ -8,6 +8,8 @@ import dev.goetynouveau.glyph.NativeFocusGlyph;
 import dev.goetynouveau.platform.NativeFocusPlatform;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import com.hollingsworth.arsnouveau.common.items.Glyph;
+import java.util.function.Supplier;
 import java.util.*;
 
 /** Observe actual item registrations, including addons registered after our own item event. */
@@ -27,5 +29,16 @@ public final class NativeFocusIndex {
     }
     public static ResourceLocation id(ResourceLocation focus) {return CarrierRegistry.id("goety_nouveau:glyph_native/"+focus.getNamespace()+"/"+focus.getPath());}
     public static synchronized List<NativeFocusGlyph> all() {return List.copyOf(GLYPHS.values());}
+    /** Ars also registers its glyph map. Early addon focuses already registered their exact item;
+     * omit only that second insertion, leaving the live catalogue and unrelated collisions intact. */
+    public static synchronized Map<ResourceLocation,Supplier<Glyph>> itemsForArsRegistration(Map<ResourceLocation,Supplier<Glyph>> items) {
+        var remaining=new LinkedHashMap<>(items);
+        for(var glyph:GLYPHS.values()) {
+            var supplier=remaining.get(glyph.getRegistryName());
+            if(supplier!=null && NativeFocusPlatform.itemRegistered(glyph) && supplier.get()==glyph.getGlyph())
+                remaining.remove(glyph.getRegistryName());
+        }
+        return remaining;
+    }
     public static NativeFocusGlyph glyph(ResourceLocation glyph) {return all().stream().filter(g->g.getRegistryName().equals(glyph)).findFirst().orElse(null);}
 }

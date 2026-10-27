@@ -12,6 +12,7 @@ public final class NativeFocusPlatform {
     public static void init(net.minecraftforge.fml.ModContainer owner){container=owner;}
     public static boolean ready(){return container!=null;}
     public static void item(AbstractSpellPart glyph){net.minecraftforge.registries.ForgeRegistries.ITEMS.register(glyph.getRegistryName(),glyph.getGlyph());}
+    public static boolean itemRegistered(AbstractSpellPart glyph){return net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(glyph.getRegistryName())==glyph.getGlyph();}
     public static void config(AbstractSpellPart glyph){
         var builder=new net.minecraftforge.common.ForgeConfigSpec.Builder();glyph.buildConfig(builder);var spec=builder.build();glyph.CONFIG=spec;
         new net.minecraftforge.fml.config.ModConfig(net.minecraftforge.fml.config.ModConfig.Type.SERVER,spec,container,"goety_nouveau/"+glyph.getRegistryName().getPath()+".toml");

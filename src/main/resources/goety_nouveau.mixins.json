@@ -93,7 +93,8 @@
     "NativeImpactDamageMixin",
     "NativeFocusRegistrationMixin",
     "NativeFocusRecipeMixin",
-    "NativeFocusWandMixin"
+    "NativeFocusWandMixin",
+    "NativeFocusArsRegistrationMixin"
   ],
   "injectors": {
     "defaultRequire": 1

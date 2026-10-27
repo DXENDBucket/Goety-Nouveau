@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-28",
+  "version": "0.1.2",
+  "report": "https://mclo.gs/48gxbGQ",
+  "state": "verified-ready-for-deployment",
+  "addon_start": "77b6f0fe15c5e72c4549e54206aebceb38acdcc3",
+  "fixed_core": "b626e92705c9c7d4ff607c7b0a782e1766558f7d",
+  "core_tracked_files_unchanged": true,
+  "reproduction": {
+    "log": "build-registration-before-fix.log",
+    "symptom": "Duplicate item key goety_nouveau:glyph_native/native_focus_fixture/early before GameTest startup",
+    "gradle_exit_code": 0,
+    "actual_test_pass_count": 0,
+    "note": "Do not treat the zero launcher exit code as a passing test."
+  },
+  "tests": [
+    {
+      "loader": "NeoForge 21.1.250",
+      "mc": "1.21.1",
+      "ars": "5.13.1",
+      "goety": "3.2.1",
+      "passed": 1,
+      "failed": 0,
+      "log": "build-registration-fixed-neoforge-baseline.log"
+    },
+    {
+      "loader": "NeoForge 21.1.250",
+      "mc": "1.21.1",
+      "ars": "5.13.3",
+      "goety": "3.2.2",
+      "geckolib": "4.9.3",
+      "passed": 1,
+      "failed": 0,
+      "log": "build-registration-fixed-neoforge.log"
+    },
+    {
+      "loader": "Forge 47.4.0",
+      "mc": "1.20.1",
+      "ars": "4.12.7",
+      "goety": "2.5.59.2",
+      "passed": 1,
+      "failed": 0,
+      "log": "forge/build-registration-fixed-forge.log"
+    }
+  ],
+  "namespace": "goety_nouveau_registration",
+  "coverage": "Actual early Ars-event focus plus three late focuses: generated item binding, source model, recipe, no base-Goety duplicate",
+  "native_addon_jars_loaded": false,
+  "exact_full_report_environment_tested": false,
+  "client_started": false,
+  "gameplay_config_changed": false,
+  "distribution_checks": true,
+  "forge_reobfuscated": true,
+  "shared_instance_deployed": false,
+  "git_pushed": false,
+  "curseforge_uploaded": false,
+  "artifacts": [
+    {
+      "file": "C:\\Users\\57991\\Documents\\MinecraftDev\\parallel-workspaces\\goety-glyph-registration-20261028\\Goety-Nouveau\\build\\libs\\goety-nouveau-0.1.2-mc1.21.1-neoforge.jar",
+      "size": 605931,
+      "sha256": "25e64c52b7cdc8b52be3c252b51f4d04f7dc8fd59f5b13b9e610e075ff128d97"
+    },
+    {
+      "file": "C:\\Users\\57991\\Documents\\MinecraftDev\\parallel-workspaces\\goety-glyph-registration-20261028\\Goety-Nouveau\\build\\libs\\goety-nouveau-0.1.2-sources.jar",
+      "size": 331889,
+      "sha256": "de1cc2c6dc20b18f427e6b558d6f4cd9c1a402c71c009b9ca1c612f382f5bde5"
+    },
+    {
+      "file": "C:\\Users\\57991\\Documents\\MinecraftDev\\parallel-workspaces\\goety-glyph-registration-20261028\\Goety-Nouveau\\forge\\build\\libs\\goety-nouveau-0.1.2-mc1.20.1-forge.jar",
+      "size": 620941,
+      "sha256": "008eec821a7938ba7c427b79e8dbf6445836ecf3e936a107e8ba98a6abfb708d"
+    },
+    {
+      "file": "C:\\Users\\57991\\Documents\\MinecraftDev\\parallel-workspaces\\goety-glyph-registration-20261028\\Goety-Nouveau\\forge\\build\\libs\\goety-nouveau-0.1.2-sources.jar",
+      "size": 334452,
+      "sha256": "65bb7923a5d62bf60336715e67d4e17e082a1ef1144b84ed035ab70d6e5edf7d"
+    }
+  ]
+}

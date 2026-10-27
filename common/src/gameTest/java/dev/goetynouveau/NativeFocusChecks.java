@@ -27,8 +27,8 @@ public final class NativeFocusChecks {
         glyph.onResolve(hit,h.getLevel(),player,new SpellStats.Builder().setAmplification(2).build(),context,new SpellResolver(context));
     }
     public static void catalogue(GameTestHelper h,ServerPlayer p){
-        prepare(h,p);h.assertTrue(NativeFocusIndex.all().stream().filter(g->g.focusId().getNamespace().equals("native_focus_fixture")).count()==3,"Late item registrations all create glyphs");
-        for(var name:java.util.List.of("warmup","charge","ever")){
+        prepare(h,p);h.assertTrue(NativeFocusIndex.all().stream().filter(g->g.focusId().getNamespace().equals("native_focus_fixture")).count()==4,"Early and late registrations all create glyphs");
+        for(var name:java.util.List.of("early","warmup","charge","ever")){
             var g=glyph(name);h.assertTrue(g!=null&&BuiltInRegistries.ITEM.containsKey(g.getRegistryName()),"Native glyph item registered");
             h.assertTrue(NativeFocusResources.model(CarrierRegistry.id("goety_nouveau:item/"+g.getRegistryName().getPath())).contains("native_focus_fixture:item/"+name),"Source focus item model is reused");
             h.assertTrue(h.getLevel().getRecipeManager().byKey(g.getRegistryName()).isPresent(),"Native Scribe recipe loaded");
