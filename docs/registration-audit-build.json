@@ -137,11 +137,37 @@
   ],
   "shared_instance_deployed": true,
   "git_pushed": false,
-  "curseforge_uploaded": false,
+  "curseforge_uploaded": true,
   "implementation_commit": "d4f59a550a27ad47d212ef3e179eba9a677a63e9",
   "main_branch_merged": true,
   "deployed_modid_unique": true,
   "other_mods_unchanged": true,
   "deployment_backup": "C:\\Users\\57991\\Desktop\\.minecraft\\versions\\1.21.1-万法归一\\codex-backups\\goety-registration-audit-20261028-032130\\mods\\goety-nouveau-0.1.2-mc1.21.1-neoforge.jar",
-  "deployment_receipt": "releases/goety-registration-audit-20261028/deployment.json"
+  "deployment_receipt": "releases/goety-registration-audit-20261028/deployment.json",
+  "curseforge_receipts": [
+    {
+      "project": "goety",
+      "project_id": 1739392,
+      "platform": "neoforge",
+      "version": "0.1.3",
+      "file": "goety-nouveau-0.1.3-mc1.21.1-neoforge.jar",
+      "sha256": "1ca05d649734434402725fa1910b16fc53c1f0a5428543ffed6d850c303f3f3c",
+      "file_id": 9345946,
+      "state": "uploaded",
+      "release_type": "release",
+      "manual_release": false
+    },
+    {
+      "project": "goety",
+      "project_id": 1739392,
+      "platform": "forge",
+      "version": "0.1.3",
+      "file": "goety-nouveau-0.1.3-mc1.20.1-forge.jar",
+      "sha256": "862242f31c8c0b2b5f5b74266800babac101b476afc35bbb2105eae9fc3406a0",
+      "file_id": 9345947,
+      "state": "uploaded",
+      "release_type": "release",
+      "manual_release": false
+    }
+  ]
 }
