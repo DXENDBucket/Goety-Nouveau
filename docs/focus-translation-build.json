@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-28",
+  "version": "0.1.4",
+  "fixed_core": "b626e92705c9c7d4ff607c7b0a782e1766558f7d",
+  "upstream_checks": [
+    {
+      "loader": "neoforge",
+      "goety": "3.2.2",
+      "goety_jar_sha256": "507ad7c4462fe4d888a6458ad6dfbf1f320eadd626d714c96061c109493d888f",
+      "focus_names_matched": 121,
+      "platform_absent": [],
+      "extra_ability_and_enchantment_names_matched": 12
+    },
+    {
+      "loader": "forge",
+      "goety": "2.5.59.2",
+      "goety_jar_sha256": "d8136cfb7ef70736c7125f9837b1d5938225bd231513a2332f92655216e40e89",
+      "focus_names_matched": 120,
+      "platform_absent": [
+        "breeze"
+      ],
+      "extra_ability_and_enchantment_names_matched": 12
+    }
+  ],
+  "changed_focus_names": 77,
+  "changed_extra_ability_names": 1,
+  "shared_language_keys": 281,
+  "duplicate_keys": 0,
+  "missing_keys": 0,
+  "corrupt_values": 0,
+  "game_tests_run": false,
+  "client_started": false,
+  "curseforge_uploaded": false,
+  "git_pushed": false,
+  "addon_start": "91bf8629007c7907732ed26a9906ee77b2baf172",
+  "distribution_checks": true,
+  "forge_reobfuscated": true,
+  "artifacts": [
+    {
+      "loader": "neoforge",
+      "file": "build/libs/goety-nouveau-0.1.4-mc1.21.1-neoforge.jar",
+      "size": 606099,
+      "sha256": "85585dd52cad41a35375ac41556009c963aa9b4c6a878a166fd99396fbf9598b"
+    },
+    {
+      "loader": "neoforge",
+      "file": "build/libs/goety-nouveau-0.1.4-sources.jar",
+      "size": 331990,
+      "sha256": "a058363463b9eb5d99d6b32a54bb2304ff35f63fc8992ccd9c84a6fcde86aa04"
+    },
+    {
+      "loader": "forge",
+      "file": "forge/build/libs/goety-nouveau-0.1.4-mc1.20.1-forge.jar",
+      "size": 621182,
+      "sha256": "8469796cb6998d66e6fa6db554e3110f2aa3cbde29c3074f11dd72a913ec911a"
+    },
+    {
+      "loader": "forge",
+      "file": "forge/build/libs/goety-nouveau-0.1.4-sources.jar",
+      "size": 334575,
+      "sha256": "00a4170a92815141b2b97e0b1aa974970505335fe725ce9bb1b700481451b288"
+    }
+  ],
+  "entry_differences": [
+    {
+      "loader": "neoforge",
+      "changed_entries_from_0_1_3": [
+        "META-INF/neoforge.mods.toml",
+        "assets/goety_nouveau/lang/zh_cn.json"
+      ],
+      "executable_code_unchanged": true
+    },
+    {
+      "loader": "forge",
+      "changed_entries_from_0_1_3": [
+        "META-INF/mods.toml",
+        "assets/goety_nouveau/lang/zh_cn.json"
+      ],
+      "executable_code_unchanged": true
+    }
+  ],
+  "build_logs": [
+    "build-translation-neoforge.log",
+    "forge/build-translation-forge.log"
+  ],
+  "shared_instance_deployed": false
+}
