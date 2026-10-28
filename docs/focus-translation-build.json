@@ -83,5 +83,11 @@
     "build-translation-neoforge.log",
     "forge/build-translation-forge.log"
   ],
-  "shared_instance_deployed": false
+  "shared_instance_deployed": true,
+  "implementation_commit": "327a3b31c00488f210951d80dbef74c1ed5d4004",
+  "main_branch_merged": true,
+  "deployed_modid_unique": true,
+  "other_mods_unchanged": true,
+  "deployment_receipt": "releases/goety-focus-translations-20261028/deployment.json",
+  "deployment_backup": "C:\\Users\\57991\\Desktop\\.minecraft\\versions\\1.21.1-万法归一\\codex-backups\\goety-focus-translations-20261028-135756\\mods\\goety-nouveau-0.1.3-mc1.21.1-neoforge.jar"
 }
