@@ -15,7 +15,7 @@ Verified against the installed Goety 3.2.2 JAR (the relevant classes match the c
 - `WaterHurtingProjectile` stores private x/y/z acceleration components only in its directional constructors. Client packet reconstruction comes from vanilla AbstractHurtingProjectile and restores velocity but not those private components; its save/load methods omit them too. This is an independently identified native prediction/persistence gap, not yet established as the cause of the user's direction report.
 - The native HellBolt renderer reads the projectile rotation; native travel rotates toward actual velocity. Initial shooter rotation and gradual projectile rotation are separate from the server's movement vector.
 
-No replacement aiming, additional entity orientation sync or speculative motion patch is installed. A distinction between incorrect actual flight and incorrect visible orientation is still needed to narrow the symptom without launching a client.
+The user subsequently clarified that the report concerns Ars-triggered Goety focuses executing through allied mobs, not Inferno HellBolts. The actual mismatch is the adapter mixing body-facing particle/block/beam directions with head-facing target selection. See [the allied executor fix](allied-executor-facing.md). The Inferno changes stay removed; the unrelated native projectile prediction gap is not modified.
 
 ## Validation boundary
 

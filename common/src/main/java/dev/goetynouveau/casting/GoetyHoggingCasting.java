@@ -1,5 +1,7 @@
 package dev.goetynouveau.casting;
 
+import dev.arsconflux.api.execution.ExecutionAnchor;
+
 import com.Polarice3.Goety.common.entities.ModEntityType;
 import com.Polarice3.Goety.common.magic.SummonSpell;
 import com.Polarice3.Goety.utils.*;
@@ -31,7 +33,7 @@ public final class GoetyHoggingCasting {
         var center=frame.target() instanceof EntityHitResult e ? e.getEntity().position() : frame.target().getLocation();
         if(!Double.isFinite(center.lengthSqr())) return false;
         var direction=frame.incomingDirection();
-        if(direction==null || !Double.isFinite(direction.lengthSqr()) || direction.horizontalDistanceSqr()<1E-8) direction=caster.getLookAngle();
+        if(direction==null || !Double.isFinite(direction.lengthSqr()) || direction.horizontalDistanceSqr()<1E-8) direction=ExecutionAnchor.viewDirection(caster);
         direction=new Vec3(direction.x,0,direction.z).normalize();
         if(direction.lengthSqr()<1E-8) direction=new Vec3(0,0,1);
         var side=new Vec3(direction.z,0,-direction.x).scale(2);

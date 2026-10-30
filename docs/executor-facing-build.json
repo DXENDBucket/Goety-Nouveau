@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-31",
+  "core_commit": "c21d48a9d44830a4c7ad5553124a952af9c3af1b",
+  "runtime_validation": "Not run: build-only requested. No GameTest, client/server launch or shared instance replacement.",
+  "deployed": false,
+  "checks": "Both loaders compiled/packaged; metadata/Core minimum, licenses, Mixin classes/refmaps and removed workaround checked. Cataclysm/Legendary distribution verification passed.",
+  "artifacts": [
+    {
+      "project": "Goety-Nouveau",
+      "version": "0.1.9",
+      "loader": "neoforge",
+      "minecraft": "1.21.1",
+      "jar": "Goety-Nouveau/build/libs/goety-nouveau-0.1.9-mc1.21.1-neoforge.jar",
+      "sha256": "af4750ce6f19e9928cb95498258c30a32c7a3f458172349dd7a458eb15ad7ed5",
+      "sources": "Goety-Nouveau/build/libs/goety-nouveau-0.1.9-sources.jar",
+      "sources_sha256": "c74d33c9b3c9817d84245d90e81cbd93b6a5f2435c7d53fa344601d13ec22760"
+    },
+    {
+      "project": "Goety-Nouveau",
+      "version": "0.1.9",
+      "loader": "forge",
+      "minecraft": "1.20.1",
+      "jar": "Goety-Nouveau/forge/build/libs/goety-nouveau-0.1.9-mc1.20.1-forge.jar",
+      "sha256": "dba7ae93e2fce050c4dd29fa7f89bbe362533819fe452e9e2292ec9fde36b262",
+      "sources": "Goety-Nouveau/forge/build/libs/goety-nouveau-0.1.9-sources.jar",
+      "sources_sha256": "56e137088510e987be4b65b43f7dd8e311fb26a266762bc0283a99474df53c8b"
+    }
+  ]
+}

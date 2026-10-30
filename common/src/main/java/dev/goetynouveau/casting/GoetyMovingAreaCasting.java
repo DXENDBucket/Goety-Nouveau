@@ -1,5 +1,7 @@
 package dev.goetynouveau.casting;
 
+import dev.arsconflux.api.execution.ExecutionAnchor;
+
 import com.Polarice3.Goety.common.entities.projectiles.*;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.utils.*;
@@ -23,7 +25,7 @@ public final class GoetyMovingAreaCasting {
         if(frame.target() instanceof EntityHitResult && (selected==null || !selected.isAlive() || selected.isRemoved() || selected.level()!=world))return false;
         var point=selected!=null?selected.position():frame.target().getLocation();
         if(!Double.isFinite(point.lengthSqr()) || !world.isInWorldBounds(BlockPos.containing(point)) || !world.hasChunkAt(BlockPos.containing(point)))return false;
-        var direction=frame.incomingDirection();if(direction.lengthSqr()<1e-10 || focus==EffectFocus.TIDAL && direction.horizontalDistanceSqr()<1e-10)direction=caster.getLookAngle();
+        var direction=frame.incomingDirection();if(direction.lengthSqr()<1e-10 || focus==EffectFocus.TIDAL && direction.horizontalDistanceSqr()<1e-10)direction=ExecutionAnchor.viewDirection(caster);
         if(!Double.isFinite(direction.lengthSqr()) || direction.lengthSqr()<1e-10)return false;
         direction=direction.normalize();
         var owner=frame.damageOwner()!=null?frame.damageOwner():caster;var spell=(Spell)focus.spell();var staff=GoetyResources.staff(caster);

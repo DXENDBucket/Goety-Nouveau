@@ -15,7 +15,7 @@ public abstract class NativeBreathingResultMixin {
     @Redirect(method = "SpellResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getEyePosition()Lnet/minecraft/world/phys/Vec3;", remap = true), require = 0)
     private Vec3 goetyNouveau$eyes(LivingEntity caster) { return GoetyBreathGeometry.spatial(caster).getEyePosition(); }
     @Redirect(method = "SpellResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getLookAngle()Lnet/minecraft/world/phys/Vec3;", remap = true), require = 0)
-    private Vec3 goetyNouveau$look(LivingEntity caster) { return GoetyBreathGeometry.spatial(caster).getLookAngle(); }
+    private Vec3 goetyNouveau$look(LivingEntity caster) { return dev.goetynouveau.casting.GoetyExecutorFacing.look(caster); }
     @Redirect(method = "SpellResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getX()D", remap = true), require = 0)
     private double goetyNouveau$x(LivingEntity caster) { return GoetyBreathGeometry.spatial(caster).getX(); }
     @Redirect(method = "SpellResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getY()D", remap = true), require = 0)

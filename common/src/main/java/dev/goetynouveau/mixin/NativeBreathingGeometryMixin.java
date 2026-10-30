@@ -22,16 +22,19 @@ public abstract class NativeBreathingGeometryMixin implements IBreathingSpell {
         var view = GoetyBreathGeometry.current();
         if (view == null) return GoetyBreathGeometry.nativeDefaults().getBreathTarget(caster, range, filter);
         var host = GoetyBreathGeometry.spatial(caster);
-        return MobUtil.getTargets(host.level(), host, range, 3, entity -> entity != caster && entity != host
+        return MobUtil.getTargets(host.level(), host, host.getEyePosition(),
+                dev.goetynouveau.casting.GoetyExecutorFacing.look(host), range, 3, entity -> entity != caster && entity != host
                 && net.minecraft.world.entity.EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)
                 && MobUtil.LIVING_OR_PART.test(entity) && !dev.arsconflux.api.targeting.Allies.areAllies(caster, entity) && filter.test(entity));
     }
     @Override public void breathAttack(ParticleOptions particle, LivingEntity caster, boolean spreadOut,
                                         int count, double velocity, double spread) {
-        GoetyBreathGeometry.nativeDefaults().breathAttack(particle, GoetyBreathGeometry.spatial(caster), spreadOut, count, velocity, spread);
+        if(GoetyBreathGeometry.current()==null)GoetyBreathGeometry.nativeDefaults().breathAttack(particle,caster,spreadOut,count,velocity,spread);
+        else dev.goetynouveau.casting.GoetyBreathVisuals.breath(particle,GoetyBreathGeometry.spatial(caster),spreadOut,count,velocity,spread);
     }
     @Override public void dragonBreathAttack(ParticleOptions particle, LivingEntity caster, int count,
                                               double velocity, double angle) {
-        GoetyBreathGeometry.nativeDefaults().dragonBreathAttack(particle, GoetyBreathGeometry.spatial(caster), count, velocity, angle);
+        if(GoetyBreathGeometry.current()==null)GoetyBreathGeometry.nativeDefaults().dragonBreathAttack(particle,caster,count,velocity,angle);
+        else dev.goetynouveau.casting.GoetyBreathVisuals.dragon(particle,GoetyBreathGeometry.spatial(caster),count,velocity,angle);
     }
 }

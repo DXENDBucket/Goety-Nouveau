@@ -1,8 +1,10 @@
 # Goety & Nouveau
 
+0.1.9 修正 Ars 执行者朝向：读取生物头部视角，避免友军转头时吐息、冲刺或持续光束仍沿身体方向执行。使用 Conflux 0.1.47 的共用视角方法；位置执行保留固定方向和入射方向优先级。本批仅构建，未部署或进行客户端验证。详见 [跨附属朝向核对](docs/executor-facing-audit.md)。
+
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-`0.1.9` adds quiet NPC summon/buff usefulness hints and forwards valid NPC combat targets to native servants. Native summon limits and resource modes remain unchanged. See [the behavior and build-only validation boundary](docs/npc-summoning-and-inferno-aim.md).
+`0.1.9` adds quiet NPC summon/buff usefulness hints and forwards valid NPC combat targets to native servants. It also aligns Ars-triggered breath particles, block traces and corruption beams with the real executor's head view, without turning the executor. Native summon limits and resource modes remain unchanged. See [allied directional execution](docs/allied-executor-facing.md) and [the behavior and build-only validation boundary](docs/npc-summoning-and-inferno-aim.md).
 
 `0.1.8` adds an optional public non-player soul-account provider API. Explicitly configured NPCs can pay real soul energy through Conflux transactions; ordinary mobs remain unsupported in soul mode. Player storage, native loss events, totems and Ars resource mode are unchanged. See [NPC accounts](docs/npc-soul-accounts.md).
 

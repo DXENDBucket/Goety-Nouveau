@@ -1,5 +1,7 @@
 package dev.goetynouveau.casting;
 
+import dev.arsconflux.api.execution.ExecutionAnchor;
+
 import com.Polarice3.Goety.common.entities.projectiles.Spike;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.utils.WandUtil;
@@ -28,7 +30,7 @@ public final class GoetySpikeCasting {
                 Math.max(0,(gear?NativeSummonHooks.burning(caster):defaults.burning())+ars.getBuffCount(AugmentBurning.INSTANCE)),
                 gear?NativeEffectHooks.soulEater(caster):0);
         int range=Math.max(0,defaults.range()+(gear?WandUtil.getRangeLevel(caster):0));
-        var direction=frame.incomingDirection(); if(direction.horizontalDistanceSqr()<1e-10) direction=caster.getLookAngle();
+        var direction=frame.incomingDirection(); if(direction.horizontalDistanceSqr()<1e-10) direction=ExecutionAnchor.viewDirection(caster);
         float angle=(float)Math.atan2(direction.z,direction.x); boolean added=false;
         if(GoetyResources.sneaking(caster)) {
             added|=ring(world,frame,point,angle,5,1.5,(float)Math.PI*.4F,0,0,p);

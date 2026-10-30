@@ -29,7 +29,8 @@ public final class GoetyWaterWhipCasting {
         float yaw=host.yBodyRot*((float)Math.PI/180);double sin=Math.sin(yaw),cos=Math.cos(yaw),offset=side*.5;
         var origin=host.getEyePosition().add(-cos*offset-sin,(host.isCrouching()?-.1875:0)-.45,-sin*offset+cos);
         var tentacle=new GulfTentacle(ModEntityType.GULF_TENTACLE.get(),world);
-        tentacle.setPos(origin);tentacle.setOffset(side);tentacle.setRot(host.getYRot(),host.getXRot());
+        tentacle.setPos(origin);tentacle.setOffset(side);tentacle.setRot(host.getViewYRot(1),host.getViewXRot(1));
+        ((ArsTriggeredEntity)tentacle).goetyNouveau$arsTriggered(true);
         // Native synchronized owner controls attachment and client aim, not this adapter's damage attribution.
         tentacle.setTrueOwner(host);tentacle.setRange(tentacle.getRange()+range);
         tentacle.setStaff(spell.rightStaff(GoetyResources.staff(caster)));

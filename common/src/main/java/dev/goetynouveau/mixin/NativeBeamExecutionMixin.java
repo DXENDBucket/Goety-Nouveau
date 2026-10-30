@@ -30,6 +30,16 @@ public abstract class NativeBeamExecutionMixin implements ManagedBeam {
     }
     public CastContext goetyNouveau$beamContext() { return goetyNouveau$context; }
 
+    @Inject(method="updatePositionAndRotation",at=@At("TAIL"))
+    private void goetyNouveau$executorView(CallbackInfo ci) {
+        if(!((ArsTriggeredEntity)this).goetyNouveau$arsTriggered())return;
+        var beam=(AbstractBeam)(Object)this;
+        var owner=beam.getOptionalOwner().orElse(null);
+        if(owner==null)return;
+        beam.setYRot(owner.getViewYRot(1));beam.yRotO=owner.getViewYRot(0);
+        beam.setXRot(owner.getViewXRot(1));beam.xRotO=owner.getViewXRot(0);
+    }
+
     @Inject(method = "tick", remap = true, at = @At("HEAD"), cancellable = true)
     private void goetyNouveau$life(CallbackInfo ci) {
         if (!((ArsTriggeredEntity)this).goetyNouveau$arsTriggered()) return;

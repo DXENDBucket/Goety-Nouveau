@@ -15,5 +15,7 @@
       "sha256": "0a27b2eac35f3e2e2b94a292a91c6fb1e248f0dc5dbddb4855e419a77ecab44c"
     }
   ],
-  "inferno_alignment": "Removed. Original cause unresolved; native flight, client prediction and visible orientation audited; awaiting symptom distinction."
+  "inferno_alignment": "Removed; the report concerns Ars allied focus execution, not Inferno projectiles.",
+  "historical": true,
+  "superseded_by": "executor-facing-build.json"
 }

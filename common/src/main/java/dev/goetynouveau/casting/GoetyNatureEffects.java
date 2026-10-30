@@ -1,5 +1,7 @@
 package dev.goetynouveau.casting;
 
+import dev.arsconflux.api.execution.ExecutionAnchor;
+
 import com.Polarice3.Goety.api.blocks.entities.IWindPowered;
 import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.client.particles.*;
@@ -41,7 +43,7 @@ public final class GoetyNatureEffects {
     }
     private static Vec3 direction(CastContext frame) {
         var direction=frame.incomingDirection();
-        return direction.lengthSqr()>1e-10 ? direction.normalize() : frame.caster().getLookAngle();
+        return direction.lengthSqr()>1e-10 ? direction.normalize() : ExecutionAnchor.viewDirection(frame.caster());
     }
     private static boolean wind(ServerLevel world, CastContext frame, Spell spell, NativeSpellStats defaults,
                                  SpellStats ars, Vec3 point) {

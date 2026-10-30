@@ -1,5 +1,7 @@
 package dev.goetynouveau.casting;
 
+import dev.arsconflux.api.execution.ExecutionAnchor;
+
 import com.Polarice3.Goety.client.particles.AbsorbTrailParticleOption;
 import com.Polarice3.Goety.client.particles.GatherTrailParticleOption;
 import com.Polarice3.Goety.common.entities.ModEntityType;
@@ -83,7 +85,7 @@ public final class GoetyLocationEffects {
         fist.setExtraDamage(potency); fist.setWarmupDelayTicks(10);
         var direction = point.subtract(frame.caster().position());
         if (direction.horizontalDistanceSqr() < 1.0e-10) direction = frame.incomingDirection();
-        if (direction.horizontalDistanceSqr() < 1.0e-10) direction = frame.caster().getLookAngle();
+        if (direction.horizontalDistanceSqr() < 1.0e-10) direction = ExecutionAnchor.viewDirection(frame.caster());
         fist.setYRot((float)Math.toDegrees(Math.atan2(direction.z, direction.x)));
         if (!world.addFreshEntity(fist)) return false;
         world.playSound(null, point.x, point.y, point.z, ModSounds.RUMBLE.get(), spell.getSoundSource(), 1, 1);
@@ -165,7 +167,7 @@ public final class GoetyLocationEffects {
         double power = NativeLocationHooks.launchPower(staff) + potency * NativeLocationHooks.launchPotencyPower();
         if (!Double.isFinite(power) || power <= 0) return false;
         target.hurtMarked = true; target.setOnGround(false);
-        target.setDeltaMovement(target.getLookAngle().scale(power)); target.hasImpulse = true; target.fallDistance = 0;
+        target.setDeltaMovement(ExecutionAnchor.viewDirection(target).scale(power)); target.hasImpulse = true; target.fallDistance = 0;
         spell.playSound(world,target,ModSounds.WIND.get(),2,1);
         return true;
     }

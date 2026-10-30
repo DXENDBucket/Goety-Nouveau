@@ -14,6 +14,14 @@ import java.util.*;
 
 @Mixin(value=GulfTentacle.class,remap=false)
 public abstract class NativeTentacleRolesMixin {
+    @Redirect(method="tick",remap=true,
+            at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/LivingEntity;getYRot()F",remap=true))
+    private float goetyNouveau$viewYaw(LivingEntity host) {
+        return ((ArsTriggeredEntity)this).goetyNouveau$arsTriggered()?host.getViewYRot(1):host.getYRot();
+    }
+    @Redirect(method={"updatePositionAndRotation","damageEntities"},
+            at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/LivingEntity;getYRot()F",remap=true))
+    private float goetyNouveau$otherViewYaw(LivingEntity host){return goetyNouveau$viewYaw(host);}
     @Inject(method="tick",at=@At("HEAD"),cancellable=true,remap=true)
     private void goetyNouveau$attachment(CallbackInfo ci){
         var area=(GulfTentacle)(Object)this;
@@ -37,5 +45,9 @@ public abstract class NativeTentacleRolesMixin {
         return ModDamageSource.indirectDrench(direct,GoetyAreaProvenance.marked(area)?GoetyAreaProvenance.damageOwner(area,GoetyAreaProvenance.source(area,area.getTrueOwner())):nativeOwner);
     }
     @Redirect(method="damageEntities",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z",remap=true))
-    private boolean goetyNouveau$offspring(Level world,Entity extra){GoetyAreaProvenance.copy((Entity)(Object)this,extra);return world.addFreshEntity(extra);}
+    private boolean goetyNouveau$offspring(Level world,Entity extra){
+        GoetyAreaProvenance.copy((Entity)(Object)this,extra);
+        if(extra instanceof ArsTriggeredEntity child&&((ArsTriggeredEntity)this).goetyNouveau$arsTriggered())child.goetyNouveau$arsTriggered(true);
+        return world.addFreshEntity(extra);
+    }
 }

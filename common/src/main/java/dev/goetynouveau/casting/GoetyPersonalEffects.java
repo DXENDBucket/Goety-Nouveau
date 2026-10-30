@@ -1,5 +1,7 @@
 package dev.goetynouveau.casting;
 
+import dev.arsconflux.api.execution.ExecutionAnchor;
+
 import com.Polarice3.Goety.client.particles.*;
 import com.Polarice3.Goety.common.entities.ModEntityType;
 import com.Polarice3.Goety.common.entities.ally.Doppelganger;
@@ -87,8 +89,8 @@ public final class GoetyPersonalEffects {
                                     SpellStats ars, Vec3 point) {
         var caster = frame.caster();
         boolean self = frame.target() instanceof EntityHitResult e && e.getEntity() == caster;
-        var direction = self ? caster.getLookAngle() : point.subtract(caster.position());
-        if (direction.lengthSqr() < 1.0e-10) direction = caster.getLookAngle();
+        var direction = self ? ExecutionAnchor.viewDirection(caster) : point.subtract(caster.position());
+        if (direction.lengthSqr() < 1.0e-10) direction = ExecutionAnchor.viewDirection(caster);
         direction = direction.normalize();
         boolean staff = spell.rightStaff(GoetyResources.staff(caster));
         int potency = defaults.potency();

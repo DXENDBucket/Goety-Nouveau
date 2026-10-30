@@ -13,6 +13,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /** Native mob targets and default player ray tracing, at the real executor's body. */
 @Mixin(value=Spell.class,remap=false)
 public abstract class NativeSpellGeometryMixin implements ISpell {
+    @Override public net.minecraft.world.phys.BlockHitResult blockResult(Level world,LivingEntity caster,double range) {
+        var view=GoetyNativeGeometry.current();
+        if(view==null||view.spell()!=(Object)this||caster!=view.context().caster()&&caster!=view.host())
+            return dev.goetynouveau.casting.GoetyBreathGeometry.nativeDefaults().blockResult(world,caster,range);
+        var host=view.host();var start=host.getEyePosition();
+        var end=start.add(dev.goetynouveau.casting.GoetyExecutorFacing.look(host).scale(range));
+        return world.clip(new net.minecraft.world.level.ClipContext(start,end,
+                net.minecraft.world.level.ClipContext.Block.OUTLINE,net.minecraft.world.level.ClipContext.Fluid.NONE,host));
+    }
     @Override public HitResult rayTrace(Level world, LivingEntity caster, int range, double radius) {
         var host=GoetyNativeGeometry.spatial(this,caster);
         // Preserve virtual entityResult/blockResult overrides outside and inside the scope.
