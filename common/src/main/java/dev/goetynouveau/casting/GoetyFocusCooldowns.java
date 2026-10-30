@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 
 /** Use native focus records. A result-specific cooldown must survive the base release callback. */
 public final class GoetyFocusCooldowns {
+    private static final ThreadLocal<Boolean> FINAL_WRITE = new ThreadLocal<>();
     private GoetyFocusCooldowns() {}
     public static boolean enabled(LivingEntity caster) {
         return GoetyConfig.cooldownsEnabled() && dev.arsconflux.api.casting.ActiveCasts.cooldownsEnabled(caster) && ActiveCastingPlatform.realPlayer(caster)
@@ -26,7 +27,17 @@ public final class GoetyFocusCooldowns {
         return 0;
     }
     public static void atLeast(LivingEntity caster, Item focus, int ticks) {
-        if (ticks > 0 && enabled(caster) && remaining((ServerPlayer)caster, focus) < ticks)
-            SEHelper.addCooldown((ServerPlayer)caster, focus, ticks);
+        int adjusted = dev.arsconflux.api.casting.CastingTiming.cooldownTicks(caster, ticks);
+        if (adjusted > 0 && enabled(caster) && remaining((ServerPlayer)caster, focus) < adjusted) {
+            var previous = FINAL_WRITE.get();
+            FINAL_WRITE.set(true);
+            try { SEHelper.addCooldown((ServerPlayer)caster, focus, adjusted); }
+            finally { if (previous == null) FINAL_WRITE.remove(); else FINAL_WRITE.set(previous); }
+        }
+    }
+    /** Custom native focus callbacks may write directly; only opt-in native-focus scopes participate. */
+    public static int nativeWrite(net.minecraft.world.entity.player.Player player, int ticks) {
+        return !Boolean.TRUE.equals(FINAL_WRITE.get()) && NativeFocusScope.current(player) != null
+                ? dev.arsconflux.api.casting.CastingTiming.cooldownTicks(player, ticks) : ticks;
     }
 }

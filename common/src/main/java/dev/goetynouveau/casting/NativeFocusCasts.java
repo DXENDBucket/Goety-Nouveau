@@ -38,7 +38,8 @@ public final class NativeFocusCasts {
             var charge=GoetyResources.quote(frame.ars(),state.spell,ars.getAugments());
             var charging=state.spell instanceof IChargingSpell c?c:null;
             int nativeWarmup=Math.max(0,charging==null?state.spell.castDuration(player,state.wand):charging.castUp(player,state.wand));
-            int warmup=GoetyConfig.chantingEnabled()&&dev.arsconflux.api.casting.ActiveCastPolicy.of(frame.ars()).chanting()?nativeWarmup:0,offset=nativeWarmup-warmup;
+            int warmup=GoetyConfig.chantingEnabled()&&dev.arsconflux.api.casting.ActiveCastPolicy.of(frame.ars()).chanting()
+                    ?dev.arsconflux.api.casting.CastingTiming.chantTicks(player,nativeWarmup):0,offset=nativeWarmup-warmup;
             int lifetime=charging==null?warmup+2:Math.min(72000,warmup+GoetyConfig.nativeChannelTicks());
             NativeFocusPlatform.state(state.wand,lifetime+offset,0);
             var driver=new ExecutionDriver<SpellStat>(){

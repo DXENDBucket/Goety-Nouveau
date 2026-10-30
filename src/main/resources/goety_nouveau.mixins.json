@@ -4,6 +4,7 @@
   "package": "dev.goetynouveau.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "GoetyCooldownTimingMixin",
     "ArsRiftDataMixin",
     "ArsRiftVisualMixin",
     "FistVisualAccess",

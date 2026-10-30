@@ -3,6 +3,14 @@ import net.minecraft.gametest.framework.*;
 import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("goety_nouveau_native_self") @PrefixGameTestTemplate(false)
 public final class NativeFocusGameTests {
+ @GameTest(template="empty",timeoutTicks=30) public static void universalPreparation(GameTestHelper h){
+    var p=player(h);p.getAttribute(dev.arsconflux.platform.TimingAttributes.CAST_TIME_REDUCTION).setBaseValue(.5);
+    NativeFocusChecks.universalPreparation(h,p);
+ }
+ @GameTest(template="empty",timeoutTicks=30) public static void universalCooldown(GameTestHelper h){
+    var p=player(h);p.getAttribute(dev.arsconflux.platform.TimingAttributes.COOLDOWN_REDUCTION).setBaseValue(.25);
+    TimingIntegrationCases.cooldowns(h,p);
+ }
  private static net.minecraft.server.level.ServerPlayer player(GameTestHelper h){
         var cookie=net.minecraft.server.network.CommonListenerCookie.createInitial(new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(), "CastStudent"),false);
         var player=new net.minecraft.server.level.ServerPlayer(h.getLevel().getServer(),h.getLevel(),cookie.gameProfile(),cookie.clientInformation());

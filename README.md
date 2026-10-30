@@ -2,6 +2,8 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
+`0.1.5` requires Conflux 0.1.40 and connects its shared timing attributes, including native self-focus preparation and scoped custom cooldown writes. Defaults are neutral; ordinary Goety casting remains native. See [timing attributes](docs/timing-attributes.md).
+
 `0.1.4` aligns Simplified Chinese glyph names with their corresponding native Goety focuses and corrects related summon/projectile terminology in descriptions. Glyph IDs, recipes and spell behavior are unchanged. See [the translation audit](docs/focus-translation-audit.md).
 
 `0.1.3` limits automatic focus discovery to the actual Minecraft item registry, preventing custom catalogues from generating invalid extra glyphs and recipes. A registration audit of Conflux and seven addons found no equivalent duplicate-registration path in the other projects. See [the audit and regression results](docs/registration-audit-2026-10-28.md).

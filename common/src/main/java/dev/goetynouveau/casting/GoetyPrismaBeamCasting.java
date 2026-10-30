@@ -21,8 +21,9 @@ public final class GoetyPrismaBeamCasting {
                 || !GoetyChannelCasting.eligible(world,frame.caster(),host))return false;
         var spell=(Spell)EffectFocus.PRISMA_BEAM.spell();var staff=GoetyResources.staff(frame.caster()).copy();
         int nativeTicks=Math.max(1,spell.castDuration(frame.caster(),staff));
-        int ticks=GoetyChannelCasting.boundedTicks(nativeTicks,ars.getDurationMultiplier());
-        if(ticks<=0)return false;
+        int configured=GoetyChannelCasting.boundedTicks(nativeTicks,ars.getDurationMultiplier());
+        if(configured<=0)return false;
+        int ticks=Math.max(1,dev.arsconflux.api.casting.CastingTiming.chantTicks(frame.caster(),configured));
         var stats=WandUtil.getStats(frame.caster(),spell);
         stats.setPotency(Math.max(0,stats.getPotency()+(int)ars.getAmpMultiplier()));
         var display=GoetyEntities.CHANNEL_BEAM.get().create(world);

@@ -16,6 +16,18 @@ import net.minecraft.world.phys.*;
 import net.minecraft.world.InteractionHand;
 
 public final class NativeFocusChecks {
+    public static void universalPreparation(GameTestHelper h,ServerPlayer p){
+        prepare(h,p);
+        resolve(h,p,glyph("warmup"),new EntityHitResult(p));
+        h.assertTrue(p.getPersistentData().getInt("fixture_result")==0,"Native focus still starts before its reduced preparation");
+        h.runAfterDelay(3,()->h.assertTrue(p.getPersistentData().getInt("fixture_result")==1,
+                "50% Conflux reduction completes a four-tick native preparation in two ticks"));
+        h.runAfterDelay(6,()->{
+            h.assertTrue(p.getPersistentData().getInt("fixture_result")==1&&p.getPersistentData().getInt("fixture_stop")==1,
+                    "Reduced native preparation still emits once and cleans up");
+            p.discard();h.succeed();
+        });
+    }
     static NativeFocusGlyph glyph(String path){return NativeFocusIndex.glyph(CarrierRegistry.id("goety_nouveau:glyph_native/native_focus_fixture/"+path));}
     public static void prepare(GameTestHelper h,ServerPlayer player){
         player.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);player.setPos(h.absoluteVec(new Vec3(2,4,2)));h.getLevel().addNewPlayer(player);
