@@ -2,6 +2,8 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
+`0.1.6` connects Conflux 0.1.42 percentage spell-power attributes and retains the school profile of delayed Bolting tasks. Native spell stats, soul costs, healing and ordinary Goety casts remain unchanged at default zero bonuses.
+
 `0.1.5` requires Conflux 0.1.40 and connects its shared timing attributes, including native self-focus preparation and scoped custom cooldown writes. Defaults are neutral; ordinary Goety casting remains native. See [timing attributes](docs/timing-attributes.md).
 
 `0.1.4` aligns Simplified Chinese glyph names with their corresponding native Goety focuses and corrects related summon/projectile terminology in descriptions. Glyph IDs, recipes and spell behavior are unchanged. See [the translation audit](docs/focus-translation-audit.md).

@@ -12,11 +12,16 @@ import net.minecraft.world.entity.*;
  * The original MIT tick attack is adapted only to separate attribution from the moving caster. */
 public final class GoetyDashTask extends BoltingSpell.BoltingDashTask {
     private final java.util.UUID damageOwner;
+    private final dev.arsconflux.api.damage.SpellPower.Profile power;
     public GoetyDashTask(LivingEntity caster, LivingEntity damageOwner, ServerLevel world, boolean staff, float potency) {
         super(caster.getUUID(), world, staff, potency);
         this.damageOwner = damageOwner.getUUID();
+        this.power=dev.arsconflux.api.damage.SpellPower.capture(caster);
     }
     @Override public void tickTask() {
+        dev.arsconflux.api.school.SchoolDamage.during(power.schools(),()->dev.arsconflux.api.damage.SpellPower.scoped(power,()->{tickPowerTask();return null;}));
+    }
+    private void tickPowerTask() {
         ++ticks;
         if (!(level.getEntity(owner) instanceof LivingEntity caster)) return;
         var source = level.getEntity(damageOwner) instanceof LivingEntity living ? living : caster;

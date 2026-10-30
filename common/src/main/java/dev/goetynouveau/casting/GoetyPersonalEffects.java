@@ -64,7 +64,8 @@ public final class GoetyPersonalEffects {
             feedback = damage;
         }
         if (damage <= 0 || !Float.isFinite(damage) || !Float.isFinite(feedback)) return false;
-        boolean paidFeedback = caster.hurt(feedbackSource, feedback);
+        float feedbackAmount=feedback;
+        boolean paidFeedback = dev.arsconflux.api.damage.SpellPower.handled(() -> caster.hurt(feedbackSource, feedbackAmount));
         if (!paidFeedback && mortal) return false;
         if (!target.hurt(ModDamageSource.deathCurse(owner(frame)), damage)) return paidFeedback;
         var color = new ColorUtil(14226710);
