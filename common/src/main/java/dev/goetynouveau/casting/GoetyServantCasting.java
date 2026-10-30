@@ -91,7 +91,6 @@ public final class GoetyServantCasting {
             else pos=BlockFinder.SummonRadius(anchor,servant,world);
             if(!world.hasChunkAt(pos) || pos.getY()<world.getMinBuildHeight() || pos.getY()>=world.getMaxBuildHeight()) { servant.discard(); continue; }
             servant=GoetyServantProfiles.variant(focus,servant,world,pos,spell,caster,staff);
-            GoetyInfernoAim.mark(servant);
             servant.setTrueOwner(owner); servant.moveTo(pos,focus==EffectFocus.SPRITE || focus==EffectFocus.GHASTLY?caster.getYRot():0,0);
             if(exact!=null) servant.setPos(exact);
             if(GoetyServantProfiles.formation(focus,staff)) { servant.setYHeadRot(caster.getYHeadRot()); servant.setYRot(caster.getYRot()); }

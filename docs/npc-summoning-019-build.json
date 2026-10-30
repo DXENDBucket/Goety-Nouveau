@@ -4,15 +4,16 @@
   "artifacts": [
     {
       "path": "C:\\Users\\57991\\Documents\\MinecraftDev\\Goety-Nouveau\\build\\libs\\goety-nouveau-0.1.9-mc1.21.1-neoforge.jar",
-      "sha256": "96025b2a5ee2ac4981008f0c8464ab4f7ae58ba090ed812e84f9945e5182c56a"
+      "sha256": "d4d4076c0b184a189e8975c23726b1c78eff62b628ce4c937371c32b9bd6a7b1"
     },
     {
       "path": "C:\\Users\\57991\\Documents\\MinecraftDev\\Goety-Nouveau\\forge\\build\\libs\\goety-nouveau-0.1.9-mc1.20.1-forge.jar",
-      "sha256": "c9532d66d988b35fe45f4133cbbb2378d27c44b2678668bcf4824e93228e240e"
+      "sha256": "41ba2000aa011e6062417bb6c9c3dcbaa9fe5fed83fb571809d6e44090d87ca6"
     },
     {
       "path": "C:\\Users\\57991\\Documents\\MinecraftDev\\Abyss-Trials\\build\\libs\\abyss-trials-0.1.0-dev.22-mc1.21.1-neoforge.jar",
       "sha256": "0a27b2eac35f3e2e2b94a292a91c6fb1e248f0dc5dbddb4855e419a77ecab44c"
     }
-  ]
+  ],
+  "inferno_alignment": "Removed. Original cause unresolved; native flight, client prediction and visible orientation audited; awaiting symptom distinction."
 }

@@ -2,7 +2,7 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
-`0.1.9` adds quiet NPC summon/buff usefulness hints, forwards valid NPC combat targets to native servants, and aligns integration-summoned Infernos with their native HellBolt launches. Native summon limits and resource modes remain unchanged. See [the behavior and build-only validation boundary](docs/npc-summoning-and-inferno-aim.md).
+`0.1.9` adds quiet NPC summon/buff usefulness hints and forwards valid NPC combat targets to native servants. Native summon limits and resource modes remain unchanged. See [the behavior and build-only validation boundary](docs/npc-summoning-and-inferno-aim.md).
 
 `0.1.8` adds an optional public non-player soul-account provider API. Explicitly configured NPCs can pay real soul energy through Conflux transactions; ordinary mobs remain unsupported in soul mode. Player storage, native loss events, totems and Ars resource mode are unchanged. See [NPC accounts](docs/npc-soul-accounts.md).
 
