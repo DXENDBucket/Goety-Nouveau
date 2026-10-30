@@ -76,6 +76,7 @@ public final class GoetyResources {
         public Object reservationKey() {
             return ResourcePoolKey.of("goety:soul_energy", active ? player : totem);
         }
+        public long capacity() { return player==null?0:active?-1:totem.isEmpty()?0:ITotem.maximumSouls(totem); }
         public boolean free() { return player != null && player.isCreative(); }
         public boolean canSpend(int amount) {
             if (player == null || player.level().isClientSide || active != SEHelper.getSEActive(player)) return false;

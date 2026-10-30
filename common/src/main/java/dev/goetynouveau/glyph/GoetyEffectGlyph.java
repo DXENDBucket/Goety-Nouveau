@@ -24,6 +24,7 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
     public GoetyEffectGlyph(EffectFocus focus) {
         super(CarrierRegistry.id("goety_nouveau:glyph_" + focus.glyph), focus.name);
         this.focus = focus;
+                GoetyAbilityHints.effect(getRegistryName(),focus);
         compatibleAugments.addAll(augments(focus));
         spellSchools.add(SpellSchools.CONJURATION);
         SpellSchools.CONJURATION.addSpellPart(this);

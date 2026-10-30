@@ -17,6 +17,7 @@ public final class GoetyBoltGlyph extends AbstractAugment implements ProjectileF
     public GoetyBoltGlyph(BoltFocus focus) {
         super(CarrierRegistry.id("goety_nouveau:glyph_" + focus.glyph), focus.name);
         this.focus = focus;
+                dev.arsconflux.api.glyph.GlyphAbilities.declare(getRegistryName(),java.util.Set.of(dev.arsconflux.api.glyph.AbilityTags.ATTACK,dev.arsconflux.api.glyph.AbilityTags.ENEMY));
         spellSchools.add(SpellSchools.CONJURATION);
         SpellSchools.CONJURATION.addSpellPart(this);
     }

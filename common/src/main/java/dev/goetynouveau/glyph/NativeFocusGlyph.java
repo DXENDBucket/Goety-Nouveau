@@ -23,6 +23,7 @@ public final class NativeFocusGlyph extends AbstractEffect implements TriggerPai
     private final Item source;
     public NativeFocusGlyph(ResourceLocation focus,Item source) {
         super(NativeFocusIndex.id(focus),focus.toString());this.focus=focus;this.source=source;
+        dev.arsconflux.api.glyph.GlyphAbilities.declare(getRegistryName(),java.util.Set.of(dev.arsconflux.api.glyph.AbilityTags.UTILITY,dev.arsconflux.api.glyph.AbilityTags.SELF,dev.arsconflux.api.glyph.AbilityTags.PLAYER_ONLY));
         compatibleAugments.addAll(Set.of(AugmentAmplify.INSTANCE,AugmentDampen.INSTANCE));
         spellSchools.add(SpellSchools.CONJURATION);SpellSchools.CONJURATION.addSpellPart(this);
     }

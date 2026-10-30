@@ -62,13 +62,17 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         }
         return List.copyOf(result);
     }
-    private boolean cooldowns(ActiveCastRequest request) {
-        return GoetyConfig.cooldownsEnabled() && dev.goetynouveau.platform.ActiveCastingPlatform.realPlayer(request.caster())
-                && (!((ServerPlayer)request.caster()).isCreative() || GoetyConfig.creativeCooldown());
+    private boolean usesCooldowns(ActiveCastRequest request) {
+        if(!GoetyConfig.cooldownsEnabled())return false;
+        if(!(request.caster() instanceof net.minecraft.world.entity.player.Player))return true;
+        return dev.goetynouveau.platform.ActiveCastingPlatform.realPlayer(request.caster())
+                &&(!((ServerPlayer)request.caster()).isCreative()||GoetyConfig.creativeCooldown());
     }
     @Override public boolean allowed(ActiveCastRequest request) { return rejection(request)==null; }
     @Override public dev.arsconflux.api.casting.CastRejection rejection(ActiveCastRequest request) {
-        if(!cooldowns(request)) return null;
+        if(!usesCooldowns(request)) return null;
+        if(!(request.caster() instanceof ServerPlayer))return cooldowns(request).stream().filter(q->q.remaining()>0)
+                .max(Comparator.comparingLong(CooldownQuote::remaining)).map(q->new CastRejection(null,q.remaining())).orElse(null);
         var player=(ServerPlayer)request.caster();
         dev.arsconflux.api.casting.CastRejection selected=null;
         for(var id:new LinkedHashSet<>(focuses(request.spell()))) {
@@ -82,8 +86,8 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
         return selected;
     }
     @Override public void released(ActiveCastRequest request, List<Spell> recipes) {
-        if (!cooldowns(request)) return;
-        var player = (ServerPlayer)request.caster();
+        if (!usesCooldowns(request)) return;
+        var caster = request.caster();
         var distinct = new LinkedHashSet<ResourceLocation>();
         for (var recipe : recipes) distinct.addAll(focuses(recipe));
         for (var id : distinct) FocusSpells.read(id).ifPresent(spell -> {
@@ -91,9 +95,21 @@ public final class GoetyActiveCastProvider implements ActiveCastProvider {
             if (rapidFire(spell)) return;
             // Native grapples cool down on retrieval/end, not on initial launch.
             if(spell instanceof com.Polarice3.Goety.common.magic.spells.wild.GrappleSpell)return;
-            int ticks = Math.max(0, spell.spellCooldown(player));
-            GoetyFocusCooldowns.atLeast(player, BuiltInRegistries.ITEM.get(id), ticks);
+            int ticks = Math.max(0, spell.spellCooldown(caster));
+            GoetyFocusCooldowns.atLeast(caster, BuiltInRegistries.ITEM.get(id), ticks);
         });
+    }
+    @Override public List<CooldownQuote> cooldowns(ActiveCastRequest request) {
+        if(!usesCooldowns(request))return List.of();
+        var result=new ArrayList<CooldownQuote>();
+        for(var id:new LinkedHashSet<>(focuses(request.spell())))FocusSpells.read(id).ifPresent(spell->{
+            if(rapidFire(spell))return;
+            var item=BuiltInRegistries.ITEM.get(id);
+            long remaining=GoetyFocusCooldowns.remaining(request.caster(),item);
+            int ticks=CastingTiming.cooldownTicks(request.caster(),Math.max(0,spell.spellCooldown(request.caster())));
+            result.add(new CooldownQuote(id,ticks,remaining));
+        });
+        return List.copyOf(result);
     }
     @Override public void chantProgress(ActiveCastRequest request, UUID token, int duration, int remaining) {
         if (request.caster() instanceof ServerPlayer player && !player.hasDisconnected())

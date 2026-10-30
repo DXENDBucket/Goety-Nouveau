@@ -10,11 +10,16 @@ import net.minecraft.world.item.Item;
 
 /** Use native focus records. A result-specific cooldown must survive the base release callback. */
 public final class GoetyFocusCooldowns {
+    private static final dev.arsconflux.api.casting.PersistentCooldowns.Namespace MOBS=dev.arsconflux.api.casting.PersistentCooldowns.register(
+            dev.arsconflux.api.projectile.CarrierRegistry.id("goety_nouveau:mob_casting"),"goety_nouveau_mob_cooldowns");
     private static final ThreadLocal<Boolean> FINAL_WRITE = new ThreadLocal<>();
     private GoetyFocusCooldowns() {}
     public static boolean enabled(LivingEntity caster) {
-        return GoetyConfig.cooldownsEnabled() && dev.arsconflux.api.casting.ActiveCasts.cooldownsEnabled(caster) && ActiveCastingPlatform.realPlayer(caster)
-                && (!((ServerPlayer)caster).isCreative() || GoetyConfig.creativeCooldown());
+        return caster!=null&&!caster.level().isClientSide&&GoetyConfig.cooldownsEnabled() && dev.arsconflux.api.casting.ActiveCasts.cooldownsEnabled(caster) && (!(caster instanceof net.minecraft.world.entity.player.Player)
+                || ActiveCastingPlatform.realPlayer(caster)&&(!((ServerPlayer)caster).isCreative()||GoetyConfig.creativeCooldown()));
+    }
+    public static int remaining(LivingEntity actor,Item focus) {
+        return actor instanceof ServerPlayer player?remaining(player,focus):(int)Math.min(Integer.MAX_VALUE,MOBS.remaining(actor,net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(focus).toString()));
     }
     public static int remaining(ServerPlayer player, Item focus) {
         // Public native serialization exposes remaining ticks without a reflection/mixin dependency.
@@ -28,7 +33,10 @@ public final class GoetyFocusCooldowns {
     }
     public static void atLeast(LivingEntity caster, Item focus, int ticks) {
         int adjusted = dev.arsconflux.api.casting.CastingTiming.cooldownTicks(caster, ticks);
-        if (adjusted > 0 && enabled(caster) && remaining((ServerPlayer)caster, focus) < adjusted) {
+        if(adjusted>0&&enabled(caster)&&!(caster instanceof net.minecraft.world.entity.player.Player)) {
+            MOBS.extendRaw(caster,net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(focus).toString(),adjusted);return;
+        }
+        if (adjusted > 0 && enabled(caster) && remaining(caster, focus) < adjusted) {
             var previous = FINAL_WRITE.get();
             FINAL_WRITE.set(true);
             try { SEHelper.addCooldown((ServerPlayer)caster, focus, adjusted); }

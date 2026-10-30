@@ -2,6 +2,8 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
+`0.1.7` connects Conflux 0.1.45 planning facts, native-derived non-player focus cooldowns and optional glyph ability hints. A mob still needs a usable resource account: default soul mode does not become free; explicitly configured Ars mode uses native non-player mana. Player-native timing, resource selection and summon limits remain authoritative.
+
 `0.1.6` connects Conflux 0.1.42 percentage spell-power attributes and retains the school profile of delayed Bolting tasks. Native spell stats, soul costs, healing and ordinary Goety casts remain unchanged at default zero bonuses.
 
 `0.1.5` requires Conflux 0.1.40 and connects its shared timing attributes, including native self-focus preparation and scoped custom cooldown writes. Defaults are neutral; ordinary Goety casting remains native. See [timing attributes](docs/timing-attributes.md).
