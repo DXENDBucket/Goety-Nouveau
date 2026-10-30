@@ -1,5 +1,7 @@
 # Goety & Nouveau
 
+`0.1.11` adds explicit NPC staff qualifications, with selective school/item grants and an `ALL` convenience preset. Native mutually exclusive variants retain their branch order. No equipment, resources or player rules are automatically changed. See [staff qualifications](docs/npc-staff-qualifications.md).
+
 `0.1.10` lets native Goety equipment checks read actual Curios worn by non-player entities. It does not create slots, equip items or grant virtual upgrades; NPC content supplies its own entity-slot data and equipment. Player lookup is unchanged. See [NPC equipment](docs/npc-curios.md).
 
 0.1.9 修正 Ars 执行者朝向：读取生物头部视角，避免友军转头时吐息、冲刺或持续光束仍沿身体方向执行。使用 Conflux 0.1.47 的共用视角方法；位置执行保留固定方向和入射方向优先级。本批仅构建，未部署或进行客户端验证。详见 [跨附属朝向核对](docs/executor-facing-audit.md)。

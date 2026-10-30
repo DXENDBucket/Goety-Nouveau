@@ -10,6 +10,12 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value=WandUtil.class,remap=false)
 public abstract class NativeFocusWandMixin {
+    @Inject(method="findWand",at=@At("RETURN"),cancellable=true)
+    private static void goetyNouveau$qualifications(LivingEntity caster,CallbackInfoReturnable<ItemStack> cir){
+        var original=cir.getReturnValue();
+        var qualified=dev.goetynouveau.api.StaffQualifications.apply(caster,original);
+        if(qualified!=original)cir.setReturnValue(qualified);
+    }
     @Inject(method="findWand",at=@At("HEAD"),cancellable=true)
     private static void goetyNouveau$wand(LivingEntity caster,CallbackInfoReturnable<ItemStack> cir){var s=NativeFocusScope.current(caster);if(s!=null)cir.setReturnValue(s.wand);}
     @Inject(method="findFocus",at=@At("HEAD"),cancellable=true)
