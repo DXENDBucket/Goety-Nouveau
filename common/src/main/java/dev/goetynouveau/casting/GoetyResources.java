@@ -18,7 +18,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-/** Uses native storage, never a parallel soul-energy capability or a synthetic player. */
+/** Native player storage or an explicitly registered NPC account; never a synthetic player. */
 public final class GoetyResources {
     private GoetyResources() {}
     public static ISpell spell() {
@@ -52,7 +52,8 @@ public final class GoetyResources {
         cost = (int)Math.min(Integer.MAX_VALUE, total);
         if (GoetyConfig.RESOURCE_SOURCE.get() == ResourceSource.ARS_MANA)
             return new ResourceCharge(new ArsManaAccount(context.getCaster()), Math.max(0, cost));
-        var account = new SoulAccount(caster instanceof Player player ? player : null);
+        ResourceAccount account = dev.goetynouveau.api.SoulEnergyAccounts.find(caster);
+        if (account == null) account = new SoulAccount(caster instanceof Player player ? player : null);
         if (caster instanceof Player player) cost = (int)(cost * SEHelper.soulDiscount(player));
         return new ResourceCharge(account, Math.max(0, cost));
     }

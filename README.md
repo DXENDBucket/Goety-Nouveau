@@ -2,6 +2,8 @@
 
 An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
+`0.1.8` adds an optional public non-player soul-account provider API. Explicitly configured NPCs can pay real soul energy through Conflux transactions; ordinary mobs remain unsupported in soul mode. Player storage, native loss events, totems and Ars resource mode are unchanged. See [NPC accounts](docs/npc-soul-accounts.md).
+
 `0.1.7` connects Conflux 0.1.45 planning facts, native-derived non-player focus cooldowns and optional glyph ability hints. A mob still needs a usable resource account: default soul mode does not become free; explicitly configured Ars mode uses native non-player mana. Player-native timing, resource selection and summon limits remain authoritative.
 
 `0.1.6` connects Conflux 0.1.42 percentage spell-power attributes and retains the school profile of delayed Bolting tasks. Native spell stats, soul costs, healing and ordinary Goety casts remain unchanged at default zero bonuses.

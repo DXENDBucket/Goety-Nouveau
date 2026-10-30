@@ -1,0 +1,38 @@
+{
+  "project": "Goety-Nouveau",
+  "version": "0.1.8",
+  "artifacts": [
+    {
+      "file": "build/libs/goety-nouveau-0.1.8-mc1.21.1-neoforge.jar",
+      "sha256": "7809b5f8be926e3616479993e72ebaafac136fb37e042dd086eca438a3824495"
+    },
+    {
+      "file": "build/libs/goety-nouveau-0.1.8-sources.jar",
+      "sha256": "2e2f340fad11c4bc7c69717fbb163faeebdf6415e60a28bdbf74cc00a8ddf343"
+    },
+    {
+      "file": "forge/build/libs/goety-nouveau-0.1.8-mc1.20.1-forge.jar",
+      "sha256": "cedc164ea9b53eca0e4767d880e4c11dac4fc7827776b203e41ea04620d7b80c"
+    },
+    {
+      "file": "forge/build/libs/goety-nouveau-0.1.8-sources.jar",
+      "sha256": "250eb91b30f935e346b14850e7002fb273453d4253dd1973e41346ebf9699dcb"
+    }
+  ],
+  "verification": {
+    "integration_tests": "5/5; Abyss-Trials/build/weimeng-resources-gametest.log",
+    "without_optional_mods": "3/3; Abyss-Trials/build/weimeng-standalone-gametest.log",
+    "core_forge": "build and verifyDistributions passed; new accessor maps maxValue to f_22308_:D",
+    "goety_forge": "remapped binary + source package built; no Forge runtime test in this batch",
+    "client_visuals": "not manually verified"
+  },
+  "deployment": {
+    "instance": "1.21.1-\u4e07\u6cd5\u5f52\u4e00",
+    "backup": "mod-backups/weimeng-and-mana-limits-20261031-055442",
+    "core_startup_limits": {
+      "enabled": true,
+      "maximum_mana": 1000000,
+      "maximum_regeneration": 100000
+    }
+  }
+}
