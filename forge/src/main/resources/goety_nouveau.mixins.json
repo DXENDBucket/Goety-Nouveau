@@ -6,6 +6,7 @@
   "refmap": "goety_nouveau.refmap.json",
   "mixins": [
     "GoetyCooldownTimingMixin",
+    "NativeMobCuriosMixin",
     "ArsRiftDataMixin",
     "ArsRiftVisualMixin",
     "FistVisualAccess",

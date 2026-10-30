@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-31",
+  "version": "0.1.10",
+  "core_commit": "8c889733399a0dcf2d64260a95bbf17c0c59685c",
+  "validation": "Both loaders compiled and packaged. Released target signatures, Mixin membership, class presence, Forge refmap and licenses checked statically. No runtime test launched.",
+  "artifacts": [
+    {
+      "loader": "neoforge",
+      "minecraft": "1.21.1",
+      "jar": "build\\libs\\goety-nouveau-0.1.10-mc1.21.1-neoforge.jar",
+      "sha256": "4d6f18bddb7a07dfe7cf61d50605923ea6b1223d2e31b89780545154d6cf3eb7",
+      "sources": "build\\libs\\goety-nouveau-0.1.10-sources.jar",
+      "sources_sha256": "95398911708677ed55948133fdc25dd3ed36c1bf89457745d83bdacb20076976",
+      "native_jar": "goety.jar"
+    },
+    {
+      "loader": "forge",
+      "minecraft": "1.20.1",
+      "jar": "forge\\build\\libs\\goety-nouveau-0.1.10-mc1.20.1-forge.jar",
+      "sha256": "2aa95729775864703bb96dc81ecc8c94b287c35d71ccfdf9d014a0c35f98196f",
+      "sources": "forge\\build\\libs\\goety-nouveau-0.1.10-sources.jar",
+      "sources_sha256": "05924f5c0c2717fe8dbfe6138c379ee0b9f54f5bd583e27becb4cf2379a2090a",
+      "native_jar": "goety-2.5.59.2-forge1201.jar"
+    }
+  ]
+}
