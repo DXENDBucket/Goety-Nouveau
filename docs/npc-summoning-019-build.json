@@ -1,0 +1,18 @@
+{
+  "core_commit": "f457b0ba631b366ac903f75338a68c997d7809e4",
+  "validation": "Compilation/packaging and static distribution checks only. No runtime tests or pack deployment authorized.",
+  "artifacts": [
+    {
+      "path": "C:\\Users\\57991\\Documents\\MinecraftDev\\Goety-Nouveau\\build\\libs\\goety-nouveau-0.1.9-mc1.21.1-neoforge.jar",
+      "sha256": "96025b2a5ee2ac4981008f0c8464ab4f7ae58ba090ed812e84f9945e5182c56a"
+    },
+    {
+      "path": "C:\\Users\\57991\\Documents\\MinecraftDev\\Goety-Nouveau\\forge\\build\\libs\\goety-nouveau-0.1.9-mc1.20.1-forge.jar",
+      "sha256": "c9532d66d988b35fe45f4133cbbb2378d27c44b2678668bcf4824e93228e240e"
+    },
+    {
+      "path": "C:\\Users\\57991\\Documents\\MinecraftDev\\Abyss-Trials\\build\\libs\\abyss-trials-0.1.0-dev.22-mc1.21.1-neoforge.jar",
+      "sha256": "0a27b2eac35f3e2e2b94a292a91c6fb1e248f0dc5dbddb4855e419a77ecab44c"
+    }
+  ]
+}

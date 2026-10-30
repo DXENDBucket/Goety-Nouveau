@@ -15,6 +15,7 @@
     "GoetyBoltStateMixin",
     "GoetyFireballStateMixin",
     "GoetyHellBoltStateMixin",
+    "NativeInfernoLaunchAlignmentMixin",
     "GoetyQuillStateMixin",
     "ManagedFireballHitMixin",
     "ManagedQuillHitMixin",

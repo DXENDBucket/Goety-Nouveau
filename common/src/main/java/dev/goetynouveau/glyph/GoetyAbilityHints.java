@@ -16,6 +16,14 @@ final class GoetyAbilityHints {
             default -> Set.of();
         };
         if(!tags.isEmpty())GlyphAbilities.declare(id,tags);
+        switch(focus) {
+            case SOUL_HEAL -> GlyphConditions.declare(id,(caster,target)->target.isAlive()&&target.getHealth()<target.getMaxHealth()-.5f);
+            case IRON_HIDE -> GlyphConditions.declare(id,(caster,target)->!target.hasEffect(dev.goetynouveau.platform.NativeEffectHooks.ironHide(1,0).getEffect()));
+            case CHILL_HIDE -> GlyphConditions.declare(id,(caster,target)->!target.hasEffect(dev.goetynouveau.platform.NativeEffectHooks.chillHide(1,0).getEffect()));
+            case BULWARK -> GlyphConditions.declare(id,(caster,target)->com.Polarice3.Goety.utils.MiscCapHelper.getShields(target)<=0);
+            case BLAZING,GHASTLY -> GlyphConditions.declare(id,(caster,target)->dev.goetynouveau.casting.GoetyServantCasting.canSummon(focus,caster));
+            default -> {}
+        }
     }
     private GoetyAbilityHints() {}
 }

@@ -62,7 +62,7 @@ public final class GoetyEffectGlyph extends AbstractEffect implements TriggerPai
         // a different injured ally, so validate the actual recipient in the adapter instead.
         // Banish performs the full native conditions inside a scoped Ars-target adapter;
         // the ordinary native sight trace would otherwise validate an unrelated entity.
-        if (!focus.channel() && focus != EffectFocus.KILLING && focus != EffectFocus.SOUL_HEAL && focus != EffectFocus.IRON_HIDE && focus != EffectFocus.BULWARK && focus != EffectFocus.BANISH
+        if (!focus.channel() && focus != EffectFocus.KILLING && focus != EffectFocus.SOUL_HEAL && focus != EffectFocus.IRON_HIDE && focus != EffectFocus.CHILL_HIDE && focus != EffectFocus.BULWARK && focus != EffectFocus.BANISH
                 && !(spell instanceof com.Polarice3.Goety.common.magic.SummonSpell && GoetyResources.sneaking(caster))
                 && !spell.conditionsMet(server, caster)) return;
         if(focus==EffectFocus.GRAPPLE){dev.goetynouveau.casting.GoetyGrappleCasting.apply(server,frame,stats,context);return;}

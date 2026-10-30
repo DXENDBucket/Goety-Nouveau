@@ -22,6 +22,12 @@ import java.util.ArrayList;
  * resource pool, expiry timer or command AI. Adapted from the original MIT summon spells. */
 public final class GoetyServantCasting {
     private GoetyServantCasting() {}
+    /** Read-only AI hint. The actual summon still validates positions, native limits and payment. */
+    public static boolean canSummon(EffectFocus focus,LivingEntity caster) {
+        if(!(caster.level() instanceof ServerLevel world)||!(focus.spell() instanceof SummonSpell spell))return false;
+        var servants=owned(world,NativeSummonHooks.owner(caster),spell);
+        return GoetyResources.sneaking(caster)?!servants.isEmpty():servants.size()<spell.summonLimit();
+    }
     public static boolean apply(EffectFocus focus,ServerLevel world,CastContext frame,SummonSpell spell,
                                 NativeSpellStats defaults,SpellStats ars) {
         var caster=frame.caster(); var owner=NativeSummonHooks.owner(caster);
@@ -44,6 +50,13 @@ public final class GoetyServantCasting {
         LivingEntity target=hit instanceof EntityHitResult e && e.getEntity() instanceof LivingEntity l
                 && l.isAlive() && l.level()==world && l!=caster && !dev.arsconflux.api.targeting.Allies.areAllies(caster,l)
                 && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(l) ? l : null;
+        // Self-casting NPCs already have a combat target; no player sight trace is available.
+        if(target==null&&caster instanceof Mob mob) {
+            var enemy=mob.getTarget();
+            if(enemy!=null&&enemy.isAlive()&&enemy.level()==world&&enemy!=owner
+                    &&!dev.arsconflux.api.targeting.Allies.areAllies(caster,enemy)
+                    &&EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(enemy))target=enemy;
+        }
         boolean added=false;
         SpawnGroupData group=null;
         for(int i=0;i<amount;i++) {
@@ -78,6 +91,7 @@ public final class GoetyServantCasting {
             else pos=BlockFinder.SummonRadius(anchor,servant,world);
             if(!world.hasChunkAt(pos) || pos.getY()<world.getMinBuildHeight() || pos.getY()>=world.getMaxBuildHeight()) { servant.discard(); continue; }
             servant=GoetyServantProfiles.variant(focus,servant,world,pos,spell,caster,staff);
+            GoetyInfernoAim.mark(servant);
             servant.setTrueOwner(owner); servant.moveTo(pos,focus==EffectFocus.SPRITE || focus==EffectFocus.GHASTLY?caster.getYRot():0,0);
             if(exact!=null) servant.setPos(exact);
             if(GoetyServantProfiles.formation(focus,staff)) { servant.setYHeadRot(caster.getYHeadRot()); servant.setYRot(caster.getYRot()); }
