@@ -113,6 +113,8 @@ public final class GoetyPersonalEffects {
     }
     private static boolean illusion(ServerLevel world, CastContext frame, Spell spell, LivingEntity target, Vec3 point) {
         var caster = frame.caster();
+        if(!enemy(caster,target)&&caster instanceof net.minecraft.world.entity.Mob mob&&enemy(caster,mob.getTarget()))
+            target=mob.getTarget();
         var old = new ArrayList<Doppelganger>();
         for (var entity : world.getAllEntities()) if (entity instanceof Doppelganger clone && clone.isAlive()
                 && clone.getTrueOwner() == caster && clone.tickCount > 10) old.add(clone);

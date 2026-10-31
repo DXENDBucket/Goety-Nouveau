@@ -1,5 +1,7 @@
 # Goety & Nouveau
 
+`0.1.12` adds quiet summon-cap usefulness hints for Blackguard and Leapleaf. Summon readiness checks stop at the relevant limit and no longer build a complete servant list; actual summon lifecycle, caps and payment remain native. Illusion now declares summoning hints; self-casting mobs forward their real enemy to native clone targeting without changing player aim or clone variants.
+
 `0.1.11` adds explicit NPC staff qualifications, with selective school/item grants and an `ALL` convenience preset. Native mutually exclusive variants retain their branch order. No equipment, resources or player rules are automatically changed. See [staff qualifications](docs/npc-staff-qualifications.md).
 
 `0.1.10` lets native Goety equipment checks read actual Curios worn by non-player entities. It does not create slots, equip items or grant virtual upgrades; NPC content supplies its own entity-slot data and equipment. Player lookup is unchanged. See [NPC equipment](docs/npc-curios.md).

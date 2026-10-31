@@ -25,8 +25,17 @@ public final class GoetyServantCasting {
     /** Read-only AI hint. The actual summon still validates positions, native limits and payment. */
     public static boolean canSummon(EffectFocus focus,LivingEntity caster) {
         if(!(caster.level() instanceof ServerLevel world)||!(focus.spell() instanceof SummonSpell spell))return false;
-        var servants=owned(world,NativeSummonHooks.owner(caster),spell);
-        return GoetyResources.sneaking(caster)?!servants.isEmpty():servants.size()<spell.summonLimit();
+        boolean recalling=GoetyResources.sneaking(caster);
+        int limit=spell.summonLimit(),count=0;
+        if(!recalling&&limit<=0)return false;
+        var owner=NativeSummonHooks.owner(caster).getUUID();var predicate=spell.summonPredicate();
+        for(var entity:world.getAllEntities())
+            if(entity instanceof LivingEntity living&&living.isAlive()&&entity instanceof IOwned owned
+                    &&owner.equals(owned.getOwnerId())&&predicate.test(living)) {
+                if(recalling)return true;
+                if(++count>=limit)return false;
+            }
+        return !recalling;
     }
     public static boolean apply(EffectFocus focus,ServerLevel world,CastContext frame,SummonSpell spell,
                                 NativeSpellStats defaults,SpellStats ars) {

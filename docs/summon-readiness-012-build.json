@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-31",
+  "version": "0.1.12",
+  "core_commit": "7582e450b85191d85254a8e56c71980c23ecd366",
+  "validation": "Builds, final-JAR license, optional source exclusion and declared refmap presence checked. Forge artifacts reobfuscated. No client/server/GameTest launch. Visuals and gameplay remain unverified.",
+  "artifacts": [
+    {
+      "loader": "neoforge",
+      "minecraft": "1.21.1",
+      "jar": "build\\libs\\goety-nouveau-0.1.12-mc1.21.1-neoforge.jar",
+      "sha256": "dd5fe5a343bc4fcdedb6ee9bfda2423f3b55607a5ac6d98b4be2c1afd3129145",
+      "sources": "build\\libs\\goety-nouveau-0.1.12-sources.jar",
+      "sources_sha256": "d5d46cab642b96d1c8ae9d09e37f2e48242371e3d93cb6be8df30a62287d00ad"
+    },
+    {
+      "loader": "forge",
+      "minecraft": "1.20.1",
+      "jar": "forge\\build\\libs\\goety-nouveau-0.1.12-mc1.20.1-forge.jar",
+      "sha256": "d1f648b796c33b765c7b99eb7af7b31fd69d0e41fa2882106375708e94c6bc90",
+      "sources": "forge\\build\\libs\\goety-nouveau-0.1.12-sources.jar",
+      "sources_sha256": "3feba31434c8681c47c02ac1914f7d7de2af40075ceebe007158de7d5b806482"
+    }
+  ],
+  "charge_regression": "UtilityEffects.class exactly matches 0.1.11 on both loaders; canceled Charge policy classes absent."
+}
