@@ -168,8 +168,10 @@ public final class GlyphCatalog {
         return ability ? "1" : "0";
     }
     public static void register() {
+        boolean charmsLoaded=dev.goetynouveau.platform.NativeFocusPlatform.modLoaded("goety_charms");
+        if(charmsLoaded)dev.goetynouveau.compat.GoetyCharmsCompat.addGlyph(ALL);
         dev.arsconflux.api.glyph.GlyphVisuals.register("goety_nouveau",part->part instanceof dev.goetynouveau.glyph.NativeFocusGlyph nativeFocus
-                ?dev.arsconflux.api.glyph.GlyphIcon.item(nativeFocus.source()):null);
+                ?dev.arsconflux.api.glyph.GlyphIcon.item(nativeFocus.source()):charmsLoaded?dev.goetynouveau.compat.GoetyCharmsCompat.icon(part):null);
         dev.arsconflux.api.targeting.Allies.register(CarrierRegistry.id("goety_nouveau:native_allies"),
                 com.Polarice3.Goety.utils.MobUtil::areAllies);
         // Secondary ordering runs within the provider group, never across providers.

@@ -32,6 +32,10 @@ def generateGlyphRecipes = tasks.register('generateGlyphRecipes') {
                        count: recipe.output.count, inputItems: recipe.inputs.collect { [item: it] }]
                     : [type: recipe.type, exp: recipe.exp, inputs: recipe.inputs, output: recipe.output]
             def directory = glyphRecipeLoader == 'forge' ? 'recipes' : 'recipe'
+            if(recipe.requires_mod) {
+                if(glyphRecipeLoader=='forge')output.conditions=[[type:'forge:mod_loaded',modid:recipe.requires_mod]]
+                else output['neoforge:conditions']=[[type:'neoforge:mod_loaded',modid:recipe.requires_mod]]
+            }
             def file = new File(targetRoot, "data/goety_nouveau/${directory}/${name}.json")
             file.parentFile.mkdirs()
             file.setText(JsonOutput.prettyPrint(JsonOutput.toJson(output)) + '\n', 'UTF-8')

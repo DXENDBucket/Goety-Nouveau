@@ -53,6 +53,8 @@ neoForge {
 }
 dependencies {
     implementation project(':ars-conflux')
+    compileOnly fileTree(dir:'libs/optional',include:'goety-charms-*.jar')
+    if(providers.gradleProperty('withCharms').getOrElse('false').toBoolean())runtimeOnly fileTree(dir:'libs/optional',include:'goety-charms-*.jar')
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     runtimeOnly fileTree(dir: 'libs', include: '*.jar')
     // Development-only optional coexistence run; never a production dependency or bundled JAR.

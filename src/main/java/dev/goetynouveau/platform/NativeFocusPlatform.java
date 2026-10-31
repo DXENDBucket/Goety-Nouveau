@@ -13,6 +13,7 @@ public final class NativeFocusPlatform {
     private static net.neoforged.fml.ModContainer container;
     public static void init(net.neoforged.fml.ModContainer owner){container=owner;}
     public static boolean ready(){return container!=null;}
+    public static boolean modLoaded(String id){return net.neoforged.fml.ModList.get().isLoaded(id);}
     public static void item(AbstractSpellPart glyph){Registry.register(BuiltInRegistries.ITEM,glyph.getRegistryName(),glyph.getGlyph());}
     public static boolean itemRegistered(AbstractSpellPart glyph){return BuiltInRegistries.ITEM.containsKey(glyph.getRegistryName()) && BuiltInRegistries.ITEM.get(glyph.getRegistryName())==glyph.getGlyph();}
     public static void config(AbstractSpellPart glyph){

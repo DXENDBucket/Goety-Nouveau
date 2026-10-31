@@ -1,5 +1,7 @@
 # Goety & Nouveau
 
+`0.1.13` adds the optional **Activate Charm / 启符** effect when Goety Charms 0.2.2+ is installed. It releases the first sealed summoning/conversion charm in the original player's offhand, then hotbar left to right, then backpack rows left to right from top to bottom. Summoning uses the Ars hit location; conversion uses the selected living entity. A failed attempt retains that charm without falling through to other inventory items. Teleport/location charms and unsealed samples are skipped. The glyph itself adds no Mana, soul fee, native preparation or cooldown; ordinary recipe parts keep their own costs. Native ritual capacity, source validation and creative non-consumption remain authoritative. Obtain it at a Scribe's Table with Blank Charm + Source Gem (27 experience points). Without Goety Charms, neither the glyph nor its recipe is registered. See [charm activation](docs/charm-activation.md).
+
 `0.1.12` adds quiet summon-cap usefulness hints for Blackguard and Leapleaf. Summon readiness checks stop at the relevant limit and no longer build a complete servant list; actual summon lifecycle, caps and payment remain native. Illusion now declares summoning hints; self-casting mobs forward their real enemy to native clone targeting without changing player aim or clone variants.
 
 `0.1.11` adds explicit NPC staff qualifications, with selective school/item grants and an `ALL` convenience preset. Native mutually exclusive variants retain their branch order. No equipment, resources or player rules are automatically changed. See [staff qualifications](docs/npc-staff-qualifications.md).
@@ -30,7 +32,7 @@ An independent Goety integration for Ars Nouveau, built on Ars Conflux.
 
 `0.1.0` requires Ars Conflux 0.1.25 or newer in the 0.1.x series and adds automatic, player-self-casting glyphs for addon `IFocus` items. Native staff identity, matching-focus enchantments and spell callbacks are retained in a per-cast scope, with native preparation, resource billing, charging cadence and shared focus cooldowns. These glyphs do not replace Ars projectiles or support remote origins. See [native focus self-casting](docs/native-focus-self-casting.md) for configuration and boundaries.
 
-**Current release: `0.1.9`. Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap) and four native parameter augments are available; this is not yet a complete Goety spell catalogue.**
+**Current release: `0.1.13`. Twenty-four projectile replacements, one hundred and six shared effects, one additional native effect per loader (NeoForge Breeze / Forge Temblor Clap), four native parameter augments and an optional charm-activation effect are available; this is not yet a complete Goety spell catalogue.**
 
 The project provides builds for Minecraft **1.21.1 NeoForge** and **1.20.1 Forge**. Both use the same version file and shared integration source. Iron & Nouveau is not a dependency. Optional Ars projectile integrations belong to Ars Conflux, so each spell addon does not need to implement them again.
 

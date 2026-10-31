@@ -8,7 +8,7 @@ group = 'dev.goetynouveau'
 version = file('../VERSION').text.trim()
 base { archivesName = 'goety-nouveau' }
 java { toolchain.languageVersion = JavaLanguageVersion.of(17); withSourcesJar() }
-repositories { flatDir { dirs 'libs' }; mavenCentral { content { excludeGroup 'local' } } }
+repositories { flatDir { dirs 'libs','libs/optional' }; mavenCentral { content { excludeGroup 'local' } } }
 sourceSets.main { java.srcDir '../common/src/main/java'; resources.srcDir '../common/src/main/resources' }
 sourceSets { gameTest {
     java.srcDir '../common/src/gameTest/java'
@@ -62,6 +62,8 @@ dependencies {
     compileOnly 'io.github.llamalad7:mixinextras-common:0.4.1'
     annotationProcessor 'io.github.llamalad7:mixinextras-common:0.4.1'
     implementation project(':ars-conflux')
+    compileOnly fg.deobf('local:goety-charms:0.2.2-forge1201')
+    if(providers.gradleProperty('withCharms').getOrElse('false').toBoolean())runtimeOnly fg.deobf('local:goety-charms:0.2.2-forge1201')
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.0'
     for (name in ['ars-nouveau', 'geckolib', 'curios', 'patchouli']) {
         implementation fg.deobf("local:${name}:forge1201")

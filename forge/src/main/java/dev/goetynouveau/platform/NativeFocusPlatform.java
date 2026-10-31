@@ -11,6 +11,7 @@ public final class NativeFocusPlatform {
     private static net.minecraftforge.fml.ModContainer container;
     public static void init(net.minecraftforge.fml.ModContainer owner){container=owner;}
     public static boolean ready(){return container!=null;}
+    public static boolean modLoaded(String id){return net.minecraftforge.fml.ModList.get().isLoaded(id);}
     public static void item(AbstractSpellPart glyph){net.minecraftforge.registries.ForgeRegistries.ITEMS.register(glyph.getRegistryName(),glyph.getGlyph());}
     public static boolean itemRegistered(AbstractSpellPart glyph){return net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(glyph.getRegistryName())==glyph.getGlyph();}
     public static void config(AbstractSpellPart glyph){

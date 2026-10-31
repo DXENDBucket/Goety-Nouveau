@@ -7,6 +7,12 @@ version="${version}"
 displayName="Goety & Nouveau"
 authors="EndXiom"
 description='''Compose native Goety spells through Ars Nouveau and Ars Conflux.'''
+[[dependencies.goety_nouveau]]
+modId="goety_charms"
+type="optional"
+versionRange="[0.2.2,)"
+ordering="AFTER"
+side="BOTH"
 [[mixins]]
 config="goety_nouveau.mixins.json"
 [[dependencies.goety_nouveau]]

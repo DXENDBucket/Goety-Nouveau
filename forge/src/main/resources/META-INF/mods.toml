@@ -8,6 +8,12 @@ displayName="Goety & Nouveau"
 authors="EndXiom"
 description='''Compose native Goety spells through Ars Nouveau and Ars Conflux.'''
 [[dependencies.goety_nouveau]]
+modId="goety_charms"
+mandatory=false
+versionRange="[0.2.2,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.goety_nouveau]]
 modId="forge"
 mandatory=true
 versionRange="[47.4.0,48)"

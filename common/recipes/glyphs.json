@@ -2184,5 +2184,22 @@
       "id": "goety_nouveau:glyph_corrosion",
       "count": 1
     }
+  },
+  "glyph_activate_charm": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "requires_mod": "goety_charms",
+    "inputs": [
+      {
+        "item": "goety_charms:blank_charm"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_activate_charm",
+      "count": 1
+    }
   }
 }
