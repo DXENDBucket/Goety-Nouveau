@@ -77,3 +77,7 @@ apply from: "gradle/validate-localization.gradle"
 ext.glyphRecipeRoot = file(".")
 ext.glyphRecipeLoader = "neoforge"
 apply from: "gradle/glyph-recipes.gradle"
+
+ext.glyphNameRoot = glyphLocalizationRoot
+ext.glyphNameDefinitions = file('common/recipes/glyphs.json')
+apply from: 'gradle/validate-glyph-names.gradle'
