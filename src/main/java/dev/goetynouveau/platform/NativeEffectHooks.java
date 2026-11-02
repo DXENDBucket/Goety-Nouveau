@@ -8,6 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 
 public final class NativeEffectHooks {
     private NativeEffectHooks() {}
+    public static MobEffectInstance hysteria(int ticks,int amp){return new MobEffectInstance(GoetyEffects.HYSTERIA,ticks,amp);}
+    public static MobEffectInstance burnHex(int ticks){return new MobEffectInstance(GoetyEffects.BURN_HEX,ticks);}
     public static MobEffectInstance shadowWalk(LivingEntity entity) { return entity.getEffect(GoetyEffects.SHADOW_WALK); }
     public static boolean removeShadowWalk(LivingEntity entity) { return entity.removeEffect(GoetyEffects.SHADOW_WALK); }
     public static MobEffectInstance tentacleBuff(int amplifier){return new MobEffectInstance(GoetyEffects.BUFF,com.Polarice3.Goety.utils.EffectsUtil.infiniteEffect(),amplifier,false,false); }

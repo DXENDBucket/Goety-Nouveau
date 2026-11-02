@@ -23,7 +23,12 @@ public final class AbilitySpells {
         LEAF_SHELL("leaf_shell", null, "leaf_shell", 60, 600),
         THORN_TRAP("thorn_trap", null, "thorn_trap", 40, 400),
         TRANSPOSE("transpose", null, "transpose", 60, 400),
-        CORROSION("corrosion", null, "corrosion", 80, 600);
+        CORROSION("corrosion", null, "corrosion", 80, 600),
+        HELL_CLOUD("hell_cloud", "hail_focus", null, 40, 300),
+        VOID_LIGHTNING_TRAP("void_lightning_trap", "lightning_focus", null, 30, 100),
+        ILL_BOMB("ill_bomb", "scatter_focus", null, 20, 60),
+        DEATH_ARROW("death_arrow", "soul_bolt_focus", null, 20, 40),
+        HYSTERIA("hysteria", "iron_hide_focus", null, 30, 400);
         public final String glyph, reference, brew;
         public final int preparation, cooldown;
         Ability(String glyph,String reference,String brew,int preparation,int cooldown) {
@@ -46,6 +51,8 @@ public final class AbilitySpells {
         private final Ability ability;
         private Adapter(Ability ability) {this.ability=ability;}
         @Override public int defaultSoulCost() {
+            int fixed=switch(ability){case HELL_CLOUD->80;case VOID_LIGHTNING_TRAP->60;case ILL_BOMB->40;case DEATH_ARROW->30;case HYSTERIA->50;default->0;};
+            if(fixed>0)return fixed;
             return ability.brew!=null?ability.brewEffect().getSoulCost():
                     FocusSpells.read(CarrierRegistry.id("goety:"+ability.reference)).orElseThrow().defaultSoulCost();
         }

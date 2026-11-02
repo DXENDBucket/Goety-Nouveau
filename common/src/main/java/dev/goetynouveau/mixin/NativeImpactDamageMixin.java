@@ -32,6 +32,7 @@ import org.spongepowered.asm.mixin.injection.At;
     "com.Polarice3.Goety.common.entities.projectiles.RazorWind",
     "com.Polarice3.Goety.common.entities.projectiles.VoidSlash",
     "com.Polarice3.Goety.common.entities.projectiles.BlastFungus",
+    "com.Polarice3.Goety.common.entities.projectiles.DeathArrow",
     "com.Polarice3.Goety.utils.SpellExplosion",
     "com.Polarice3.Goety.utils.FungusExplosion"
 },remap=false)

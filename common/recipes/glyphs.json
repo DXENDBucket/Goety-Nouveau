@@ -2201,5 +2201,85 @@
       "id": "goety_nouveau:glyph_activate_charm",
       "count": 1
     }
+  },
+  "glyph_hell_cloud": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:unholy_blood"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_hell_cloud",
+      "count": 1
+    }
+  },
+  "glyph_void_lightning_trap": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:void_shard"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_void_lightning_trap",
+      "count": 1
+    }
+  },
+  "glyph_ill_bomb": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:ill_bomb"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_ill_bomb",
+      "count": 1
+    }
+  },
+  "glyph_death_arrow": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:unholy_blood"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_death_arrow",
+      "count": 1
+    }
+  },
+  "glyph_hysteria": {
+    "type": "ars_nouveau:glyph",
+    "exp": 27,
+    "inputs": [
+      {
+        "item": "goety:unholy_blood"
+      },
+      {
+        "item": "ars_nouveau:source_gem"
+      }
+    ],
+    "output": {
+      "id": "goety_nouveau:glyph_hysteria",
+      "count": 1
+    }
   }
 }

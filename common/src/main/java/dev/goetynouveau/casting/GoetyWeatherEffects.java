@@ -128,7 +128,7 @@ public final class GoetyWeatherEffects {
         }
         return true;
     }
-    private static boolean placeCloud(ServerLevel world, AbstractSpellCloud cloud, Vec3 point) {
+    static boolean placeCloud(ServerLevel world, AbstractSpellCloud cloud, Vec3 point) {
         var base = BlockPos.containing(point);
         double y = point.y+4;
         for (int offset = 0; offset <= 4; offset++) {

@@ -28,7 +28,9 @@ public enum BoltFocus {
     SNARELING_SHOT("snareling_shot", "glyph_snareling_shot", "Snareling Shot"),
     SNAP_FUNGUS("snap_fungus", "glyph_snap_fungus", "Snap Fungus"),
     BLAST_FUNGUS("blast_fungus", "glyph_blast_fungus", "Blast Fungus"),
-    BERSERK_FUNGUS("berserk_fungus", "glyph_berserk_fungus", "Berserk Fungus");
+    BERSERK_FUNGUS("berserk_fungus", "glyph_berserk_fungus", "Berserk Fungus"),
+    ILL_BOMB("ill_bomb", "glyph_ill_bomb", "Ill Bomb"),
+    DEATH_ARROW("death_arrow", "glyph_death_arrow", "Death Arrow");
 
     public final String glyph, focus, name;
     BoltFocus(String glyph, String name) { this(glyph, glyph + "_focus", name); }

@@ -1,0 +1,56 @@
+{
+  "version": "0.1.14",
+  "date": "2026-11-02",
+  "source_base": "cb2e47ed7abf737a9930dd34f1b3d7a59275ac66",
+  "core_commit": "108706a2b8429935a91de214427b61bc956cac52",
+  "core_source_changes": "none; pre-existing publication docs untouched",
+  "native_baselines": {
+    "neoforge_compile_and_server_test": "Goety 3.2.1",
+    "neoforge_additional_class_audit": "Goety 3.2.2 installed instance",
+    "forge_compile_and_server_test": "Goety 2.5.59.2"
+  },
+  "validation": {
+    "neoforge_focused_gametests": 5,
+    "forge_focused_gametests": 5,
+    "final_jar_checks": "CRC, pack metadata, licenses, five real recipes/icons/bilingual entries, no upstream classes/test fixtures, Forge refmap and SRG targets, Java bytecode targets",
+    "logs": [
+      "build/boss-abilities-neo-test.log",
+      "forge/build/boss-abilities-forge-test.log"
+    ],
+    "client_visual_test": false,
+    "production_forge_client_launch": false
+  },
+  "deployed": false,
+  "pushed": false,
+  "curseforge_uploaded": false,
+  "artifacts": [
+    {
+      "loader": "neoforge",
+      "kind": "binary",
+      "path": "C:\\Users\\57991\\Documents\\MinecraftDev\\Goety-Nouveau\\build\\libs\\goety-nouveau-0.1.14-mc1.21.1-neoforge.jar",
+      "sha256": "74ed94fcf79f81fc087cf341925d821cd31c6ec7ca631c56cdfa2c6d252f637e",
+      "bytes": 664582
+    },
+    {
+      "loader": "neoforge",
+      "kind": "sources",
+      "path": "C:\\Users\\57991\\Documents\\MinecraftDev\\Goety-Nouveau\\build\\libs\\goety-nouveau-0.1.14-sources.jar",
+      "sha256": "25bbce621e6826e588d0796080c6305c72ac1f19ce3a1e86d57dc9d928ac453d",
+      "bytes": 363655
+    },
+    {
+      "loader": "forge",
+      "kind": "binary",
+      "path": "C:\\Users\\57991\\Documents\\MinecraftDev\\Goety-Nouveau\\forge\\build\\libs\\goety-nouveau-0.1.14-mc1.20.1-forge.jar",
+      "sha256": "442a5cfd4686514b5284e484e5e9a4b052fdb81727030caf2f18c89de250e19e",
+      "bytes": 681430
+    },
+    {
+      "loader": "forge",
+      "kind": "sources",
+      "path": "C:\\Users\\57991\\Documents\\MinecraftDev\\Goety-Nouveau\\forge\\build\\libs\\goety-nouveau-0.1.14-sources.jar",
+      "sha256": "b11c9a0ae2e7601fc54097c988f529f80049655b886cfbd45d377173e587f452",
+      "bytes": 366251
+    }
+  ]
+}

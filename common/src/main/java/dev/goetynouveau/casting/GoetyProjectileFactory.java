@@ -39,6 +39,21 @@ public final class GoetyProjectileFactory {
         var origin=carrierOrigin.add(direction.x/2,-.1,direction.z/2);
         var result=new ArrayList<Projectile>();
         switch(focus) {
+            case ILL_BOMB -> {
+                var bomb=new IllBomb(caster,world);bomb.setPos(carrierOrigin);
+                // Minister uses 1.0 for ranged throws; reflected bombs retain native 1.5.
+                bomb.shoot(direction.x,direction.y,direction.z,1.0F*speed,0);
+                GoetyAreaProvenance.mark(bomb,frame);
+                bomb.getPersistentData().putFloat(GoetyBossDamageScope.BONUS,Math.max(0,potency));result.add(bomb);
+            }
+            case DEATH_ARROW -> {
+                var arrow=new DeathArrow(world,caster);arrow.setPos(carrierOrigin);
+                arrow.pickup=AbstractArrow.Pickup.CREATIVE_ONLY;
+                arrow.setBaseDamage(Math.max(0,arrow.getBaseDamage()+potency));
+                float nativeSpeed=caster.level().dimension()==net.minecraft.world.level.Level.NETHER?3.2F:2.4F;
+                arrow.shoot(direction.x,direction.y,direction.z,nativeSpeed*speed,0);
+                GoetyAreaProvenance.mark(arrow,frame);result.add(arrow);
+            }
             case SNARELING_SHOT, SNAP_FUNGUS, BLAST_FUNGUS, BERSERK_FUNGUS -> {
                 Projectile projectile=switch(focus) {
                     case SNARELING_SHOT -> new SnarelingShot(caster,world);
@@ -205,6 +220,8 @@ public final class GoetyProjectileFactory {
     public static void sound(BoltFocus focus, ServerLevel world, LivingEntity caster) {
         var spell=(Spell)focus.spell();
         switch(focus) {
+            case ILL_BOMB -> spell.playSound(world,caster,SoundEvents.WITCH_THROW);
+            case DEATH_ARROW -> spell.playSound(world,caster,ModSounds.APOSTLE_SHOOT.get());
             case SNARELING_SHOT -> spell.playSound(world,caster,ModSounds.SNARELING_SHOOT.get());
             case SNAP_FUNGUS, BLAST_FUNGUS, BERSERK_FUNGUS -> spell.playSound(world,caster,ModSounds.BLAST_FUNGUS_THROW.get(),.5F,.75F);
             case ICE_STORM -> spell.playSound(world,caster,ModSounds.WIND_BLAST.get(),1,.75F);

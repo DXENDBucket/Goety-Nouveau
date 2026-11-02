@@ -100,7 +100,15 @@
     "NativeFocusRegistrationMixin",
     "NativeFocusRecipeMixin",
     "NativeFocusWandMixin",
-    "NativeFocusArsRegistrationMixin"
+    "NativeFocusArsRegistrationMixin",
+    "GoetyDeathArrowStateMixin",
+    "GoetyIllBombStateMixin",
+    "NativeBossAreaMixin",
+    "NativeHellCloudHitMixin",
+    "NativeDeathArrowCapMixin",
+    "NativeIllBombScopeMixin",
+    "NativeBossDamageGuardMixin",
+    "NativeBossBonusMixin"
   ],
   "injectors": {
     "defaultRequire": 1

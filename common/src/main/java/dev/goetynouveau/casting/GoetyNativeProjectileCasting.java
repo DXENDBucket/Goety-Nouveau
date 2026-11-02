@@ -113,6 +113,8 @@ public final class GoetyNativeProjectileCasting {
         payloads.forEach(p -> {
             var owner = frame.damageOwner() != null ? frame.damageOwner() : caster;
             p.setOwner(owner);
+            // Forge AbstractArrow.setOwner resets pickup when its owner is a player.
+            if(p instanceof DeathArrow arrow)arrow.pickup=net.minecraft.world.entity.projectile.AbstractArrow.Pickup.CREATIVE_ONLY;
             // This native family overloads setOwner(LivingEntity) and resolves its own synced UUID.
             // Updating vanilla Projectile.owner alone would leave native damage/ally checks on the old caster.
             if (p instanceof SpellTargetProjectile targeted && (Entity)owner instanceof net.minecraft.world.entity.LivingEntity living) targeted.setOwner(living);
@@ -173,6 +175,7 @@ public final class GoetyNativeProjectileCasting {
         if (repeated && batch.focus == BoltFocus.SWORD && GoetyProjectileFactory.sword(session.caster()).isEmpty()) return false;
         state.goetyNouveau$handlingHit(true); state.goetyNouveau$impacting(repeated);
         boolean continued;
+        if(projectile instanceof IllBomb)projectile.getPersistentData().remove(GoetyBossDamageScope.CHILDREN);
         try {
             if (repeated) {
                 projectile.setPos(hit.getLocation());
@@ -183,17 +186,24 @@ public final class GoetyNativeProjectileCasting {
                 if (projectile instanceof SlashProjectile slash && hit instanceof EntityHitResult entity) slash.damageEntity(entity.getEntity());
                 else ((ProjectileHitAccess)projectile).goetyNouveau$hit(hit);
             });
+            // Native fireworks are delayed payloads: successful creation is an activation receipt,
+            // while normal explosions still require actual damage and shield reflections do not count.
+            if(projectile instanceof IllBomb && projectile.getPersistentData().getBoolean(GoetyBossDamageScope.CHILDREN))continued=true;
             if (!repeated && projectile instanceof VoidShockBomb) batch.settled.add(projectile);
             if (repeated && projectile instanceof VoidShockBomb) ((dev.goetynouveau.mixin.NativeVoidBombAccess)projectile).goetyNouveau$growTick(0);
             if (repeated && projectile instanceof BouncyBubble bubble && ((dev.goetynouveau.mixin.NativeBubbleAccess)bubble).goetyNouveau$exploding()) {
                 ((dev.goetynouveau.mixin.NativeBubbleAccess)bubble).goetyNouveau$exploding(false); bubble.setBounceTimes(0);
             }
             // Arrow block hits normally latch into the ground. Ars special carriers own that decision.
+            if (repeated && projectile instanceof IllBomb bomb) bomb.setBounceTimes(0);
             if (repeated && projectile instanceof net.minecraft.world.entity.projectile.AbstractArrow) {
                 ((ArrowGroundAccess)projectile).goetyNouveau$inGround(false);
                 projectile.setDeltaMovement(velocity);
             }
-        } finally { state.goetyNouveau$impacting(false); state.goetyNouveau$handlingHit(false); }
+        } finally {
+            if(projectile instanceof IllBomb)projectile.getPersistentData().remove(GoetyBossDamageScope.CHILDREN);
+            state.goetyNouveau$impacting(false); state.goetyNouveau$handlingHit(false);
+        }
         if (continued) session.impact(hit);
         if (repeated && batch.focus == BoltFocus.SWORD) GoetyProjectileFactory.wearSword(session.caster());
         return true;

@@ -143,6 +143,11 @@ public final class GlyphCatalog {
     public static final GoetyEffectGlyph THORN_TRAP=new GoetyEffectGlyph(EffectFocus.THORN_TRAP);
     public static final GoetyEffectGlyph TRANSPOSE=new GoetyEffectGlyph(EffectFocus.TRANSPOSE);
     public static final GoetyEffectGlyph CORROSION=new GoetyEffectGlyph(EffectFocus.CORROSION);
+    public static final GoetyEffectGlyph HELL_CLOUD=new GoetyEffectGlyph(EffectFocus.HELL_CLOUD);
+    public static final GoetyEffectGlyph VOID_LIGHTNING_TRAP=new GoetyEffectGlyph(EffectFocus.VOID_LIGHTNING_TRAP);
+    public static final GoetyEffectGlyph HYSTERIA=new GoetyEffectGlyph(EffectFocus.HYSTERIA);
+    public static final GoetyBoltGlyph ILL_BOMB=new GoetyBoltGlyph(BoltFocus.ILL_BOMB);
+    public static final GoetyBoltGlyph DEATH_ARROW=new GoetyBoltGlyph(BoltFocus.DEATH_ARROW);
     public static final GoetyBoltGlyph SNARELING_SHOT=new GoetyBoltGlyph(BoltFocus.SNARELING_SHOT);
     public static final GoetyBoltGlyph SNAP_FUNGUS=new GoetyBoltGlyph(BoltFocus.SNAP_FUNGUS);
     public static final GoetyBoltGlyph BLAST_FUNGUS=new GoetyBoltGlyph(BoltFocus.BLAST_FUNGUS);
@@ -152,7 +157,7 @@ public final class GlyphCatalog {
             SHOCKWAVE, CUSHION, FANGS, IGNITE, FEAST, BULWARK, DISCHARGE, EARTH_FIST, GHOST_FIRE, LEECHING, LAUNCH, ERUPTION, BIO_MINE, TEETH, THUNDERBOLT, HAIL, MONSOON, FIRE_BLAST, SONIC_BOOM, FLAME_STRIKE, VOID_RIFT, WIND_BLAST, OVERGROWTH, ZOMBIE, SKELETON, VEX, SENSING, ROTATION, TREMBLING, CHARGE, SPIKES, LEAPING, BARRICADE, HUNTING, MAULING, REAPER, WRAITH, PHANTOM, SLIMY, CARRION, WHISPER, FROSTBORN, SPRITE, VANGUARD, BLACKGUARD, KILLING, BOLTING, ILLUSION, BLAZING, GHASTLY, GUARDIAN, WATCHING, SNARING, BLASTING, FIRE_BREATH, FROST_BREATH, SWARM, MINISTROUS, HOGGING, ARROW_RAIN, BLIZZARD, METEOR_SHOWER, BOMBARDMENT, THUNDERSTORM, TRIDENT_STORM, CORRUPTED_BEAM, WATER_JET, PRISMA_BEAM, VOID_SHOCK, QUAKING, WARDING, FLYING, WHIRLWIND, SHOCKING, TELEKINESIS, BURROWING, CYCLONE, TIDAL, WATER_WHIP, ILLUMINATE, PULVERIZE, SCATTER, TUNNEL, GRAPPLE, END_WALK, BANISH, BLINK, ICE_STORM, GLOW_LIGHT, SOUL_LIGHT, ICE_SPIKE, LAVABALL, STEAM, BOUNCY_BUBBLE, ELECTRO_ORB, SURGING, SMACK_STONE, BLOSSOM, MAGMA, VOID_BOMB, SWORD, RAZOR_WIND, dev.goetynouveau.glyph.AugmentBurning.INSTANCE,
             dev.goetynouveau.glyph.AugmentGoety.EXTENSION, dev.goetynouveau.glyph.AugmentGoety.LIFE_ABSORB,
             dev.goetynouveau.glyph.AugmentGoety.SOUL_EATER,
-            SNARELING_TRAP, BERSERK_CLOUD, BONE_PULL, LEAF_SHELL, THORN_TRAP, TRANSPOSE, CORROSION, SNARELING_SHOT, SNAP_FUNGUS, BLAST_FUNGUS, BERSERK_FUNGUS)));
+            SNARELING_TRAP, BERSERK_CLOUD, BONE_PULL, LEAF_SHELL, THORN_TRAP, TRANSPOSE, CORROSION, SNARELING_SHOT, SNAP_FUNGUS, BLAST_FUNGUS, BERSERK_FUNGUS, HELL_CLOUD, VOID_LIGHTNING_TRAP, HYSTERIA, ILL_BOMB, DEATH_ARROW)));
     private static List<AbstractSpellPart> withNativeExtras(List<AbstractSpellPart> shared) {
         // Do not construct an unavailable glyph: even construction registers its spell school.
         if (BREEZE == null && TEMBLOR_CLAP == null) return shared;
@@ -203,6 +208,8 @@ public final class GlyphCatalog {
             case RAZOR_WIND -> RAZOR_WIND;
             case GLOW_LIGHT -> GLOW_LIGHT;
             case SOUL_LIGHT -> SOUL_LIGHT;
+            case ILL_BOMB -> ILL_BOMB;
+            case DEATH_ARROW -> DEATH_ARROW;
             case SNARELING_SHOT -> SNARELING_SHOT;
             case SNAP_FUNGUS -> SNAP_FUNGUS;
             case BLAST_FUNGUS -> BLAST_FUNGUS;

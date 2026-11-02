@@ -52,7 +52,7 @@ public final class GoetyEffectCasting {
         }
         var parameters = new Parameters(potency, duration, radius);
         return switch (focus) {
-            case SNARELING_TRAP, BERSERK_CLOUD, BONE_PULL, LEAF_SHELL, THORN_TRAP, TRANSPOSE, CORROSION -> throw new IllegalStateException("Ability dispatch bypassed");
+            case HELL_CLOUD, VOID_LIGHTNING_TRAP, HYSTERIA, SNARELING_TRAP, BERSERK_CLOUD, BONE_PULL, LEAF_SHELL, THORN_TRAP, TRANSPOSE, CORROSION -> throw new IllegalStateException("Ability dispatch bypassed");
             case CRAFTING, ENDER_CHEST -> GoetyMenuCasting.apply(focus, world, frame);
             case TEMBLOR_CLAP -> dev.goetynouveau.platform.NativeAreaHooks.temblor(world,frame,ars);
             case BLINK -> GoetyBlinkCasting.apply(world, frame);

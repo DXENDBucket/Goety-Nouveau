@@ -281,5 +281,15 @@
   "goety_nouveau.native_self.tooltip": "Player self-casting only; native focus targeting and direction apply.",
   "goety_nouveau.native_self.description": "Runs this focus through its native lifecycle on the player. Preserves native targeting, staff and focus modifiers, with configured resources, native preparation and cooldowns. Channels end automatically. Remote origins and projectile replacement are not supported. Amplify and Dampen adjust native potency.",
   "goety_nouveau.glyph_name.glyph_activate_charm": "Activate Charm",
-  "goety_nouveau.glyph_desc.glyph_activate_charm": "Releases one carried, sealed summoning or conversion charm. Checks the offhand, hotbar left to right, then backpack rows left to right from top to bottom. Summons at the hit location or converts the hit creature. Failure retains the selected charm without trying another. Does not charge the ritual soul cost again."
+  "goety_nouveau.glyph_desc.glyph_activate_charm": "Releases one carried, sealed summoning or conversion charm. Checks the offhand, hotbar left to right, then backpack rows left to right from top to bottom. Summons at the hit location or converts the hit creature. Failure retains the selected charm without trying another. Does not charge the ritual soul cost again.",
+  "goety_nouveau.glyph_name.glyph_hell_cloud": "Hell Cloud",
+  "goety_nouveau.glyph_desc.glyph_hell_cloud": "Creates a dark cloud above the selected point. After gathering, hellfire rain burns enemies and inflicts Burn Hex.",
+  "goety_nouveau.glyph_name.glyph_void_lightning_trap": "Void Lightning Trap",
+  "goety_nouveau.glyph_desc.glyph_void_lightning_trap": "Marks the selected location, then strikes with void lightning and Void Touched.",
+  "goety_nouveau.glyph_name.glyph_ill_bomb": "Ill Bomb",
+  "goety_nouveau.glyph_desc.glyph_ill_bomb": "Replaces the projectile with a bouncing Ill Bomb. Shields can reflect it; explosions may release fireworks.",
+  "goety_nouveau.glyph_name.glyph_death_arrow": "Death Arrow",
+  "goety_nouveau.glyph_desc.glyph_death_arrow": "Replaces the projectile with a Death Arrow. Special life-draining effects retain their native equipment and Nether requirements.",
+  "goety_nouveau.glyph_name.glyph_hysteria": "Hysteria",
+  "goety_nouveau.glyph_desc.glyph_hysteria": "Drives yourself or an ally into a frenzy. Greatly increases melee damage and speed, but continuously consumes health and can kill the recipient."
 }

@@ -112,7 +112,10 @@ public enum EffectFocus {
     LEAF_SHELL("leaf_shell", "glyph_leaf_shell", "Leaf Shell", false, false, true),
     THORN_TRAP("thorn_trap", "glyph_thorn_trap", "Thorn Trap", true, false, false),
     TRANSPOSE("transpose", "glyph_transpose", "Transpose", false, false, true),
-    CORROSION("corrosion", "glyph_corrosion", "Corrosion", true, false, true);
+    CORROSION("corrosion", "glyph_corrosion", "Corrosion", true, false, true),
+    HELL_CLOUD("hell_cloud", "glyph_hell_cloud", "Hell Cloud", true, true, true),
+    VOID_LIGHTNING_TRAP("void_lightning_trap", "glyph_void_lightning_trap", "Void Lightning Trap", true, false, true),
+    HYSTERIA("hysteria", "glyph_hysteria", "Hysteria", true, true, false);
 
     public final String glyph, focus, name;
     public final boolean potency, duration, radius;

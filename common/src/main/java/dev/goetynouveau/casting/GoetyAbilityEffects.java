@@ -26,6 +26,8 @@ public final class GoetyAbilityEffects {
         var pos=BlockPos.containing(point);
         if(!world.hasChunkAt(pos)) return false;
         var owner=frame.damageOwner()!=null?frame.damageOwner():frame.caster();
+        if(focus==EffectFocus.HELL_CLOUD || focus==EffectFocus.VOID_LIGHTNING_TRAP || focus==EffectFocus.HYSTERIA)
+            return GoetyBossAbilities.apply(focus,world,frame,stats);
         if(focus==EffectFocus.SNARELING_TRAP) {
             var trap=frame.target() instanceof EntityHitResult hit
                     ? new SnarelingGoop(world,owner,hit.getEntity()) : new SnarelingGoop(world,owner,pos);

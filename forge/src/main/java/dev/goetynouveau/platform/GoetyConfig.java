@@ -5,6 +5,8 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public final class GoetyConfig {
     public static final ForgeConfigSpec SPEC;
+    private static final ForgeConfigSpec.BooleanValue CAP_DEATH_ARROW_PERCENTAGE;
+    private static final ForgeConfigSpec.DoubleValue DEATH_ARROW_PERCENTAGE_CAP;
     public static final ForgeConfigSpec.EnumValue<ResourceSource> RESOURCE_SOURCE;
     public static final ForgeConfigSpec.IntValue BURNING_COST, EXTENSION_COST, LIFE_ABSORB_COST, SOUL_EATER_COST, UNBOUNDED_CHANNEL_TICKS;
     public static final ForgeConfigSpec.BooleanValue CHANTING_ENABLED, MOVEMENT_ENABLED, COOLDOWNS_ENABLED, CREATIVE_COOLDOWN;
@@ -53,6 +55,10 @@ public final class GoetyConfig {
                 "This does not change native Goety wand casting.")
                 .defineInRange("unboundedDurationTicks", 200, 1, 72000);
         builder.pop();
+        builder.push("bossAbilities");
+        CAP_DEATH_ARROW_PERCENTAGE=builder.comment("Cap the additional native percentage health loss of bridge-created Death Arrows. Native arrows and equipment qualifications are unchanged.").define("capDeathArrowPercentage",true);
+        DEATH_ARROW_PERCENTAGE_CAP=builder.comment("Maximum additional health loss per qualified Death Arrow hit, before ordinary healing events.").defineInRange("deathArrowPercentageCap",20.0,0.0,1000000.0);
+        builder.pop();
         builder.push("abilities");
         for(var ability:dev.goetynouveau.api.AbilitySpells.Ability.values()) {
             builder.push(ability.glyph);
@@ -69,6 +75,8 @@ public final class GoetyConfig {
         builder.pop();
         SPEC = builder.build();
     }
+    public static boolean capDeathArrowPercentage(){return read(CAP_DEATH_ARROW_PERCENTAGE);}
+    public static float deathArrowPercentageCap(){return read(DEATH_ARROW_PERCENTAGE_CAP).floatValue();}
     public static int abilityPreparation(String id,int fallback) {var value=ABILITY_PREPARATION.get(id);return value==null?fallback:read(value);}
     public static int abilityCooldown(String id,int fallback) {var value=ABILITY_COOLDOWN.get(id);return value==null?fallback:read(value);}
     public static boolean nativeSelfEnabled(net.minecraft.resources.ResourceLocation focus){return read(NATIVE_ENABLED)&&!read(NATIVE_DISABLED).contains(focus.toString());}

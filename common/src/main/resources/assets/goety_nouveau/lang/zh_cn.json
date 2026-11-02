@@ -281,5 +281,15 @@
   "goety_nouveau.native_self.tooltip": "仅支持玩家自身触发，目标与方向由原聚晶决定。",
   "goety_nouveau.native_self.description": "在玩家自身运行此聚晶的原生施法。保留原生目标选择、法杖与聚晶修饰，消耗所选资源并沿用原生吟唱和冷却。持续施法自动结束；不支持远程释放位置或弹射物替换。强化与抑制调整原生威力。",
   "goety_nouveau.glyph_name.glyph_activate_charm": "启符",
-  "goety_nouveau.glyph_desc.glyph_activate_charm": "释放你携带的一枚已封存召唤或转化符咒。依次查找副手、从左到右的快捷栏，再逐行查找背包。召唤在命中位置生效，转化作用于命中的生物；失败时保留符咒，不继续尝试下一枚。不会再次收取仪式的灵魂费用。"
+  "goety_nouveau.glyph_desc.glyph_activate_charm": "释放你携带的一枚已封存召唤或转化符咒。依次查找副手、从左到右的快捷栏，再逐行查找背包。召唤在命中位置生效，转化作用于命中的生物；失败时保留符咒，不继续尝试下一枚。不会再次收取仪式的灵魂费用。",
+  "goety_nouveau.glyph_name.glyph_hell_cloud": "狱云",
+  "goety_nouveau.glyph_desc.glyph_hell_cloud": "在选定位置上方凝聚狱云，蓄势后降下狱火之雨，灼伤敌人并施加灼烧魔印。",
+  "goety_nouveau.glyph_name.glyph_void_lightning_trap": "虚空闪电陷阱",
+  "goety_nouveau.glyph_desc.glyph_void_lightning_trap": "在选定位置标记雷阵，短暂蓄势后降下虚空闪电并施加虚空之蚀。",
+  "goety_nouveau.glyph_name.glyph_ill_bomb": "恶意炸弹",
+  "goety_nouveau.glyph_desc.glyph_ill_bomb": "将弹射物替换为会弹跳的恶意炸弹。可被盾牌反弹，爆炸时可能释放烟花。",
+  "goety_nouveau.glyph_name.glyph_death_arrow": "死亡之箭",
+  "goety_nouveau.glyph_desc.glyph_death_arrow": "将弹射物替换为死亡之箭。特殊生命汲取效果仍需满足原生装备与下界环境等条件。",
+  "goety_nouveau.glyph_name.glyph_hysteria": "狂躁",
+  "goety_nouveau.glyph_desc.glyph_hysteria": "使自身或友军陷入狂躁，大幅提升近战伤害和移速，但会持续损失生命，甚至死亡。"
 }
